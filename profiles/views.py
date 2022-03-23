@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from .models import School,Post,Student,User
+from .models import School,Student,User
 from django.contrib.auth import authenticate, login, logout
 #from .models import 
 
@@ -8,21 +8,21 @@ from django.contrib.auth import authenticate, login, logout
 #         'temp': .objects.all(),
 #     }
 #     return render(request,'profiles/temp.html',context)
-from .forms import SchoolSignUpForm,StudentSignUpForm
+from .forms import StudentSignUpForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 import hashlib
 
-class PostCreateView(CreateView):
-	model = Post
-	fields = ['title', 'content']
+# class PostCreateView(CreateView):
+# 	model = Post
+# 	fields = ['title', 'content']
 
-	def form_valid(self, form):
-		test = School.objects.first()
-		print(test)
-		form.instance.school = test
-		return super().form_valid(form)
+# 	def form_valid(self, form):
+# 		test = School.objects.first()
+# 		print(test)
+# 		form.instance.school = test
+# 		return super().form_valid(form)
 
 
 

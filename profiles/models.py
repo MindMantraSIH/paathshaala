@@ -32,19 +32,8 @@ class Student(models.Model):
     
 
     def __str__(self) -> str:
-        return f'{self.school.name}: {self.roll_number}'
+        return f'{self.school.user.name}: {self.roll_number}'
 
 
-class Post(models.Model):
-    title = models.CharField(max_length=100)
-    slug = AutoSlugField(populate_from='title', unique=True)
-    content = models.TextField()
-    date_posted = models.DateTimeField(default=timezone.now)
-    school = models.ForeignKey(School,on_delete=models.CASCADE)
 
-    def __str__(self):
-        return f'{self.school.user.name}: {self.title}' 
-    
-    def get_absolute_url(self):
-        return reverse('post-create')
     
