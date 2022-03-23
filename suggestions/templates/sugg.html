@@ -14,7 +14,8 @@
 </head>
 
 <body>
-    <form action="">
+    <form method="POST" action="">
+        {% csrf_token %}
         <div class="card container mt-4">
             <div class="card-body">
                 <h5 class="card-title">Survey of Happiness Index in School Index</h5>
@@ -23,559 +24,168 @@
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">First</th>
-                                <th scope="col">Last</th>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
                             </tr>
                         </thead>
                         <tbody>
+                            
+                            <!-- GENDER -->
                             <tr>
                                 <th scope="row">1</th>
-                                <!-- STD -->
-                                <td>Who is filling this form?</td>
-                                <td>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="inlineRadio1" value="option1">
-                                        <label class="form-check-label" for="inlineRadio1">Student</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="inlineRadio2" value="option2">
-                                        <label class="form-check-label" for="inlineRadio2">Teacher</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="inlineRadio3" value="option2">
-                                        <label class="form-check-label" for="inlineRadio3">Counsellor</label>
-                                    </div>
-
-                                </td>
-                            </tr>
-                            <!-- GENDER -->
-                            <tr>
-                                <th scope="row">2</th>
                                 <td>Level Of Courses (Difficulty)</td>
                                 <td>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="inlineRadio22" value="option1">
-                                        <label class="form-check-label" for="inlineRadio22">1</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="inlineRadio23" value="option2">
-                                        <label class="form-check-label" for="inlineRadio23">2</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="inlineRadio25" value="option2">
-
-                                        <label class="form-check-label mr-1" for="inlineRadio25">3</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="inlineRadio21" value="option2">
-                                        <label class="form-check-label" for="inlineRadio21">4</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="inlineRadio24" value="option2">
-
-                                        <label class="form-check-label mr-1" for="inlineRadio24">5</label>
-                                    </div>
+                                    <div class="form-check form-inline">
+                                        <input  type="number" >
+                                            </div>
                                 </td>
                             </tr>
                             <!-- GENDER -->
+                            <!-- Hobbies  -->
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>A Clean Environment</td>
+                                <td>
+                                    <div class="form-check form-inline">
+                                        <input  type="number" 
+                                        >
+                                </td>
+                            </tr>
                             <!-- Hobbies  -->
                             <tr>
                                 <th scope="row">3</th>
-                                <td>A Clean Environment</td>
-                                <td>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="env1" value="option1">
-                                        <label class="form-check-label" for="env1">1</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="env2" value="option2">
-                                        <label class="form-check-label" for="env2">2</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="env3" value="option2">
-
-                                        <label class="form-check-label mr-1" for="env3">3</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="env4" value="option2">
-                                        <label class="form-check-label" for="env4">4</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="env5" value="option2">
-
-                                        <label class="form-check-label mr-1" for="env5">5</label>
-                                    </div>
-                                </td>
-                            </tr>
-                            <!-- Hobbies  -->
-                            <tr>
-                                <th scope="row">4</th>
                                 <td>Employing teachers with competency</td>
                                 <td>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="emp1" value="option1">
-                                        <label class="form-check-label" for="emp1">1</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="emp2" value="option2">
-                                        <label class="form-check-label" for="emp2">2</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="emp3" value="option2">
-
-                                        <label class="form-check-label mr-1" for="emp3">3</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="emp4" value="option2">
-                                        <label class="form-check-label" for="emp4">4</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="emp5" value="option2">
-
-                                        <label class="form-check-label mr-1" for="emp5">5</label>
-                                    </div>
+                                    <div class="form-check form-inline">
+                                        <input  type="number" 
+                                            >
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">4</th>
+                                <td>Preventing Discrimination and Persuasion</td>
+                                <td>
+                                    <div class="form-check form-inline">
+                                        <input  type="number" 
+                                        >
                                 </td>
                             </tr>
                             <tr>
                                 <th scope="row">5</th>
-                                <td>Preventing Discrimination and Persuasion</td>
+                                <td>Providing laboratory & workshop facilities </td>
                                 <td>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="Dis1" value="option1">
-                                        <label class="form-check-label" for="Dis1">1</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="Dis2" value="option2">
-                                        <label class="form-check-label" for="Dis2">2</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="Dis3" value="option2">
-
-                                        <label class="form-check-label mr-1" for="Dis3">3</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="Dis4" value="option2">
-                                        <label class="form-check-label" for="Dis4">4</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="Dis5" value="option2">
-
-                                        <label class="form-check-label mr-1" for="Dis5">5</label>
-                                    </div>
+                                    <div class="form-check form-inline">
+                                        <input  type="number" 
+                                           >
                                 </td>
                             </tr>
                             <tr>
                                 <th scope="row">6</th>
-                                <td>Providing laboratory & workshop facilities </td>
+                                <td>The school timetable</td>
                                 <td>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="lab1" value="option1">
-                                        <label class="form-check-label" for="lab1">1</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="lab2" value="option2">
-                                        <label class="form-check-label" for="lab2">2</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="lab3" value="option2">
-
-                                        <label class="form-check-label mr-1" for="lab3">3</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="lab4" value="option2">
-                                        <label class="form-check-label" for="lab4">4</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="lab5" value="option2">
-
-                                        <label class="form-check-label mr-1" for="lab5">5</label>
-                                    </div>
+                                    <div class="form-check form-inline">
+                                        <input  type="number" 
+                                           >
                                 </td>
                             </tr>
                             <tr>
                                 <th scope="row">7</th>
-                                <td>The school timetable</td>
+                                <td>Performing group work</td>
                                 <td>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="inlineRadio22" value="option1">
-                                        <label class="form-check-label" for="inlineRadio22">1</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="inlineRadio23" value="option2">
-                                        <label class="form-check-label" for="inlineRadio23">2</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="inlineRadio25" value="option2">
-
-                                        <label class="form-check-label mr-1" for="inlineRadio25">3</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="inlineRadio21" value="option2">
-                                        <label class="form-check-label" for="inlineRadio21">4</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="inlineRadio24" value="option2">
-
-                                        <label class="form-check-label mr-1" for="inlineRadio24">5</label>
-                                    </div>
+                                    <div class="form-check form-inline">
+                                        <input  type="number" 
+                                            >
                                 </td>
                             </tr>
                             <tr>
                                 <th scope="row">8</th>
-                                <td>Performing group work</td>
-                                <td>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="inlineRadio1" value="option1">
-                                        <label class="form-check-label" for="inlineRadio1">1</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="inlineRadio2" value="option2">
-                                        <label class="form-check-label" for="inlineRadio2">2</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="inlineRadio3" value="option2">
-                                        <label class="form-check-label" for="inlineRadio3">3</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="inlineRadio4" value="option2">
-                                        <label class="form-check-label" for="inlineRadio4">4</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="inlineRadio5" value="option2">
-                                        <label class="form-check-label" for="inlineRadio5">5</label>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">9</th>
                                 <td>Mental health assessment of all students </td>
                                 <td>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="forhrs1" value="option1">
-                                        <label class="form-check-label" for="forhrs1">1</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="forhrs2" value="option2">
-                                        <label class="form-check-label" for="forhrs2">2</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="forhrs3" value="option2">
-                                        <label class="form-check-label" for="forhrs3">3</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="forhrs4" value="option2">
-                                        <label class="form-check-label" for="forhrs4">4</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="forhrs5" value="option2">
-                                        <label class="form-check-label" for="forhrs5">5</label>
-                                    </div>
+                                    <div class="form-check form-inline">
+                                        <input  type="number" 
+                                            >
                                     
                                 </td>
                             </tr>
                             <tr>
-                                <th scope="row">10</th>
+                                <th scope="row">9</th>
                                 <td>Presenting more sporting & artistic classes</td>
                                 <td>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="inlineRadio22" value="option1">
-                                        <label class="form-check-label" for="inlineRadio22">1</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="inlineRadio23" value="option2">
-                                        <label class="form-check-label" for="inlineRadio23">2</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="inlineRadio25" value="option2">
-
-                                        <label class="form-check-label mr-1" for="inlineRadio25">3</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="inlineRadio21" value="option2">
-                                        <label class="form-check-label" for="inlineRadio21">4</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="inlineRadio24" value="option2">
-
-                                        <label class="form-check-label mr-1" for="inlineRadio24">5</label>
-                                    </div>
+                                    <div class="form-check form-inline">
+                                        <input  type="number" 
+                                            >
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">10</th>
+                                <td>Being able to solve problems of the learner</td>
+                                <td>
+                                    <div class="form-check form-inline">
+                                        <input  type="number" 
+                                            >
                                 </td>
                             </tr>
                             <tr>
                                 <th scope="row">11</th>
-                                <td>Being able to solve problems of the learner</td>
+                                <td>Courses should have creative and colorful instructional materials and fun
+                                    activities.</td>
                                 <td>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="inlineRadio22" value="option1">
-                                        <label class="form-check-label" for="inlineRadio22">1</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="inlineRadio23" value="option2">
-                                        <label class="form-check-label" for="inlineRadio23">2</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="inlineRadio25" value="option2">
-
-                                        <label class="form-check-label mr-1" for="inlineRadio25">3</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="inlineRadio21" value="option2">
-                                        <label class="form-check-label" for="inlineRadio21">4</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="inlineRadio24" value="option2">
-
-                                        <label class="form-check-label mr-1" for="inlineRadio24">5</label>
-                                    </div>
+                                    <div class="form-check form-inline">
+                                        <input  type="number" 
+                                            >
                                 </td>
                             </tr>
                             <tr>
                                 <th scope="row">12</th>
-                                <td>Courses should have creative and colorful instructional materials and fun
-                                    activities.</td>
+                                <td>Focus on the individual </td>
                                 <td>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="sportst1" value="option1">
-                                        <label class="form-check-label" for="sports1">1</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="sports2" value="option2">
-                                        <label class="form-check-label" for="sports2">2</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="sports3" value="option2">
-                                        <label class="form-check-label" for="sports3">3</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="sports4" value="option2">
-                                        <label class="form-check-label" for="sports4">4</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="sports5" value="option2">
-                                        <label class="form-check-label" for="sports5">5</label>
-                                    </div>
+                                    <div class="form-check form-inline">
+                                        <input  type="number"  >
                                 </td>
                             </tr>
                             <tr>
                                 <th scope="row">13</th>
-                                <td>Focus on the individual </td>
+                                <td>Involve with fundamental and critical aspects of learner , about manner of living
+                                </td>
                                 <td>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="anx1"
-                                            value="option1">
-                                        <label class="form-check-label" for="anx1">1</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="anx2"
-                                            value="option2">
-                                        <label class="form-check-label" for="anx2">2</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="anx3"
-                                            value="option2">
-                                        <label class="form-check-label" for="anx3">3</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="anx4"
-                                            value="option2">
-                                        <label class="form-check-label" for="anx4">4</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="anx5"
-                                            value="option2">
-                                        <label class="form-check-label" for="anx5">5</label>
-                                    </div>
+                                    <div class="form-check form-inline">
+                                        <input  type="number" 
+                                            >
                                 </td>
                             </tr>
                             <tr>
                                 <th scope="row">14</th>
-                                <td>Involve with fundamental and critical aspects of learner , about manner of living
-                                </td>
+                                <td>Course relevance </td>
                                 <td>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="inlineRadio1" value="option1">
-                                        <label class="form-check-label" for="inlineRadio1">1</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="inlineRadio2" value="option2">
-                                        <label class="form-check-label" for="inlineRadio2">2</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="inlineRadio3" value="option2">
-                                        <label class="form-check-label" for="inlineRadio3">3</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="inlineRadio4" value="option2">
-                                        <label class="form-check-label" for="inlineRadio4">4</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="inlineRadio5" value="option2">
-                                        <label class="form-check-label" for="inlineRadio5">5</label>
-                                    </div>
+                                    <div class="form-check form-inline">
+                                        <input  type="number" 
+                                            >
                                 </td>
                             </tr>
                             <tr>
                                 <th scope="row">15</th>
-                                <td>Course relevance </td>
-                                <td>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="inlineRadio1" value="option1">
-                                        <label class="form-check-label" for="inlineRadio1">1</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="inlineRadio2" value="option2">
-                                        <label class="form-check-label" for="inlineRadio2">2</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="inlineRadio3" value="option2">
-                                        <label class="form-check-label" for="inlineRadio3">3</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="inlineRadio4" value="option2">
-                                        <label class="form-check-label" for="inlineRadio4">4</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="inlineRadio5" value="option2">
-                                        <label class="form-check-label" for="inlineRadio5">5</label>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">16</th>
                                 <td>Issues of concern should be made a point of conversation within age appropriate
                                     classrooms and children made aware of existing realities. </td>
                                 <td>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="inlineRadio1" value="option1">
-                                        <label class="form-check-label" for="inlineRadio1">1</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="inlineRadio2" value="option2">
-                                        <label class="form-check-label" for="inlineRadio2">2</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="inlineRadio3" value="option2">
-                                        <label class="form-check-label" for="inlineRadio3">3</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="inlineRadio4" value="option2">
-                                        <label class="form-check-label" for="inlineRadio4">4</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="inlineRadio5" value="option2">
-                                        <label class="form-check-label" for="inlineRadio5">5</label>
-                                    </div>
+                                    <div class="form-check form-inline">
+                                        <input  type="number" 
+                                            >
                                 </td>
                             </tr>
                             <tr>
                                 <th scope="row">16</th>
                                 <td>Are these problems being solved by the School?</td>
                                 <td>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="inlineRadio1" value="option1">
-                                        <label class="form-check-label" for="inlineRadio1">1</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="inlineRadio2" value="option2">
-                                        <label class="form-check-label" for="inlineRadio2">2</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="inlineRadio3" value="option2">
-                                        <label class="form-check-label" for="inlineRadio3">3</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="inlineRadio4" value="option2">
-                                        <label class="form-check-label" for="inlineRadio4">4</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                            id="inlineRadio5" value="option2">
-                                        <label class="form-check-label" for="inlineRadio5">5</label>
-                                    </div>
+                                    <div class="form-check form-inline">
+                                        <input  type="number"
+                                            >
                                 </td>
                             </tr>
                             <tr>
                                 <th scope="row">17</th>
                                 <td>Any other factors , according to you , which contribute to happiness index</td>
                                 <td>
-                                    <div class="form-check form-check-inline">
+                                    <div class="form-check form-inline">
                                         <input type="text" id="thoughts" class="form-control">
                                     </div>
                                 </td>
@@ -591,7 +201,7 @@
                         </div>
                         <!-- Submit button -->
                         <div class="align-self-center mx-auto text-center">
-                            <button type="button" class="btn btn-primary" Value="Submit"
+                            <button type="submit" class="btn btn-primary" Value="Submit"
                                 style="background-color: #fbff79; color: black; width: 25%;">
                                 Submit
                             </button>
