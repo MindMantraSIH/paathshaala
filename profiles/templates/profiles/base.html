@@ -1,14 +1,109 @@
-<!doctype html>
+{% load static %}
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- This is the description of the website that will appear below your website link  -->
+    <meta name="description" content="this is the description">
+
+    <!-- These are the keywords that will help find your website on search engines  -->
+    <meta name="keywords" content="health,happiness index, school ranking,wellbeing,mental health">
+
+    <!-- This tag helps your website to be put up on search engines like google and bing -->
+    <meta name="robot" content="INDEX FOLLOW">
+
+    <!-- This how you include externa css -->
+    <!-- {% block connectcss %}
+
+    {% endblock connectcss %} -->
+    <link rel="stylesheet" href="{% static 'profiles/base.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="styles/index.processed.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Paathshaala</title>
+    <!-- add icon link -->
+    <link rel="icon" href="{% static 'profiles/circular paathshala logo.png' %}" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-<body>
-  <div class="container">
+
+<body style="background-color:#EEEEEE !important;">
+    <header class="main-header" >
+        <div style="margin:1.5rem;">
+            <nav class="navbar navbar-expand-lg main-nav px-0"style="background-color: linear-gradient(to right, #fbff79, #ffc680) !important;">
+                <a class="navbar-brand" href="#">
+                    <img src="{% static 'profiles/circular paathshala logo.png' %} " alt="paathshaala logo" style="height: 40;width: 40;">
+                </a>
+                <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainMenu"
+                    aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
+                </button> -->
+                <div class="collapse navbar-collapse" id="mainMenu">
+                    <ul class="navbar-nav ml-auto text-uppercase f1">
+                        <li><a href="home/" class="active active-first">Home</a></li>
+                        <li><a href="#">School Rank</a></li>
+                        <li><a href="selfassess/">Self Assesment</a></li>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="forum/">Forum</a></li>
+                        
+                        {% block login %}
+
+                        {% endblock login %}
+                        <!-- <li><a href="#">Login / Signup</a></li> -->
+                    </ul>
+                    <span class="material-icons">account_circle</span>
+                </div>
+            </nav>
+        </div>
+        <!-- /.container -->
+
     {% block content %}
-    {% endblock %}
-  </div>
+
+
+    {% endblock content %}
+
+    <!-- Optional JavaScript; choose one of the two! -->
+    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+        </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous">
+        </script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+        </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
+        </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
+        integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous">
+        </script>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <!-- Scripts -->
+    <script src="scripts/index.js"></script>
+    <!-- </div> -->
 </body>
+{% block script %}
+
+{% endblock script %}
+
 </html>
