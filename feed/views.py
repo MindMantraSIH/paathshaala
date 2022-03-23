@@ -15,10 +15,12 @@ def school_feed(request, slug):
     context['posts'] = posts
     context['school'] = school
     if request.method == 'POST':
-        print('HELLLO')
+        if 'image' in request.FILES:
+            im = request.FILES['image']
+        else:
+            im = None
         title = request.POST.get('title')
         content = request.POST.get('content')
-        im = request.POST.get('image')
         post = Post.objects.create(title=title.strip(),content=content.strip(),school=request.user.school,image=im)
         post.save()
         return render(request, 'feed/school_feed.html',context)
