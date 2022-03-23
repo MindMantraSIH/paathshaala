@@ -19,6 +19,7 @@ class School(models.Model):
     city = models.CharField(max_length=100)
     address = models.TextField()
     rank = models.IntegerField(blank=True,null=True)
+    happiness_score = models.FloatField(blank=True,null=True)
     board = models.CharField(max_length=50)
 
 

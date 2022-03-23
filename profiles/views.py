@@ -26,6 +26,8 @@ def home(request):
 # 		form.instance.school = test
 # 		return super().form_valid(form)
 
+def home(request):
+	return render(request, 'profiles/home.html')
 
 
 def school_register(request):
