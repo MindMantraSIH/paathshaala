@@ -22,4 +22,4 @@ def getdata(request):
         except smtplib.SMTPException:
             print("Error: unable to send email")
         return redirect('')
-    return render(request, 'selfasses.html', {'ans':ans})
+    return render(request, 'selfasses.html')
