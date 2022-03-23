@@ -279,7 +279,8 @@
 {% endblock content %}
 
 {% block script %}
-$('.upvote_btn').click(function(){
+<script>
+    $('.upvote_btn').click(function(){
 		 $.ajax({
              type: "POST",
              url: "{% url 'post-upvote-ajax' %}",
@@ -299,4 +300,6 @@ $('.upvote_btn').click(function(){
         });
 
 	 })
+</script>
+
 {% endblock script %}

@@ -27,7 +27,7 @@ def student_register(request):
 		if form.is_valid():
 			form.save()
 			messages.success(request, f'Your account has been created! You are now able to log in')
-			return redirect('home')
+			return redirect('school-feed')
 	else:
 		form = StudentSignUpForm(request.user)
 	return render(request, 'profiles/student_register.html', {'form': form})
@@ -71,7 +71,7 @@ def loginregister(request):
 				if user.is_school:
 					return redirect('school-feed', user.slug)
 				else:
-					return redirect('school-feed',user.school.user.slug)
+					return redirect('school-feed',user.student.school.user.slug)
 
 		
 
