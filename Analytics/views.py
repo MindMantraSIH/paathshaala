@@ -8,7 +8,7 @@ import plotly.express as px
 import os
 from plotly.subplots import make_subplots
 import plotly.graph_objects as go
-from dashboard import *
+
 
 
 
@@ -95,7 +95,7 @@ def ranking():
     pass
 
 def dashboard(request):
-    df = pd.read_csv('Analytics/data/student_data.csv')
+    df = pd.read_csv('Analytics/data/Parents Feedback (Responses) - Form Responses 1.csv')
     anx = df[df['Anxiety and pressure felt by students during exams'] > 3]
     number_of_anxious = anx['Anxiety and pressure felt by students during exams'].count()
     soc = df[df['How socially active are your children ?'] < 3]
@@ -121,7 +121,7 @@ def dashboard(request):
     graph2 = plotly.offline.plot(fig, auto_open=False, output_type="div")
     fig = px.box(df, y=['How self confident are your children ?'])
     graph3 = plotly.offline.plot(fig, auto_open=False, output_type="div")
-    fig = px.line(coin_data, x="Date", y=coin_data.columns[3:4], width=1050, height=500)
-    graph4 = plotly.offline.plot(fig, auto_open=False, output_type="div")
-    context = {"graph": [graph1, graph2, graph3, graph4]}
+ #   fig = px.line(coin_data, x="Date", y=coin_data.columns[3:4], width=1050, height=500)
+ #   graph4 = plotly.offline.plot(fig, auto_open=False, output_type="div")
+    context = {"graph": [graph1, graph2, graph3]}
     return render(request,'Analytics/dashboard.html',context)

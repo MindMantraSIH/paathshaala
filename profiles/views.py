@@ -121,7 +121,11 @@ def school_register(request):
 		school.state = state
 		school.save()
 		user.save()
+
+		return redirect('school-feed',slug=user.slug)
+
 		return redirect('schoolhome')
+
 
 	return render(request, 'profiles/school_register.html')
 
