@@ -23,5 +23,5 @@ urlpatterns = [
     path('forum/', include('forum.urls')),
     path('analytics/', include('Analytics.urls')),
     path('feed/', include('feed.urls')),
-
+    path('selfassess/', include('selfassessments.urls')),  
 ]
