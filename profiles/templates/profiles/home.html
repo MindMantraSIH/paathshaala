@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,8 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Paathshaala</title>
-    <link rel="stylesheet" href="home.css">
-    <link rel="stylesheet" href="basefile.css">
+    <link rel="stylesheet" href="{% static 'profiles/home.css' %}">
+    <link rel="stylesheet" href="{% static 'profiles/basefile.css' %}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
@@ -20,7 +21,7 @@
             <nav class="navbar navbar-expand-lg main-nav px-0"
                 style="background-color: linear-gradient(to right, #fbff79, #ffc680) !important;">
                 <a class="navbar-brand" href="#">
-                    <img src="circular paathshala logo.png" alt="paathshaala logo" style="height: 40;width: 40;">
+                    <img src="{% static 'profiles/circular paathshala logo.png' %}" alt="paathshaala logo" style="height: 40;width: 40;">
                     
                 </a>
                 <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainMenu"
@@ -63,7 +64,7 @@
                 </div>
                 <!-- Image -->
                 <div class="col-md-5" style="margin: auto;">
-                    <img class="d-block img-width" src="Teaching pastel yellow gif.gif" alt="">
+                    <img class="d-block img-width" src="{% static 'profiles/Teaching pastel yellow gif.gif' %}" alt="">
                 </div>
                 
             </div>
