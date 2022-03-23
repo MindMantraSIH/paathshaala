@@ -3,6 +3,12 @@ from django.contrib.auth.decorators import login_required
 import pandas as pd
 import numpy as np
 from profiles.models import *
+import plotly
+import plotly.express as px
+import os
+from plotly.subplots import make_subplots
+import plotly.graph_objects as go
+from dashboard import *
 
 
 
@@ -87,3 +93,35 @@ def normalize_ratings(rating):
 
 def ranking():
     pass
+
+def dashboard(request):
+    df = pd.read_csv('Analytics/data/student_data.csv')
+    anx = df[df['Anxiety and pressure felt by students during exams'] > 3]
+    number_of_anxious = anx['Anxiety and pressure felt by students during exams'].count()
+    soc = df[df['How socially active are your children ?'] < 3]
+    nuumber_of_soc_active = soc['How socially active are your children ?'].count()
+    self_conf = df[df['How self confident are your children ?'] < 3]
+    number_of_low_confid = self_conf['How self confident are your children ?'].count()
+    sub_col = ['How satisfied are you with school ', 'Schools emphasis on practical learning',
+               'Curriculums emphasis on life and social skills']
+    box_df = df['How satisfied are you with school ']
+
+    to_plot = {'Number of Anxious Students': number_of_anxious, 'Less Socially Active': nuumber_of_soc_active,
+               'Less Confident': number_of_low_confid}
+    labels = []
+    sizes = []
+    for x, y in to_plot.items():
+        labels.append(x)
+        sizes.append(y)
+
+    # color_discrete_map = { 'Open': 'rgb(255,0,0)'}
+    fig = go.Figure(data=[go.Pie(labels=labels, values=sizes)])
+    graph1 = plotly.offline.plot(fig, auto_open=False, output_type="div")
+    fig = px.bar(df['Steps taken to spread awareness about mental health'])
+    graph2 = plotly.offline.plot(fig, auto_open=False, output_type="div")
+    fig = px.box(df, y=['How self confident are your children ?'])
+    graph3 = plotly.offline.plot(fig, auto_open=False, output_type="div")
+    fig = px.line(coin_data, x="Date", y=coin_data.columns[3:4], width=1050, height=500)
+    graph4 = plotly.offline.plot(fig, auto_open=False, output_type="div")
+    context = {"graph": [graph1, graph2, graph3, graph4]}
+    return render(request,'Analytics/dashboard.html',context)
