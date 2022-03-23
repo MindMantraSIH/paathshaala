@@ -68,7 +68,10 @@ def loginregister(request):
 			user = authenticate(request, username=username, password=passw)
 			if user is not None:
 				login(request,user)
-				return redirect('home')
+				if user.is_school:
+					return redirect('school-feed', user.slug)
+				else:
+					return redirect('school-feed',user.school.user.slug)
 
 		
 
