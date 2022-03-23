@@ -6,26 +6,28 @@ import numpy as np
 
 
 def happiness_index(request):
-    df = pd.read_csv("")
-    df_actual = pd.read_csv("")
-    features = df_actual.iloc[:, 0]
-    number_of_students = len(df[df["Category"] == "Student"])
-    number_of_teachers = len(df[df["Category"] == "Teachers"])
-    number_of_counsellors = len(df[df["Category"] == "Counsellors"])
+    df = pd.read_csv("Analytics\data\HI.csv").iloc[:,:-1]
+    df_actual = pd.read_csv("Analytics\data\student_data.csv")
+    features = df_actual.iloc[1,:-1]
+    number_of_students = len(df[df["Who is filling this form?"] == "Student"])
+    number_of_teachers = len(df[df["Who is filling this form?"] == "Teacher"])
+    number_of_counsellors = len(df[df["Who is filling this form?"] == "Counsellor"])
     number_categories= {"Students": number_of_students,
                         "Teachers": number_of_teachers,
                         "Counsellors": number_of_counsellors}
-    ratings_students = df[df["Category"] == "Student"].drop()
-    ratings_teachers = df[df["Category"] == "Teachers"].drop()
-    ratings_counsellors = df[df["Category"] == "Counsellors"].drop()
+    ratings_students = df[df["Who is filling this form?"] == "Student"].drop(["Timestamp", "Who is filling this form?"],axis =1)
+    ratings_teachers = df[df["Who is filling this form?"] == "Teacher"].drop(["Timestamp", "Who is filling this form?"], axis =1)
+    ratings_counsellors = df[df["Who is filling this form?"] == "Counsellor"].drop(["Timestamp", "Who is filling this form?"],
+                                                                                   axis =1)
     ratings = {"Students": ratings_students,
                 "Teachers": ratings_teachers,
                 "Counsellors": ratings_counsellors}
     normalized_ratings = normalize_ratings(ratings)
     weights = calculate_weights(number_categories,normalized_ratings)
-
-    happiness_index = weights*features
-
+    happiness_index = weights*features.values
+    print(happiness_index.sum())
+    print(np.log(happiness_index.sum()))
+    print(happiness_index.sum()*10**np.log(happiness_index.sum()))
 
 def calculate_weights(number_categories, normalized_ratings):
     weight_students = []
@@ -34,7 +36,9 @@ def calculate_weights(number_categories, normalized_ratings):
     total = 0
     for name, count in number_categories.items():
         nr = normalized_ratings.get(name)
-        for i in range(len(nr)):
+        print("Hello")
+        print(nr)
+        for i in range(nr.shape[1]):
             if name == "Students":
                 weight_students.append(count*nr.iloc[:,i].sum())
             elif name == "Teachers":
@@ -55,7 +59,8 @@ def normalize_ratings(rating):
         means = ratings.mean()
         sd = ratings.std()
         for i in range(len(ratings.columns)):
-            ratings.iloc[:,i] = ratings.iloc[:,i].apply(lambda x: (x-means[1,i])/sd)
+            ratings.iloc[:,i] = ratings.iloc[:,i].apply(lambda x: (x-means.iloc[i])/sd.iloc[i])
+    print(rating)
     return rating
 
 def ranking():
