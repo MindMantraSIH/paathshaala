@@ -14,40 +14,22 @@ from django.contrib import messages
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 import hashlib
 
-# class PostCreateView(CreateView):
-# 	model = Post
-# 	fields = ['title', 'content']
-
-# 	def form_valid(self, form):
-# 		test = School.objects.first()
-# 		print(test)
-# 		form.instance.school = test
-# 		return super().form_valid(form)
-
 def home(request):
-	return render(request, 'profiles/home.html')
+	return render(request,'profiles/home.html')
 
 
-def school_register(request):
-	if request.method == 'POST':
-		form = SchoolSignUpForm(request.POST)
-		if form.is_valid():
-			form.save()
-			messages.success(request, f'Your account has been created! You are now able to log in')
-			return redirect('school-login')
-	else:
-		form = SchoolSignUpForm()
-	return render(request, 'profiles/school_register.html', {'form': form})
+
+
 
 def student_register(request):
 	if request.method == 'POST':
-		form = StudentSignUpForm(request.POST)
+		form = StudentSignUpForm(request.user, request.POST)
 		if form.is_valid():
 			form.save()
 			messages.success(request, f'Your account has been created! You are now able to log in')
-			return redirect('student-login')
+			return redirect('home')
 	else:
-		form = StudentSignUpForm()
+		form = StudentSignUpForm(request.user)
 	return render(request, 'profiles/student_register.html', {'form': form})
 
 
@@ -86,7 +68,10 @@ def loginregister(request):
 			user = authenticate(request, username=username, password=passw)
 			if user is not None:
 				login(request,user)
-				return redirect('home')
+				if user.is_school:
+					return redirect('school-feed', user.slug)
+				else:
+					return redirect('school-feed',user.school.user.slug)
 
 		
 
@@ -101,7 +86,7 @@ def home(request):
 	return render(request,'profiles/home.html',{'user':request.user})
 
 def school_register(request):
-	print(request.user.username)
+	print(request.user.school)
 	if request.method == 'POST':
 		board = request.POST.get('board')
 		phone_num = request.POST.get('pno')
@@ -119,19 +104,11 @@ def school_register(request):
 		school.state = state
 		school.save()
 		user.save()
-		return redirect('home')
+		return redirect('school-feed',slug=user.slug)
 
 	return render(request, 'profiles/school_register.html')
 
-def student_register(request):
-	if request.method == 'POST':
-		form = StudentSignUpForm(request.POST)
-		if form.is_valid():
-			form.save()
-			messages.success(request, f'Your account has been created! You are now able to log in')
-			return redirect('student-login')
-	else:
-		form = StudentSignUpForm()
-	return render(request, 'profiles/student_register.html', {'form': form})
 
 
+def schoolhome(request):
+	return render(request,'profiles/schoolhome.html')

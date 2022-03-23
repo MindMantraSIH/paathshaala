@@ -58,7 +58,7 @@ a {
   .input-group:after {
 	clear: both;
   }
-button {
+button{
 	border-radius: 20px;
 	border: 1px solid #fbff79;
 	background-color: #fbff79;

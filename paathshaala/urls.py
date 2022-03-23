@@ -17,7 +17,6 @@ from django.contrib import admin
 from django.urls import path, include
 from profiles.views import home
 
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('profiles/', include('profiles.urls')),
@@ -25,6 +24,7 @@ urlpatterns = [
     path('forum/', include('forum.urls')),
     path('analytics/', include('Analytics.urls')),
     path('feed/', include('feed.urls')),
-    path('selfassess/', include('selfassessments.urls')),  
+    path('selfassess/', include('selfassessments.urls')),
+    path('sugg/', include('suggestions.urls')),   
     path('', home, name='home'),
 ]
