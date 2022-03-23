@@ -51,23 +51,40 @@
             </div>
             <div class="card sec3">
                 <div class="card-body" style="color: black;">
-                    <h4>
+                    <h4 class="text-center">
                         Happiness Index
                     </h4>
                 </div>
             </div>
             <div class="card sec3" >
-                <div class="card-body" style="color: black;">
+                <div class="card-body" >
                     <div class="text-center">
                         <button type="submit" class="btn btn-primary px-5">Send Feedbacks</button>
                       </div>
                 </div>
             </div>
+
             <div class="card sec3" >
 
                 <div class="card-body" style="color: black;">
                     <div class="text-center">
-                        <button type="submit" class="btn btn-primary" style="background-color:#ff4000; border:none;">Calculate Happiness Index</button>
+                        <a type="submit" href="#" class="btn btn-primary" style="background-color:#ff4000; border:none;">Calculate Happiness Index</a>
+                      </div>
+                </div>
+            </div>
+            <div class="card sec3" >
+                <div class="card-header"> <h5>Upload Student Database Here</h5></div>
+                <div class="card-body" >
+                    <div class="text-center">
+                        <form method="POST" enctype="multipart/form-data" action="{% url 'csv' %}">
+                            {% csrf_token %}
+  <div class="form-group">
+
+    <input type="file" class="form-control-file" id="exampleFormControlFile1" name="csv" style="margin-left:3rem;">
+      <button type="submit" class="btn btn-primary mt-3">Upload Csv</button>
+  </div>
+</form>
+
                       </div>
                 </div>
             </div>
@@ -83,7 +100,7 @@
                 </div>
             </div>
             <div class="card sec3" style="">
-                <div class="card-header"> <h3>Analysis of Feedback</h3></div>
+                <div class="card-header text-center"> <h3>Analysis of Feedback</h3></div>
                 <div class="card-body" style="color: black;">
 
                     <div class="card-text text-center">

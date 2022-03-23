@@ -2,17 +2,23 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 import pandas as pd
 import numpy as np
+import csv
+import os
 from profiles.models import *
 import plotly
 import plotly.express as px
 import os
 from plotly.subplots import make_subplots
 import plotly.graph_objects as go
+from .models import Academics
+from profiles.models import School
 
 
 
 
-def happiness_index(request):
+
+def happiness_index():
+
     df = pd.read_csv("Analytics\data\HI.csv").iloc[:,:-1]
     df_actual = pd.read_csv("Analytics\data\student_data.csv")
     features = df_actual.iloc[:,:-1]
@@ -38,14 +44,11 @@ def happiness_index(request):
         happiness_index += intermediate.values.sum() * 10 **(-1* np.log(intermediate.values.sum()))
         # weights*features[i,:].values
     happiness_index = happiness_index/features.shape[0]
-<<<<<<< HEAD
-=======
 
     happiness_index = happiness_index* 10 ** np.log(happiness_index.sum())
 
     happiness_index = happiness_index* 10 ** np.log(intermediate.sum())
 
->>>>>>> 4798c28ec0aafdd7c931e06e481e4b34d4037f58
     print(happiness_index)
     # happiness_index = happiness_index* 10 **(-1* np.log(happiness_index))
     print(request.user)
@@ -134,3 +137,20 @@ def dashboard(request):
  #   graph4 = plotly.offline.plot(fig, auto_open=False, output_type="div")
     context = {"graph": [graph1, graph2, graph3]}
     return render(request,'Analytics/dashboard.html',context)
+
+def upload_csv(request):
+    if request.method == "POST":
+        csv = request.FILES['csv']
+        # print(csv.read().decode())
+        for i,line in enumerate(csv.read().decode().splitlines()):
+            if i == 0:
+                continue
+            elements = line.split(',')
+            print(request.user)
+            p = Academics(school = request.user.school,name=elements[0], email=elements[1], english = elements[2])
+            p.save()
+            happiness_index()
+    return render(request, 'Analytics/dashboard.html')
+
+def send(request):
+    students = School.objects.get()
