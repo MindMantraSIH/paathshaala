@@ -14,6 +14,8 @@ from django.contrib import messages
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 import hashlib
 
+def home(request):
+	return render(request,'profiles/home.html')
 # class PostCreateView(CreateView):
 # 	model = Post
 # 	fields = ['title', 'content']
@@ -119,7 +121,11 @@ def school_register(request):
 		school.state = state
 		school.save()
 		user.save()
+<<<<<<< HEAD
 		return redirect('school-feed',slug=user.slug)
+=======
+		return redirect('schoolhome')
+>>>>>>> 63cc7f85a22ccd109706cf76775d059d439ea4f4
 
 	return render(request, 'profiles/school_register.html')
 
@@ -134,4 +140,5 @@ def student_register(request):
 		form = StudentSignUpForm()
 	return render(request, 'profiles/student_register.html', {'form': form})
 
-
+def schoolhome(request):
+	return render(request,'profiles/schoolhome.html')

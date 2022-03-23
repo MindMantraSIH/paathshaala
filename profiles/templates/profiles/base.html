@@ -17,14 +17,17 @@
     <meta name="robot" content="INDEX FOLLOW">
 
     <!-- This how you include externa css -->
-    <!-- {% block connectcss %}
+    {% block connectcss %}
 
-    {% endblock connectcss %} -->
+    {% endblock connectcss %}
     <link rel="stylesheet" href="{% static 'profiles/basefile.css' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="styles/index.processed.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Paathshaala</title>
@@ -49,8 +52,7 @@
                         <li><a href="#">School Rank</a></li>
                         <li><a href="selfassess/">Self Asst</a></li>
                         <li><a href="#">Help Center</a></li>
-                        <li><a href="forum/">Forum</a></li>
-                        
+                        <li><a href="forum/">Forum</a></li>                        
                         {% block login %}
 
                         {% endblock login %}

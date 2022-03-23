@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'feed.apps.FeedConfig',
     'selfassessments.apps.SelfassessmentsConfig',
     'Analytics.apps.AnalyticsConfig',
+    'suggestions.apps.SuggestionsConfig',
     'profiles.apps.ProfilesConfig',
     'ranking.apps.RankingConfig',
     'forum.apps.ForumConfig',
