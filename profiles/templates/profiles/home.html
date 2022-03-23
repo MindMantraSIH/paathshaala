@@ -1,7 +1,95 @@
-{% extends 'profiles/base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% load crispy_forms_tags %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paathshaala</title>
+    <link rel="stylesheet" href="{% static 'profiles/home.css' %}">
+    <link rel="stylesheet" href="{% static 'profiles/basefile.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
 
+<<<<<<< HEAD
+<body style="background-color: #eee !important;">
+    <header class="main-header" style="margin: 0px;" >
+        <div style="margin:1.5rem;">
+            <nav class="navbar navbar-expand-lg main-nav px-0"
+                style="background-color: linear-gradient(to right, #fbff79, #ffc680) !important;">
+                <a class="navbar-brand" href="#">
+                    <img src="{% static 'profiles/circular paathshala logo.png' %}" alt="paathshaala logo" style="height: 40;width: 40;">
+                    
+                </a>
+                <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainMenu"
+                    aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
+                </button> -->
+                <div class="collapse navbar-collapse" id="mainMenu">
+                    <ul class="navbar-nav ml-auto text-uppercase f1">
+                        <li><a href="#" class="active active-first">Home</a></li>
+                        <li><a href="#">School Rank</a></li>
+                        <li><a href="#">Self Assesment</a></li>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Forum</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Login / Signup</a></li>
+                    </ul>
+                    <span class="material-icons">account_circle</span>
+                </div>
+            </nav>
+        </div>
+        <!-- /.container -->
+    </header>
+
+
+    <div class="container-fluid gedf-wrapper" >
+        <div style="margin: 10px;background-color: #eee !important;text-align: center;">
+            <div class="row ">
+                <div class="col-md-7 px-3" >
+                    <div class="heading">
+                        <h1 style="font-size: 3.5rem !important; font-family: 'Vesper Libre', serif;">PAATHSHAALA</h1>
+                    </div>
+                    <div>
+                        <p style="font-size: 1.5rem ;">
+                        Platform for assessing and advancing the<br>happiness Index of schools and assisting learner's ambitions
+                    </p>
+                    </div>
+                    <div>
+                        <p></p>
+
+                    </div>  
+                </div>
+                <!-- Image -->
+                <div class="col-md-5" style="margin: auto;">
+                    <img class="d-block img-width" src="{% static 'profiles/Teaching pastel yellow gif.gif' %}" alt="">
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
+=======
 {% block content %}
   <h1> {{user.username}} </h1>
 {% endblock %}
+>>>>>>> fde787473d39fc95ae1b6db38d5143971b3ae9d9
