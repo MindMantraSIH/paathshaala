@@ -70,14 +70,15 @@
             <div class="card sec3" style="">
                 <div class="card-body" style="color: black;">
                     <div class="card-text text-center">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col">  {% if graph %}</div>
+                        <div class="container"> {% for g in graph %}
+<!--                            {{ g|safe }}-->
+
+                             <div class="col">{{ g|safe }}</div>
                                 <div class="col"></div>
                                 <div class="w-100"></div>
                                 <div class="col"></div>
                                 <div class="col"></div>
-                            </div>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
