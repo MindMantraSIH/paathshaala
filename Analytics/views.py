@@ -33,9 +33,18 @@ def happiness_index(request):
         # weights*features[i,:].values
     happiness_index = happiness_index/features.shape[0]
     happiness_index = happiness_index* 10 ** np.log(intermediate.sum())
+    print(happiness_index)
     # print(happiness_index.sum())
     # print(np.log(happiness_index.sum()))
     print(happiness_index)
+
+
+
+
+
+
+
+
 
 
 def calculate_weights(number_categories, normalized_ratings):
