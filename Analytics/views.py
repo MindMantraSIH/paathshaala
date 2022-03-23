@@ -3,6 +3,8 @@ from django.contrib.auth.decorators import login_required
 import pandas as pd
 import numpy as np
 from profiles.models import *
+#from dashboard import *
+
 
 
 
@@ -67,4 +69,10 @@ def normalize_ratings(rating):
 
 def ranking():
     pass
+
+#@login_required
+def dashboard(request):
+   return render(request,'Analytics/dashboard.html')
+
+
 
