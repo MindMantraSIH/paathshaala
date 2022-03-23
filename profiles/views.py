@@ -88,7 +88,10 @@ def loginregister(request):
 			user = authenticate(request, username=username, password=passw)
 			if user is not None:
 				login(request,user)
-				return redirect('home')
+				if user.is_school:
+					return redirect('school-feed', user.slug)
+				else:
+					return redirect('school-feed',user.school.user.slug)
 
 		
 
@@ -121,7 +124,7 @@ def school_register(request):
 		school.state = state
 		school.save()
 		user.save()
-		return redirect('schoolhome')
+		return redirect('school-feed')
 
 	return render(request, 'profiles/school_register.html')
 

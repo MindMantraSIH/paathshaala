@@ -22,14 +22,15 @@
     {% endblock connectcss %}
     <link rel="stylesheet" href="{% static 'profiles/basefile.css' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->
     <link rel="stylesheet" href="styles/index.processed.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" -->
+        <!-- integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
     <title>Paathshaala</title>
     <!-- add icon link -->
     <link rel="icon" href="{% static 'profiles/circular paathshala logo.png' %}" type="image/x-icon">
@@ -48,11 +49,11 @@
                 </button> -->
                 <div class="collapse navbar-collapse" id="mainMenu">
                     <ul class="navbar-nav ml-auto text-uppercase f1">
-                        <li><a href="home/" class="active active-first">Home</a></li>
+                        <li><a href="{% url 'home' %}" class="active-first">Home</a></li>
                         <li><a href="#">School Rank</a></li>
-                        <li><a href="selfassess/">Self Asst</a></li>
+                        <li><a href="{% url 'getdata'%}">Self Assesment</a></li>
                         <li><a href="#">Help Center</a></li>
-                        <li><a href="forum/">Forum</a></li>
+                        <li><a href="{% url 'forum' %}">Forum</a></li>
                         
                         {% block login %}
 

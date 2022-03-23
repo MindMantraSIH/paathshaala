@@ -1,6 +1,19 @@
+{% extends "profiles/base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
+
+
+{% block connectcss %} 
+<link rel="stylesheet" href="{% static 'feed/school_feed.css' %}">
+{% endblock connectcss %}
+
+{% block login %}
+<li><a href="{% url 'HappinessIndex' %}">Dashboard</a></li>
+<li><a href="{% url 'school-feed' user.slug %}">Feed</a></li>
+<li><a href="{% url 'home' %}">Logout</a></li>
+{% endblock login %}
+
+<!-- <!DOCTYPE html> -->
+<!-- <html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -23,25 +36,25 @@
                 <a class="navbar-brand" href="#">
                     <img src="{% static 'feed/circular paathshala logo.png' %}" alt="paathshaala logo" style="height: 40;width: 40;">
                 </a>
-                <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainMenu"
+                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainMenu"
                     aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
                 </button> -->
-                <div class="collapse navbar-collapse" id="mainMenu">
+                <!-- <div class="collapse navbar-collapse" id="mainMenu">
                     <ul class="navbar-nav ml-auto text-uppercase f1">
                         <li><a href="#" class="active active-first">Home</a></li>
                         <li><a href="#">School Rank</a></li>
                         <li><a href="{% url 'getdata' %}">Self Assesment</a></li>
                         <li><a href="#">Help Center</a></li>
                         <li><a href="#">Forum</a></li>
-                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Feed</a></li>
                         <li><a href="#">Login / Signup</a></li>
                     </ul>
                     <span class="material-icons">account_circle</span>
                 </div>
             </nav>
-        </div>
+        </div> -->
         <!-- /.container -->
-    </header>
+    <!-- </header> --> 
     <!-- <nav class="navbar navbar-light bg-white">
         <a href="#" class="navbar-brand">Bootsbook</a>
         <form class="form-inline">
@@ -56,200 +69,185 @@
             </div>
         </form>
     </nav> -->
-
-    <div class="container-fluid gedf-wrapper">
-        <div class="row">
-            <div class="col-md-3">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="h5">{{ school.user.name }}</div>
-                        <div class="h7 text-muted">Board: {{ school.board }}</div>
-                        <div class="h7">Address:{{ school.address }}</div>
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">
-                            <div class="h6 text-muted">School Rank</div>
-                            {% if school.rank %}
-                            <div class="h5">{{ school.rank }}</div>
-                            {% else %}
-                            <div class="h5">NA</div>
-                            {% endif %}
+{% block content %}
+<div class="container-fluid gedf-wrapper">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <div class="h5">{{ school.user.name }}</div>
+                    <div class="h7 text-muted">Board: {{ school.board }}</div>
+                    <div class="h7">Address:{{ school.address }}</div>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <div class="h6 text-muted">School Rank</div>
+                        {% if school.rank %}
+                        <div class="h5">{{ school.rank }}</div>
+                        {% else %}
+                        <div class="h5">NA</div>
+                        {% endif %}
+                    </li>
+                    <li class="list-group-item">
+                        <div class="h6 text-muted">Location</div>
+                        <div class="h6">State: {{ school.state }}</div>
+                        <div class="h6">City: {{ school.city }}</div>
+                    </li>
+                    <li class="list-group-item">Your Happiness Index: 
+                        {% if school.rank %}
+                        <div class="h5">{{ school.happiness_score }}</div>
+                        {% else %}
+                        <div class="h5">NA</div>
+                        {% endif %}
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-6 gedf-main">
+            
+            <!--- \\\\\\\Post-->
+            {% if user == school.user %}
+            <form method="post" enctype='multipart/form-data'>
+                {% csrf_token %}
+            <div class="card gedf-card">
+                <div class="card-header">
+                    <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="posts-tab" data-toggle="tab" href="#posts" role="tab"
+                                aria-controls="posts" aria-selected="true">Write Something</a>
                         </li>
-                        <li class="list-group-item">
-                            <div class="h6 text-muted">Location</div>
-                            <div class="h6">State: {{ school.state }}</div>
-                            <div class="h6">City: {{ school.city }}</div>
-                        </li>
-                        <li class="list-group-item">Your Happiness Index: 
-                            {% if school.rank %}
-                            <div class="h5">{{ school.happiness_score }}</div>
-                            {% else %}
-                            <div class="h5">NA</div>
-                            {% endif %}
+                        <li class="nav-item">
+                            <a class="nav-link" id="images-tab" data-toggle="tab" role="tab" aria-controls="images"
+                                aria-selected="false" href="#images" style="color: #ffc680 !important;">Images</a>
                         </li>
                     </ul>
                 </div>
-            </div>
-            <div class="col-md-6 gedf-main">
-                
-                <!--- \\\\\\\Post-->
-                {% if user == school.user %}
-                <form method="post" enctype='multipart/form-data'>
-                    {% csrf_token %}
-                <div class="card gedf-card">
-                    <div class="card-header">
-                        <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active" id="posts-tab" data-toggle="tab" href="#posts" role="tab"
-                                    aria-controls="posts" aria-selected="true">Write Something</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="images-tab" data-toggle="tab" role="tab" aria-controls="images"
-                                    aria-selected="false" href="#images" style="color: #ffc680 !important;">Images</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="card-body">
-                        <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade show active" id="posts" role="tabpanel"
-                                aria-labelledby="posts-tab">
-                                <div class="form-group">
-                                    <label class="sr-only" for="message">post</label>
-                                    <textarea class="form-control" name='title' rows="1"
-                                        placeholder="Title" style="margin-bottom:0.4rem;" >
-                                    </textarea>
-                                    <textarea class="form-control" name='content' rows="3"
-                                        placeholder="What are you thinking?" >
-                                    </textarea>
-                                </div>
+                <div class="card-body">
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="posts" role="tabpanel"
+                            aria-labelledby="posts-tab">
+                            <div class="form-group">
+                                <label class="sr-only" for="message">post</label>
+                                <textarea class="form-control" name='title' rows="1"
+                                    placeholder="Title" style="margin-bottom:0.4rem;" >
+                                </textarea>
+                                <textarea class="form-control" name='content' rows="3"
+                                    placeholder="What are you thinking?" >
+                                </textarea>
+                            </div>
 
-                            </div>
-                            <div class="tab-pane fade" id="images" role="tabpanel" aria-labelledby="images-tab">
-                                <div class="form-group">
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="customFile" name='image' accept="image/*">
-                                        <label class="custom-file-label" for="customFile">Upload image</label>
-                                    </div>
-                                </div>
-                                <div class="py-4"></div>
-                            </div>
                         </div>
-                        <div class="btn-toolbar justify-content-between">
-                            <div class="btn-group">
-                                <input type="submit" name='type' value="Share" class="btn btn-primary">
-                                {% comment %} <button type="submit" class="btn btn-primary">Share</button> {% endcomment %}
+                        <div class="tab-pane fade" id="images" role="tabpanel" aria-labelledby="images-tab">
+                            <div class="form-group">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="customFile" name='image' accept="image/*">
+                                    <label class="custom-file-label" for="customFile">Upload image</label>
+                                </div>
                             </div>
-                            
+                            <div class="py-4"></div>
                         </div>
                     </div>
-                </div>
-            </form>
-                <!-- Post /////-->
-                {% endif %}
-                
-                <!--- \\\\\\\Post-->
-                {% for post in posts %}
-                <div class="card gedf-card">
-                    <div class="card-header">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="mr-2">
-                                    <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
-                                </div>
-                                <div class="ml-2">
-                                    <div class="h5 m-0">@{{ school.user.username }}</div>
-                                    <div class="h7 text-muted">{{ school.user.name }}</div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="dropdown">
-                                    <button class="btn btn-link dropdown-toggle" type="button" id="gedf-drop1"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fa fa-ellipsis-h"></i>
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
-                                        <!-- <div class="h6 dropdown-header">Configuration</div> -->
-                                        <a class="dropdown-item" href="#">Edit</a>
-                                        <a class="dropdown-item" href="#">Delete</a>
-                                        <!-- <a class="dropdown-item" href="#">Report</a> -->
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="btn-toolbar justify-content-between">
+                        <div class="btn-group">
+                            <input type="submit" name='type' value="Share" class="btn btn-primary">
+                            {% comment %} <button type="submit" class="btn btn-primary">share</button> {% endcomment %}
                         </div>
-
-                    </div>
-                    <div class="card-body">
-                        <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>{{ post.date_posted }}</div>
-                        <a class="card-link" href="#">
-                            <h5 class="card-title">{{ post.title }}</h5>
-                        </a>
-
-                        <p class="card-text">
-                            {{ post.content }}
-                        </p>
-                        {% if post.image %}<img src=https://res.cloudinary.com/dhny6jvtu/image/upload/v1/{{ post.image }} alt="img">{% endif %}
                         
                     </div>
-                    <div class="card-footer">
-                        <a href="#" class="card-link"><i class="fa fa-gittip"></i> Like</a>
-                        <!-- <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
-                        <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a> -->
-                    </div>
-                </div>
-                <!-- Post /////-->
-                {% endfor %}
-
-               
-
-
-
-            </div>
-            <div class="col-md-3">
-                <!-- <div class="card gedf-card">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the
-                            card's content.</p>
-                        <a href="#" class="card-link">Card link</a>
-                        <a href="#" class="card-link">Another link</a>
-                    </div> -->
-                <form action="/search.html" method="get">
-                    <input class="form-input" type="text" name="query" placeholder="Post Search">
-                    <button style="height: 2rem;" class="btn btn-outline-primary" type="button" id="button-addon2">
-                        <i style="display: block !important;" class="fa fa-search"></i>
-                    </button>
-                </form>
-
-                <div class="card gedf-card" style="margin-top: 2rem;">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the
-                            card's content.</p>
-                        <a href="#" class="card-link">Card link</a>
-                        <a href="#" class="card-link">Another link</a>
-                    </div>
                 </div>
             </div>
+        </form>
+            <!-- Post /////-->
+            {% endif %}
+            
+            <!--- \\\\\\\Post-->
+            {% for post in posts %}
+            <div class="card gedf-card" style="margin-top: 1.5rem;">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <!-- <div class="mr-2">
+                                <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
+                            </div> -->
+                            <div class="ml-2">
+                                <div class="h5 m-0">@{{ school.user.username }}</div>
+                                <div class="h7 text-muted">{{ school.user.name }}</div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="dropdown">
+                                <button class="btn btn-link" type="button" id="gedf-drop1"
+                                     aria-haspopup="true" aria-expanded="false">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                                <!-- <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
+                                     <div class="h6 dropdown-header">Configuration</div> -->
+                                    <!-- <a class="dropdown-item" href="#">Edit</a>
+                                    <a class="dropdown-item" href="#">Delete</a>
+                                     <a class="dropdown-item" href="#">Report</a> 
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card-body">
+                    <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>{{ post.date_posted }}</div>
+                    <h5 class="card-title">{{ post.title }}</h5>
+            
+
+                    <p class="card-text">
+                        {{ post.content }}
+                    </p>
+                    {% if post.image %}<img src=https://res.cloudinary.com/dhny6jvtu/image/upload/v1/{{ post.image }} alt="img">{% endif %}
+                    
+                </div>
+                <div class="card-footer">
+                    <i class="fa fa-gittip"></i> Like
+                    <!-- <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
+                    <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a> -->
+                </div>
+            </div>
+            <!-- Post /////-->
+            {% endfor %}
+
+           
+
+
+
+        </div>
+        <div class="col-md-3">
+            <!-- <div class="card gedf-card">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                        the
+                        card's content.</p>
+                    <a href="#" class="card-link">Card link</a>
+                    <a href="#" class="card-link">Another link</a>
+                </div> -->
+            <form action="/search.html" method="get">
+                <input class="form-input" type="text" name="query" placeholder="Post Search">
+                <button style="height: 2rem;" class="btn btn-outline-primary" type="button" id="button-addon2">
+                    <i style="display: block !important;" class="fa fa-search"></i>
+                </button>
+            </form>
+
+            <!-- <div class="card gedf-card" style="margin-top: 2rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                        the
+                        card's content.</p>
+                    <a href="#" class="card-link">Card link</a>
+                    <a href="#" class="card-link">Another link</a>
+                </div>
+            </div> -->
         </div>
     </div>
+</div>
+{% endblock content %}
 
-
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
-        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-        crossorigin="anonymous"></script>
-</body>
-
-</html>
+    
