@@ -7,6 +7,13 @@ from django.contrib.auth.decorators import login_required
 @login_required()
 def school_feed(request, slug):
     context = {}
+    user = request.user
+    if user.is_student:
+        context['student'] = user
+    school = School.objects.filter(user__slug = slug)[0]
+    posts = Post.objects.filter(school = school)
+    context['posts'] = posts
+    context['school'] = school
     if request.method == 'POST':
         print('HELLLO')
         title = request.POST.get('title')
@@ -15,12 +22,7 @@ def school_feed(request, slug):
         post = Post.objects.create(title=title.strip(),content=content.strip(),school=request.user.school,image=im)
         post.save()
         return render(request, 'feed/school_feed.html',context)
-    user = request.user
     
-    if user.is_student:
-        context['student'] = user
-    school = School.objects.filter(user__slug = slug)[0]
-    posts = Post.objects.filter(school = school)
-    context['posts'] = posts
-    context['school'] = school
+    
+   
     return render(request, 'feed/school_feed.html',context)
