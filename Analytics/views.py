@@ -9,7 +9,7 @@ from profiles.models import *
 def happiness_index(request):
     df = pd.read_csv("Analytics\data\HI.csv").iloc[:,:-1]
     df_actual = pd.read_csv("Analytics\data\student_data.csv")
-    features = df_actual.iloc[1,:-1]
+    features = df_actual.iloc[:,:-1]
     number_of_students = len(df[df["Who is filling this form?"] == "Student"])
     number_of_teachers = len(df[df["Who is filling this form?"] == "Teacher"])
     number_of_counsellors = len(df[df["Who is filling this form?"] == "Counsellor"])
@@ -25,10 +25,17 @@ def happiness_index(request):
                 "Counsellors": ratings_counsellors}
     normalized_ratings = normalize_ratings(ratings)
     weights = calculate_weights(number_categories,normalized_ratings)
-    happiness_index = weights*features.values
-    print(happiness_index.sum())
-    print(np.log(happiness_index.sum()))
-    print(happiness_index.sum()*10**np.log(happiness_index.sum()))
+    happiness_index = 0
+    print(features.shape)
+    for i in range(features.shape[0]):
+        intermediate = weights*features.iloc[i,:]
+        happiness_index += intermediate.values.sum()
+        # weights*features[i,:].values
+    happiness_index = happiness_index/features.shape[0]
+    happiness_index = happiness_index* 10 ** np.log(intermediate.sum())
+    # print(happiness_index.sum())
+    # print(np.log(happiness_index.sum()))
+    print(happiness_index)
 
 
 def calculate_weights(number_categories, normalized_ratings):
