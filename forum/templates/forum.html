@@ -116,8 +116,8 @@
                                     <div class="card-header">
                                         <p><span>{{ d.disc_title }}</span>
                                         <span  style="float: right; color: black;">
-                                            <a href={% url 'discussionUpdate' pk=d.id %} style="color: black;"><i class="fas fa-edit"></i></a>
-                                            <a href={% url 'discussionDelete' pk=d.id %} style="color: black;" ><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                            <a href={% url 'discussionUpdate' slug=d.slug %} style="color: black;"><i class="fas fa-edit"></i></a>
+                                            <a href={% url 'discussionDelete' slug=d.slug %} style="color: black;" ><i class="fa fa-trash" aria-hidden="true"></i></a>
                                         </span></p>
                                     </div>
                                     <div class="card-body">
@@ -139,7 +139,7 @@
                             <div>
                                 <p><span style="float:left; color: black;">{{ d.timestamp }}</span>
                                     <a style="color: black;"
-                                        href={% url 'comment' myid=d.id %}><span
+                                        href={% url 'comment' slug=d.slug %}><span
                                             style="float: right;">Comment
                                             <i class="fa fa-comment"></i></span></a></p>
 

@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from .models import School,Post,Student,User
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 #from .models import 
 
 # def temp(request):
@@ -24,32 +24,6 @@ class PostCreateView(CreateView):
 		form.instance.school = test
 		return super().form_valid(form)
 
-
-# class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
-# 	model = Post
-# 	fields = ['title', 'content']
-
-# 	def form_valid(self, form):
-# 		form.instance.school = self.request.user.school
-# 		return super().form_valid(form)
-
-# 	def test_func(self):
-# 		post = self.get_object()
-# 		if self.request.user.school == post.school.user:
-# 			return True
-# 		return False
-
-
-# class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
-# 	model = Post
-
-# 	def test_func(self):
-# 		post = self.get_object()
-# 		if self.request.user.school == post.school.user:
-# 			return True
-# 		return False
-
-# 	success_url = '/'
 
 
 def school_register(request):
@@ -77,6 +51,7 @@ def student_register(request):
 
 def loginregister(request):
 	context = {}
+	logout(request)
 	if request.method == 'POST':
 		form = request.POST.get('type')
 		if form=='register':
@@ -87,40 +62,30 @@ def loginregister(request):
 			cpassw = request.POST.get('con_password')
 			if passw != cpassw:
 				return render(request, 'profiles/loginregister.html', {'message': 'Password Doesnt Match'})
-			passw = hashlib.sha256(passw).hexdigest()
-			print(passw)
 			if User.objects.filter(username=username).exists():
 				return render(request, 'profiles/loginregister.html', {'message': 'Username Already exists'})
 			if cat == 'student':
-				user = User.objects.create(username=username, name=name, password=passw, is_student=True)
+				user = User.objects.create(username=username, name=name, is_student=True)
+				user.set_password(passw)
 				user.save()
+				user = authenticate(request, username=username, password = passw)
+				login(request,user)
 				return redirect('student-register')
 			if cat == 'school':
-				user = User.objects.create(username=username, name=name, password=passw, is_school=True)
+				user = User.objects.create(username=username, name=name, is_school=True)
+				user.set_password(passw)
 				user.save()
+				user = authenticate(request, username=username, password = passw)
+				login(request,user)
 				return redirect('school-register')
 		elif form=='sign-in':
-			
 			username = request.POST.get('username')
 			passw = request.POST.get('password')
 			user = authenticate(request, username=username, password=passw)
-			print('1',user)
 			if user is not None:
-				print('HEYEHY')
-				login(request, user)
+				login(request,user)
 				return redirect('home')
-			print(username)
-			print(passw)
-			if User.objects.filter(username=username).exists():
-				print('in if')
-				user = User.objects.filter(username=username)[0]
-				print(user)
-				if user.password == passw:
-					return redirect('home')
-				else:
-					return render(request, 'profiles/loginregister.html', {'message': 'Username or password entered is incorrect'})
-			else:
-				return render(request, 'profiles/loginregister.html', {'message': 'Username or password entered is incorrect'})
+
 		
 
 	return render(request, 'profiles/loginregister.html')
@@ -131,11 +96,40 @@ def home(request):
 		print(f"Username --> {request.user.username}")
 	else:
 		print("User is not logged in :(")
-	return render(request,'profiles/home.html',{'user':request.user.username})
+	return render(request,'profiles/home.html',{'user':request.user})
 
 def school_register(request):
+	print(request.user.username)
+	if request.method == 'POST':
+		board = request.POST.get('board')
+		phone_num = request.POST.get('pno')
+		email = request.POST.get('email')
+		address = request.POST.get('address')
+		state = request.POST.get('state')
+		city = request.POST.get('city')
+		user = User.objects.filter(username=request.user.username)[0]
+		user.email = email
+		user.phone_number = phone_num
+		school = School.objects.create(user=user)
+		school.board = board
+		school.address = address
+		school.city = city
+		school.state = state
+		school.save()
+		user.save()
+		return redirect('home')
+
 	return render(request, 'profiles/school_register.html')
 
 def student_register(request):
-	return render(request, 'profiles/student_register.html')
+	if request.method == 'POST':
+		form = StudentSignUpForm(request.POST)
+		if form.is_valid():
+			form.save()
+			messages.success(request, f'Your account has been created! You are now able to log in')
+			return redirect('student-login')
+	else:
+		form = StudentSignUpForm()
+	return render(request, 'profiles/student_register.html', {'form': form})
+
 

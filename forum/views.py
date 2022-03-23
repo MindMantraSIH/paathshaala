@@ -25,26 +25,26 @@ def forum(request):
     return render(request, "forum.html", {'posts':posts})
 
 @login_required
-def comment(request,myid):
+def comment(request,slug):
     #profile = Profile.objects.all()
-    post = Discussion.objects.filter(id=myid)
+    post = Discussion.objects.filter(slug=slug)
     #print(posts)
     replies = Reply.objects.filter(post=post[0])
     return render(request, "comment.html", {'reply':replies,'posts':post})
 
 #@login_required(login_url = '/login')
 @login_required
-def replies(request, myid):
-    post = Discussion.objects.get(id=myid)
+def replies(request, slug):
+    post = Discussion.objects.get(slug=slug)
     replies = Reply.objects.filter(post=post)
     if request.method=="POST":
         user = request.user
         print(user)
         rep = request.POST.get('reply')
         print(rep)
-        post_id = myid
-        print(post)
-        print(post_id)
+        #post_id = myid
+        #print(post)
+        #print(post_id)
         reply = Reply(user = user)
         reply.reply_content = rep
         reply.post = post
@@ -55,16 +55,18 @@ def replies(request, myid):
 
 
 @login_required
-def discussionUpdate(request,pk):
-    disc=Discussion.objects.get(id=pk)
+def discussionUpdate(request,slug):
+    #print(slug)
+    print("in update",Discussion.objects.all())
+    disc=Discussion.objects.get(slug=slug)
+    print(disc)
     #print(disc)
     #user = User.objects.get(id = request.user.id)
     #print(user)
-    disc.delete()
+    
     print("in edit")
     if request.method == 'POST':
-        user=request.user
-        
+        user=request.user        
         title=request.POST.get('title')
         content=request.POST.get('content')
         d = Discussion(user1=user, disc_title=title,disc_content=content)
@@ -72,16 +74,12 @@ def discussionUpdate(request,pk):
         d.disc_title = title
         upd_form=d
         d.save()
-        #upd_form = DiscussionUpdateForm(request.POST)
-        print(upd_form.is_valid())
-        
+        disc.delete()
         return redirect('forum')
 
-    context = {
-        'upd_form': upd_form
-    }
+    
 
-    return render(request, "DiscussionUpdate.html",context)
+    return render(request, "DiscussionUpdate.html")
 
 
 @login_required
@@ -105,8 +103,8 @@ def replyUpdate(request):
     return render(request, 'ReplyUpdate.html', context)
 
 @login_required
-def discussionDelete(request,pk):
-    disc=Discussion.objects.get(id=pk)
+def discussionDelete(request,slug):
+    disc=Discussion.objects.get(slug=slug)
     disc.delete()
     posts = Discussion.objects.all()
             #print(posts)

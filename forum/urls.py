@@ -3,10 +3,10 @@ from . import views
 
 urlpatterns = [
     path("", views.forum, name="forum"),
-    path("discussion/<int:myid>/reply", views.replies, name="replies"),
-    path("discussion/<int:myid>/comment", views.comment, name="comment"),
-    path("discussion/<int:pk>/update", views.discussionUpdate, name="discussionUpdate"),
-    path("discussion/<int:pk>/delete", views.discussionDelete, name="discussionDelete"),
+    path("discussion/<str:slug>/reply", views.replies, name="replies"),
+    path("discussion/<str:slug>/comment", views.comment, name="comment"),
+    path("discussion/<str:slug>/update", views.discussionUpdate, name="discussionUpdate"),
+    path("discussion/<str:slug>/delete", views.discussionDelete, name="discussionDelete"),
     #path("discussion/<int:pk>/", views.replyUpdate, name="replyUpdate"),
     #path("myprofile/", views.myprofile, name="Myprofile"),
 ]
