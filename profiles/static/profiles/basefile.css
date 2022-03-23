@@ -1,10 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;&display=swap');
 body {
-<<<<<<< HEAD
-  background: #EEEEEE !important;
-=======
   background: #EEEEEE;
->>>>>>> fde787473d39fc95ae1b6db38d5143971b3ae9d9
   font-family:'Playfair Display', serif !important;
 
 }
@@ -203,10 +199,3 @@ body {
 
   /*header ends*/
 }
-<<<<<<< HEAD
-=======
-img {
-  max-width: 100%;
-  height: auto;
-}
->>>>>>> fde787473d39fc95ae1b6db38d5143971b3ae9d9

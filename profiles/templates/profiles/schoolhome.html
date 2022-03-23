@@ -1,13 +1,13 @@
-{% extends "profiles/base.html" %}
 {% load static %}
-
+{% extends "profiles/base.html"}
 
 {% block connectcss %} 
 <link rel="stylesheet" href="{% static 'profiles/home.css' %}">
 {% endblock connectcss %}
 
 {% block login %}
-<li><a href="{% url 'loginregister' %}">Login / Signup</a></li>
+<li><a href="{% url 'school-feed' %}">Feed</a></li>
+<li><a href="{% url 'home' %}">Logout</a></li>
 {% endblock login %}
 
 {% block content %}
