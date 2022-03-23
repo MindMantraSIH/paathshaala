@@ -7,6 +7,7 @@ import smtplib
 def getdata(request):
     if request.method == 'POST':
         ans = request.POST.getlist('ans[]')
+        print(ans)
         sender = 'jobhunt2511@gmail.com'
         receivers = ['jobhunt2511@gmail.com']
         message = """From: From Person <jobhunt2511@gmail.com>
