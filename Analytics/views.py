@@ -29,14 +29,19 @@ def happiness_index(request):
     print(features.shape)
     for i in range(features.shape[0]):
         intermediate = weights*features.iloc[i,:]
-        happiness_index += intermediate.values.sum()
+        happiness_index += intermediate.values.sum() * 10 **(-1* np.log(intermediate.values.sum()))
         # weights*features[i,:].values
     happiness_index = happiness_index/features.shape[0]
-    happiness_index = happiness_index* 10 ** np.log(intermediate.sum())
     print(happiness_index)
+    # happiness_index = happiness_index* 10 **(-1* np.log(happiness_index))
+    print(request.user)
+    school = School.objects.filter(user__slug = request.user.slug)[0]
+    print(school)
+    school.happiness_score = happiness_index
+    school.save()
     # print(happiness_index.sum())
     # print(np.log(happiness_index.sum()))
-    print(happiness_index)
+
 
 
 
