@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 import pandas as pd
 import numpy as np
+from profiles.models import *
 
 
 
@@ -28,6 +29,7 @@ def happiness_index(request):
     print(happiness_index.sum())
     print(np.log(happiness_index.sum()))
     print(happiness_index.sum()*10**np.log(happiness_index.sum()))
+
 
 def calculate_weights(number_categories, normalized_ratings):
     weight_students = []
