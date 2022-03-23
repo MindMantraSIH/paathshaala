@@ -75,7 +75,7 @@
                     <h3> Welcome to the paathshaala forums.</h3>
                 </div>
                 <div class="card-body">
-                    <form class="container card-text" style="padding-top: 30px;">
+                    <form method="POST" class="container card-text" style="padding-top: 30px;">
                         <!-- topic input -->
                         {% csrf_token %}
                         <div class="form-outline mb-4">
@@ -94,7 +94,7 @@
                         <!-- Submit button -->
                         <div class="card-footer text-muted">
                             <div class="align-self-center mx-auto">
-                                <button type="button" class="btn btn-primary"
+                                <button type="submit" class="btn btn-primary"
                                     style="background-color: #fbff79; color: black; width: 25%;">
                                     Post
                                 </button>
@@ -108,15 +108,16 @@
                         <div class="card-header">
                             <h3 style="text-align: center;"> Previous Discussions</h3>
                         </div>
+                        {% for d in posts %}
                         <div class="card-body">
                             <div class="container " style="padding-bottom: 10px;">
-                                {% for d in posts %}
+                                
                                 <div class="card">
                                     <div class="card-header">
                                         <p><span>{{ d.disc_title }}</span>
                                         <span  style="float: right; color: black;">
-                                            <a href="edit.html" style="color: black;"><i class="fas fa-edit"></i></a>
-                                            <a href=""style="color: black;" ><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                            <a href={% url 'discussionUpdate' pk=d.id %} style="color: black;"><i class="fas fa-edit"></i></a>
+                                            <a href={% url 'discussionDelete' pk=d.id %} style="color: black;" ><i class="fa fa-trash" aria-hidden="true"></i></a>
                                         </span></p>
                                     </div>
                                     <div class="card-body">
@@ -136,51 +137,20 @@
                         </div>
                         <div class="card-footer text-muted">
                             <div>
-                                <p><span style="float:left; color: black;">{{ d.timestamp }}</span><a style="color: black;"
-                                        data-toggle="collapse" href="#collapseExample"><span
+                                <p><span style="float:left; color: black;">{{ d.timestamp }}</span>
+                                    <a style="color: black;"
+                                        href={% url 'comment' myid=d.id %}><span
                                             style="float: right;">Comment
                                             <i class="fa fa-comment"></i></span></a></p>
 
                             </div>
-                            <div style="align-items: center;" class="container">
-                                <div class="collapse" id="collapseExample"
-                                    style="padding-top:20px; align-items: center;">
-                                    <hr>
-                                    <h4 style="text-align: center; margin-bottom: 15px;color: black;">Comments</h4>
-                                    <div class="container" style="padding-bottom: 10px;">
-                                        {% for c in post %}
-                                        <div class="card" style="height: min-content;">
-                                            <div class="card-body">
-                                                <blockquote class="blockquote mb-0" style="color: black;">
-                                                    <p>{{ c.reply_content }}</p>
-                                                    <footer class="blockquote-footer"><span
-                                                            style="float:right;">{{ c.timestamp }}</span></footer>
-                                                </blockquote>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-                                    <form class="container" style="padding-top: 30px;">
-                                        <!-- Message input -->
-                                        <div class="form-outline mb-4" style="color: black;">
-                                            Comment:
-                                            <input class="form-control" type="text" placeholder="">
-                                        </div>
-                                        <!-- Submit button -->
-                                        <div class="align-self-center mx-auto text-center">
-                                            <button type="button" class="btn btn-primary"
-                                                style="background-color: #fbff79; color: black; width: 25%;">
-                                                Post
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
+                            
                         </div>
                     </div>
+                    {% endfor %}
                 </section>
-                {% endfor %}
-                {% endfor %}
+                
+                
         </section>
        
         <!-- Optional JavaScript -->
