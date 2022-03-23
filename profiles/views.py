@@ -83,7 +83,7 @@ def home(request):
 	return render(request,'profiles/home.html',{'user':request.user})
 
 def school_register(request):
-	print(request.user.username)
+	print(request.user.school)
 	if request.method == 'POST':
 		board = request.POST.get('board')
 		phone_num = request.POST.get('pno')
@@ -101,11 +101,7 @@ def school_register(request):
 		school.state = state
 		school.save()
 		user.save()
-<<<<<<< HEAD
-		return redirect('schoolhome')
-=======
 		return redirect('school-feed',slug=user.slug)
->>>>>>> 0fec730f3b6ac471985f786d5acf5d4bd4d8c603
 
 	return render(request, 'profiles/school_register.html')
 

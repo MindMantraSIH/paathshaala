@@ -6,9 +6,10 @@ def savedata(request):
     print("saving")
     if request.method=="POST":
         print("hello")
-        #school = request.user
-        print(request.user)
+        school = request.user.student.school
+        # print(request.user.student.school)
         levelc = request.POST.get('levelc')
+        print(levelc)
         env = request.POST.get('env')
         teachersc = request.POST.get('teachersc')
         prevdisc = request.POST.get('prevdisc')
