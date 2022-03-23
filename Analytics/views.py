@@ -153,4 +153,6 @@ def upload_csv(request):
     return render(request, 'Analytics/dashboard.html')
 
 def send(request):
-    students = School.objects.get()
+    school = School.objects.get(user__slug = request.user.school)
+    print(school)
+    return render(request, 'Analytics/dashboard.html')
