@@ -18,7 +18,7 @@ class School(models.Model):
     state = models.CharField(max_length=50)
     city = models.CharField(max_length=100)
     address = models.TextField()
-    rank = models.IntegerField(blank=True)
+    rank = models.IntegerField(blank=True,null=True)
     board = models.CharField(max_length=50)
 
 
@@ -28,49 +28,12 @@ class School(models.Model):
 class Student(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE,primary_key=True)
     roll_number = models.CharField(max_length=20)
-    school = models.OneToOneField(School, on_delete=models.CASCADE)
+    school = models.ForeignKey(School, on_delete=models.CASCADE)
     
 
     def __str__(self) -> str:
-        return f'{self.school.name}: {self.roll_number}'
+        return f'{self.school.user.name}: {self.roll_number}'
 
 
-class Post(models.Model):
-    title = models.CharField(max_length=100)
-    slug = AutoSlugField(populate_from='title', unique=True)
-    content = models.TextField()
-    date_posted = models.DateTimeField(default=timezone.now)
-    school = models.ForeignKey(School,on_delete=models.CASCADE)
 
-    def __str__(self):
-        return f'{self.school.user.name}: {self.title}' 
     
-    def get_absolute_url(self):
-        return reverse('post-create')
-    
-#School
-##slug
-##scho0l_name
-##state
-##city
-##email
-##school_url
-
-###
-#student/school
-#name
-#username
-#password
-#con-password
-
-#CHild
-##slug
-##child_name
-##roll_num
-##school_name
-##parent_email
-##parent_mobile_num
-
-#name
-#phone_num
-#email

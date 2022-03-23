@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'feed.apps.FeedConfig',
     'Analytics.apps.AnalyticsConfig',
     'profiles.apps.ProfilesConfig',
     'ranking.apps.RankingConfig',
@@ -42,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'cloudinary',
 ]
 
 MIDDLEWARE = [
@@ -128,3 +130,13 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'profiles.User'
+
+LOGIN_URL = 'loginregister'
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dhny6jvtu',
+    'API_KEY': '957535151397397',
+    'API_SECRET': 'SyeOR8BVzZsG2lEGdERxXIGDSkw',
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'

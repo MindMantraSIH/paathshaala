@@ -1,0 +1,68 @@
+body {
+    background-color: #eeeeee;
+}
+
+.h7 {
+    font-size: 0.8rem;
+}
+
+.gedf-wrapper {
+    margin-top: 0.97rem;
+}
+
+@media (min-width: 992px) {
+    .gedf-main {
+        padding-left: 4rem;
+        padding-right: 4rem;
+    }
+    .gedf-card {
+        margin-bottom: 2.77rem;
+    }
+}
+
+/**Reset Bootstrap*/
+.dropdown-toggle::after {
+    content: none;
+    display: none;
+}
+.card{
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
+    0 10px 10px rgba(0,0,0,0.22);
+    border-radius: 10px !important;
+}
+.btn-primary {
+    /* background-color: #fbff79 !important; */
+    background: linear-gradient(to right, #fbff79, #ffc680) !important;
+    color: #1b1d21 !important;
+    border: #1b1d21 !important;
+    text-decoration: none;
+
+}
+.fa{
+    color: #1b1d21 !important;
+}
+.dropdown-toggle{
+    color: #1b1d21 !important;
+}
+.badge-primary{
+    background: linear-gradient(to right, #fbff79, #ffc680) !important;
+    color: #1b1d21 !important;
+}
+.card-link{
+    color: #1b1d21 !important;
+}
+.card-footer a:hover {
+    color: #ffc680 !important;
+}
+.card-link a:hover {
+    color: #ffc680 !important;
+}
+.btn-outline-primary {
+    border-color: #1b1d21 !important;
+    background:linear-gradient(to right, #fbff79, #ffc680) !important;
+}
+.btn:hover
+{
+background-image:none !important;
+background-color:linear-gradient(to right, #fbff79, #ffc680) !important;
+}

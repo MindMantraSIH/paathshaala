@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from profiles.views import home
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -22,5 +23,7 @@ urlpatterns = [
     path('ranking/', include('ranking.urls')),
     path('forum/', include('forum.urls')),
     path('analytics/', include('Analytics.urls')),
+    path('feed/', include('feed.urls')),
+    path('',home ,name='home'),
 
 ]

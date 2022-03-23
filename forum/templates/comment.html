@@ -81,8 +81,8 @@
                     <div class="card-header">
                         <p><span>{{ d.disc_title }}</span>
                         <span  style="float: right; color: black;">
-                            <a href={% url 'discussionUpdate' pk=d.id %} style="color: black;"><i class="fas fa-edit"></i></a>
-                            <a href={% url 'discussionDelete' pk=d.id %} style="color: black;" ><i class="fa fa-trash" aria-hidden="true"></i></a>
+                            <a href={% url 'discussionUpdate' slug=d.slug %} style="color: black;"><i class="fas fa-edit"></i></a>
+                            <a href={% url 'discussionDelete' slug=d.slug %} style="color: black;" ><i class="fa fa-trash" aria-hidden="true"></i></a>
                         </span></p>
                     </div>
                     <div class="card-body">
@@ -127,7 +127,7 @@
             {% endfor %}
         </div>
         
-        <form method="POST" action={% url 'replies' myid=d.id %} class="container" style="padding-top: 30px;">
+        <form method="POST" action={% url 'replies' slug=d.slug %} class="container" style="padding-top: 30px;">
             <!-- Message input -->
             {% csrf_token %}
             <div class="form-outline mb-4" style="color: black;">
