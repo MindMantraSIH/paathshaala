@@ -30,7 +30,7 @@
                     <ul class="navbar-nav ml-auto text-uppercase f1">
                         <li><a href="#" class="active active-first">Home</a></li>
                         <li><a href="#">School Rank</a></li>
-                        <li><a href="#">Self Assesment</a></li>
+                        <li><a href="{% url 'getdata' %}">Self Assesment</a></li>
                         <li><a href="#">Help Center</a></li>
                         <li><a href="#">Forum</a></li>
                         <li><a href="#">Contact Us</a></li>
@@ -70,7 +70,7 @@
                         <li class="list-group-item">
                             <div class="h6 text-muted">School Rank</div>
                             {% if school.rank %}
-                            <div class="h5">5</div>
+                            <div class="h5">{{ school.rank }}</div>
                             {% else %}
                             <div class="h5">NA</div>
                             {% endif %}
@@ -80,7 +80,13 @@
                             <div class="h6">State: {{ school.state }}</div>
                             <div class="h6">City: {{ school.city }}</div>
                         </li>
-                        <li class="list-group-item">Your Child Name: Tushar Sarkar</li>
+                        <li class="list-group-item">Your Happiness Index: 
+                            {% if school.rank %}
+                            <div class="h5">{{ school.happiness_score }}</div>
+                            {% else %}
+                            <div class="h5">NA</div>
+                            {% endif %}
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -88,7 +94,7 @@
                 
                 <!--- \\\\\\\Post-->
                 {% if user == school.user %}
-                <form method="post">
+                <form method="post" enctype='multipart/form-data'>
                     {% csrf_token %}
                 <div class="card gedf-card">
                     <div class="card-header">
@@ -110,10 +116,10 @@
                                 <div class="form-group">
                                     <label class="sr-only" for="message">post</label>
                                     <textarea class="form-control" name='title' rows="1"
-                                        placeholder="Title">
+                                        placeholder="Title" style="margin-bottom:0.4rem;" >
                                     </textarea>
                                     <textarea class="form-control" name='content' rows="3"
-                                        placeholder="What are you thinking?">
+                                        placeholder="What are you thinking?" >
                                     </textarea>
                                 </div>
 
@@ -121,7 +127,7 @@
                             <div class="tab-pane fade" id="images" role="tabpanel" aria-labelledby="images-tab">
                                 <div class="form-group">
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="customFile" name='image'>
+                                        <input type="file" class="custom-file-input" id="customFile" name='image' accept="image/*">
                                         <label class="custom-file-label" for="customFile">Upload image</label>
                                     </div>
                                 </div>
@@ -181,7 +187,7 @@
                         <p class="card-text">
                             {{ post.content }}
                         </p>
-                        {% if post.image %}<img src="{% static 'profiles/circular paathshala logo.png' %}" alt="img">{% endif %}
+                        {% if post.image %}<img src=https://res.cloudinary.com/dhny6jvtu/image/upload/v1/{{ post.image }} alt="img">{% endif %}
                         
                     </div>
                     <div class="card-footer">
