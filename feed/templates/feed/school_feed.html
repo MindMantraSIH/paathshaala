@@ -22,10 +22,14 @@
     <title>Paathshaala</title>
     <link rel="stylesheet" href="{% static 'feed/feed.css' %}">
     <link rel="stylesheet" href="{% static 'profiles/basefile.css' %}">
+    <script src="https://kit.fontawesome.com/0493cbe504.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+
 </head>
 
 <body>
@@ -175,21 +179,45 @@
                             </div>
                         </div>
                         <div>
-                            <div class="dropdown">
-                                <button class="btn btn-link" type="button" id="gedf-drop1"
-                                     aria-haspopup="true" aria-expanded="false">
-                                    <i class="fa fa-trash"></i>
-                                </button>
-                                <!-- <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
-                                     <div class="h6 dropdown-header">Configuration</div> -->
-                                    <!-- <a class="dropdown-item" href="#">Edit</a>
-                                    <a class="dropdown-item" href="#">Delete</a>
-                                     <a class="dropdown-item" href="#">Report</a> 
-                                </div> -->
+                                <div class="dropdown">
+                                    <button class="btn btn-link" type="button" id="gedf-drop1"
+                                    aria-haspopup="true" aria-expanded="false">
+                                   <i class="fa fa-trash"></i>
+                                    </button>    
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
+                                        <!-- <div class="h6 dropdown-header">Configuration</div> -->
+                                        <a class="dropdown-item" href="#">Edit</a>
+                                        <a class="dropdown-item" href="{% url 'delete-feed-post' school.user.slug post.slug %}">Delete</a>
+                                        <!-- <a class="dropdown-item" href="#">Report</a> -->
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
 
+                        <p class="card-text">
+                            {{ post.content }}
+                        </p>
+                        {% if post.image %}<img src=https://res.cloudinary.com/dhny6jvtu/image/upload/v1/{{ post.image }} alt="img" style="width: 30rem; height: 20rem;">{% endif %}
+                        
+                    </div>
+                    <div class="card-footer">
+                        {% if user in post.upvote %}
+                       
+                            <button type="submit" name="post_id" value="{{post.id}}" class="btn btn-lg upvote_btn shadow-none"><i
+                                    class="fas fa-thumbs-up btn_upvote" aria-hidden="true"></i></button>
+                            {% else %}
+                            
+                            <button type="submit" name="post_id" value="{{post.id}}" class="btn btn-lg upvote_btn shadow-none"><i
+                                    class="far fa-thumbs-up btn_upvote" aria-hidden="true"></i></button>
+                            {% endif %}
+                        <!-- <a href="#" class="card-link"><i class="fa fa-gittip"></i> Like</a> -->
+                        <!-- <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
+                        <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a> -->
+                        <div class="my-2" >
+				<strong class="text-xl-center" id='upvote_count'>{{ post.number_of_upvotes }}</strong>
+			</div>
+                    </div>
                 </div>
                 <div class="card-body">
                     <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>{{ post.date_posted }}</div>
@@ -250,4 +278,25 @@
 </div>
 {% endblock content %}
 
-    
+{% block script %}
+$('.upvote_btn').click(function(){
+		 $.ajax({
+             type: "POST",
+             url: "{% url 'post-upvote-ajax' %}",
+             data: {'csrfmiddlewaretoken': '{{ csrf_token }}','post_id': $(this).attr('value')},
+             dataType: "json",
+             success: function(response) {
+			  if (response.up_status == 'liked'){
+				   $('.btn_upvote').replaceWith("<i class='fas fa-thumbs-up btn_upvote' aria-hidden='true'></i>");
+			  }
+			  else{
+				  $('.btn_upvote').replaceWith("<i class='far fa-thumbs-up btn_upvote' aria-hidden='true'></i>");
+			  }
+              $('#upvote_count').replaceWith("<strong class='text-xl-center' id='upvote_count'>" + response.up_count + "</strong>")
+
+              }
+
+        });
+
+	 })
+{% endblock script %}
