@@ -56,6 +56,21 @@
                     </h4>
                 </div>
             </div>
+            <div class="card sec3" >
+                <div class="card-body" style="color: black;">
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary px-5">Send Feedbacks</button>
+                      </div>
+                </div>
+            </div>
+            <div class="card sec3" >
+
+                <div class="card-body" style="color: black;">
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary" style="background-color:#ff4000; border:none;">Calculate Happiness Index</button>
+                      </div>
+                </div>
+            </div>
         </div>
         <div class="col-6">
             <div class="card sec3">
@@ -68,7 +83,9 @@
                 </div>
             </div>
             <div class="card sec3" style="">
+                <div class="card-header"> <h3>Analysis of Feedback</h3></div>
                 <div class="card-body" style="color: black;">
+
                     <div class="card-text text-center">
                         <div class="container"> {% for g in graph %}
 <!--                            {{ g|safe }}-->
@@ -83,13 +100,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card sec3" >
-                <div class="card-body" style="color: black;">
-                    <div class="text-center">
-                        <button type="button" class="btn btn-primary">Send Feedbacks</button>
-                      </div>
-                </div>
-            </div>
+
         </div>
         <div class="col">
             <div class="card sec3">
