@@ -11,7 +11,7 @@ from django.conf import settings
 
 @login_required
 def forum(request):
-    profile = Profile.objects.all()
+    #profile = Profile.objects.all()
     if request.method=="POST":   
         user = request.user
         content = request.POST.get('content')
@@ -26,7 +26,7 @@ def forum(request):
 
 @login_required
 def comment(request,myid):
-    profile = Profile.objects.all()
+    #profile = Profile.objects.all()
     post = Discussion.objects.filter(id=myid)
     #print(posts)
     replies = Reply.objects.filter(post=post[0])
@@ -86,7 +86,7 @@ def discussionUpdate(request,pk):
 
 @login_required
 def replyUpdate(request):
-    user = User.objects.get(id = request.user.id)
+    #user = User.objects.get(id = request.user.id)
     #print(user)
     if request.method == 'POST':
         upd_form = ReplyUpdateForm(request.POST,instance=request.user)

@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'Analytics.apps.AnalyticsConfig'
+    'Analytics.apps.AnalyticsConfig',
     'profiles.apps.ProfilesConfig',
     'ranking.apps.RankingConfig',
     'forum.apps.ForumConfig',
