@@ -15,7 +15,6 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 
-<<<<<<< HEAD
 <body style="background-color: #eee !important;">
     <header class="main-header" style="margin: 0px;" >
         <div style="margin:1.5rem;">
@@ -34,9 +33,9 @@
                         <li><a href="#">School Rank</a></li>
                         <li><a href="#">Self Assesment</a></li>
                         <li><a href="#">Help Center</a></li>
-                        <li><a href="#">Forum</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                        <li><a href="#">Login / Signup</a></li>
+                        <li><a href="{% url 'forum' %}">Forum</a></li>
+<!--                        <li><a href="#">Contact Us</a></li>-->
+                        <li><a href="{% url 'loginregister' %}">Login / Signup</a></li>
                     </ul>
                     <span class="material-icons">account_circle</span>
                 </div>
@@ -88,8 +87,7 @@
 </body>
 
 </html>
-=======
-{% block content %}
-  <h1> {{user.username}} </h1>
-{% endblock %}
->>>>>>> fde787473d39fc95ae1b6db38d5143971b3ae9d9
+<!--{% block content %}-->
+<!--  <h1> {{user.username}} </h1>-->
+<!--{% endblock %}-->
+
