@@ -86,7 +86,7 @@ def home(request):
 	return render(request,'profiles/home.html',{'user':request.user})
 
 def school_register(request):
-	print(request.user.username)
+	print(request.user.school)
 	if request.method == 'POST':
 		board = request.POST.get('board')
 		phone_num = request.POST.get('pno')
