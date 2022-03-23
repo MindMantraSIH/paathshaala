@@ -2,25 +2,22 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 import smtplib
 
+from django.conf import settings
+from django.core.mail import send_mail
+
 
 @login_required()
 def getdata(request):
+    print(request.method)
     if request.method == 'POST':
+        for i in request.POST:
+            print(i)
         ans = request.POST.getlist('ans[]')
-        print(ans)
-        sender = 'jobhunt2511@gmail.com'
-        receivers = ['jobhunt2511@gmail.com']
-        message = """From: From Person <jobhunt2511@gmail.com>
-        To: To Person <jobhunt2511@gmail.com>
-        Subject: SMTP e-mail test
-
-        This is a test e-mail message.
-        """
-        try:
-            smtpObj = smtplib.SMTP('localhost')
-            smtpObj.sendmail(sender, receivers, message)
-            print("Successfully sent email")
-        except smtplib.SMTPException:
-            print("Error: unable to send email")
-        return redirect('')
+        print(ans,"list")
+        subject = 'test'
+        message = f'Hi'
+        email_from = settings.EMAIL_HOST_USER
+        recipient_list = ['jobhunt2511@gmail.com']
+        send_mail( subject, message, email_from, recipient_list )
+        return redirect('getdata')
     return render(request, 'selfasses.html')
