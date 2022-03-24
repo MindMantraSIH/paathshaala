@@ -15,6 +15,7 @@
 
 <body>
     <form method="POST" action="">
+        {% csrf_token %}
         <div class="card container mt-4">
             <div class="card-body">
                 <h5 class="card-title">Self Assessment</h5>
@@ -28,6 +29,7 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <form>
                             <tr>
                                 <th scope="row">1</th>
                                 <!-- STD -->
@@ -38,7 +40,7 @@
                                     <label class="form-check-label" for="inlineRadio1">1</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
+                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
                                         value="option2">
                                     <label class="form-check-label" for="inlineRadio2">2</label>
                                 </div>
@@ -84,7 +86,9 @@
                                 </div>
                             </td>
                             </tr>
+                            </form>
                             <!-- GENDER -->
+                            <form>
                             <tr>
                                 <th scope="row">2</th>
                                 <td>Your Gender</td>
@@ -108,8 +112,10 @@
                                 </div>
                             </td>
                             </tr>
+                            </form>
                             <!-- GENDER -->
                             <!-- Hobbies  -->
+                            <form>
                             <tr>
                                 <th scope="row">3</th>
                                 <td>Your Hobbies</td>
@@ -119,6 +125,8 @@
                                 </div>
                             </td>
                             </tr>
+                            </form>
+                            <form>
                             <!-- Hobbies  -->
                             <tr>
                                 <th scope="row">4</th>
@@ -129,6 +137,8 @@
                                     </div>
                                 </td>
                             </tr>
+                            </form>
+                            <form>
                             <tr>
                                 <th scope="row">5</th>
                                 <td>Your Parents Education </td>
@@ -138,6 +148,8 @@
                                     </div>
                                 </td>
                             </tr>
+                            </form>
+                        <form>
                             <tr>
                                 <th scope="row">6</th>
                                 <td>Your Family Income</td>
@@ -147,6 +159,8 @@
                                 </div>
                             </td>
                             </tr>
+                        </form>
+                        <form>
                             <tr>
                                 <th scope="row">7</th>
                                 <td>Extra tuitions apart from school </td>
@@ -161,6 +175,8 @@
                                     <label class="form-check-label" for="inlineRadio2">No</label>
                                 </div></td>
                             </tr>
+                            </form>
+                            <form>
                             <tr>
                                 <th scope="row">8</th>
                                 <td>Your Average daily play hours </td>
@@ -191,6 +207,8 @@
                                 </div>
                             </td>
                             </tr>
+                            </form>
+                            <form>
                             <tr>
                                 <th scope="row">9</th>
                                 <td>Your Hours of sleep</td>
@@ -247,6 +265,8 @@
                                     </div>
                             </td>
                             </tr>
+                            </form>
+                            <form>
                             <tr>
                                 <th scope="row">10</th>
                                 <td>Competitive exams - participation </td>
@@ -261,6 +281,8 @@
                                     <label class="form-check-label" for="parti1">NO</label>
                                 </div></td>
                             </tr>
+                            </form>
+                            <form>
                             <tr>
                                 <th scope="row">11</th>
                                 <td>When do you start preparing for your exams?</td>
@@ -268,6 +290,8 @@
                                     <input type="text" placeholder="Answer" id="exam" class="form-control">
                                 </div></td>
                             </tr>
+                            </form>
+                            <form>
                             <tr>
                                 <th scope="row">12</th>
                                 <td>How likely are you to take part in sports?</td>
@@ -297,6 +321,8 @@
                                     <label class="form-check-label" for="sports5">5</label>
                                 </div></td>
                             </tr>
+                            </form>
+                            <form>
                             <tr>
                                 <th scope="row">13</th>
                                 <td>Anxiety and pressure felt during exams</td>
@@ -326,6 +352,8 @@
                                     <label class="form-check-label" for="anx5">5</label>
                                 </div></td>
                             </tr>
+                            </form>
+                            <form>
                             <tr>
                                 <th scope="row">14</th>
                                 <td>How secure do you feel at home</td>
@@ -355,6 +383,8 @@
                                     <label class="form-check-label" for="inlineRadio5">5</label>
                                 </div></td>
                             </tr>
+                            </form>
+                            <form>
                             <tr>
                                 <th scope="row">15</th>
                                 <td>How self confident are you?</td>
@@ -384,6 +414,8 @@
                                     <label class="form-check-label" for="inlineRadio5">5</label>
                                 </div></td>
                             </tr>
+                            </form>
+                            <form>
                             <tr>
                                 <th scope="row">16</th>
                                 <td>How socially active are you? </td>
@@ -413,6 +445,8 @@
                                     <label class="form-check-label" for="inlineRadio5">5</label>
                                 </div></td>
                             </tr>
+                            </form>
+                            <form>
                             <tr>
                                 <th scope="row">17</th>
                                 <td>Additional thoughts </td>
@@ -420,15 +454,13 @@
                                     <input type="text" id="thoughts" class="form-control">
                                 </div></td>
                             </tr>
-                            
+                            </form>
                         </tbody>
                     </table>
-                    <form class="container" style="padding-top: 30px;">
+                
+                    <div class="container" style="padding-top: 30px;">
                         <!-- Message input -->
-                        <div class="form-outline mb-4" style="color: black;">
-
-                            
-                        </div>
+                        
                         <!-- Submit button -->
                         <div class="align-self-center mx-auto text-center">
                             <button type="submit" class="btn btn-primary" Value="Submit"
@@ -436,11 +468,13 @@
                                 Submit
                             </button>
                         </div>
+                    </div>
+                    
                     </form>
                 </div>
             </div>
         </div>
-    </form>
+    
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
