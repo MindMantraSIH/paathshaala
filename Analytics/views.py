@@ -136,7 +136,7 @@ def normalize_ratings(rating):
     return rating
 
 def ranking():
-    schools = School.objects.all().order_by('happiness_score')
+    schools = School.objects.all().order_by('-happiness_score')
     for i,school in enumerate(schools):
         school.rank = i+1
         school.save()
@@ -178,7 +178,7 @@ def dashboard(request):
                 'city': request.user.school.city,
                 'state': request.user.school.state,
                'rank': request.user.school.rank,
-               'happinessindex': round(request.user.school.happiness_score,2)
+               'happinessindex': request.user.school.happiness_score
                }
     return render(request,'Analytics/dashboard.html',context)
 
@@ -188,15 +188,18 @@ def upload_csv(request):
         # print(csv.read().decode())
         lines = csv.read().decode().split('\r\n')
         print(lines)
-        # for i,line in enumerate(lines):
-        #     print(line)
-        #     if i == 0 or i == len(lines) -1:
-        #         continue
-        #     elements = line.split(',')
-        #     print(elements)
-        #     p = Academics.objects.create(school = request.user.school,name=elements[0],
-        #                                  email=elements[1], english = elements[2], roll_no = elements[3])
-        #     print(p)
+        for i,line in enumerate(lines):
+            try:
+                print(line)
+                if i == 0 or i == len(lines) -1:
+                    continue
+                elements = line.split(',')
+                print(elements)
+                p = Academics.objects.create(school = request.user.school,name=elements[0],
+                                             email=elements[1], english = elements[2], roll_no = elements[3])
+                print(p)
+            except:
+                pass
 
         happiness_index(request)
         ranking()

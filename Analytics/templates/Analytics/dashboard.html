@@ -20,7 +20,9 @@
   margin-bottom: 10px;
 }
     </style>
+
 </head>
+<body style="background-image:linear-gradient(180deg, #fbff79, #ffc680)">
 <section class="m-4">
     <div class="row">
         <div class="col">
@@ -52,14 +54,14 @@
             <div class="card sec3">
                 <div class="card-body" style="color: black;">
                     <h4 class="text-center">
-                        Happiness index: {{ happinessindex }}
+                        Happiness index: {{ happinessindex|floatformat:2 }}
                     </h4>
                 </div>
             </div>
             <div class="card sec3" >
                 <div class="card-body" >
                     <div class="text-center">
-                        <a type="submit" href="{% url 'send' %}" class="btn btn-primary px-5">Send Feedbacks</a>
+                        <a type="submit" href="{% url 'send' %}" class="btn btn-primary px-5" style="color:black; background-color:#bdffb0; border:none;">Send Feedbacks</a>
                       </div>
                 </div>
             </div>
@@ -68,7 +70,7 @@
 
                 <div class="card-body" style="color: black;">
                     <div class="text-center">
-                        <a type="submit" href="{% url 'send' %}" class="btn btn-primary" style="background-color:#ff4000; border:none;">Calculate Happiness Index</a>
+                        <a type="submit" href="{% url 'send' %}" class="btn btn-primary" style="color:black; background-color:#bdffb0; border:none;">Calculate Happiness Index</a>
                       </div>
                 </div>
             </div>
@@ -81,7 +83,7 @@
   <div class="form-group">
 
     <input type="file" class="form-control-file" id="exampleFormControlFile1" name="csv" style="margin-left:3rem;">
-      <button type="submit" class="btn btn-primary mt-3">Upload Csv</button>
+      <button type="submit" class="btn btn-primary mt-3" style="color:black; background-color:#bdffb0; border:none;">Upload Csv</button>
   </div>
 </form>
 

@@ -32,7 +32,7 @@
                     </li>
                     <li class="list-group-item">Your Happiness Index: 
                         {% if school.rank %}
-                        <div class="h5">{{ school.happiness_score }}</div>
+                        <div class="h5">{{ school.happiness_score|floatformat:2 }}</div>
                         {% else %}
                         <div class="h5">NA</div>
                         {% endif %}

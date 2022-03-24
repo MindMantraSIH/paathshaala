@@ -12,14 +12,19 @@ def getdata(request):
     all=[]
     if request.method == 'POST':
         print(request.POST.get("gen"))
-        for i in ['std','gen','hob','act','edu','inc','extra','play','sleep','comp','prep','sport','anx','secure','conf','soc','add']:
+        for i in ['std','gen','hob','act','edu','inc','extra','play','sleep','comp','prep','sport','anx','secure','conf','soc','add','email']:
             ans=request.POST.get(i)
             all.append(ans)
         print(all)
-        subject = 'test'
-        message = f'https://www.verywellfamily.com/improve-childrens-mental-health-4154379 https://www.parents.com/health/healthy-happy-kids/why-and-how-to-teach-kids-mindfulness/ https://kidshelpphone.ca/get-info/how-practice-self-care/ https://www.mhanational.org/what-every-child-needs-good-mental-health' 
+        subject = 'Self Assessment Report'
+        message = "Dear User, \n" \
+                  "Thank you for using our application. Here are some resources to help you based on the assessment: \n" \
+                  "https://www.verywellfamily.com/improve-childrens-mental-health-4154379\n" \
+                  " https://www.parents.com/health/healthy-happy-kids/why-and-how-to-teach-kids-mindfulness/ \n" \
+                  "https://kidshelpphone.ca/get-info/how-practice-self-care/ \n" \
+                  "https://www.mhanational.org/what-every-child-needs-good-mental-health"
         email_from = settings.EMAIL_HOST_USER
-        recipient_list = ['jobhunt2511@gmail.com']
+        recipient_list = [all[-1]]
         send_mail( subject, message, email_from, recipient_list )
         return redirect('getdata')
     return render(request, 'selfasses.html')

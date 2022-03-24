@@ -47,7 +47,7 @@
                 <div class="collapse navbar-collapse" id="mainMenu">
                     <ul class="navbar-nav ml-auto text-uppercase f1">
                         <li><a href="{% url 'home' %}" class="active-first">Home</a></li>
-                        <li><a href="#">School Rank</a></li>
+                        <li><a href="{% url 'schoolinfo' %}">School Rank</a></li>
                         <li><a href="{% url 'getdata' %}">Self Assesment</a></li>
                         <li><a href="{% url 'counselling' %}">Help Center</a></li>
                         <li><a href="{% url 'forum' %}">Forum</a></li>
@@ -60,7 +60,7 @@
                         {% endif %}
                         <!-- if user is student -->
                         {% if user.is_student %}
-                        <li><a href="{% url 'school-feed' user.slug %}">Feed</a></li>
+                        <li><a href="{% url 'school-feed' user.student.school.user.slug %}">Feed</a></li>
                         <li><a href="{% url 'savedata' %}">feedback</a></li>
                         {% endif %}
                         {% if user.is_authenticated %}

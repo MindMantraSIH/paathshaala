@@ -29,6 +29,6 @@ def savedata(request):
         data = Data(school=school,levelc=levelc,env=env,teachersc=teachersc,prevdisc=prevdisc,fecilities=fecilities,timetable=timetable,grpwork=grpwork,mentalhlth=mentalhlth,sportart=sportart,solveprob=solveprob,creativecourse=creativecourse,foconindv=foconindv,mannlearn=mannlearn,courserele=courserele,issuesofconc=issuesofconc,aresolved=aresolved,others=others)
         data.save()
         print("done")
-        return redirect('savedata')
+        return redirect('home')
     return render(request,'sugg.html')
         
