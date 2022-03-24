@@ -13,7 +13,7 @@
 
 </div>
 
-- ### Snapshots of the project :
+### Diagrams of the project :
 
 <div align="center">
   
@@ -57,7 +57,8 @@
 The Solution is lightweight as it occupies only 466Mb of space and the database that we used integrates data from different sources and distributions creating one simple repo for easily accessing, manupulating and analysing the data to improve our application and save more lives.
 
 ### Novelty of method and Implementation
-The metric that we used for estimating the happiness index is as follows.
+The metric that we used for estimating the happiness index is as follows:
+![img](images/math.jpg)
 
 ### Future work:
 - Provide solutions for special-aided students.
