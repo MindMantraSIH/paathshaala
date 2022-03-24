@@ -6,7 +6,7 @@ from django.conf import settings
 from django.core.mail import send_mail
 
 
-@login_required()
+
 def getdata(request):
     print(request.method)
     all=[]
@@ -17,7 +17,7 @@ def getdata(request):
             all.append(ans)
         print(all)
         subject = 'test'
-        message = f'Hi'
+        message = f'https://www.verywellfamily.com/improve-childrens-mental-health-4154379 https://www.parents.com/health/healthy-happy-kids/why-and-how-to-teach-kids-mindfulness/ https://kidshelpphone.ca/get-info/how-practice-self-care/ https://www.mhanational.org/what-every-child-needs-good-mental-health' 
         email_from = settings.EMAIL_HOST_USER
         recipient_list = ['jobhunt2511@gmail.com']
         send_mail( subject, message, email_from, recipient_list )

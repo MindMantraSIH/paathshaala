@@ -1,0 +1,40 @@
+{% extends "profiles/base.html" %}
+{% load static %}
+{% block connectcss%}
+<style>
+  button{
+  border-radius: 20px;
+  border: 1px solid #fbff79;
+  background-color: #fbff79;
+  color: #1b1d21;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 12px 45px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: transform 80ms ease-in;
+}
+</style>
+{% endblock connectcss%}
+{% block content %}
+    <div class="container jumbotron mt-4" style="width: 75%;box-shadow: 0 14px 28px rgba(0,0,0,0.25),0 10px 10px rgba(0,0,0,0.22);border-radius: 10px !important;padding-top: 1.5rem;">
+      <h3 style="text-align: center;">Connect to a counsellor</h3>
+        <form action="" method="POST">
+          {% csrf_token %}
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">Email address</label>
+                  <input type="email" class="form-control" name="email" id="exampleFormControlInput1" placeholder="name@example.com">
+                </div>
+                <div class="form-group">
+                  <label for="Address">Address</label>
+                  <textarea class="form-control" name="address" id="Address" rows="4"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="Description">Description</label>
+                    <textarea class="form-control" name="problem" id="Description" rows="4"></textarea>
+                  </div>
+                  <button type="submit" class="btn  text-center px-4" style="margin-left: 40%;width: 8rem;height: 3rem; background-color: #fbff79">Submit</button>
+        </form>
+
+    </div>
+  {% endblock content%}

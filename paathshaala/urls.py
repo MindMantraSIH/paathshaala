@@ -26,5 +26,6 @@ urlpatterns = [
     path('feed/', include('feed.urls')),
     path('selfassess/', include('selfassessments.urls')),
     path('sugg/', include('suggestions.urls')),   
+    path('counsel/', include('counsellor.urls')),   
     path('', home, name='home'),
 ]
