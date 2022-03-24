@@ -6,73 +6,6 @@
 <link rel="stylesheet" href="{% static 'feed/school_feed.css' %}">
 {% endblock connectcss %}
 
-{% block login %}
-<li><a href="{% url 'Dashboard' %}">Dashboard</a></li>
-<li><a href="{% url 'school-feed' user.slug %}">Feed</a></li>
-<li><a href="{% url 'logout' %}">Logout</a></li>
-{% endblock login %}
-
-<!-- <!DOCTYPE html> -->
-<!-- <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paathshaala</title>
-    <link rel="stylesheet" href="{% static 'feed/feed.css' %}">
-    <link rel="stylesheet" href="{% static 'profiles/basefile.css' %}">
-    <script src="https://kit.fontawesome.com/0493cbe504.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-
-
-</head>
-
-<body>
-    <header class="main-header">
-        <div style="margin:1.5rem;">
-            <nav class="navbar navbar-expand-lg main-nav px-0"
-                style="background-color: linear-gradient(to right, #fbff79, #ffc680) !important;">
-                <a class="navbar-brand" href="#">
-                    <img src="{% static 'feed/circular paathshala logo.png' %}" alt="paathshaala logo" style="height: 40;width: 40;">
-                </a>
-                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainMenu"
-                    aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
-                </button> -->
-                <!-- <div class="collapse navbar-collapse" id="mainMenu">
-                    <ul class="navbar-nav ml-auto text-uppercase f1">
-                        <li><a href="#" class="active active-first">Home</a></li>
-                        <li><a href="#">School Rank</a></li>
-                        <li><a href="{% url 'getdata' %}">Self Assesment</a></li>
-                        <li><a href="#">Help Center</a></li>
-                        <li><a href="#">Forum</a></li>
-                        <li><a href="#">Feed</a></li>
-                        <li><a href="#">Login / Signup</a></li>
-                    </ul>
-                    <span class="material-icons">account_circle</span>
-                </div>
-            </nav>
-        </div> -->
-        <!-- /.container -->
-    <!-- </header> --> 
-    <!-- <nav class="navbar navbar-light bg-white">
-        <a href="#" class="navbar-brand">Bootsbook</a>
-        <form class="form-inline">
-            <div class="input-group">
-                <input type="text" class="form-control" aria-label="Recipient's username"
-                    aria-describedby="button-addon2">
-                <div class="input-group-append">
-                    <button class="btn btn-outline-primary" type="button" id="button-addon2">
-                        <i class="fa fa-search"></i>
-                    </button>
-                </div>
-            </div>
-        </form>
-    </nav> -->
 {% block content %}
 <div class="container-fluid gedf-wrapper">
     <div class="row">
@@ -132,12 +65,8 @@
                             aria-labelledby="posts-tab">
                             <div class="form-group">
                                 <label class="sr-only" for="message">post</label>
-                                <textarea class="form-control" name='title' rows="1"
-                                    placeholder="Title" style="margin-bottom:0.4rem;" >
-                                </textarea>
-                                <textarea class="form-control" name='content' rows="3"
-                                    placeholder="What are you thinking?" >
-                                </textarea>
+                                <textarea class="form-control" name='title' rows="1" placeholder="Title" style="margin-bottom:0.4rem;"></textarea>
+                                <textarea class="form-control" name='content' rows="3"placeholder="What are you thinking?"></textarea>
                             </div>
 
                         </div>
@@ -160,7 +89,7 @@
                     </div>
                 </div>
             </div>
-        </form>
+            </form>
             <!-- Post /////-->
             {% endif %}
             
@@ -170,110 +99,43 @@
                 <div class="card-header">
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="d-flex justify-content-between align-items-center">
-                            <!-- <div class="mr-2">
-                                <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
-                            </div> -->
                             <div class="ml-2">
                                 <div class="h5 m-0">@{{ school.user.username }}</div>
                                 <div class="h7 text-muted">{{ school.user.name }}</div>
                             </div>
                         </div>
                         <div>
-                                <div class="dropdown">
-                                    <button class="btn btn-link" type="button" id="gedf-drop1"
-                                    aria-haspopup="true" aria-expanded="false">
-                                   <i class="fa fa-trash"></i>
-                                    </button>    
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
-                                        <!-- <div class="h6 dropdown-header">Configuration</div> -->
-                                        <a class="dropdown-item" href="#">Edit</a>
-                                        <a class="dropdown-item" href="{% url 'delete-feed-post' school.user.slug post.slug %}">Delete</a>
-                                        <!-- <a class="dropdown-item" href="#">Report</a> -->
-                                    </div>
-                                </div>
+                            <div class="dropdown">
+                                <button class="btn btn-link" type="button" id="gedf-drop1"
+                                aria-haspopup="true" aria-expanded="false">
+                                <a href="{% url 'delete-feed-post' school.user.slug post.slug %}"><i class="fa fa-trash"></i></a>
+                                </button>    
                             </div>
                         </div>
                     </div>
-
-                        <p class="card-text">
-                            {{ post.content }}
-                        </p>
-                        {% if post.image %}<img src=https://res.cloudinary.com/dhny6jvtu/image/upload/v1/{{ post.image }} alt="img" style="width: 30rem; height: 20rem;">{% endif %}
-                        
-                    </div>
-                    <div class="card-footer">
-                        {% if user in post.upvote %}
-                       
-                            <button type="submit" name="post_id" value="{{post.id}}" class="btn btn-lg upvote_btn shadow-none"><i
-                                    class="fas fa-thumbs-up btn_upvote" aria-hidden="true"></i></button>
-                            {% else %}
-                            
-                            <button type="submit" name="post_id" value="{{post.id}}" class="btn btn-lg upvote_btn shadow-none"><i
-                                    class="far fa-thumbs-up btn_upvote" aria-hidden="true"></i></button>
-                            {% endif %}
-                        <!-- <a href="#" class="card-link"><i class="fa fa-gittip"></i> Like</a> -->
-                        <!-- <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
-                        <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a> -->
-                        <div class="my-2" >
-				<strong class="text-xl-center" id='upvote_count'>{{ post.number_of_upvotes }}</strong>
-			</div>
-                    </div>
                 </div>
                 <div class="card-body">
-                    <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>{{ post.date_posted }}</div>
+                    <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i> {{ post.date_posted|date:"M d, Y" }}</div>
                     <h5 class="card-title">{{ post.title }}</h5>
-            
-
                     <p class="card-text">
                         {{ post.content }}
                     </p>
-                    {% if post.image %}<img src=https://res.cloudinary.com/dhny6jvtu/image/upload/v1/{{ post.image }} alt="img">{% endif %}
+                    {% if post.image %}<img src=https://res.cloudinary.com/dhny6jvtu/image/upload/v1/{{ post.image }} alt="img" style="height:15rem; width:15rem;">{% endif %}
                     
                 </div>
+                        
                 <div class="card-footer">
-                    <i class="fa fa-gittip"></i> Like
-                    <!-- <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
-                    <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a> -->
+                    
+                        <button type="submit" name="post_slug" value="{{post.slug}}" class="btn btn-lg upvote_btn shadow-none"><i
+                                class="fa fa-gittip btn_upvote" aria-hidden="true"></i><strong class="text-xl-center" id='upvote_count{{post.slug}}'>  {{ post.number_of_upvotes }}</strong></button>
+              
+
                 </div>
             </div>
             <!-- Post /////-->
             {% endfor %}
-
-           
-
-
-
         </div>
-        <div class="col-md-3">
-            <!-- <div class="card gedf-card">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                        the
-                        card's content.</p>
-                    <a href="#" class="card-link">Card link</a>
-                    <a href="#" class="card-link">Another link</a>
-                </div> -->
-            <form action="/search.html" method="get">
-                <input class="form-input" type="text" name="query" placeholder="Post Search">
-                <button style="height: 2rem;" class="btn btn-outline-primary" type="button" id="button-addon2">
-                    <i style="display: block !important;" class="fa fa-search"></i>
-                </button>
-            </form>
-
-            <!-- <div class="card gedf-card" style="margin-top: 2rem;">
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                        the
-                        card's content.</p>
-                    <a href="#" class="card-link">Card link</a>
-                    <a href="#" class="card-link">Another link</a>
-                </div>
-            </div> -->
-        </div>
+        
     </div>
 </div>
 {% endblock content %}
@@ -287,16 +149,11 @@
 		 $.ajax({
              type: "POST",
              url: "{% url 'post-upvote-ajax' %}",
-             data: {'csrfmiddlewaretoken': '{{ csrf_token }}','post_id': $(this).attr('value')},
+             data: {'csrfmiddlewaretoken': '{{ csrf_token }}','post_slug': $(this).attr('value')},
              dataType: "json",
              success: function(response) {
-			  if (response.up_status == 'liked'){
-				   $('.btn_upvote').replaceWith("<i class='fas fa-thumbs-up btn_upvote' aria-hidden='true'></i>");
-			  }
-			  else{
-				  $('.btn_upvote').replaceWith("<i class='far fa-thumbs-up btn_upvote' aria-hidden='true'></i>");
-			  }
-              $('#upvote_count').replaceWith("<strong class='text-xl-center' id='upvote_count'>" + response.up_count + "</strong>")
+		
+              $('#upvote_count'+response.post_slug).replaceWith("<strong class='text-xl-center' id='upvote_count" + response.post_slug + "'>"+ response.up_count + "</strong>")
 
               }
 

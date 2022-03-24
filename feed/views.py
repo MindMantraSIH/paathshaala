@@ -32,6 +32,7 @@ def school_feed(request, slug):
    
 	return render(request, 'feed/school_feed.html',context)
 
+
 def delete_feed_post(request, school, slug):
 	post = Post.objects.filter(slug = slug)[0]
 	print(post)
@@ -42,8 +43,8 @@ def delete_feed_post(request, school, slug):
 
 
 def upvote_ajax(request):
-	post = get_object_or_404(Post, id=request.POST.get('post_id'))
-	post_id = post.id
+	post = get_object_or_404(Post, slug=request.POST.get('post_slug'))
+	print(post)
 	up_status = ''
 	if post.upvote.filter(id=request.user.id).exists():
 		post.upvote.remove(request.user)
@@ -52,5 +53,6 @@ def upvote_ajax(request):
 		post.upvote.add(request.user)
 		up_status = 'liked'
 	up_count = post.number_of_upvotes()
-	ctx = {'up_status':up_status,'up_count':up_count}
+	print(up_count)
+	ctx = {'up_status':up_status,'up_count':up_count,'post_slug':post.slug}
 	return HttpResponse(json.dumps(ctx), content_type='application/json')

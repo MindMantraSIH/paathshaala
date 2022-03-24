@@ -61,8 +61,3 @@ body {
     border-color: #1b1d21 !important;
     background:linear-gradient(to right, #fbff79, #ffc680) !important;
 }
-.btn:hover
-{
-background-image:none !important;
-background-color:linear-gradient(to right, #fbff79, #ffc680) !important;
-}
