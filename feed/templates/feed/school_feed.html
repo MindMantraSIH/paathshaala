@@ -7,9 +7,9 @@
 {% endblock connectcss %}
 
 {% block login %}
-<li><a href="{% url 'HappinessIndex' %}">Dashboard</a></li>
+<li><a href="{% url 'Dashboard' %}">Dashboard</a></li>
 <li><a href="{% url 'school-feed' user.slug %}">Feed</a></li>
-<li><a href="{% url 'home' %}">Logout</a></li>
+<li><a href="{% url 'logout' %}">Logout</a></li>
 {% endblock login %}
 
 <!-- <!DOCTYPE html> -->
@@ -280,6 +280,9 @@
 
 {% block script %}
 <script>
+    if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, window.location.href );
+      }
     $('.upvote_btn').click(function(){
 		 $.ajax({
              type: "POST",

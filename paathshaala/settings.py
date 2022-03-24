@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'feed.apps.FeedConfig',
+    'counsellor.apps.CounsellorConfig',
     'selfassessments.apps.SelfassessmentsConfig',
     'Analytics.apps.AnalyticsConfig',
     'suggestions.apps.SuggestionsConfig',
