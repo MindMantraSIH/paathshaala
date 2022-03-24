@@ -1,7 +1,8 @@
 from django.shortcuts import render
-
-def temp(request):
+from profiles.models import School
+def schoolinfo(request):
+    school=School.objects.order_by('rank')
     context={
-        'temp':temp,
+        'school':school,
     }
-    return render(request,'profiles/temp.html',context)
+    return render(request,'ranking/Ranking.html',context)
