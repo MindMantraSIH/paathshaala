@@ -34,7 +34,6 @@ def student_register(request):
 
 
 def loginregister(request):
-	context = {}
 	logout(request)
 	if request.method == 'POST':
 		form = request.POST.get('type')
@@ -72,6 +71,8 @@ def loginregister(request):
 					return redirect('school-feed', user.slug)
 				else:
 					return redirect('school-feed',user.student.school.user.slug)
+			else:
+				return render(request, 'profiles/loginregister.html', {'message': 'Username or password is incorrect'})
 
 		
 
@@ -106,3 +107,7 @@ def school_register(request):
 		return redirect('school-feed',slug=user.slug)
 
 	return render(request, 'profiles/school_register.html')
+
+def logout_view(request):
+	logout(request)
+	return redirect('home')

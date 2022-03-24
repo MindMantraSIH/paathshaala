@@ -42,12 +42,14 @@
                     <option value="school">School</option>
                 </select>
                 <br>
+                {% if message %}
                 <div class="alert alert-warning alert-dismissible fade show" role="alert" style="padding-right: 1rem;">
                     {{ message }}
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="padding: 0%; background-color: inherit;border: none; margin-left: 2rem;">
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
+                  {% endif %}
                 <input style="display: None" name="login" value="login">
                 <input type="submit" name='type' value="Register" class="btn" style="width: 8rem;height: 3rem; background-color: #fbff79"> 
             </form>
@@ -58,13 +60,14 @@
                 <h1>Login</h1>
                 <input name='username' type="text" placeholder="Username" style="margin:7px" required />
                 <input name='password' type="password" placeholder="Password" style="margin-bottom: 7px" required />
-
+                {% if message %}
                 <div class="alert alert-warning alert-dismissible fade show" role="alert" style="padding-right: 1rem;">
                     {{ message }}
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="padding: 0%; background-color: inherit;border: none; margin-left: 2rem;">
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
+                  {% endif %}
                 <button type="submit" name='type' value='sign-in' class='btn' style="margin-top: 20px;width: 8rem;height: 3rem; background-color: #fbff79">Sign In</button>
             </form>
         </div>

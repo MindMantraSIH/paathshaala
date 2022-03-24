@@ -9,11 +9,13 @@ from django.core.mail import send_mail
 @login_required()
 def getdata(request):
     print(request.method)
+    all=[]
     if request.method == 'POST':
-        for i in request.POST:
-            print(i)
-        ans = request.POST.getlist('ans[]')
-        print(ans,"list")
+        print(request.POST.get("gen"))
+        for i in ['std','gen','hob','act','edu','inc','extra','play','sleep','comp','prep','sport','anx','secure','conf','soc','add']:
+            ans=request.POST.get(i)
+            all.append(ans)
+        print(all)
         subject = 'test'
         message = f'Hi'
         email_from = settings.EMAIL_HOST_USER
