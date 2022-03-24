@@ -22,7 +22,7 @@ def forum(request):
         #return render(request, "forum.html")
     posts = Discussion.objects.all()
     print(posts)
-    return render(request, "forum.html", {'posts':posts})
+    return render(request, "forum/forum1.html", {'posts':posts})
 
 @login_required
 def comment(request,slug):
@@ -30,7 +30,7 @@ def comment(request,slug):
     post = Discussion.objects.filter(slug=slug)
     #print(posts)
     replies = Reply.objects.filter(post=post[0])
-    return render(request, "comment.html", {'reply':replies,'posts':post})
+    return render(request, "forum/comment.html", {'reply':replies,'posts':post})
 
 #@login_required(login_url = '/login')
 @login_required
@@ -79,7 +79,7 @@ def discussionUpdate(request,slug):
 
     
 
-    return render(request, "DiscussionUpdate.html")
+    return render(request, "forum/DiscussionUpdate.html")
 
 
 @login_required
@@ -100,7 +100,7 @@ def replyUpdate(request):
         'upd_form': upd_form
     }
 
-    return render(request, 'ReplyUpdate.html', context)
+    return render(request, 'forum/ReplyUpdate.html', context)
 
 @login_required
 def discussionDelete(request,slug):
