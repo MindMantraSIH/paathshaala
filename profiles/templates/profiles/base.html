@@ -54,7 +54,7 @@
                         
                         <!-- if user is school -->
                         {% if user.is_school %}
-                        <li><a href="{% url 'HappinessIndex' %}">Dashboard</a></li>
+                        <li><a href="{% url 'Dashboard' %}">Dashboard</a></li>
                         <li><a href="{% url 'school-feed' user.slug %}">Feed</a></li>
                         
                         {% endif %}

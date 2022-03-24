@@ -115,39 +115,27 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i>{{ post.date_posted }}</div>
+                    <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i> {{ post.date_posted|date:"M d, Y" }}</div>
                     <h5 class="card-title">{{ post.title }}</h5>
                     <p class="card-text">
                         {{ post.content }}
                     </p>
-                    {% if post.image %}<img src=https://res.cloudinary.com/dhny6jvtu/image/upload/v1/{{ post.image }} alt="img" style="display: block;margin: auto;">{% endif %}
+                    {% if post.image %}<img src=https://res.cloudinary.com/dhny6jvtu/image/upload/v1/{{ post.image }} alt="img" style="height:15rem; width:15rem;">{% endif %}
                     
                 </div>
                         
                 <div class="card-footer">
-                    {% if user in post.upvote %}
                     
-                        <button type="submit" name="post_id" value="{{post.id}}" class="btn btn-lg upvote_btn shadow-none"><i
-                                class="fa fa-gittip btn_upvote" aria-hidden="true"></i><strong class="text-xl-center" id='upvote_count'>{{ post.number_of_upvotes }}</strong></button>
-                        {% else %}
-                        
-                        <button type="submit" name="post_id" value="{{post.id}}" class="btn btn-lg upvote_btn shadow-none"><i
-                                class="fa fa-gittip btn_upvote" aria-hidden="true"></i><strong class="text-xl-center" id='upvote_count'>{{ post.number_of_upvotes }}</strong></button>
-                        {% endif %}
+                        <button type="submit" name="post_slug" value="{{post.slug}}" class="btn btn-lg upvote_btn shadow-none"><i
+                                class="fa fa-gittip btn_upvote" aria-hidden="true"></i><strong class="text-xl-center" id='upvote_count{{post.slug}}'>  {{ post.number_of_upvotes }}</strong></button>
+              
 
                 </div>
             </div>
             <!-- Post /////-->
             {% endfor %}
         </div>
-        {% comment %} <div class="col-md-3">
-            <form action="/search.html" method="get">
-                <input class="form-input" type="text" name="query" placeholder="Post Search">
-                <button style="height: 2rem;" class="btn btn-outline-primary" type="button" id="button-addon2">
-                    <i style="display: block !important;" class="fa fa-search"></i>
-                </button>
-            </form>
-        </div> {% endcomment %}
+        
     </div>
 </div>
 {% endblock content %}
@@ -161,16 +149,11 @@
 		 $.ajax({
              type: "POST",
              url: "{% url 'post-upvote-ajax' %}",
-             data: {'csrfmiddlewaretoken': '{{ csrf_token }}','post_id': $(this).attr('value')},
+             data: {'csrfmiddlewaretoken': '{{ csrf_token }}','post_slug': $(this).attr('value')},
              dataType: "json",
              success: function(response) {
-			  if (response.up_status == 'liked'){
-				   $('.btn_upvote').replaceWith("<i class='fas fa-thumbs-up btn_upvote' aria-hidden='true'></i>");
-			  }
-			  else{
-				  $('.btn_upvote').replaceWith("<i class='far fa-thumbs-up btn_upvote' aria-hidden='true'></i>");
-			  }
-              $('#upvote_count').replaceWith("<strong class='text-xl-center' id='upvote_count'>" + response.up_count + "</strong>")
+		
+              $('#upvote_count'+response.post_slug).replaceWith("<strong class='text-xl-center' id='upvote_count" + response.post_slug + "'>"+ response.up_count + "</strong>")
 
               }
 
