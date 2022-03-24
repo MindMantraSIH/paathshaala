@@ -8,4 +8,4 @@ def counsellor(request):
         address = request.POST.get('address')
         problem = request.POST.get('problem')
         c = Councellor.objects.create(email=email,address=address,problem=problem)
-    return render(request, 'counsellor/councellor_connect.html')
+    return render(request, 'counsellor/counsellor.html')

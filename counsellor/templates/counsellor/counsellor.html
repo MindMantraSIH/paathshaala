@@ -27,21 +27,20 @@
   <body>
     <div class="container jumbotron mt-4" style="width: 75%;">
         <form action="" method="POST">
-            <form>
+          {% csrf_token %}
                 <div class="form-group">
                   <label for="exampleFormControlInput1">Email address</label>
-                  <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                  <input type="email" class="form-control" name="email" id="exampleFormControlInput1" placeholder="name@example.com">
                 </div>
                 <div class="form-group">
                   <label for="Address">Address</label>
-                  <textarea class="form-control" id="Address" rows="4"></textarea>
+                  <textarea class="form-control" name="address" id="Address" rows="4"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="Description">Description</label>
-                    <textarea class="form-control" id="Description" rows="4"></textarea>
+                    <textarea class="form-control" name="problem" id="Description" rows="4"></textarea>
                   </div>
                   <button type="submit" class="btn  text-center px-4" style="margin-left: 40%;">Submit</button>
-              </form>
         </form>
 
     </div>
