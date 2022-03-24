@@ -39,8 +39,8 @@
 
 <body style="background-color:#EEEEEE !important;">
     <header class="main-header" >
-        <div >
-            <nav class="navbar navbar-expand-lg main-nav px-0"style="background-color: linear-gradient(to right, #fbff79, #ffc680) !important;">
+        <div style="margin:1.5rem;">
+            <nav class="navbar navbar-expand-lg main-nav px-0">
                 <a class="navbar-brand" href="#">
                     <img src="{% static 'profiles/circular paathshala logo.png' %} " alt="paathshaala logo" style="height: 40;width: 40;">
                 </a>
@@ -55,9 +55,27 @@
                         <li><a href="#">Help Center</a></li>
                         <li><a href="{% url 'forum' %}">Forum</a></li>
                         
-                        {% block login %}
+                        <!-- if user is school -->
+                        {% if user.is_school %}
+                        <li><a href="{% url 'HappinessIndex' %}">Dashboard</a></li>
+                        <li><a href="{% url 'school-feed' user.slug %}">Feed</a></li>
+                        
+                        {% endif %}
+                        <!-- if user is student -->
+                        {% if user.is_student %}
+                        <li><a href="{% url 'HappinessIndex' %}">Dashboard</a></li>
+                        <li><a href="{% url 'school-feed' user.slug %}">Feed</a></li>
+                        <li><a href="{% url 'savedata' %}">feedback</a></li>
+                        <li><a href="{% url 'home' %}">Logout</a></li>
+                        {% endif %}
+                        {% if user.is_authenticated %}
+                        <li><a href="{% url 'home' %}">Logout</a></li>
+                        {% else %}
+                        <li><a href="{% url 'loginregister' %}">Login / Signup</a></li>
+                        {% endif %}
+                        <!-- {% block login %}
 
-                        {% endblock login %}
+                        {% endblock login %} -->
                         <!-- <li><a href="#">Login / Signup</a></li> -->
                     </ul>
                     <span class="material-icons">account_circle</span>
@@ -65,7 +83,7 @@
             </nav>
         </div>
         <!-- /.container -->
-
+    </header>
     {% block content %}
 
 
