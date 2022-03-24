@@ -49,7 +49,7 @@
                         <li><a href="{% url 'home' %}" class="active-first">Home</a></li>
                         <li><a href="#">School Rank</a></li>
                         <li><a href="{% url 'getdata' %}">Self Assesment</a></li>
-                        <li><a href="#">Help Center</a></li>
+                        <li><a href="{% url 'counselling' %}">Help Center</a></li>
                         <li><a href="{% url 'forum' %}">Forum</a></li>
                         
                         <!-- if user is school -->
@@ -69,7 +69,6 @@
                         <li><a href="{% url 'loginregister' %}">Login / Signup</a></li>
                         {% endif %}
                     </ul>
-                    <span class="material-icons">account_circle</span>
                 </div>
             </nav>
         </div>
