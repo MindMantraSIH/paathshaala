@@ -12,12 +12,16 @@ from plotly.subplots import make_subplots
 import plotly.graph_objects as go
 from .models import Academics
 from profiles.models import School
+import smtplib
+
+from django.conf import settings
+from django.core.mail import send_mail
 
 
 
 
 
-def happiness_index():
+def happiness_index(request):
 
     df = pd.read_csv("Analytics\data\HI.csv").iloc[:,:-1]
     df_actual = pd.read_csv("Analytics\data\student_data.csv")
@@ -142,17 +146,31 @@ def upload_csv(request):
     if request.method == "POST":
         csv = request.FILES['csv']
         # print(csv.read().decode())
-        for i,line in enumerate(csv.read().decode().splitlines()):
-            if i == 0:
+        lines = csv.read().decode().split('\r\n')
+        print(lines)
+        for i,line in enumerate(lines):
+            print(line)
+            if i == 0 or i == len(lines) -1:
                 continue
             elements = line.split(',')
-            print(request.user)
-            p = Academics(school = request.user.school,name=elements[0], email=elements[1], english = elements[2])
-            p.save()
-            happiness_index()
+            print(elements)
+            p = Academics.objects.create(school = request.user.school,name=elements[0],
+                                         email=elements[1], english = elements[2], roll_no = elements[3])
+            print(p)
+
+        happiness_index(request)
     return render(request, 'Analytics/dashboard.html')
 
 def send(request):
-    school = School.objects.get(user__slug = request.user.school)
-    print(school)
+    school = School.objects.filter(user= request.user)[0]
+    academics = Academics.objects.filter(school = school)
+    email_list = []
+    for acad in academics:
+        email_list.append(acad.email)
+    print(email_list)
+    subject = 'Request to fill survey form'
+    message = "Please login and fill the form."
+    email_from = settings.EMAIL_HOST_USER
+    send_mail(subject, message, email_from, email_list)
     return render(request, 'Analytics/dashboard.html')
+
