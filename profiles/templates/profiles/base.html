@@ -44,9 +44,6 @@
                 <a class="navbar-brand" href="#">
                     <img src="{% static 'profiles/circular paathshala logo.png' %} " alt="paathshaala logo" style="height: 40;width: 40;">
                 </a>
-                <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainMenu"
-                    aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
-                </button> -->
                 <div class="collapse navbar-collapse" id="mainMenu">
                     <ul class="navbar-nav ml-auto text-uppercase f1">
                         <li><a href="{% url 'home' %}" class="active-first">Home</a></li>
@@ -73,10 +70,6 @@
                         {% else %}
                         <li><a href="{% url 'loginregister' %}">Login / Signup</a></li>
                         {% endif %}
-                        <!-- {% block login %}
-
-                        {% endblock login %} -->
-                        <!-- <li><a href="#">Login / Signup</a></li> -->
                     </ul>
                     <span class="material-icons">account_circle</span>
                 </div>

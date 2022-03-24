@@ -37,16 +37,6 @@
                 <input name="name" type="text" placeholder="Name" style="margin-bottom: 7px" required />
                 <input name="password" type="password" placeholder="Password" style="margin-bottom: 7px" required />
                 <input name="con_password" type="password" placeholder="Confirm Password" style="margin-bottom: 7px" required />
-<!--                <div class="dropdown">-->
-<!--                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
-<!--                      Dropdown button-->
-<!--                    </button>-->
-<!--                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">-->
-<!--                      <a class="dropdown-item" href="#">Action</a>-->
-<!--                      <a class="dropdown-item" href="#">Another action</a>-->
-<!--                      <a class="dropdown-item" href="#">Something else here</a>-->
-<!--                    </div>-->
-<!--                </div>-->
                 <select name="category">
                     <option value="student">Student</option>
                     <option value="school">School</option>
@@ -59,8 +49,7 @@
                     </button>
                   </div>
                 <input style="display: None" name="login" value="login">
-                <!-- <button type="submit">Register</button> -->
-                <input type="submit" name='type' value="register" class="btn" style="width: 8rem;height: 3rem; background-color: #fbff79"> 
+                <input type="submit" name='type' value="Register" class="btn" style="width: 8rem;height: 3rem; background-color: #fbff79"> 
             </form>
         </div>
         <div class="form-container sign-in-container">
@@ -69,7 +58,7 @@
                 <h1>Login</h1>
                 <input name='username' type="text" placeholder="Username" style="margin:7px" required />
                 <input name='password' type="password" placeholder="Password" style="margin-bottom: 7px" required />
-                <!-- <a href="#">Forgot your password?</a> -->
+
                 <div class="alert alert-warning alert-dismissible fade show" role="alert" style="padding-right: 1rem;">
                     {{ message }}
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="padding: 0%; background-color: inherit;border: none; margin-left: 2rem;">
@@ -84,13 +73,11 @@
             <div class="overlay">
                 <div class=" overlay-panel overlay-left">
                     <h1>Welcome Back!</h1>
-                    <!-- <p>To keep connected with us please login with your personal info</p> -->
                     {% comment %} <img src="{% static 'profiles/login-illustration.png' %}" style="height: 300 !important;width:300 !important;"> {% endcomment %}
                     <button class="ghost" id="signIn"style="margin-top: 20px;">Login</button>
                 </div>
                 <div class="overlay-panel overlay-right">
                     <h1>Welcome to Paathshaala</h1>
-                    <!-- <p>A one stop solution to all your health problems. <br>Register now and start your journey with us.</p> -->
                     {% comment %} <img src="{% static 'profiles/register-illustration.png' %}" style="height: 300 !important;width:300 !important;"> {% endcomment %}
                     <button class="ghost" id="signUp" style="margin-top: 20px;">Sign Up</button>
                 </div>

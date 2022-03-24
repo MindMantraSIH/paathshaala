@@ -106,8 +106,3 @@ def school_register(request):
 		return redirect('school-feed',slug=user.slug)
 
 	return render(request, 'profiles/school_register.html')
-
-
-
-def schoolhome(request):
-	return render(request,'profiles/schoolhome.html')
