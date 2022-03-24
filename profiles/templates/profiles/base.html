@@ -48,10 +48,8 @@
                     <ul class="navbar-nav ml-auto text-uppercase f1">
                         <li><a href="{% url 'home' %}" class="active-first">Home</a></li>
                         <li><a href="#">School Rank</a></li>
-                        {% if user.is_student %}
-                        <li><a href="{% url 'getdata'%}">Self Assesment</a></li>
+                        <li><a href="{% url 'getdata' %}">Self Assesment</a></li>
                         <li><a href="#">Help Center</a></li>
-                        {% endif %}
                         <li><a href="{% url 'forum' %}">Forum</a></li>
                         
                         <!-- if user is school -->
@@ -62,13 +60,11 @@
                         {% endif %}
                         <!-- if user is student -->
                         {% if user.is_student %}
-                        <li><a href="{% url 'HappinessIndex' %}">Dashboard</a></li>
                         <li><a href="{% url 'school-feed' user.slug %}">Feed</a></li>
                         <li><a href="{% url 'savedata' %}">feedback</a></li>
-                        <li><a href="{% url 'home' %}">Logout</a></li>
                         {% endif %}
                         {% if user.is_authenticated %}
-                        <li><a href="{% url 'home' %}">Logout</a></li>
+                        <li><a href="{% url 'logout' %}">Logout</a></li>
                         {% else %}
                         <li><a href="{% url 'loginregister' %}">Login / Signup</a></li>
                         {% endif %}

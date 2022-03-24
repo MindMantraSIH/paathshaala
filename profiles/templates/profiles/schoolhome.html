@@ -1,0 +1,42 @@
+{% load static %}
+{% extends "profiles/base.html"}
+
+{% block connectcss %} 
+<link rel="stylesheet" href="{% static 'profiles/home.css' %}">
+{% endblock connectcss %}
+
+{% block login %}
+<li><a href="{% url 'school-feed' %}">Feed</a></li>
+<li><a href="{% url 'home' %}">Logout</a></li>
+{% endblock login %}
+
+{% block content %}
+<div class="container-fluid gedf-wrapper" >
+    <div style="margin: 10px;background-color: #eee !important;text-align: center;">
+        <div class="row ">
+            <div class="col-md-7 px-3" >
+                <div class="heading">
+                    <h1 style="font-size: 3.5rem !important; font-family: 'Vesper Libre', serif;">PAATHSHAALA</h1>
+                </div>
+                <div>
+                    <p style="font-size: 1.5rem ;">
+                    Platform for assessing and advancing the<br>happiness Index of schools and assisting learner's ambitions
+                </p>
+                </div>
+                <div>
+                    <p></p>
+
+                </div>  
+            </div>
+            <!-- Image -->
+            <div class="col-md-5" style="margin: auto;">
+                <img class="d-block img-width" src="{% static 'profiles/Teaching pastel yellow gif.gif' %}" alt="">
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}
+

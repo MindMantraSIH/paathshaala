@@ -140,14 +140,14 @@
             <!-- Post /////-->
             {% endfor %}
         </div>
-        <div class="col-md-3">
+        {% comment %} <div class="col-md-3">
             <form action="/search.html" method="get">
                 <input class="form-input" type="text" name="query" placeholder="Post Search">
                 <button style="height: 2rem;" class="btn btn-outline-primary" type="button" id="button-addon2">
                     <i style="display: block !important;" class="fa fa-search"></i>
                 </button>
             </form>
-        </div>
+        </div> {% endcomment %}
     </div>
 </div>
 {% endblock content %}

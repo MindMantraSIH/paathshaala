@@ -17,10 +17,6 @@ import hashlib
 def home(request):
 	return render(request,'profiles/home.html')
 
-
-
-
-
 def student_register(request):
 	if request.method == 'POST':
 		form = StudentSignUpForm(request.user, request.POST)
@@ -37,8 +33,10 @@ def loginregister(request):
 	logout(request)
 	if request.method == 'POST':
 		form = request.POST.get('type')
+		print(form)
 		if form=='register':
 			cat = request.POST.get('category')
+			print(cat)
 			username = request.POST.get('username')
 			name = request.POST.get('name')
 			passw = request.POST.get('password')
@@ -49,6 +47,7 @@ def loginregister(request):
 				return render(request, 'profiles/loginregister.html', {'message': 'Username Already exists'})
 			if cat == 'student':
 				user = User.objects.create(username=username, name=name, is_student=True)
+				print(user)
 				user.set_password(passw)
 				user.save()
 				user = authenticate(request, username=username, password = passw)
