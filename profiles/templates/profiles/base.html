@@ -51,8 +51,10 @@
                     <ul class="navbar-nav ml-auto text-uppercase f1">
                         <li><a href="{% url 'home' %}" class="active-first">Home</a></li>
                         <li><a href="#">School Rank</a></li>
+                        {% if user.is_student %}
                         <li><a href="{% url 'getdata'%}">Self Assesment</a></li>
                         <li><a href="#">Help Center</a></li>
+                        {% endif %}
                         <li><a href="{% url 'forum' %}">Forum</a></li>
                         
                         {% block login %}
