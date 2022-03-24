@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from django.http import HttpResponse
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 import pandas as pd
 import numpy as np
@@ -13,18 +15,46 @@ import plotly.graph_objects as go
 from .models import Academics
 from profiles.models import School
 import smtplib
-
+from suggestions.models import Data
 from django.conf import settings
 from django.core.mail import send_mail
-
-
+import os
+import csv
+from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
+from sklearn.decomposition import NMF, LatentDirichletAllocation
 
 
 
 def happiness_index(request):
-
+    output = []
+    print(request.user)
+    query_set = Data.objects.filter(school=request.user.school)
+    with open(os.getcwd() + "/data.csv", 'w',newline='') as file:
+        writer = csv.writer(file)
+        print(os.getcwd())
+        writer.writerow(['Level Of Courses (Difficulty)', 'A Clean Environment',
+       'Employing teachers with competency',
+       'Preventing Discrimination and Persuasion',
+       'Providing laboratory & workshop facilities', 'The school timetable',
+       'Performing group work', 'Mental health assessment of all students',
+       'Presenting more sporting & artistic classes',
+       'Being able to solve problems of the learner',
+       'Courses should have creative and colorful instructional materials and fun activities.',
+       'Focus on the individual',
+       'Involve with fundamental and critical aspects of learner , about manner of living',
+       'Course relevance',
+       'Issues of concern should be made a point of conversation within age appropriate classrooms and children made aware of existing realities.',
+       'Are these problems being solved by the School?',
+       'Any other factors , according to you , which contribute to happiness index'])
+        for user in query_set:
+            print(user)
+            output.append([user.levelc, user.env, user.teachersc, user.prevdisc, user.fecilities, user.timetable,
+                       user.grpwork, user.mentalhlth, user.sportart, user.solveprob, user.creativecourse,
+                       user.foconindv, user.mannlearn, user.courserele, user.issuesofconc, user.aresolved, user.others])
+        writer.writerows(output)
+    print()
     df = pd.read_csv("Analytics\data\HI.csv").iloc[:,:-1]
-    df_actual = pd.read_csv("Analytics\data\student_data.csv")
+    df_actual = pd.read_csv(os.getcwd() + "/data.csv")
     features = df_actual.iloc[:,:-1]
     number_of_students = len(df[df["Who is filling this form?"] == "Student"])
     number_of_teachers = len(df[df["Who is filling this form?"] == "Teacher"])
@@ -47,11 +77,9 @@ def happiness_index(request):
         intermediate = weights*features.iloc[i,:]
         happiness_index += intermediate.values.sum() * 10 **(-1* np.log(intermediate.values.sum()))
         # weights*features[i,:].values
-    happiness_index = happiness_index/features.shape[0]
+    happiness_index = np.log(happiness_index/features.shape[0])
 
-    happiness_index = happiness_index* 10 ** np.log(happiness_index.sum())
-
-    happiness_index = happiness_index* 10 ** np.log(intermediate.sum())
+    # happiness_index = happiness_index* 10 ** np.log(happiness_index.sum())
 
     print(happiness_index)
     # happiness_index = happiness_index* 10 **(-1* np.log(happiness_index))
@@ -108,38 +136,50 @@ def normalize_ratings(rating):
     return rating
 
 def ranking():
-    pass
+    schools = School.objects.all().order_by('happiness_score')
+    for i,school in enumerate(schools):
+        school.rank = i+1
+        school.save()
+
+
 
 def dashboard(request):
-    df = pd.read_csv('Analytics/data/Parents Feedback (Responses) - Form Responses 1.csv')
-    anx = df[df['Anxiety and pressure felt by students during exams'] > 3]
-    number_of_anxious = anx['Anxiety and pressure felt by students during exams'].count()
-    soc = df[df['How socially active are your children ?'] < 3]
-    nuumber_of_soc_active = soc['How socially active are your children ?'].count()
-    self_conf = df[df['How self confident are your children ?'] < 3]
-    number_of_low_confid = self_conf['How self confident are your children ?'].count()
-    sub_col = ['How satisfied are you with school ', 'Schools emphasis on practical learning',
-               'Curriculums emphasis on life and social skills']
-    box_df = df['How satisfied are you with school ']
-
-    to_plot = {'Number of Anxious Students': number_of_anxious, 'Less Socially Active': nuumber_of_soc_active,
-               'Less Confident': number_of_low_confid}
-    labels = []
+    df = pd.read_csv('Analytics/data/HI.csv')
+    label = []
     sizes = []
+    diff = df[df['Level Of Courses (Difficulty)'] > 2]
+    students_course_difficult = diff['Level Of Courses (Difficulty)'].count()
+    eas = df[df['Level Of Courses (Difficulty)'] < 2]
+    students_course_easy = eas['Level Of Courses (Difficulty)'].count()
+    students_course_easy += 1
+    print(students_course_easy)
+    to_plot = {'Students finding course difficult': students_course_difficult,
+               'Students finding Course Easy': students_course_easy}
     for x, y in to_plot.items():
-        labels.append(x)
+        label.append(x)
         sizes.append(y)
-
-    # color_discrete_map = { 'Open': 'rgb(255,0,0)'}
-    fig = go.Figure(data=[go.Pie(labels=labels, values=sizes)])
+    fig = go.Figure(data=[go.Pie(labels=label, values=sizes)])
     graph1 = plotly.offline.plot(fig, auto_open=False, output_type="div")
-    fig = px.bar(df['Steps taken to spread awareness about mental health'])
+    want = df[df['Courses should have creative and colorful instructional materials and fun activities.'] > 3]
+    want_count = want['Courses should have creative and colorful instructional materials and fun activities.'].count()
+    not_w = df[df['Courses should have creative and colorful instructional materials and fun activities.'] < 3]
+    not_want_count = not_w[
+        'Courses should have creative and colorful instructional materials and fun activities.'].count()
+    res = [want_count, not_want_count]
+    a = ['Want fun activities', 'Dont want fun activites']
+    fig = go.Figure([go.Bar(x=a, y=res)])
     graph2 = plotly.offline.plot(fig, auto_open=False, output_type="div")
-    fig = px.box(df, y=['How self confident are your children ?'])
+    fig = px.box(df, y=['Being able to solve problems of the learner'])
     graph3 = plotly.offline.plot(fig, auto_open=False, output_type="div")
- #   fig = px.line(coin_data, x="Date", y=coin_data.columns[3:4], width=1050, height=500)
- #   graph4 = plotly.offline.plot(fig, auto_open=False, output_type="div")
-    context = {"graph": [graph1, graph2, graph3]}
+    #   fig = px.line(coin_data, x="Date", y=coin_data.columns[3:4], width=1050, height=500)
+    #   graph4 = plotly.offline.plot(fig, auto_open=False, output_type="div")
+    context = {"graph": [graph1, graph2, graph3],
+               'name': request.user.school,
+                'city': request.user.school.city,
+                'state': request.user.school.state,
+               'rank': request.user.school.rank,
+               'happinessindex': round(request.user.school.happiness_score,2)
+               }
     return render(request,'Analytics/dashboard.html',context)
 
 def upload_csv(request):
@@ -148,18 +188,58 @@ def upload_csv(request):
         # print(csv.read().decode())
         lines = csv.read().decode().split('\r\n')
         print(lines)
-        for i,line in enumerate(lines):
-            print(line)
-            if i == 0 or i == len(lines) -1:
-                continue
-            elements = line.split(',')
-            print(elements)
-            p = Academics.objects.create(school = request.user.school,name=elements[0],
-                                         email=elements[1], english = elements[2], roll_no = elements[3])
-            print(p)
+        # for i,line in enumerate(lines):
+        #     print(line)
+        #     if i == 0 or i == len(lines) -1:
+        #         continue
+        #     elements = line.split(',')
+        #     print(elements)
+        #     p = Academics.objects.create(school = request.user.school,name=elements[0],
+        #                                  email=elements[1], english = elements[2], roll_no = elements[3])
+        #     print(p)
 
         happiness_index(request)
-    return render(request, 'Analytics/dashboard.html')
+        ranking()
+        s = suggest()
+    df = pd.read_csv('Analytics/data/HI.csv')
+    label = []
+    sizes = []
+    diff = df[df['Level Of Courses (Difficulty)'] > 2]
+    students_course_difficult = diff['Level Of Courses (Difficulty)'].count()
+    eas = df[df['Level Of Courses (Difficulty)'] < 2]
+    students_course_easy = eas['Level Of Courses (Difficulty)'].count()
+    students_course_easy += 1
+    print(students_course_easy)
+    to_plot = {'Students finding course difficult': students_course_difficult,
+               'Students finding Course Easy': students_course_easy}
+    for x, y in to_plot.items():
+        label.append(x)
+        sizes.append(y)
+    fig = go.Figure(data=[go.Pie(labels=label, values=sizes)])
+    graph1 = plotly.offline.plot(fig, auto_open=False, output_type="div")
+    want = df[df['Courses should have creative and colorful instructional materials and fun activities.'] > 3]
+    want_count = want['Courses should have creative and colorful instructional materials and fun activities.'].count()
+    not_w = df[df['Courses should have creative and colorful instructional materials and fun activities.'] < 3]
+    not_want_count = not_w[
+        'Courses should have creative and colorful instructional materials and fun activities.'].count()
+    res = [want_count, not_want_count]
+    a = ['Want fun activities', 'Dont want fun activites']
+    fig = go.Figure([go.Bar(x=a, y=res)])
+    graph2 = plotly.offline.plot(fig, auto_open=False, output_type="div")
+    fig = px.box(df, y=['Being able to solve problems of the learner'])
+    graph3 = plotly.offline.plot(fig, auto_open=False, output_type="div")
+    r = lda()
+    context = {"graph": [graph1, graph2, graph3],
+        'name': request.user.school,
+        'city': request.user.school.city,
+        'state': request.user.school.state,
+        'rank': request.user.school.rank,
+        'happinessindex': request.user.school.happiness_score,
+        'improve': s,
+               'topic': r
+    }
+    #print(context.name)
+    return render(request, 'Analytics/dashboard.html',context)
 
 def send(request):
     school = School.objects.filter(user= request.user)[0]
@@ -172,5 +252,93 @@ def send(request):
     message = "Please login and fill the form."
     email_from = settings.EMAIL_HOST_USER
     send_mail(subject, message, email_from, email_list)
-    return render(request, 'Analytics/dashboard.html')
+
+    df = pd.read_csv('Analytics/data/HI.csv')
+    label = []
+    sizes = []
+    diff = df[df['Level Of Courses (Difficulty)'] > 2]
+    students_course_difficult = diff['Level Of Courses (Difficulty)'].count()
+    eas = df[df['Level Of Courses (Difficulty)'] < 2]
+    students_course_easy = eas['Level Of Courses (Difficulty)'].count()
+    students_course_easy += 1
+    print(students_course_easy)
+    to_plot = {'Students finding course difficult': students_course_difficult,
+               'Students finding Course Easy': students_course_easy}
+    for x, y in to_plot.items():
+        label.append(x)
+        sizes.append(y)
+    fig = go.Figure(data=[go.Pie(labels=label, values=sizes)])
+    graph1 = plotly.offline.plot(fig, auto_open=False, output_type="div")
+    want = df[df['Courses should have creative and colorful instructional materials and fun activities.'] > 3]
+    want_count = want['Courses should have creative and colorful instructional materials and fun activities.'].count()
+    not_w = df[df['Courses should have creative and colorful instructional materials and fun activities.'] < 3]
+    not_want_count = not_w[
+        'Courses should have creative and colorful instructional materials and fun activities.'].count()
+    res = [want_count, not_want_count]
+    a = ['Want fun activities', 'Dont want fun activites']
+    fig = go.Figure([go.Bar(x=a, y=res)])
+    graph2 = plotly.offline.plot(fig, auto_open=False, output_type="div")
+    fig = px.box(df, y=['Being able to solve problems of the learner'])
+    graph3 = plotly.offline.plot(fig, auto_open=False, output_type="div")
+    context = {"graph": [graph1, graph2, graph3],
+        'name': request.user.school,
+        'city': request.user.school.city,
+        'state': request.user.school.state,
+        'rank': request.user.school.rank,
+        'happinessindex': request.user.school.happiness_score,
+    }
+    return render(request, 'Analytics/dashboard.html', context)
+
+def lda():
+    schools = Data.objects.all()
+    suggestions = []
+    for i,school in enumerate(schools):
+        suggestions.append(school.others)
+    print(suggestions)
+    no_features = 1000
+    tf_vectorizer = CountVectorizer(max_df=0.95, min_df=2, max_features=no_features, stop_words='english')
+    tf = tf_vectorizer.fit_transform(suggestions)
+    tf_feature_names = tf_vectorizer.get_feature_names()
+    no_topics = 1
+    lda = LatentDirichletAllocation(no_topics, max_iter=5, learning_method='online', learning_offset=50.,
+                                    random_state=0).fit(tf)
+
+    def display_topics(model, feature_names, no_top_words):
+        for topic_idx, topic in enumerate(model.components_):
+            print("Topic %d:" % (topic_idx))
+            return " ".join([feature_names[i]
+                      for i in topic.argsort()[:-no_top_words - 1:-1]])
+
+    no_top_words = 5
+    display_topics(lda, tf_feature_names, no_top_words)
+
+
+def suggest():
+    suggestions = {0: 'Reduce the difficulty level & Make sure Students learn efficiently',
+                   1: 'Clean Environment keeps student at ease , Strive to keep the place hospitable',
+                   2: ' Teachers are one of the most imp role models in a students life , So capable and competent teachers are a must – make sure the right teachers are selected and trained',
+                   3: 'Students being at a very impressionable age ,making sure their self confidence doesn’t go down is very important . Spread awareness about it ,try to make sure no student goes through it ,and if goes through – give proper councelling',
+                   4: 'Studies show students learn and understand better with doing , hence emphasize on practical and hands on training',
+                   5: 'Plan the time table in an efficient way such that students have enough break between lectures',
+                   6: 'Plan more group based activites so that the interaction of students increases ',
+                   7: 'Take frequent mental health assesment of students , detecting problems at an early stage can do a lot of good',
+                   8: 'Plan more extra-curricular activities , helps students build a lot of life skills ',
+                   9: 'Try to clear all the doubts of students , as students with a strong knowledge base become very keen of learning',
+                   10: 'Courses should have creative and colorful instructional materials and fun activities',
+                   11: 'Focus on the individual as every student should be mentored in a different way ',
+                   12: 'Involve with fundamental and critical aspects of learner , about manner of living ',
+                   13: 'Introduce relevant courses which can help the students ini life',
+                   14: 'Issues of concern should be made a point of conversation within age appropriate classrooms and children made aware of existing realities',
+
+                   }
+
+    df_actual = pd.read_csv(os.getcwd() + "/data.csv")
+    features = df_actual.iloc[:, :-1].mean().values
+    improvements = []
+    for i,feature in enumerate(features):
+        if feature < 2.5:
+            improvements.append(suggestions.get(i,""))
+    return improvements
+
+
 

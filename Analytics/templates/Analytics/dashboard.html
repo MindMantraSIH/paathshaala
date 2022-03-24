@@ -28,13 +28,13 @@
                 <div class="card-body" style="color: black;">
                     <div class="card-text">
                         <h6>
-                            Name:
+                            Name: {{ name }}
                         </h6>
                         <h6>
-                            City:
+                            City: {{ city }}
                         </h6>
                         <h6>
-                            State:
+                            State: {{ state }}
                         </h6>
                     </div>
                 </div>
@@ -43,7 +43,7 @@
                 <div class="card-body" style="color: black;">
                     <div class="card-text text-center">
                         <h2>
-                            Rank
+                            Rank: {{ rank }}
                         </h2>
 
                     </div>
@@ -52,7 +52,7 @@
             <div class="card sec3">
                 <div class="card-body" style="color: black;">
                     <h4 class="text-center">
-                        Happiness Index
+                        Happiness index: {{ happinessindex }}
                     </h4>
                 </div>
             </div>
@@ -115,6 +115,7 @@
                             {% endfor %}
                         </div>
                     </div>
+
                 </div>
             </div>
 
@@ -123,10 +124,27 @@
             <div class="card sec3">
                 <div class="card-title text-center p-1"> <h4>Suggestions</h4></div>
                 <div class="card-body" style="color: black;">
+                     {% for i in improve %}
                     <div class="card-text">
                         <h6>
-                            <i class="fa fa-arrow-right"></i> blah
+                            <i class="fa fa-arrow-right"></i> {{ i }}
                         </h6>
+
+                    </div>
+                    {% endfor %}
+                </div>
+
+            </div>
+            <div class="card sec3">
+                <div class="card-body" style="color: black;">
+                    <div class="card-text  ">
+                        <h4 class="card-title text-center">
+                            Topic Modellings for Feedbacks
+                        </h4>
+                        <h6>
+                            <i class="fa fa-arrow-right"></i> {{ topic }}
+                        </h6>
+
                     </div>
                 </div>
             </div>
