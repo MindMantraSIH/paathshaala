@@ -12,6 +12,10 @@ from plotly.subplots import make_subplots
 import plotly.graph_objects as go
 from .models import Academics
 from profiles.models import School
+import smtplib
+
+from django.conf import settings
+from django.core.mail import send_mail
 
 
 
@@ -154,12 +158,19 @@ def upload_csv(request):
                                          email=elements[1], english = elements[2], roll_no = elements[3])
             print(p)
 
-        # happiness_index(request)
+        happiness_index(request)
     return render(request, 'Analytics/dashboard.html')
 
 def send(request):
-    print(request.user)
     school = School.objects.filter(user= request.user)[0]
     academics = Academics.objects.filter(school = school)
-    print(academics)
+    email_list = []
+    for acad in academics:
+        email_list.append(acad.email)
+    print(email_list)
+    subject = 'Request to fill survey form'
+    message = "Please login and fill the form."
+    email_from = settings.EMAIL_HOST_USER
+    send_mail(subject, message, email_from, email_list)
     return render(request, 'Analytics/dashboard.html')
+
