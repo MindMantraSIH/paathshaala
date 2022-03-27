@@ -37,10 +37,12 @@
                 <input name="name" type="text" placeholder="Name" style="margin-bottom: 7px" required />
                 <input name="password" type="password" placeholder="Password" style="margin-bottom: 7px" required />
                 <input name="con_password" type="password" placeholder="Confirm Password" style="margin-bottom: 7px" required />
-                <select name="category">
-                    <option value="student">Student</option>
-                    <option value="school">School</option>
-                </select>
+                <div style="border-radius: 0.2rem; background-color: #fbff79;width: 8rem;height: 3rem;border: #fbff79;margin-top:7px;">
+                    <select name="category" style="background-color: #fbff79;border: #fbff79;text-align: center; margin-top: 0.6rem;" >
+                        <option value="student" style="background-color: #fff">Student</option>
+                        <option value="school" style="background-color: #fff">School</option>
+                    </select>
+                </div>
                 <br>
                 {% if message %}
                 <div class="alert alert-warning alert-dismissible fade show" role="alert" style="padding-right: 1rem;">
