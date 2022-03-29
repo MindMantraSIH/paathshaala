@@ -3,8 +3,6 @@
 {% block connectcss%}
 <style>
     .sec1 {
-        
-        background-color: #EEEEEE;
         width: 100%;
         height: 100%;
         background-size: 100%;
@@ -16,9 +14,10 @@
         width: 65%;
         align-self: center;
     }
-    body{
-            background-image: url("{% static 'forum/paathshala.jpg' %} ");
-        }
+
+    body {
+        background-image: url("{% static 'forum/paathshala.jpg' %} ");
+    }
 
     .hvr-round-corners {
         display: inline-block;
@@ -58,102 +57,116 @@
     .hvr-glow:active {
         box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
     }
-    .sec3{
-        box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
-        0 10px 10px rgba(0,0,0,0.22);
+
+    .sec3 {
+        box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
+            0 10px 10px rgba(0, 0, 0, 0.22);
         border-radius: 10px !important;
+    }
+
+    .bimg {
+        
+        width: 75%;
+        align-self: center;
+        margin-left: 13%;
     }
 </style>
 {% endblock connectcss%}
 
 {% block content %}
-<div class="sec1">
-    <section class="container sec2">
-        <section>
-            <div class="card text-center sec3" style="margin-top: 15px;">
-                <div class="card-header">
-                    <h3 style="text-align: center;"> Welcome to the paathshaala forums.</h3>
-                </div>
-                <div class="card-body">
-                    <form method="POST" class="container card-text" style="padding-top: 30px;">
-                        <!-- topic input -->
-                        {% csrf_token %}
-                        <div class="form-outline mb-4">
-                            <label for="Topic" style="float: left;">Topic</label>
-                            <input name="title" type="text" id="form4Example1" class="form-control" />
+<section class="bimg">
 
-                        </div>
+    <div class="sec1">
+        <section class="container sec2">
+            <section>
+                <div class="card text-center sec3" style="margin-top: 15px;">
+                    <div class="card-header">
+                        <h3 style="text-align: center;"> Welcome to the paathshaala forums.</h3>
+                    </div>
+                    <div class="card-body">
+                        <form method="POST" class="container card-text" style="padding-top: 30px;">
+                            <!-- topic input -->
+                            {% csrf_token %}
+                            <div class="form-outline mb-4">
+                                <label for="Topic" style="float: left;">Topic</label>
+                                <input name="title" type="text" id="form4Example1" class="form-control" />
 
-                        <!-- Message input -->
-                        <div class="form-outline mb-4">
-                            <label for="Desc" style="float: left;">Description</label>
-                            <textarea name="content" class="form-control" id="form4Example3" rows="4"></textarea>
-                        </div>
-
-                        <!-- Submit button -->
-                        <div class="text-muted">
-                            <div class="align-self-center mx-auto">
-                                <button type="submit" class="btn btn-primary"
-                                    style="background-color: #fbff79; color: black; width: 25%; border: none;">
-                                    Post
-                                </button>
                             </div>
-                        </div>
-                    </form>
-                </div>
-            </section>
-            {% for d in posts %}
-                <section style="margin-top: 20px; margin-bottom: 10px;">
-                    <div class="card sec3 " style="background:rgba(0.6);">
-                        <div class="card-header">
-                            <h3 style="text-align: center;"> Previous Discussions</h3>
-                        </div>
-                        
-                        <div class="card-body">
-                            <div class="container " style="padding-bottom: 10px;">
-                                
-                                <div class="card">
-                                    <div class="card-header">
-                                        <p><span>{{ d.disc_title }}</span>
-                                        <span  style="float: right; color: black;">
-                                            <a href={% url 'discussionUpdate' slug=d.slug %} style="color: black;"><i class="fas fa-edit"></i></a>
-                                            <a href={% url 'discussionDelete' slug=d.slug %} style="color: black;" ><i class="fa fa-trash" aria-hidden="true"></i></a>
-                                        </span></p>
-                                    </div>
-                                    <div class="card-body">
-                                        <div>
-                                            <blockquote class="blockquote mb-0" style="color: black;">
-                                                <p>{{ d.disc_content }}
-                                                </p>
-                                            </blockquote>
 
-                                        </div>
+                            <!-- Message input -->
+                            <div class="form-outline mb-4">
+                                <label for="Desc" style="float: left;">Description</label>
+                                <textarea name="content" class="form-control" id="form4Example3" rows="4"></textarea>
+                            </div>
 
-
-                                    </div>
+                            <!-- Submit button -->
+                            <div class="text-muted">
+                                <div class="align-self-center mx-auto">
+                                    <button type="submit" class="btn btn-primary"
+                                        style="background-color: #fbff79; color: black; width: 25%; border: none;">
+                                        Post
+                                    </button>
                                 </div>
                             </div>
-
-                        </div>
-                        <div class="card-footer text-muted mb-2">
-                            <div>
-                                <p><span style="float:left; color: black;">{{ d.timestamp }}</span>
-                                    <a style="color: black;"
-                                        href={% url 'comment' slug=d.slug %}><span
-                                            style="float: right;">Comment
-                                            <i class="fa fa-comment"></i></span></a></p>
-
-                            </div>
-                            
-                        </div>
+                        </form>
                     </div>
-                   
-                </section>
-                {% endfor %}
-                
-                
+            </section>
+            {% for d in posts %}
+            <section style="margin-top: 20px; margin-bottom: 10px;">
+                <div class="card sec3 " style="background:rgba(0.6);">
+                    <div class="card-header">
+                        <h3 style="text-align: center;"> Previous Discussions</h3>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="container " style="padding-bottom: 10px;">
+
+                            <div class="card">
+                                <div class="card-header">
+                                    <p><span>{{ d.disc_title }}</span>
+                                        <span style="float: right; color: black;">
+                                            <a href={% url 'discussionUpdate' slug=d.slug %} style="color: black;"><i
+                                                    class="fa fa-edit"></i></a>
+                                            <a href={% url 'discussionDelete' slug=d.slug %} style="color: black;"><i
+                                                    class="fa fa-trash" aria-hidden="true"></i></a>
+                                        </span>
+                                    </p>
+                                </div>
+                                <div class="card-body">
+                                    <div>
+                                        <blockquote class="blockquote mb-0" style="color: black;">
+                                            <p>{{ d.disc_content }}
+                                            </p>
+                                        </blockquote>
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="card-footer text-muted mb-2">
+                        <div>
+                            <p><span style="float:left; color: black;">{{ d.timestamp }}</span>
+                                <a style="color: black;" href={% url 'comment' slug=d.slug %}><span
+                                        style="float: right;">Comment
+                                        <i class="fa fa-comment"></i></span></a>
+                            </p>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </section>
+            {% endfor %}
+
+
         </section>
 
     </div>
-{% endblock content %}
+</section>
 
+{% endblock content %}
