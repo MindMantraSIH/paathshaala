@@ -9,7 +9,7 @@ from django.conf import settings
 
 
 
-@login_required
+# @login_required
 def forum(request):
     #profile = Profile.objects.all()
     if request.method=="POST":   
@@ -22,9 +22,9 @@ def forum(request):
         #return render(request, "forum.html")
     posts = Discussion.objects.all()
     print(posts)
-    return render(request, "forum/forum1.html", {'posts':posts})
+    return render(request, "forum/forum.html", {'posts':posts})
 
-@login_required
+# @login_required
 def comment(request,slug):
     #profile = Profile.objects.all()
     post = Discussion.objects.filter(slug=slug)
@@ -33,7 +33,7 @@ def comment(request,slug):
     return render(request, "forum/comment.html", {'reply':replies,'posts':post})
 
 #@login_required(login_url = '/login')
-@login_required
+# @login_required
 def replies(request, slug):
     post = Discussion.objects.get(slug=slug)
     replies = Reply.objects.filter(post=post)
@@ -54,7 +54,7 @@ def replies(request, slug):
     return redirect('forum')
 
 
-@login_required
+# @login_required
 def discussionUpdate(request,slug):
     #print(slug)
     print("in update",Discussion.objects.all())
@@ -82,7 +82,7 @@ def discussionUpdate(request,slug):
     return render(request, "forum/DiscussionUpdate.html")
 
 
-@login_required
+# @login_required
 def replyUpdate(request):
     #user = User.objects.get(id = request.user.id)
     #print(user)
@@ -102,7 +102,7 @@ def replyUpdate(request):
 
     return render(request, 'forum/ReplyUpdate.html', context)
 
-@login_required
+# @login_required
 def discussionDelete(request,slug):
     disc=Discussion.objects.get(slug=slug)
     disc.delete()
