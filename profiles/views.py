@@ -106,7 +106,33 @@ def school_register(request):
 		return redirect('school-feed',slug=user.slug)
 
 	return render(request, 'profiles/school_register.html')
-
+def counselor_register(request):
+	if request.method == 'POST':
+		email = request.POST.get('email','')
+		phone_num = request.POST.get('phone_no',"")
+		description = request.POST.get('description',"")
+		address = request.POST.get('address',"")
+		pincode = request.POST.get('pincode',"")
+		speciality = request.POST.get('speciality',"")
+		awards = request.POST.get('awards',"")
+		fees = request.POST.get('fees',"")
+		id_proof = request.FILES['id_proof']
+		user = User.objects.get(username=request.user.username)
+		user.email = email
+		user.phone_number = phone_num
+		counselor = Counselor.objects.create(user=user)
+		counselor.description = description
+		counselor.address = address
+		counselor.pincode = pincode
+		counselor.speciality = speciality
+		counselor.awards = awards
+		counselor.fees = fees
+		counselor.medical_id_proof = id_proof
+		counselor.save()
+		user.save()
+		return redirect('awaiting-confirmation')
+	
+	return render(request, 'profiles/counsellor_register.html')
 def logout_view(request):
 	logout(request)
 	return redirect('home')
