@@ -49,6 +49,8 @@
                   <div class="col-xl-6">
                     <div class="card-body p-md-5 text-black">
                       <h3 class="mb-5 text-uppercase">School registration form</h3>
+                      <form action="" method="POST">
+                      {% csrf_token %}
                       <div class="row">
                         <div class="col-md-6 mb-4">
                           <div class="form-outline">
@@ -97,7 +99,7 @@
                         <button type="button" class="btn btn-light btn-lg" id="reset">Reset all</button>
                         <button type="button" class="btn btn-warning btn-lg ms-2" id="submit">Submit form</button>
                       </div>
-      
+                      </form>
                     </div>
                   </div>
                 </div>
