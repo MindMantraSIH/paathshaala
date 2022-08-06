@@ -27,4 +27,4 @@ def getdata(request):
         recipient_list = [all[-1]]
         send_mail( subject, message, email_from, recipient_list )
         return redirect('getdata')
-    return render(request, 'selfasses.html')
+    return render(request, 'selfassessments/selfasses.html')

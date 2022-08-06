@@ -140,6 +140,14 @@
             </span>
             <i class="fas fa-angle-right"></i>
             </a>
+            {% else %}
+            <a href="{% url 'loginregister' %}" class="btn focus-reset" >
+              Go To Feed 
+              <span class="material-symbols-outlined">
+                chevron_right
+              </span>
+              <i class="fas fa-angle-right"></i>
+              </a>
             {% endif %}
           </div>
         </div>

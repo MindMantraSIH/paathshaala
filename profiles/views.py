@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from .models import School,Student,User
+from .models import School,Student,User, Counsellor
 from django.contrib.auth import authenticate, login, logout
 #from .models import 
 
@@ -120,15 +120,15 @@ def counselor_register(request):
 		user = User.objects.get(username=request.user.username)
 		user.email = email
 		user.phone_number = phone_num
-		counselor = Counselor.objects.create(user=user)
-		counselor.description = description
-		counselor.address = address
-		counselor.pincode = pincode
-		counselor.speciality = speciality
-		counselor.awards = awards
-		counselor.fees = fees
-		counselor.medical_id_proof = id_proof
-		counselor.save()
+		counsellor = Counsellor.objects.create(user=user)
+		counsellor.description = description
+		counsellor.address = address
+		counsellor.pincode = pincode
+		counsellor.speciality = speciality
+		counsellor.awards = awards
+		counsellor.fees = fees
+		counsellor.medical_id_proof = id_proof
+		counsellor.save()
 		user.save()
 		return redirect('awaiting-confirmation')
 	

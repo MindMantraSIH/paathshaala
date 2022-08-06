@@ -12,6 +12,7 @@
   <meta name="keywords" content="health,happiness index, school ranking,wellbeing,mental health">
   <!-- Bootstrap , fonts & icons  -->
   <link rel="stylesheet" href="{% static 'profiles/bootstrap.css' %}">
+  <link rel="stylesheet" href="{% static 'profiles/main.css' %}">
   <!-- <link rel="stylesheet" href="./fonts/icon-font/css/style.css"> -->
   <!-- <link rel="stylesheet" href="./fonts/typography-font/typo.css">
   <link rel="stylesheet" href="./fonts/fontawesome-5/css/all.css"> -->
@@ -25,7 +26,7 @@
   <!-- Plugin'stylesheets  -->
   <link rel="stylesheet" href="{% static 'profiles/aos.min.css' %}">
   <!-- Vendor stylesheets  -->
-  <link rel="stylesheet" href="{% static 'profiles/main.css' %}">
+  {% comment %} <link rel="stylesheet" href="{% static 'profiles/main.css' %}"> {% endcomment %}
   <!-- Custom stylesheet -->
       <!-- This how you include externa css -->
       {% block connectcss %}
@@ -39,7 +40,7 @@
       <div class="container">
         <nav class="navbar site-navbar" >
             <img src="{% static 'profiles/circular paathshala logo.png' %}" alt="" style="height: 3rem ; border-radius: 50%; margin-right: 1rem;" >
-            <a href="{% url 'home' %}" style=" color: inherit;"><span><h4 style="margin-top: 0.3rem ;">PAATHSHALA</h4></span> </a> 
+            <a href="{% url 'home' %}" style=" color: inherit;"><span><h3 style="margin-top: 0.3rem ;">PAATHSHALA</h3></span> </a> 
           <div class="menu-block-wrapper">
             <div class="menu-overlay"></div>
             <nav class="menu-block" id="append-menu-header">
