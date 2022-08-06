@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Dashboard</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'Analytics/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href=  "{% static 'Analytics/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a4ba5bc4af.js" crossorigin="anonymous"></script>
+
+  <!-- Template Main CSS File -->
+  <link href="{% static 'Analytics\style.css' %}" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: NiceAdmin - v2.3.1
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Dashboard</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item active">Dashboard</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+      <div class="row">
+
+        <!-- Left side columns -->
+        <div class="col-lg-8">
+          <div class="row">
+            <!-- Name Card -->
+            <div class="col-xxl-4 col-md-6">
+              <div class="card info-card sales-card">
+
+                <div class="card-body">
+                  <h5 class="card-title">Name of the School
+                    <!-- <span>| Today</span></h5> -->
+                    <div class="d-flex align-items-center" style="margin-top: 1rem; margin-bottom:-0.7rem">
+                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                        <i class="fa fa-school"></i>
+                      </div>
+                      <div class="ps-3">
+                        <h6>SVIS</h6>
+                        <!-- <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span> -->
+                      </div>
+                    </div>
+                </div>
+
+              </div>
+            </div><!-- End name Card -->
+
+            <!-- city Card -->
+            <div class="col-xxl-4 col-md-6">
+              <div class="card info-card revenue-card">
+                <div class="card-body">
+                  <h5 class="card-title">City
+                    <!-- <span>| This Month</span></h5> -->
+                    <div class="d-flex align-items-center" style="margin-top: 1rem; margin-bottom:-0.7rem">
+                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                        <i class="fa-solid fa-city"></i>
+                      </div>
+                      <div class="ps-3">
+                        <h6>CITY</h6>
+                        <!-- <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span> -->
+                      </div>
+                    </div>
+                </div>
+
+              </div>
+            </div><!-- End city Card -->
+            <!-- State Card -->
+            <div class="col-xxl-4 col-md-6">
+              <div class="card info-card sales-card">
+
+                <div class="card-body">
+                  <h5 class="card-title">State
+                    <!-- <span>| Today</span></h5> -->
+
+                    <div class="d-flex align-items-center" style="margin-top:1rem; margin-bottom:-0.7rem;">
+                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                        <i> <img src="capitol.png" alt="" style="height:2rem;"></i>
+                      </div>
+                      <div class="ps-3">
+                        <h6>State</h6>
+                        <!-- <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span> -->
+
+                      </div>
+                    </div>
+                </div>
+              </div>
+            </div><!-- End state Card -->
+
+            <!-- Rank Card -->
+            <div class="col-xxl-4 col-md-6">
+              <div class="card info-card revenue-card">
+                <div class="card-body">
+                  <h5 class="card-title">Rank
+                    <!-- <span>| This Month</span></h5> -->
+                    <div class="d-flex align-items-center" style="margin-top: 1rem; margin-bottom:-0.7rem">
+                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                        <i class="fa-solid fa-ranking-star" style="color:#FF85BA;"></i>
+                      </div>
+                      <div class="ps-3">
+                        <h6>Rank</h6>
+                        <!-- <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span> -->
+                      </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+            <!-- End rank Card -->
+
+            <!-- Happiness Index Card -->
+            <div class="col-xxl-4 col-xl-12">
+              <div class="card info-card customers-card">
+                <div class="card-body">
+                  <h5 class="card-title">Happiness Index
+                    <!-- <span>| This Year</span></h5> -->
+                    <div class="d-flex align-items-center" style="margin-top: 1rem; margin-bottom: -0.7rem;">
+                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                        <i class="fa-solid fa-face-smile"></i>
+                      </div>
+                      <div class="ps-3">
+                        <h6>HI</h6>
+                        <!-- <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span> -->
+                      </div>
+                      <span>
+                        <button type="submit" class="button1">Calculate</button>
+                      </span>
+                    </div>
+                </div>
+              </div>
+            </div><!-- End Happiness Index Card -->
+
+            <!-- Feedback Card -->
+            <div class="col-xxl-4 col-xl-12">
+              <div class="card info-card customers-card">
+                <div class="card-body">
+                  <h5 class="card-title">No. of Feedbacks
+                    <!-- <span>| This Year</span></h5> -->
+                    <div class="d-flex align-items-center" style="margin-top: 1rem; margin-bottom: -0.7rem;">
+                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center"
+                        style="background-color:rgba(249, 252, 139, 0.7);">
+                        <i class="fa-solid fa-comment-dots" style="color:#fee648;"></i>
+                      </div>
+                      <div class="ps-3">
+                        <h6>FB</h6>
+                        <!-- <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span> -->
+                      </div>
+                      <span>
+                        <button type="submit" class="button2">Send Feedback</button>
+                      </span>
+                    </div>
+                </div>
+              </div>
+            </div><!-- End Happiness Index Card -->
+
+            <!-- Reports -->
+            <div class="col-12">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Chart 1
+                    <!-- <span>/Today</span></h5> -->
+
+                    <!-- Line Chart -->
+                    <div>
+                        <img src="{% static 'analytics/images/chart1.png' %}" alt="" >
+                    </div>
+                    
+                    <!-- End Line Chart -->
+
+                </div>
+
+              </div>
+            </div><!-- End Reports -->
+
+            <!-- reports -->
+            <div class="col-12">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Chart 2
+                    <!-- <span>/Today</span></h5> -->
+
+                    <!-- Line Chart -->
+                    <div>
+                        <img src="{% static 'analytics/images/chart1.png' %}" alt="" >
+                    </div>
+
+                    
+                    <!-- End Line Chart -->
+                </div>
+              </div>
+            </div><!-- End Reports -->
+          </div>
+        </div><!-- End Left side columns -->
+
+        <!-- Right side columns -->
+        <div class="col-lg-4">
+
+          <!-- Suggestions -->
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Suggestions
+                <!-- <span>| Today</span> -->
+              </h5>
+              <div class="news">
+                <div>
+                  <h4><a href="#">Nihil blanditiis at in nihil autem</a></h4>
+                  <p>Sit recusandae non aspernatur laboriosam. Quia enim eligendi sed ut harum...</p>
+                </div>
+
+                <div>
+                  <h4><a href="#">Quidem autem et impedit</a></h4>
+                  <p>Illo nemo neque maiores vitae officiis cum eum turos elan dries werona nande...</p>
+                </div>
+
+                <div>
+                  <h4><a href="#">Id quia et et ut maxime similique occaecati ut</a></h4>
+                  <p>Fugiat voluptas vero eaque accusantium eos. Consequuntur sed ipsam et totam...</p>
+                </div>
+
+              </div>
+            </div>
+          </div><!-- End Suggestions -->
+
+          <!-- upload student database Card -->
+            <div class="card info-card sales-card">
+              <div class="card-body">
+                <h5 class="card-title">Upload Student Database Here
+                  <!-- <span>| Today</span> -->
+                </h5>
+                  <div class="d-flex align-items-center" >
+                    <!-- <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <i class="fa-solid fa-upload"></i>
+                    </div> -->
+                    <div class="ps-3">
+                      <form method="POST" enctype="multipart/form-data" >
+                        
+                        {% csrf_token %}
+                        <div class="form-group">
+                          <!-- <h6 style="font-size:1.5rem;">Choose a file</h6> -->
+                          <div>
+                            <input type="file" class="form-control-file" id="exampleFormControlFile1" name="csv">
+                          </div>
+                        <button type="submit" class="button3" ><i class="fa-solid fa-upload"></i></button>
+                        </div>
+                    </form>
+                      <!-- <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span> -->
+                    </div>
+                  </div>
+              </div>
+            </div>
+          <!-- End name Card -->
+
+          <!-- Chart 3 -->
+          <div class="card">
+
+
+            <div class="card-body pb-0">
+              <h5 class="card-title"> Chart 3
+                <!-- <span>| This Month</span></h5> -->
+
+                <div style="min-height: 400px;" class="echart">
+                    <img src="{% static 'analytics/images/chart2.png' %}" alt="" >
+                </div>
+
+                
+            </div>
+          </div><!-- End Chart 3 -->
+
+          <!-- Chart 4 -->
+          <div class="card">
+            <div class="card-body pb-0">
+              <h5 class="card-title">Chart 4
+                <!-- <span>| Today</span></h5> -->
+
+                <div style="min-height: 400px;" class="echart">
+                    <img src="{% static 'analytics/images/chart3.png' %}" alt="" >
+                </div>
+
+                
+
+            </div>
+          </div><!-- End Website Traffic -->
+
+          <!-- News & Updates Traffic -->
+          <div class="card">
+            <div class="card-body pb-0">
+              <h5 class="card-title">Topic Modellings for Feedbacks</h5>
+              <div class="news">
+                <div class="post-item clearfix">
+                  <div>
+                    <h4><a href="#">Nihil blanditiis at in nihil autem</a></h4>
+                    <p>Sit recusandae non aspernatur laboriosam. Quia enim eligendi sed ut harum...</p>
+                  </div>
+  
+                  <div>
+                    <h4><a href="#">Quidem autem et impedit</a></h4>
+                    <p>Illo nemo neque maiores vitae officiis cum eum turos elan dries werona nande...</p>
+                  </div>
+  
+                  <div>
+                    <h4><a href="#">Id quia et et ut maxime similique occaecati ut</a></h4>
+                    <p>Fugiat voluptas vero eaque accusantium eos. Consequuntur sed ipsam et totam...</p>
+                  </div>
+                </div>
+              </div><!-- End sidebar recent posts-->
+
+            </div>
+          </div><!-- End News & Updates -->
+
+        </div><!-- End Right side columns -->
+
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+ 
+</body>
+
+</html>
