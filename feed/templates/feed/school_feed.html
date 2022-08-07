@@ -12,12 +12,16 @@
 <div class="container-fluid gedf-wrapper" style="margin-top: 20vh;margin-left: 4vh;margin-right: 4vh;">
     <div class="row">
         <div class="col-md-3">
-            <div class="card">
-                <div class="card-body">
-                    <div class="h5">{{ school.user.name }}</div>
-                    <div class="h7 text-muted">Board: {{ school.board }}</div>
-                    <div class="h7">Address:{{ school.address }}</div>
+            <div class="card" style="border-radius: 9vh !important;">
+                <img class="card-img-top" src="{% static 'feed/school.png' %}" alt="Card image cap">
+                <div class="card-header h5">
+                    {{ school.user.name }}
                 </div>
+                <div class="card-body">
+                    <div class="h6 text-muted">Board: {{ school.board }}</div>
+                    <div class="h5">Address:{{ school.address }}</div>
+                </div>
+                
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">
                         <div class="h6 text-muted">School Rank</div>
@@ -32,7 +36,8 @@
                         <div class="h6">State: {{ school.state }}</div>
                         <div class="h6">City: {{ school.city }}</div>
                     </li>
-                    <li class="list-group-item">Your Happiness Index:
+                    <li class="list-group-item">
+                        <div class="h6 text-muted">Your Happiness Index:</div>
                         {% if school.rank %}
                         <div class="h5">{{ school.happiness_score|floatformat:2 }}</div>
                         {% else %}
@@ -42,6 +47,7 @@
                 </ul>
             </div>
         </div>
+        
         <div class="col-md-6 gedf-main">
 
             <!--- \\\\\\\Post-->
@@ -147,6 +153,7 @@
         </div>
 
     </div>
+    
 </div>
 {% endblock content %}
 
