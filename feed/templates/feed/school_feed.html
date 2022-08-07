@@ -2,12 +2,14 @@
 {% load static %}
 
 
-{% block connectcss %} 
+{% block connectcss %}
 <link rel="stylesheet" href="{% static 'feed/school_feed.css' %}">
+<link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 {% endblock connectcss %}
 
 {% block content %}
-<div class="container-fluid gedf-wrapper">
+<div class="container-fluid gedf-wrapper" style="margin-top: 20vh;margin-left: 4vh;margin-right: 4vh;">
     <div class="row">
         <div class="col-md-3">
             <div class="card">
@@ -30,7 +32,7 @@
                         <div class="h6">State: {{ school.state }}</div>
                         <div class="h6">City: {{ school.city }}</div>
                     </li>
-                    <li class="list-group-item">Your Happiness Index: 
+                    <li class="list-group-item">Your Happiness Index:
                         {% if school.rank %}
                         <div class="h5">{{ school.happiness_score|floatformat:2 }}</div>
                         {% else %}
@@ -41,58 +43,61 @@
             </div>
         </div>
         <div class="col-md-6 gedf-main">
-            
+
             <!--- \\\\\\\Post-->
             {% if user == school.user %}
             <form method="post" enctype='multipart/form-data'>
                 {% csrf_token %}
-            <div class="card gedf-card">
-                <div class="card-header">
-                    <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="posts-tab" data-toggle="tab" href="#posts" role="tab"
-                                aria-controls="posts" aria-selected="true">Write Something</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="images-tab" data-toggle="tab" role="tab" aria-controls="images"
-                                aria-selected="false" href="#images" style="color: #ffc680 !important;">Images</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="card-body">
-                    <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="posts" role="tabpanel"
-                            aria-labelledby="posts-tab">
-                            <div class="form-group">
-                                <label class="sr-only" for="message">post</label>
-                                <textarea class="form-control" name='title' rows="1" placeholder="Title" style="margin-bottom:0.4rem;"></textarea>
-                                <textarea class="form-control" name='content' rows="3"placeholder="What are you thinking?"></textarea>
+                <div class="card gedf-card">
+                    <div class="card-header">
+                        <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="posts-tab" data-toggle="tab" href="#posts" role="tab"
+                                    aria-controls="posts" aria-selected="true">Write Something</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="images-tab" data-toggle="tab" role="tab" aria-controls="images"
+                                    aria-selected="false" href="#images" style="color: #ffc680 !important;">Images</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="posts" role="tabpanel"
+                                aria-labelledby="posts-tab">
+                                <div class="form-group">
+                                    <label class="sr-only" for="message">post</label>
+                                    <textarea class="form-control" name='title' rows="1" placeholder="Title"
+                                        style="margin-bottom:0.4rem;"></textarea>
+                                    <textarea class="form-control" name='content' rows="3"
+                                        placeholder="What are you thinking?"></textarea>
+                                </div>
+
+                            </div>
+                            <div class="tab-pane fade" id="images" role="tabpanel" aria-labelledby="images-tab">
+                                <div class="form-group">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="customFile" name='image'
+                                            accept="image/*">
+                                        <label class="custom-file-label" for="customFile">Upload image</label>
+                                    </div>
+                                </div>
+                                <div class="py-4"></div>
+                            </div>
+                        </div>
+                        <div class="btn-toolbar justify-content-between">
+                            <div class="btn-group">
+                                <input type="submit" name='type' value="Share" class="btn btn-primary">
+                                {% comment %} <button type="submit" class="btn btn-primary">share</button> {% endcomment %}
                             </div>
 
                         </div>
-                        <div class="tab-pane fade" id="images" role="tabpanel" aria-labelledby="images-tab">
-                            <div class="form-group">
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="customFile" name='image' accept="image/*">
-                                    <label class="custom-file-label" for="customFile">Upload image</label>
-                                </div>
-                            </div>
-                            <div class="py-4"></div>
-                        </div>
-                    </div>
-                    <div class="btn-toolbar justify-content-between">
-                        <div class="btn-group">
-                            <input type="submit" name='type' value="Share" class="btn btn-primary">
-                            {% comment %} <button type="submit" class="btn btn-primary">share</button> {% endcomment %}
-                        </div>
-                        
                     </div>
                 </div>
-            </div>
             </form>
             <!-- Post /////-->
             {% endif %}
-            
+
             <!--- \\\\\\\Post-->
             {% for post in posts %}
             <div class="card gedf-card" style="margin-top: 1.5rem;">
@@ -106,60 +111,65 @@
                         </div>
                         <div>
                             <div class="dropdown">
-                                <button class="btn btn-link" type="button" id="gedf-drop1"
-                                aria-haspopup="true" aria-expanded="false">
-                                <a href="{% url 'delete-feed-post' school.user.slug post.slug %}"><i class="fa fa-trash"></i></a>
-                                </button>    
+                                <button class="btn btn-link" type="button" id="gedf-drop1" aria-haspopup="true"
+                                    aria-expanded="false">
+                                    <a href="{% url 'delete-feed-post' school.user.slug post.slug %}"><i
+                                            class="fa fa-trash"></i></a>
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i> {{ post.date_posted|date:"M d, Y" }}</div>
+                    <div class="text-muted h7 mb-2"> <i class="fa fa-clock-o"></i> {{ post.date_posted|date:"M d, Y" }}
+                    </div>
                     <h5 class="card-title">{{ post.title }}</h5>
                     <p class="card-text">
                         {{ post.content }}
                     </p>
-                    {% if post.image %}<img src=https://res.cloudinary.com/dhny6jvtu/image/upload/v1/{{ post.image }} alt="img" style="height:15rem; width:15rem;">{% endif %}
-                    
+                    {% if post.image %}<img src=https://res.cloudinary.com/dhny6jvtu/image/upload/v1/{{ post.image }}
+                        alt="img" style="height:15rem; width:15rem;">{% endif %}
+
                 </div>
-                        
+
                 <div class="card-footer">
-                    
-                        <button type="submit" name="post_slug" value="{{post.slug}}" class="btn btn-lg upvote_btn shadow-none"><i
-                                class="fa fa-gittip btn_upvote" aria-hidden="true"></i><strong class="text-xl-center" id='upvote_count{{post.slug}}'>  {{ post.number_of_upvotes }}</strong></button>
-              
+
+                    <button type="submit" name="post_slug" value="{{post.slug}}" style="border: 0;"><span class="material-symbols-outlined">
+                            thumb_up
+                        </span><strong class="text-xl-center" id='upvote_count{{post.slug}}'> {{post.number_of_upvotes }}</strong></button>
+
+
 
                 </div>
             </div>
             <!-- Post /////-->
             {% endfor %}
         </div>
-        
+
     </div>
 </div>
 {% endblock content %}
 
 {% block script %}
 <script>
-    if ( window.history.replaceState ) {
-        window.history.replaceState( null, null, window.location.href );
-      }
-    $('.upvote_btn').click(function(){
-		 $.ajax({
-             type: "POST",
-             url: "{% url 'post-upvote-ajax' %}",
-             data: {'csrfmiddlewaretoken': '{{ csrf_token }}','post_slug': $(this).attr('value')},
-             dataType: "json",
-             success: function(response) {
-		
-              $('#upvote_count'+response.post_slug).replaceWith("<strong class='text-xl-center' id='upvote_count" + response.post_slug + "'>"+ response.up_count + "</strong>")
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+    }
+    $('.upvote_btn').click(function () {
+        $.ajax({
+            type: "POST",
+            url: "{% url 'post-upvote-ajax' %}",
+            data: { 'csrfmiddlewaretoken': '{{ csrf_token }}', 'post_slug': $(this).attr('value') },
+            dataType: "json",
+            success: function (response) {
 
-              }
+                $('#upvote_count' + response.post_slug).replaceWith("<strong class='text-xl-center' id='upvote_count" + response.post_slug + "'>" + response.up_count + "</strong>")
+
+            }
 
         });
 
-	 })
+    })
 </script>
 
 {% endblock script %}

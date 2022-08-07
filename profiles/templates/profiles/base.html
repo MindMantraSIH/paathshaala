@@ -16,6 +16,10 @@
   <!-- <link rel="stylesheet" href="./fonts/icon-font/css/style.css"> -->
   <!-- <link rel="stylesheet" href="./fonts/typography-font/typo.css">
   <link rel="stylesheet" href="./fonts/fontawesome-5/css/all.css"> -->
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
   <link href="https://fonts.googleapis.com/css2?family=Karla:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;500;700;900&display=swap" rel="stylesheet">
@@ -52,6 +56,9 @@
                 <div class="mobile-menu-close">&times;</div>
               </div>
               <ul class="site-menu-main">
+                <li class="nav-item">
+                  <a href="{% url 'home' %}" class="nav-link-item">HOME</a>
+                </li>
                 <li class="nav-item nav-item-has-children">
                   <a href="#" class="nav-link-item drop-trigger">SERVICES<i class="fas fa-angle-down"></i>
                   </a>

@@ -35,7 +35,7 @@ class Student(models.Model):
     def __str__(self) -> str:
         return f'{self.school.user.name}: {self.roll_number}'
 
-class Counsellor(models.Model):
+class Counselor(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE,primary_key=True)
     description = models.TextField(null=True, blank=True)
     address = models.TextField(blank=True,null=True)
