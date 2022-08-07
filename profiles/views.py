@@ -1,13 +1,8 @@
 from django.shortcuts import render,redirect
-from .models import School,Student,User
+from .models import Counselor, School,Student,User
 from django.contrib.auth import authenticate, login, logout
 #from .models import 
 
-# def temp(request):
-#     context={
-#         'temp': .objects.all(),
-#     }
-#     return render(request,'profiles/temp.html',context)
 from .forms import StudentSignUpForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
@@ -53,13 +48,20 @@ def loginregister(request):
 				user = authenticate(request, username=username, password = passw)
 				login(request,user)
 				return redirect('student-register')
-			if cat == 'school':
+			elif cat == 'school':
 				user = User.objects.create(username=username, name=name, is_school=True)
 				user.set_password(passw)
 				user.save()
 				user = authenticate(request, username=username, password = passw)
 				login(request,user)
 				return redirect('school-register')
+			elif cat == 'counselor':
+				user = User.objects.create(username=username, name=name, is_counselor=True)
+				user.set_password(passw)
+				user.save()
+				user = authenticate(request, username=username, password = passw)
+				login(request,user)
+				return redirect('counselor-register')
 		elif form=='sign-in':
 			username = request.POST.get('username')
 			passw = request.POST.get('password')
@@ -84,6 +86,38 @@ def home(request):
 	else:
 		print("User is not logged in :(")
 	return render(request,'profiles/home.html',{'user':request.user})
+
+
+def counselor_register(request):
+	if request.method == 'POST':
+		email = request.POST.get('email','')
+		phone_num = request.POST.get('phone_no',"")
+		description = request.POST.get('description',"")
+		address = request.POST.get('address',"")
+		pincode = request.POST.get('pincode',"")
+		speciality = request.POST.get('speciality',"")
+		awards = request.POST.get('awards',"")
+		fees = request.POST.get('fees',"")
+		id_proof = request.FILES['id_proof']
+		user = User.objects.get(username=request.user.username)
+		user.email = email
+		user.phone_number = phone_num
+		counselor = Counselor.objects.create(user=user)
+		counselor.description = description
+		counselor.address = address
+		counselor.pincode = pincode
+		counselor.speciality = speciality
+		counselor.awards = awards
+		counselor.fees = fees
+		counselor.medical_id_proof = id_proof
+		counselor.save()
+		user.save()
+		return redirect('awaiting-confirmation')
+	
+	return render(request, 'profiles/counselor_register.html')
+
+def awaiting_confirmation(request):
+	return render(request, 'profiles/awaiting_confirmation.html')
 
 def school_register(request):
 	if request.method == 'POST':
