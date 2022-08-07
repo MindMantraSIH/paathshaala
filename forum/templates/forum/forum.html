@@ -1,0 +1,85 @@
+{% extends "forum/base-temp.html" %}
+{% load static %}
+{% block title %}Forums{% endblock title %}
+{% block body %}
+
+<main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+        <div class="container">
+            <ol>
+                <li><a>Home</a></li>
+                <li>Forum</li>
+            </ol>
+            <h2>Discussion Forums</h2>
+        </div>
+    </section><!-- End Breadcrumbs -->
+
+    <!-- ======= Blog Section ======= -->
+    <section id="blog" class="blog">
+        <div class="container" data-aos="fade-up">
+            <div class="row">
+                <div class="col-lg-8 entries">
+                    <div class="reply-form" style="margin-top:-0.1rem; margin-bottom:3.7rem;">
+                        <h3 class="entry-title">
+                            <div>
+                                Add a new thread
+                            </div>
+                        </h3>
+                            <div class="row">
+                                <div class="col form-group">
+                                    <input name="Topic" type="text" id='title' class="form-control"
+                                        placeholder="What's on your Mind?">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col form-group">
+                                    <textarea name="content" id="content" class="form-control"
+                                        placeholder="Please Describe*"></textarea>
+                                </div>
+                            </div>
+                            <button onclick="submit_post()" class="btn btn-primary">Post Content</button>
+                    </div>
+                    <div id='previous-posts'>
+                        {% include 'forum/forum_posts.html' %}
+                    </div>
+
+                </div><!-- End blog entries list -->
+                {% include 'forum/sidebar.html' %}
+
+            </div>
+
+        </div>
+    </section><!-- End Blog Section -->
+
+</main><!-- End #main -->
+
+{% endblock body%}
+
+{% block script %}
+<script>
+    function submit_post(){
+        var title = $('#title').val();
+        var content = $('#content').val();
+        console.log(title,content);
+        $.ajax(
+        {
+            type:"POST",
+            url: "{% url 'add_post' %}",
+            data:{
+                    'title': title,
+                    'content': content,
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+            },
+            success: function( response ) 
+            {
+                $('#previous-posts').empty();
+                $('#previous-posts').html(response);
+                $('#content').val('');
+                $('#title').val('');
+            }
+         })
+    }
+</script>
+{% endblock script %}
