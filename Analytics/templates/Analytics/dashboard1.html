@@ -1,45 +1,12 @@
-<!DOCTYPE html>
+{% extends "forum/base-temp.html" %}
 {% load static %}
-<html lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-  <title>Dashboard</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
-
-  <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.gstatic.com" rel="preconnect">
-  <link
-    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-    rel="stylesheet">
-
-  <!-- Vendor CSS Files -->
-  <link href="{% static 'Analytics/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
-  <link href=  "{% static 'Analytics/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
-  <script src="https://kit.fontawesome.com/a4ba5bc4af.js" crossorigin="anonymous"></script>
-
-  <!-- Template Main CSS File -->
-  <link href="{% static 'Analytics\style.css' %}" rel="stylesheet">
-
-  <!-- =======================================================
-  * Template Name: NiceAdmin - v2.3.1
-  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
-</head>
-
-<body>
-
-
-
+{% block title %}Dashboard{% endblock title %}
+{% block style %}
+<link href="{% static 'Analytics/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+<link href=  "{% static 'Analytics/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+<link href="{% static 'Analytics/style.css' %}" rel="stylesheet">
+{% endblock style %}
+{% block body %} 
   <main id="main" class="main">
 
     <div class="pagetitle">
@@ -70,7 +37,7 @@
                         <i class="fa fa-school"></i>
                       </div>
                       <div class="ps-3">
-                        <h6>SVIS</h6>
+                        <h6>{{ name }}</h6>
                         <!-- <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span> -->
                       </div>
                     </div>
@@ -90,7 +57,7 @@
                         <i class="fa-solid fa-city"></i>
                       </div>
                       <div class="ps-3">
-                        <h6>CITY</h6>
+                        <h6>{{ city }}</h6>
                         <!-- <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span> -->
                       </div>
                     </div>
@@ -111,7 +78,7 @@
                         <i> <img src="{% static 'Analytics/images/capitol.png' %}" alt="" style="height:2rem;"></i>
                       </div>
                       <div class="ps-3">
-                        <h6>State</h6>
+                        <h6>{{ state }}</h6>
                         <!-- <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span> -->
 
                       </div>
@@ -131,7 +98,7 @@
                         <i class="fa-solid fa-ranking-star" style="color:#FF85BA;"></i>
                       </div>
                       <div class="ps-3">
-                        <h6>Rank</h6>
+                        <h6>{{ rank }}</h6>
                         <!-- <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span> -->
                       </div>
                     </div>
@@ -151,7 +118,7 @@
                         <i class="fa-solid fa-face-smile"></i>
                       </div>
                       <div class="ps-3">
-                        <h6>HI</h6>
+                        <h6>{{ happinessindex|floatformat:2 }}</h6>
                         <!-- <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span> -->
                       </div>
                       <span>
@@ -185,7 +152,7 @@
               </div>
             </div><!-- End Happiness Index Card -->
 
-            <!-- Reports -->
+            <!-- chart 1 -->
             <div class="col-12">
               <div class="card">
                 <div class="card-body">
@@ -194,7 +161,7 @@
 
                     <!-- Line Chart -->
                     <div>
-                        <img src="{% static 'analytics/images/chart1.png' %}" alt="" >
+                      {{ graph.0|safe }}
                     </div>
                     
                     <!-- End Line Chart -->
@@ -202,9 +169,9 @@
                 </div>
 
               </div>
-            </div><!-- End Reports -->
+            </div><!-- End chart 1 -->
 
-            <!-- reports -->
+            <!-- Chart 2 -->
             <div class="col-12">
               <div class="card">
                 <div class="card-body">
@@ -213,14 +180,176 @@
 
                     <!-- Line Chart -->
                     <div>
-                        <img src="{% static 'analytics/images/chart1.png' %}" alt="" >
+                      {{ graph.1|safe }}
                     </div>
 
                     
                     <!-- End Line Chart -->
                 </div>
               </div>
-            </div><!-- End Reports -->
+            </div><!-- End chart 2 -->
+            <!-- Acedemic Analysis -->
+            <div class="col-12">
+              <div class="card" style="min-height:15rem">
+                <div class="card-body">
+                  <h5 class="card-title">View Acedemic Analysis of your standard </h5>
+                  <div>
+                      <span>
+                        <button style="background: linear-gradient(to right, #fca336, #ff85ba);
+                        width: 15%;
+                        height: 40px;
+                        text-align: center;
+                        border-radius: 40px;
+                        border: none;
+                        color: white;
+                        padding-right: 2%;
+                        padding-left: 2%;
+                        position: absolute;"
+                        >Standard 1</button>
+                      </span>
+                      <span>
+                        <button style="background: linear-gradient(to right, #fca336, #ff85ba);
+                        width: 15%;
+                        height: 40px;
+                        float: right;
+                        left: 21%;
+                        text-align: center;
+                        border-radius: 40px;
+                        border: none;
+                        color: white;
+                        padding-right: 2%;
+                        padding-left: 2%;
+                        position: absolute;"
+                        >Standard 2</button>
+                      </span>
+                      <span>
+                        <button style="background: linear-gradient(to right, #fca336, #ff85ba);
+                        width: 15%;
+                        height: 40px;
+                        float: right;
+                        left: 40%;
+                        text-align: center;
+                        border-radius: 40px;
+                        border: none;
+                        color: white;
+                        padding-right: 2%;
+                        padding-left: 2%;
+                        position: absolute;"
+                        >Standard 3</button>
+                      </span>
+                      <span>
+                        <button style="background: linear-gradient(to right, #fca336, #ff85ba);
+                        width: 15%;
+                        height: 40px;
+                        float: right;
+                        left: 59%;
+                        text-align: center;
+                        border-radius: 40px;
+                        border: none;
+                        color: white;
+                        padding-right: 2%;
+                        padding-left: 2%;
+                        position: absolute;"
+                        >Standard 4</button>
+                      </span>
+                      <span>
+                        <button style="background: linear-gradient(to right, #fca336, #ff85ba);
+                        width: 15%;
+                        height: 40px;
+                        float: right;
+                        left: 78%;
+                        text-align: center;
+                        border-radius: 40px;
+                        border: none;
+                        color: white;
+                        padding-right: 2%;
+                        padding-left: 2%;
+                        position: absolute;"
+                        >Standard 5</button>
+                      </span>
+                      <span>
+                        <button style="background: linear-gradient(to right, #fca336, #ff85ba);
+                        width: 15%;
+                        height: 40px;
+                        text-align: center;
+                        margin-top: 8%;
+                        border-radius: 40px;
+                        border: none;
+                        color: white;
+                        padding-right: 2%;
+                        padding-left: 2%;
+                        position: absolute;"
+                        >Standard 6</button>
+                      </span>
+                      <span>
+                        <button style="background: linear-gradient(to right, #fca336, #ff85ba);
+                        width: 15%;
+                        height: 40px;
+                        float: right;
+                        left: 21%;
+                        margin-top: 8%;
+                        text-align: center;
+                        border-radius: 40px;
+                        border: none;
+                        color: white;
+                        padding-right: 2%;
+                        padding-left: 2%;
+                        position: absolute;"
+                        >Standard 7</button>
+                      </span>
+                      <span>
+                        <button style="background: linear-gradient(to right, #fca336, #ff85ba);
+                        width: 15%;
+                        height: 40px;
+                        float: right;
+                        left: 40%;
+                        text-align: center;
+                        border-radius: 40px;
+                        border: none;
+                        color: white;
+                        padding-right: 2%;
+                        padding-left: 2%;
+                        position: absolute;
+                        margin-top: 8%;"
+                        >Standard 8</button>
+                      </span>
+                      <span>
+                        <button style="background: linear-gradient(to right, #fca336, #ff85ba);
+                        width: 15%;
+                        height: 40px;
+                        float: right;
+                        left: 59%;
+                        text-align: center;
+                        border-radius: 40px;
+                        border: none;
+                        color: white;
+                        padding-right: 2%;
+                        padding-left: 2%;
+                        margin-top: 8%;
+                        position: absolute;"
+                        >Standard 9</button>
+                      </span>
+                      <span>
+                        <button style="background: linear-gradient(to right, #fca336, #ff85ba);
+                        width: 15%;
+                        height: 40px;
+                        float: right;
+                        left: 78%;
+                        text-align: center;
+                        border-radius: 40px;
+                        border: none;
+                        color: white;
+                        padding-right: 2%;
+                        margin-top: 8%;
+                        padding-left: 2%;
+                        position: absolute;"
+                        >Standard 10</button>
+                      </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- end acedemic analysis -->
           </div>
         </div><!-- End Left side columns -->
 
@@ -234,21 +363,12 @@
                 <!-- <span>| Today</span> -->
               </h5>
               <div class="news">
+                {% for i in improve %}
                 <div>
-                  <h4><a href="#">Nihil blanditiis at in nihil autem</a></h4>
+                  <h4><a href="#">{{ i }}</a></h4>
                   <p>Sit recusandae non aspernatur laboriosam. Quia enim eligendi sed ut harum...</p>
                 </div>
-
-                <div>
-                  <h4><a href="#">Quidem autem et impedit</a></h4>
-                  <p>Illo nemo neque maiores vitae officiis cum eum turos elan dries werona nande...</p>
-                </div>
-
-                <div>
-                  <h4><a href="#">Id quia et et ut maxime similique occaecati ut</a></h4>
-                  <p>Fugiat voluptas vero eaque accusantium eos. Consequuntur sed ipsam et totam...</p>
-                </div>
-
+                {% endfor %}
               </div>
             </div>
           </div><!-- End Suggestions -->
@@ -291,7 +411,7 @@
                 <!-- <span>| This Month</span></h5> -->
 
                 <div style="min-height: 400px;" class="echart">
-                    <img src="{% static 'analytics/images/chart2.png' %}" alt="" >
+                  {{ graph.3|safe }}
                 </div>
 
                 
@@ -320,18 +440,8 @@
               <div class="news">
                 <div class="post-item clearfix">
                   <div>
-                    <h4><a href="#">Nihil blanditiis at in nihil autem</a></h4>
+                    <h4><a href="#">{{ topic }}</a></h4>
                     <p>Sit recusandae non aspernatur laboriosam. Quia enim eligendi sed ut harum...</p>
-                  </div>
-  
-                  <div>
-                    <h4><a href="#">Quidem autem et impedit</a></h4>
-                    <p>Illo nemo neque maiores vitae officiis cum eum turos elan dries werona nande...</p>
-                  </div>
-  
-                  <div>
-                    <h4><a href="#">Id quia et et ut maxime similique occaecati ut</a></h4>
-                    <p>Fugiat voluptas vero eaque accusantium eos. Consequuntur sed ipsam et totam...</p>
                   </div>
                 </div>
               </div><!-- End sidebar recent posts-->
@@ -345,7 +455,4 @@
     </section>
 
   </main><!-- End #main -->
- 
-</body>
-
-</html>
+  {% endblock body %}
