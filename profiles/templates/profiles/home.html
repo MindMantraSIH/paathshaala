@@ -2,36 +2,268 @@
 {% load static %}
 
 
-{% block connectcss %} 
+ {% block connectcss %} 
 <link rel="stylesheet" href="{% static 'profiles/home.css' %}">
-{% endblock connectcss %}
+{% endblock connectcss %} 
 
 {% block content %}
-<div class="container-fluid gedf-wrapper" >
-    <div style="margin: 10px;background-color: #eee !important;text-align: center;">
-        <div class="row ">
-            <div class="col-md-7 px-3" >
-                <div class="heading">
-                    <h1 style="font-size: 3.5rem !important; font-family: 'Vesper Libre', serif;">PAATHSHAALA</h1>
-                </div>
-                <div>
-                    <p style="font-size: 1.5rem ;">
-                    Platform for assessing and advancing the<br>happiness Index of schools and assisting learner's ambitions
-                </p>
-                </div>
-                <div>
-                    <p></p>
-
-                </div>  
-            </div>
-            <!-- Image -->
-            <div class="col-md-5" style="margin: auto;">
-                <img class="d-block img-width" src="{% static 'profiles/Teaching pastel yellow gif.gif' %}" alt="">
-            </div>
+<!-- Hero Area -->
+<div class="hero-area-l-14 position-relative z-index-1 overflow-hidden" style="background: url('static/profiles/hero-bg.png');background-repeat: no-repeat; background-position: center right;margin-top: -3rem;">
+    <div class="container">
+      <div class="row position-relative justify-content-center">
+        <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10 pr-0 " data-aos="fade-right" data-aos-duration="800" data-aos-once="true">
+          <div class="content">
+            <h3> <strong>P</strong>latform for <strong>A</strong>ssesing and <strong>A</strong>dvancing <strong>T</strong>he <strong>H</strong>appiness Index of <strong>S</strong>chools and <strong>A</strong>ssisting <strong>L</strong>earner's <strong>A</strong>mbitions</h3>
+            <!-- <p>Create custom landing pages with Shades that convert more visitors than any website—no coding
+              required.</p> -->
             
+            <a href="{% url 'schoolinfo' %}" class="btn focus-reset" style="margin-top:4rem;">Check your school's happiness index</a>
+          </div>
         </div>
+        <div class="col-xl-7 col-lg-5 col-md-8 " data-aos="fade-left" data-aos-duration="800" data-aos-once="true">
+          <div class="banner-image-l-14">
+            <img src="{% static 'profiles/hero-img.png' %}" alt="" class="w-100 mt-xl-n10">
+          </div>
+        </div>
+      </div>
     </div>
-</div>
+    <div class="bg-shape-14"></div>
+  </div>
+  <!-- Content-Area-1 -->
+  <div class="content-area-l-14-1 position-relative" style="margin-top:7rem;">
+    <div class="container">
+      <div class="row align-items-center justify-content-center">
+        <div class="col-xl-4 col-lg-6 col-md-8 col-sm-10 order-lg-1 order-1" data-aos="fade-right" data-aos-duration="1200" data-aos-once="true">
+          <div class="h-100 section-heading-8 content text-lg-start text-center">
+            <h2>Self Assesment for students</h2>
+            <p>Students can take this test to find out </p>
+            <a href="{% url 'getdata' %}" class="btn focus-reset">
+              Take The Test Now
+              <span class="material-symbols-outlined">
+                chevron_right
+              </span>
+              <i class="fas fa-angle-right"></i>
+            </a>
+          </div>
+        </div>
+        <div class="offset-xl-2 col-xl-6 col-lg-6 col-md-8 pl-xl-11 order-lg-1 order-0" data-aos="fade-left" data-aos-duration="1200" data-aos-once="true">
+          <div class="content-img">
+            <img src="{% static 'profiles/self-assess.svg' %}" alt="" style="width: 20;height: 20;">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Content-Area-2 -->
+  <div class="content-area-l-14-2">
+    <div class="container">
+      <div class="row align-items-center justify-content-center">
+        <div class="col-lg-6 col-md-8" data-aos="fade-right" data-aos-duration="800" data-aos-once="true">
+          <div class="content-img pr-lg-13">
+            <img src="{% static 'profiles/school-rank.svg' %}" alt="" class="w-100">
+          </div>
+        </div>
+        <div class="col-xl-4 offset-xl-2 col-lg-6 col-md-8 col-sm-10" data-aos="fade-left" data-aos-duration="800" data-aos-once="true">
+          <div class="content section-heading-8 text-lg-start text-center">
+            <h2>
+              School Rank
+            </h2>
+            <p>Check the rankings of different schools</p>
+            <a href="{% url 'schoolinfo' %}" class="btn focus-reset">
+              Check school ranking
+              <span class="material-symbols-outlined">
+                chevron_right
+              </span>
+              <i class="fas fa-angle-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+      <!-- Content-Area-1 -->
+      <div class="content-area-l-14-1 position-relative" style="margin-top:7rem;">
+        <div class="container">
+          <div class="row align-items-center justify-content-center">
+            <div class="col-xl-4 col-lg-6 col-md-8 col-sm-10 order-lg-1 order-1" data-aos="fade-right" data-aos-duration="1200" data-aos-once="true">
+              <div class="h-100 section-heading-8 content text-lg-start text-center">
+                <h2>Help Centre</h2>
+                <p>Contact a councellor in case of any problems you face related to your mental health</p>
+                <a href="{% url 'counselling' %}" class="btn focus-reset">
+                  Contact Now
+                  <span class="material-symbols-outlined">
+                    chevron_right
+                  </span>
+                  <i class="fas fa-angle-right"></i>
+                </a>
+              </div>
+            </div>
+            <div class="offset-xl-2 col-xl-6 col-lg-6 col-md-8 pl-xl-11 order-lg-1 order-0" data-aos="fade-left" data-aos-duration="1200" data-aos-once="true">
+              <div class="content-img">
+                <img src="{% static 'profiles/help centre.svg' %}" alt="" class="w-100 w-xl-auto">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+  <!-- Content-Area-2 -->
+  <div class="content-area-l-14-2">
+    <div class="container">
+      <div class="row align-items-center justify-content-center">
+        <div class="col-lg-6 col-md-8" data-aos="fade-right" data-aos-duration="800" data-aos-once="true">
+          <div class="content-img pr-lg-13">
+            <img src="{% static 'profiles/feed.svg' %}" alt="" class="w-100">
+          </div>
+        </div>
+        <div class="col-xl-4 offset-xl-2 col-lg-6 col-md-8 col-sm-10" data-aos="fade-left" data-aos-duration="800" data-aos-once="true">
+          <div class="content section-heading-8 text-lg-start text-center">
+            <h2>
+              A Feed for you to be informed by your school
+            </h2>
+            <p>Get latest information about your school's achievements and progress</p>
+            {% if user.is_school %}
+            <a href="{% url 'school-feed' user.slug %}"  class="btn focus-reset">
+              Go To Feed 
+              <span class="material-symbols-outlined">
+                chevron_right
+              </span>
+              <i class="fas fa-angle-right"></i>
+            </a>
+            {% elif user.is_student %}
+            <a href="{% url 'school-feed' user.student.school.user.slug %}" class="btn focus-reset">
+            Go To Feed 
+            <span class="material-symbols-outlined">
+              chevron_right
+            </span>
+            <i class="fas fa-angle-right"></i>
+            </a>
+            {% else %}
+            <a href="{% url 'loginregister' %}" class="btn focus-reset" >
+              Go To Feed 
+              <span class="material-symbols-outlined">
+                chevron_right
+              </span>
+              <i class="fas fa-angle-right"></i>
+              </a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Content-Area-1 -->
+  <div class="content-area-l-14-1 position-relative" style="margin-top:7rem;">
+    <div class="container">
+      <div class="row align-items-center justify-content-center">
+        <div class="col-xl-4 col-lg-6 col-md-8 col-sm-10 order-lg-1 order-1" data-aos="fade-right" data-aos-duration="1200" data-aos-once="true">
+          <div class="h-100 section-heading-8 content text-lg-start text-center">
+            <h2>Forum</h2>
+            <p>Create awarness among the student community by sharing your problems and helping out fellow peers by staying anonymous</p>
+            <a href="{% url 'forum' %}" class="btn focus-reset">
+              Check Out Forum Now
+              <span class="material-symbols-outlined">
+                chevron_right
+              </span>
+              <i class="fas fa-angle-right"></i>
+            </a>
+          </div>
+        </div>
+        <div class="offset-xl-2 col-xl-6 col-lg-6 col-md-8 pl-xl-11 order-lg-1 order-0" data-aos="fade-left" data-aos-duration="1200" data-aos-once="true">
+          <div class="content-img">
+            <img src="{% static 'profiles/Forums.svg' %}" alt="" class="w-100 w-xl-auto">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  <!-- Feature Area -->
+  <div class="features-area-l-14" >
+    <div class="container bg-shape-img-2 position-relative" style="background: url('static/profiles/features-bg.svg');background-repeat: no-repeat; background-position: center center;">
+      <div class="row features-area-l-14 justify-content-center mx-0">
+        <div class="col-lg-6 col-md-8 col-sm-10 px-lg-6" data-aos="fade-right" data-aos-duration="800" data-aos-once="true">
+          <div class="content-area  d-flex">
+            <div class="circle-85 hover-icon">
+              <img src="{% static 'profiles/f-icon-1.png' %}" alt="">
+            </div>
+            <div class="content-body pl-sm-14 pl-5">
+              <h5>
+                Easy to use</h5>
+              <p class="mb-0">
+                Event is not like most tech conferences.
+                We want our presentations to engage the audience, spark discussion and inspire new ideas.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-8 col-sm-10" data-aos="fade-left" data-aos-duration="800" data-aos-once="true">
+          <div class="content-area  d-flex ">
+            <div class="circle-85 hover-icon">
+              <img src="{% static 'profiles/f-icon-2.png' %}" alt="">
+            </div>
+            <div class="content-body">
+              <h5>
+                Easy to Use</h5>
+              <p class="mb-0">
+                Event is not like most tech conferences.
+                We want our presentations to engage the audience, and inspire new ideas.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-8 col-sm-10" data-aos="fade-right" data-aos-duration="800" data-aos-once="true">
+          <div class="content-area  d-flex ">
+            <!-- circle-85 start -->
+            <div class="circle-85 hover-icon">
+              <img src="{% static 'profiles/f-icon-3.png' %}" alt="">
+            </div>
+            <div class="content-body">
+              <h5>
+                Easy to Use</h5>
+              <p class="mb-0">
+                Event is not like most tech conferences.
+                We want our presentations to engage the audience.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-8 col-sm-10" data-aos="fade-left" data-aos-duration="800" data-aos-once="true">
+          <div class="content-area  d-flex ">
+            <div class="circle-85  hover-icon">
+              <img src="{% static 'profiles/f-icon-4.png' %}" alt="" />
+            </div>
+            <div class="content-body">
+              <h5>
+                Easy to Use</h5>
+              <p class="mb-0">
+                Event is not like most tech conferences.
+                We want our presentations to engage the audience, spark discussion and inspire new ideas.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> 
+  <!-- CTA Area -->
+  <div class="cta-area-l-14">
+    <div class="container position-relative" style="background: url('static/profiles/cta-bg.svg');background-repeat: no-repeat; background-position: center center;">
+      <div class="bg-shape-img-3"></div>
+      <div class="row cta-area-l-14-content justify-content-center text-lg-start text-center">
+        <div class="col-lg-6">
+          <div class="cta-content">
+            <h2 class="text-black">Ready to get started?</h2>
+          </div>
+        </div>
+        <div class="col-lg-3 text-lg-end text-center">
+          <a class="btn" href="#">Start Free Trial</a>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
 {% endblock content %}

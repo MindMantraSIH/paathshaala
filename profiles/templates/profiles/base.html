@@ -1,125 +1,144 @@
-{% load static %}
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Paathshala </title>
+  <link rel="shortcut icon" href="{% static 'profiles/circular paathshala logo.png' %}" type="image/x-icon">
+  <!-- These are the keywords that will help find your website on search engines  -->
+  <meta name="keywords" content="health,happiness index, school ranking,wellbeing,mental health">
+  <!-- Bootstrap , fonts & icons  -->
+  <link rel="stylesheet" href="{% static 'profiles/bootstrap.css' %}">
+  <link rel="stylesheet" href="{% static 'profiles/main.css' %}">
+  <!-- <link rel="stylesheet" href="./fonts/icon-font/css/style.css"> -->
+  <!-- <link rel="stylesheet" href="./fonts/typography-font/typo.css">
+  <link rel="stylesheet" href="./fonts/fontawesome-5/css/all.css"> -->
+  {% comment %} <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> {% endcomment %}
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- This is the description of the website that will appear below your website link  -->
-    <meta name="description" content="this is the description">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <link href="https://fonts.googleapis.com/css2?family=Karla:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <!-- Plugin'stylesheets  -->
+  <link rel="stylesheet" href="{% static 'profiles/aos.min.css' %}">
+  <!-- Vendor stylesheets  -->
+  {% comment %} <link rel="stylesheet" href="{% static 'profiles/main.css' %}"> {% endcomment %}
+  <!-- Custom stylesheet -->
+      <!-- This how you include externa css -->
+      {% block connectcss %}
 
-    <!-- These are the keywords that will help find your website on search engines  -->
-    <meta name="keywords" content="health,happiness index, school ranking,wellbeing,mental health">
-
-    <!-- This tag helps your website to be put up on search engines like google and bing -->
-    <meta name="robot" content="INDEX FOLLOW">
-
-    <!-- This how you include externa css -->
-    {% block connectcss %}
-
-    {% endblock connectcss %}
-    <link rel="stylesheet" href="{% static 'profiles/basefile.css' %}">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <!-- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->
-    <link rel="stylesheet" href="styles/index.processed.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" -->
-        <!-- integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
-    <title>Paathshaala</title>
-    <!-- add icon link -->
-    <link rel="icon" href="{% static 'profiles/circular paathshala logo.png' %}" type="image/x-icon">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+      {% endblock connectcss %}
 </head>
 
-<body style="background-color:#EEEEEE">
-    <header class="main-header" style="margin-bottom: 3.5rem !important; margin-top: 0rem !important;">
-        <div style="margin:1.5rem;margin-top: 0rem !important;">
-            <nav class="navbar navbar-expand-lg main-nav px-0">
-                <a class="navbar-brand" href="#">
-                    <img src="{% static 'profiles/circular paathshala logo.png' %} " alt="paathshaala logo" style="height: 40;width: 40;">
-                </a>
-                <div class="collapse navbar-collapse" id="mainMenu">
-                    <ul class="navbar-nav ml-auto text-uppercase f1">
-                        <li><a href="{% url 'home' %}" class="active-first">Home</a></li>
-                        <li><a href="{% url 'schoolinfo' %}">School Rank</a></li>
-                        <li><a href="{% url 'getdata' %}">Self Assesment</a></li>
-                        <li><a href="{% url 'counselling' %}">Help Center</a></li>
-                        <li><a href="{% url 'forum' %}">Forum</a></li>
-                        
-                        <!-- if user is school -->
-                        {% if user.is_school %}
-                        <li><a href="{% url 'Dashboard' %}">Dashboard</a></li>
-                        <li><a href="{% url 'school-feed' user.slug %}">Feed</a></li>
-                        
-                        {% endif %}
-                        <!-- if user is student -->
-                        {% if user.is_student %}
-                        <li><a href="{% url 'school-feed' user.student.school.user.slug %}">Feed</a></li>
-                        <li><a href="{% url 'savedata' %}">feedback</a></li>
-                        {% endif %}
-                        {% if user.is_authenticated %}
-                        <li><a href="{% url 'logout' %}">Logout</a></li>
-                        {% else %}
-                        <li><a href="{% url 'loginregister' %}">Login / Signup</a></li>
-                        {% endif %}
-                    </ul>
+<body data-theme-mode-panel-active data-theme="light" style="font-family: 'Mazzard H';">
+  <div class="site-wrapper overflow-hidden position-relative">
+    <header class="site-header site-header--menu-right landing-14-menu site-header--absolute site-header--sticky">
+      <div class="container">
+        <nav class="navbar site-navbar" >
+            <img src="{% static 'profiles/circular paathshala logo.png' %}" alt="" style="height: 3rem ; border-radius: 50%; margin-right: 1rem;" >
+            <a href="{% url 'home' %}" style=" color: inherit;"><span><h3 style="margin-top: 0.3rem ;">PAATHSHALA</h3></span> </a> 
+          <div class="menu-block-wrapper">
+            <div class="menu-overlay"></div>
+            <nav class="menu-block" id="append-menu-header">
+              <div class="mobile-menu-head">
+                <div class="go-back">
+                  <i class="fa fa-angle-left"></i>
                 </div>
+                <div class="current-menu-title"></div>
+                <div class="mobile-menu-close">&times;</div>
+              </div>
+              <ul class="site-menu-main">
+                <li class="nav-item">
+                  <a href="{% url 'home' %}" class="nav-link-item">HOME</a>
+                </li>
+                <li class="nav-item nav-item-has-children">
+                  <a href="#" class="nav-link-item drop-trigger">SERVICES<i class="fas fa-angle-down"></i>
+                  </a>
+                  <ul class="sub-menu" id="submenu-9">
+                    <li class="sub-menu--item">
+                      <a href="{% url 'getdata' %}">SELF ASSESSMENT</a>
+                    </li>
+                    <li class="sub-menu--item">
+                      <a href="{% url 'schoolinfo' %}">SCHOOL RANK</a>
+                    </li>
+                    <li class="sub-menu--item">
+                      <a href="{% url 'forum' %}">FORUM</a>
+                    </li>
+                    <li class="sub-menu--item">
+                      <a href="{% url 'counselling' %}">HELP CENTER</a>
+                    </li>
+                    <!-- if user is school -->
+                    {% if user.is_school %}
+                    <li class="sub-menu--item">
+                      <a href="{% url 'school-feed' user.slug %}">FEED</a>
+                    </li>
+                    <li class="sub-menu--item">
+                      <a href="{% url 'Dashboard' %}">DASHBOARD</a>
+                    </li>
+                    {% endif %}
+                    <!-- if user is student -->
+                    {% if user.is_student %}
+                    <li class="sub-menu--item">
+                      <a href="{% url 'school-feed' user.student.school.user.slug %}">FEED</a>
+                    </li>
+                    <li class="sub-menu--item">
+                      <a href="{% url 'savedata' %}">FEEDBACK</a>
+                    </li>
+                    {% endif %}
+                  </ul>
+                </li>
+                {% comment %} <li class="nav-item">
+                  <a href="#" class="nav-link-item">FEEDBACK</a>
+                </li> {% endcomment %}
+                <li class="nav-item">
+                  <a href="#" class="nav-link-item">CONTACT US</a>
+                </li>
+              </ul>
             </nav>
-        </div>
-        <!-- /.container -->
+          </div>
+          {% if user.is_authenticated %}
+          <div class="header-btn header-btn-l-14 ms-auto d-none d-xs-inline-flex">
+            <a target="_blank" class="btn btn trail-btn focus-reset" href="{% url 'logout' %}">
+              LOGOUT
+            </a>
+          </div>
+          {% else %}
+          <div class="header-btn header-btn-l-14 ms-auto d-none d-xs-inline-flex">
+            <a target="_blank" class="btn btn trail-btn focus-reset" href="{% url 'loginregister' %}">
+              LOGIN/SIGN UP
+            </a>
+          </div>
+          {% endif %}
+          <!-- mobile menu trigger -->
+          <div class="mobile-menu-trigger">
+            <span></span>
+          </div>
+          <!--/.Mobile Menu Hamburger Ends-->
+        </nav>
+      </div>
     </header>
-    {% block content %}
+    <!-- navbar- -->
+  </div>
+  {% block content %}
 
 
-    {% endblock content %}
-
-    <!-- Optional JavaScript; choose one of the two! -->
-    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
-        </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous">
-        </script>
-
-    <!-- Option 2: Separate Popper and Bootstrap JS -->
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
-        </script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
-        </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
-        integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous">
-        </script>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-        crossorigin="anonymous"></script>
-        <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-    <!-- Scripts -->
-    <script src="scripts/index.js"></script>
-    <!-- </div> -->
+  {% endblock content %}
+  <!-- Vendor Scripts -->
+  <script src="{% static 'profiles/vendor.min.js' %}"></script>
+  <script src="{% static 'profiles/aos.min.js' %}"></script>
+  <script src="{% static 'profiles/menu.js' %}"></script>
+  <!-- Activation Script -->
+  <script src="{% static 'profiles/custom.js' %}"></script>
 </body>
 {% block script %}
 
 {% endblock script %}
-
 </html>

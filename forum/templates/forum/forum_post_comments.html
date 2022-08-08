@@ -1,0 +1,23 @@
+<div class="blog-comments">
+    <h4 class="comments-count">{{ comments_count }} Comments</h4>
+    {% for comment in comments %}
+    <div class="comment">
+      <div class="d-flex">
+        <div>
+          <div class="row">
+            <time datetime="2020-01-01">{{ comment.timestamp }}</time>
+            {% if request.user == comment.user %}
+            
+            <i class="bi bi-trash align-items-right" onclick="delete_comment('{{ comment.id }}')"></i>
+            {% endif %}
+          </div>
+          <p>
+            {{ comment.content }}
+          </p>
+        </div>
+      </div>
+    </div><!-- End comment #1 -->
+    {% endfor %}
+
+    
+  </div><!-- End blog comments -->
