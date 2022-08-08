@@ -180,7 +180,7 @@ def dashboard(request):
                'rank': request.user.school.rank,
                'happinessindex': request.user.school.happiness_score
                }
-    return render(request,'Analytics/dashboard.html',context)
+    return render(request,'Analytics/dashboard1.html',context)
 
 def upload_csv(request):
     if request.method == "POST":
@@ -242,7 +242,7 @@ def upload_csv(request):
                'topic': r
     }
     #print(context.name)
-    return render(request, 'Analytics/dashboard.html',context)
+    return render(request, 'Analytics/dashboard1.html',context)
 
 def send(request):
     school = School.objects.filter(user= request.user)[0]
@@ -290,7 +290,7 @@ def send(request):
         'rank': request.user.school.rank,
         'happinessindex': request.user.school.happiness_score,
     }
-    return render(request, 'Analytics/dashboard.html', context)
+    return render(request, 'Analytics/dashboard1.html1', context)
 
 def lda():
     schools = Data.objects.all()
@@ -345,3 +345,7 @@ def suggest():
 
 
 
+
+
+# def dashboard1(request):
+#     return render(request, "Analytics/dashboard1.html")

@@ -177,4 +177,3 @@ def discussionDelete(request,slug):
     posts = Discussion.objects.all()
             #print(posts)
     return redirect('forum')
-
