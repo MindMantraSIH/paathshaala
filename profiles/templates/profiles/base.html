@@ -104,15 +104,15 @@
               </ul>
             </nav>
           </div>
-          {% if user.is_authenticated %}
+          {% if user.is_school or user.is_student or user.is_counselor %}
           <div class="header-btn header-btn-l-14 ms-auto d-none d-xs-inline-flex">
-            <a target="_blank" class="btn btn trail-btn focus-reset" href="{% url 'logout' %}">
+            <a class="btn btn trail-btn focus-reset" href="{% url 'logout' %}">
               LOGOUT
             </a>
           </div>
-          {% else %}
+          {% elif not user.is_authenticated %}
           <div class="header-btn header-btn-l-14 ms-auto d-none d-xs-inline-flex">
-            <a target="_blank" class="btn btn trail-btn focus-reset" href="{% url 'loginregister' %}">
+            <a class="btn btn trail-btn focus-reset" href="{% url 'loginregister' %}">
               LOGIN/SIGN UP
             </a>
           </div>

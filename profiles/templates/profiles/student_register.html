@@ -61,28 +61,40 @@
                         <div class="col-md-6 mb-4">
                           <div class="form-outline">
                             <label class="form-label" for="email">Email</label>
-                            <input type="text" id="email" class="form-control form-control-lg" />
+                            <input type="text" id="email" name="email" class="form-control form-control-lg" />
                           </div>
                         </div>
                       </div>
       
                       <div class="row" >
-                        <div class="col-md-6 mb-4">
+                        <div class="col-md-4 mb-4">
                           <div class="form-outline">
                             <label class="form-label" for="rollno">Roll Number</label>
                             <input type="text" id="rollno" name="rollno" class="form-control form-control-lg" />
                           </div>
                         </div>
-                        <div class="col-md-6 mb-4">
+                        <div class="col-md-4 mb-4">
                           <div class="form-outline">
                             <label class="form-label" for="schoolname">School Name</label>
-                            <input type="text" id="schoolname" name="schoolname" class="form-control form-control-lg" />
+                            <select name="schoolname" id="schoolname" class="form-control form-control-lg">
+                              <option value="" selected disabled></option>
+                              {% for school in schools %}
+                              <option value="{{ school.user.id }}" >{{ school.user.name }}</option>
+                              
+                              {% endfor %}
+                            </select>
+                          </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                          <div class="form-outline">
+                            <label class="form-label" for="pincode">Pincode</label>
+                            <input type="text" id="pincode" name="pincode" class="form-control form-control-lg" />
                           </div>
                         </div>
                       </div>
                       <div class="d-flex justify-content-end pt-3" >
                         <button type="button" class="btn btn-light btn-lg" id="reset">Reset all</button>
-                        <button type="button" class="btn btn-warning btn-lg ms-2" id="submit">Submit form</button>
+                        <button type="submit" class="btn btn-warning btn-lg ms-2" id="submit">Submit form</button>
                       </div>
                      </form>
                     </div>

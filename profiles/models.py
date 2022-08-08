@@ -31,6 +31,7 @@ class Student(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE,primary_key=True)
     roll_number = models.CharField(max_length=20)
     school = models.ForeignKey(School, on_delete=models.CASCADE)
+    pincode = models.CharField(max_length=10, blank=True, null=True)
     
 
     def __str__(self) -> str:
