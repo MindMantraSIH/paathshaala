@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Councellor
+from .models import CounselorRequest
 
 # Register your models here.
-admin.site.register(Councellor)
+admin.site.register(CounselorRequest)
