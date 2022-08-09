@@ -349,3 +349,6 @@ def suggest():
 
 # def dashboard1(request):
 #     return render(request, "Analytics/dashboard1.html")
+
+def student_dashboard(request):
+    return render(request,"Analytics/student_dashboard.html")
