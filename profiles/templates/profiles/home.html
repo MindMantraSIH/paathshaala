@@ -3,7 +3,9 @@
 
 
  {% block connectcss %} 
-<link rel="stylesheet" href="{% static 'profiles/home.css' %}">
+<link rel="stylesheet" href="{% static 'profiles/main.css' %}">
+<link rel="stylesheet" href="{% static 'profiles/aos.min.css' %}">
+{% comment %} <link rel="stylesheet" href="{% static 'profiles/bootstrap.css' %}"> {% endcomment %}
 {% endblock connectcss %} 
 
 {% block content %}
@@ -248,14 +250,15 @@
       </div>
     </div>
   </div> 
+  
   <!-- CTA Area -->
   <div class="cta-area-l-14">
-    <div class="container position-relative" style="background: url('static/profiles/cta-bg.svg');background-repeat: no-repeat; background-position: center center;">
+    <div class="container position-relative" style="background: url('static/profiles/cta-bg.png');background-repeat: no-repeat; background-position: center center;">
       <div class="bg-shape-img-3"></div>
       <div class="row cta-area-l-14-content justify-content-center text-lg-start text-center">
         <div class="col-lg-6">
           <div class="cta-content">
-            <h2 class="text-black">Ready to get started?</h2>
+            <h2 class="text-dark">Ready to get started?</h2>
           </div>
         </div>
         <div class="col-lg-3 text-lg-end text-center">
@@ -268,3 +271,11 @@
 
 {% endblock content %}
 
+{% block script %}
+  <!-- Vendor Scripts -->
+  <script src="{% static 'profiles/vendor.min.js' %}"></script>
+  <script src="{% static 'profiles/aos.min.js' %}"></script>
+  <script src="{% static 'profiles/menu.js' %}"></script>
+  <!-- Activation Script -->
+  <script src="{% static 'profiles/custom.js' %}"></script>
+{% endblock script %}

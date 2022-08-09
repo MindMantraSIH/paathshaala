@@ -1,15 +1,4 @@
-/*------------------------------------------------------------------
-[Master Stylesheet]
--------------------------------------------------------------------
-Theme Name:     Shade - Landing Page Template
-Theme URL:      https://05-temp-whiter.netlify.app/
-Author:         grayic
-Version:        1.0
-Last change:    25/04/2021
-Description:    A default stylesheet for Appex - Landing HTML5 Template.
-Primary use:    Business, responsive, bootstrap 5, html5, clean, modern, creative, landing page, app  landing etc.
-Support:         https://finestdevs.com/product-support/
--------------------------------------------------------------------*/
+
 /*********** CSS TABLE OF CONTENTS *******************
 
 |--- 01.Component -> { Header }
@@ -28,16 +17,7 @@ Support:         https://finestdevs.com/product-support/
 
 ******************************************************/
 /*=== Media Query ===*/
-body[data-theme='dark'], .dark-bg, .dark-mode-texts {
-  --bg:                 #19191b;
-  --bg-2:                 #19191b;
-  --color-headings:    $white;
-  --color-texts:        rgba(255,255,255, 0.7);
-  --color-texts-2:        rgba(255,255,255, 1);
-  --color-texts-3:        rgba(255,255,255, 0.7);
-  --border-color:       rgba(255,255,255, 0.08);
-  --border-color-2:       rgba(255,255,255, 0.7);
-}
+
 
 body[data-theme='light'], .light-bg, .light-mode-texts {
   --bg:                   $white;
@@ -2399,7 +2379,7 @@ li.sub-menu--item.nav-item-has-children i {
   line-height: 50px;
   /* identical to box height, or 154% */
   letter-spacing: -2.52632px;
-  color: #FFFFFF;
+  color: #000 !important;
 }
 
 @media (min-width: 768px) {
