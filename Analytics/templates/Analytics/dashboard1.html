@@ -1,0 +1,458 @@
+{% extends "forum/base-temp.html" %}
+{% load static %}
+{% block title %}Dashboard{% endblock title %}
+{% block style %}
+<link href="{% static 'Analytics/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+<link href=  "{% static 'Analytics/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+<link href="{% static 'Analytics/style.css' %}" rel="stylesheet">
+{% endblock style %}
+{% block body %} 
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Dashboard</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item active">Dashboard</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+      <div class="row">
+
+        <!-- Left side columns -->
+        <div class="col-lg-8">
+          <div class="row">
+            <!-- Name Card -->
+            <div class="col-xxl-4 col-md-6">
+              <div class="card info-card sales-card">
+
+                <div class="card-body">
+                  <h5 class="card-title">Name of the School
+                    <!-- <span>| Today</span></h5> -->
+                    <div class="d-flex align-items-center" style="margin-top: 1rem; margin-bottom:-0.7rem">
+                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                        <i class="fa fa-school"></i>
+                      </div>
+                      <div class="ps-3">
+                        <h6>{{ name }}</h6>
+                        <!-- <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span> -->
+                      </div>
+                    </div>
+                </div>
+
+              </div>
+            </div><!-- End name Card -->
+
+            <!-- city Card -->
+            <div class="col-xxl-4 col-md-6">
+              <div class="card info-card revenue-card">
+                <div class="card-body">
+                  <h5 class="card-title">City
+                    <!-- <span>| This Month</span></h5> -->
+                    <div class="d-flex align-items-center" style="margin-top: 1rem; margin-bottom:-0.7rem">
+                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                        <i class="fa-solid fa-city"></i>
+                      </div>
+                      <div class="ps-3">
+                        <h6>{{ city }}</h6>
+                        <!-- <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span> -->
+                      </div>
+                    </div>
+                </div>
+
+              </div>
+            </div><!-- End city Card -->
+            <!-- State Card -->
+            <div class="col-xxl-4 col-md-6">
+              <div class="card info-card sales-card">
+
+                <div class="card-body">
+                  <h5 class="card-title">State
+                    <!-- <span>| Today</span></h5> -->
+
+                    <div class="d-flex align-items-center" style="margin-top:1rem; margin-bottom:-0.7rem;">
+                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                        <i> <img src="{% static 'Analytics/images/capitol.png' %}" alt="" style="height:2rem;"></i>
+                      </div>
+                      <div class="ps-3">
+                        <h6>{{ state }}</h6>
+                        <!-- <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span> -->
+
+                      </div>
+                    </div>
+                </div>
+              </div>
+            </div><!-- End state Card -->
+
+            <!-- Rank Card -->
+            <div class="col-xxl-4 col-md-6">
+              <div class="card info-card revenue-card">
+                <div class="card-body">
+                  <h5 class="card-title">Rank
+                    <!-- <span>| This Month</span></h5> -->
+                    <div class="d-flex align-items-center" style="margin-top: 1rem; margin-bottom:-0.7rem">
+                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                        <i class="fa-solid fa-ranking-star" style="color:#FF85BA;"></i>
+                      </div>
+                      <div class="ps-3">
+                        <h6>{{ rank }}</h6>
+                        <!-- <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span> -->
+                      </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+            <!-- End rank Card -->
+
+            <!-- Happiness Index Card -->
+            <div class="col-xxl-4 col-xl-12">
+              <div class="card info-card customers-card">
+                <div class="card-body">
+                  <h5 class="card-title">Happiness Index
+                    <!-- <span>| This Year</span></h5> -->
+                    <div class="d-flex align-items-center" style="margin-top: 1rem; margin-bottom: -0.7rem;">
+                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                        <i class="fa-solid fa-face-smile"></i>
+                      </div>
+                      <div class="ps-3">
+                        <h6>{{ happinessindex|floatformat:2 }}</h6>
+                        <!-- <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span> -->
+                      </div>
+                      <span>
+                        <button type="submit" class="button1">Calculate</button>
+                      </span>
+                    </div>
+                </div>
+              </div>
+            </div><!-- End Happiness Index Card -->
+
+            <!-- Feedback Card -->
+            <div class="col-xxl-4 col-xl-12">
+              <div class="card info-card customers-card">
+                <div class="card-body">
+                  <h5 class="card-title">No. of Feedbacks
+                    <!-- <span>| This Year</span></h5> -->
+                    <div class="d-flex align-items-center" style="margin-top: 1rem; margin-bottom: -0.7rem;">
+                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center"
+                        style="background-color:rgba(249, 252, 139, 0.7);">
+                        <i class="fa-solid fa-comment-dots" style="color:#fee648;"></i>
+                      </div>
+                      <div class="ps-3">
+                        <h6>FB</h6>
+                        <!-- <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span> -->
+                      </div>
+                      <span>
+                        <button type="submit" class="button2">Send Feedback</button>
+                      </span>
+                    </div>
+                </div>
+              </div>
+            </div><!-- End Happiness Index Card -->
+
+            <!-- chart 1 -->
+            <div class="col-12">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Chart 1
+                    <!-- <span>/Today</span></h5> -->
+
+                    <!-- Line Chart -->
+                    <div>
+                      {{ graph.0|safe }}
+                    </div>
+                    
+                    <!-- End Line Chart -->
+
+                </div>
+
+              </div>
+            </div><!-- End chart 1 -->
+
+            <!-- Chart 2 -->
+            <div class="col-12">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Chart 2
+                    <!-- <span>/Today</span></h5> -->
+
+                    <!-- Line Chart -->
+                    <div>
+                      {{ graph.1|safe }}
+                    </div>
+
+                    
+                    <!-- End Line Chart -->
+                </div>
+              </div>
+            </div><!-- End chart 2 -->
+            <!-- Acedemic Analysis -->
+            <div class="col-12">
+              <div class="card" style="min-height:15rem">
+                <div class="card-body">
+                  <h5 class="card-title">View Acedemic Analysis of your standard </h5>
+                  <div>
+                      <span>
+                        <button style="background: linear-gradient(to right, #fca336, #ff85ba);
+                        width: 15%;
+                        height: 40px;
+                        text-align: center;
+                        border-radius: 40px;
+                        border: none;
+                        color: white;
+                        padding-right: 2%;
+                        padding-left: 2%;
+                        position: absolute;"
+                        >Standard 1</button>
+                      </span>
+                      <span>
+                        <button style="background: linear-gradient(to right, #fca336, #ff85ba);
+                        width: 15%;
+                        height: 40px;
+                        float: right;
+                        left: 21%;
+                        text-align: center;
+                        border-radius: 40px;
+                        border: none;
+                        color: white;
+                        padding-right: 2%;
+                        padding-left: 2%;
+                        position: absolute;"
+                        >Standard 2</button>
+                      </span>
+                      <span>
+                        <button style="background: linear-gradient(to right, #fca336, #ff85ba);
+                        width: 15%;
+                        height: 40px;
+                        float: right;
+                        left: 40%;
+                        text-align: center;
+                        border-radius: 40px;
+                        border: none;
+                        color: white;
+                        padding-right: 2%;
+                        padding-left: 2%;
+                        position: absolute;"
+                        >Standard 3</button>
+                      </span>
+                      <span>
+                        <button style="background: linear-gradient(to right, #fca336, #ff85ba);
+                        width: 15%;
+                        height: 40px;
+                        float: right;
+                        left: 59%;
+                        text-align: center;
+                        border-radius: 40px;
+                        border: none;
+                        color: white;
+                        padding-right: 2%;
+                        padding-left: 2%;
+                        position: absolute;"
+                        >Standard 4</button>
+                      </span>
+                      <span>
+                        <button style="background: linear-gradient(to right, #fca336, #ff85ba);
+                        width: 15%;
+                        height: 40px;
+                        float: right;
+                        left: 78%;
+                        text-align: center;
+                        border-radius: 40px;
+                        border: none;
+                        color: white;
+                        padding-right: 2%;
+                        padding-left: 2%;
+                        position: absolute;"
+                        >Standard 5</button>
+                      </span>
+                      <span>
+                        <button style="background: linear-gradient(to right, #fca336, #ff85ba);
+                        width: 15%;
+                        height: 40px;
+                        text-align: center;
+                        margin-top: 8%;
+                        border-radius: 40px;
+                        border: none;
+                        color: white;
+                        padding-right: 2%;
+                        padding-left: 2%;
+                        position: absolute;"
+                        >Standard 6</button>
+                      </span>
+                      <span>
+                        <button style="background: linear-gradient(to right, #fca336, #ff85ba);
+                        width: 15%;
+                        height: 40px;
+                        float: right;
+                        left: 21%;
+                        margin-top: 8%;
+                        text-align: center;
+                        border-radius: 40px;
+                        border: none;
+                        color: white;
+                        padding-right: 2%;
+                        padding-left: 2%;
+                        position: absolute;"
+                        >Standard 7</button>
+                      </span>
+                      <span>
+                        <button style="background: linear-gradient(to right, #fca336, #ff85ba);
+                        width: 15%;
+                        height: 40px;
+                        float: right;
+                        left: 40%;
+                        text-align: center;
+                        border-radius: 40px;
+                        border: none;
+                        color: white;
+                        padding-right: 2%;
+                        padding-left: 2%;
+                        position: absolute;
+                        margin-top: 8%;"
+                        >Standard 8</button>
+                      </span>
+                      <span>
+                        <button style="background: linear-gradient(to right, #fca336, #ff85ba);
+                        width: 15%;
+                        height: 40px;
+                        float: right;
+                        left: 59%;
+                        text-align: center;
+                        border-radius: 40px;
+                        border: none;
+                        color: white;
+                        padding-right: 2%;
+                        padding-left: 2%;
+                        margin-top: 8%;
+                        position: absolute;"
+                        >Standard 9</button>
+                      </span>
+                      <span>
+                        <button style="background: linear-gradient(to right, #fca336, #ff85ba);
+                        width: 15%;
+                        height: 40px;
+                        float: right;
+                        left: 78%;
+                        text-align: center;
+                        border-radius: 40px;
+                        border: none;
+                        color: white;
+                        padding-right: 2%;
+                        margin-top: 8%;
+                        padding-left: 2%;
+                        position: absolute;"
+                        >Standard 10</button>
+                      </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- end acedemic analysis -->
+          </div>
+        </div><!-- End Left side columns -->
+
+        <!-- Right side columns -->
+        <div class="col-lg-4">
+
+          <!-- Suggestions -->
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Suggestions
+                <!-- <span>| Today</span> -->
+              </h5>
+              <div class="news">
+                {% for i in improve %}
+                <div>
+                  <h4><a href="#">{{ i }}</a></h4>
+                  <p>Sit recusandae non aspernatur laboriosam. Quia enim eligendi sed ut harum...</p>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div><!-- End Suggestions -->
+
+          <!-- upload student database Card -->
+            <div class="card info-card sales-card">
+              <div class="card-body">
+                <h5 class="card-title">Upload Student Database Here
+                  <!-- <span>| Today</span> -->
+                </h5>
+                  <div class="d-flex align-items-center" >
+                    <!-- <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <i class="fa-solid fa-upload"></i>
+                    </div> -->
+                    <div class="ps-3">
+                      <form method="POST" enctype="multipart/form-data" >
+                        
+                        {% csrf_token %}
+                        <div class="form-group">
+                          <!-- <h6 style="font-size:1.5rem;">Choose a file</h6> -->
+                          <div>
+                            <input type="file" class="form-control-file" id="exampleFormControlFile1" name="csv">
+                          </div>
+                        <button type="submit" class="button3" ><i class="fa-solid fa-upload"></i></button>
+                        </div>
+                    </form>
+                      <!-- <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span> -->
+                    </div>
+                  </div>
+              </div>
+            </div>
+          <!-- End name Card -->
+
+          <!-- Chart 3 -->
+          <div class="card">
+
+
+            <div class="card-body pb-0">
+              <h5 class="card-title"> Chart 3
+                <!-- <span>| This Month</span></h5> -->
+
+                <div style="min-height: 400px;" class="echart">
+                  {{ graph.2|safe }}
+                </div>
+
+                
+            </div>
+          </div><!-- End Chart 3 -->
+
+          <!-- Chart 4 -->
+          <div class="card">
+            <div class="card-body pb-0">
+              <h5 class="card-title">Chart 4
+                <!-- <span>| Today</span></h5> -->
+
+                <div style="min-height: 400px;" class="echart">
+                    <img src="{% static 'analytics/images/chart3.png' %}" alt="" >
+                </div>
+
+                
+
+            </div>
+          </div><!-- End Website Traffic -->
+
+          <!-- News & Updates Traffic -->
+          <div class="card">
+            <div class="card-body pb-0">
+              <h5 class="card-title">Topic Modellings for Feedbacks</h5>
+              <div class="news">
+                <div class="post-item clearfix">
+                  <div>
+                    <h4><a href="#">{{ topic }}</a></h4>
+                    <p>Sit recusandae non aspernatur laboriosam. Quia enim eligendi sed ut harum...</p>
+                  </div>
+                </div>
+              </div><!-- End sidebar recent posts-->
+
+            </div>
+          </div><!-- End News & Updates -->
+
+        </div><!-- End Right side columns -->
+
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+  {% endblock body %}

@@ -2,8 +2,6 @@ from django.shortcuts import render,redirect
 from .models import Counselor, School,Student,User
 from django.contrib.auth import authenticate, login, logout
 #from .models import 
-
-from .forms import StudentSignUpForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -13,15 +11,25 @@ def home(request):
 	return render(request,'profiles/home.html')
 
 def student_register(request):
+	print('HEHU')
 	if request.method == 'POST':
-		form = StudentSignUpForm(request.user, request.POST)
-		if form.is_valid():
-			form.save()
-			messages.success(request, f'Your account has been created! You are now able to log in')
-			return redirect('school-feed', request.user.student.school.user.slug)
-	else:
-		form = StudentSignUpForm(request.user)
-	return render(request, 'profiles/student_register.html', {'form': form})
+		user = User.objects.get(id = request.user.id)
+		user.phone_number = request.POST.get('pno','')
+		user.email = request.POST.get('email','')
+		user.is_student = True
+		student = Student()
+		student.user = user
+		student.roll_number = request.POST.get('rollno','')
+		school = request.POST.get('schoolname','')
+		print(school)
+		student.school = School.objects.get(user_id=school)
+		student.pincode = request.POST.get('pincode','')
+		student.save()
+		user.save()  
+		messages.success(request, f'Your account has been created! You are now able to log in')
+		return redirect('school-feed', request.user.student.school.user.slug)
+	schools = School.objects.all()
+	return render(request, 'profiles/student_register.html', locals())
 
 
 def loginregister(request):
@@ -41,7 +49,7 @@ def loginregister(request):
 			if User.objects.filter(username=username).exists():
 				return render(request, 'profiles/loginregister.html', {'message': 'Username Already exists'})
 			if cat == 'student':
-				user = User.objects.create(username=username, name=name, is_student=True)
+				user = User.objects.create(username=username, name=name)
 				print(user)
 				user.set_password(passw)
 				user.save()
@@ -49,14 +57,14 @@ def loginregister(request):
 				login(request,user)
 				return redirect('student-register')
 			elif cat == 'school':
-				user = User.objects.create(username=username, name=name, is_school=True)
+				user = User.objects.create(username=username, name=name)
 				user.set_password(passw)
 				user.save()
 				user = authenticate(request, username=username, password = passw)
 				login(request,user)
 				return redirect('school-register')
 			elif cat == 'counselor':
-				user = User.objects.create(username=username, name=name, is_counselor=True)
+				user = User.objects.create(username=username, name=name)
 				user.set_password(passw)
 				user.save()
 				user = authenticate(request, username=username, password = passw)
@@ -102,6 +110,7 @@ def counselor_register(request):
 		user = User.objects.get(username=request.user.username)
 		user.email = email
 		user.phone_number = phone_num
+		user.is_counselor=True
 		counselor = Counselor.objects.create(user=user)
 		counselor.description = description
 		counselor.address = address
@@ -130,6 +139,7 @@ def school_register(request):
 		user = User.objects.filter(username=request.user.username)[0]
 		user.email = email
 		user.phone_number = phone_num
+		user.is_school=True
 		school = School.objects.create(user=user)
 		school.board = board
 		school.address = address

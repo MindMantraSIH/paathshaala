@@ -8,6 +8,7 @@ from django.urls import reverse
 class User(AbstractUser):
     is_school = models.BooleanField('school status',default=False)
     is_student = models.BooleanField('student status',default=False)
+    is_counselor = models.BooleanField('counselor status', default=False)
     name = models.CharField(max_length=100)
     slug = AutoSlugField(populate_from='name')
     phone_number = models.CharField(max_length=10)
@@ -30,6 +31,7 @@ class Student(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE,primary_key=True)
     roll_number = models.CharField(max_length=20)
     school = models.ForeignKey(School, on_delete=models.CASCADE)
+    pincode = models.CharField(max_length=10, blank=True, null=True)
     
 
     def __str__(self) -> str:
