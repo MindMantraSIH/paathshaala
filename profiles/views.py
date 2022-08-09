@@ -6,6 +6,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 import hashlib
+import json
+import urllib
+import requests
 
 def home(request):
 	return render(request,'profiles/home.html')
@@ -115,6 +118,22 @@ def counselor_register(request):
 		counselor.description = description
 		counselor.address = address
 		counselor.pincode = pincode
+		where = urllib.parse.quote_plus("""
+		{
+		    "postalCode": "%s"
+		}
+		"""%pincode)
+		url = 'https://parseapi.back4app.com/classes/Indiapincode_Dataset_India_Pin_Code?limit=10&order=geoPosition&where=%s' % where
+		headers = {
+			'X-Parse-Application-Id': 'XVP5z4O2TOGHKYc7LbbUCFX5Tbctw4dYw1r5zRri',  # This is your app's application id
+			'X-Parse-REST-API-Key': 'uVTRFN5134RMaQzCw1YFhWn5RohmS63ryEACBrxI'  # This is your app's REST API key
+		}
+		data = json.loads(
+			requests.get(url, headers=headers).content.decode('utf-8'))  # Here you have the data that you need
+
+
+		counselor.latitude = str(data.get('results')[0].get('geoPosition').get('latitude'))
+		counselor.longitude = str(data.get('results')[0].get('geoPosition').get('longitude'))
 		counselor.speciality = speciality
 		counselor.awards = awards
 		counselor.fees = fees
@@ -129,6 +148,7 @@ def awaiting_confirmation(request):
 	return render(request, 'profiles/awaiting_confirmation.html')
 
 def school_register(request):
+	print("Hello I want to register my school!")
 	if request.method == 'POST':
 		board = request.POST.get('board')
 		phone_num = request.POST.get('pno')
@@ -139,7 +159,7 @@ def school_register(request):
 		user = User.objects.filter(username=request.user.username)[0]
 		user.email = email
 		user.phone_number = phone_num
-		user.is_school=True
+		user.is_school = True
 		school = School.objects.create(user=user)
 		school.board = board
 		school.address = address
@@ -147,6 +167,7 @@ def school_register(request):
 		school.state = state
 		school.save()
 		user.save()
+		print("Hello I registered my school!")
 		return redirect('school-feed',slug=user.slug)
 
 	return render(request, 'profiles/school_register.html')

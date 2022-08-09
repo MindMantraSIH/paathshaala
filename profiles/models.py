@@ -32,7 +32,6 @@ class Student(models.Model):
     roll_number = models.CharField(max_length=20)
     school = models.ForeignKey(School, on_delete=models.CASCADE)
     pincode = models.CharField(max_length=10, blank=True, null=True)
-    
 
     def __str__(self) -> str:
         return f'{self.school.user.name}: {self.roll_number}'
@@ -47,6 +46,8 @@ class Counselor(models.Model):
     medical_id_proof = models.FileField(upload_to='counselor/medical_id', null=True, blank=True)
     rating = models.CharField(max_length=10,null=True,blank=True)
     fees = models.CharField(max_length=50, null=True, blank=True)
+    latitude = models.CharField(max_length=7, null=True, blank=True)
+    longitude = models.CharField(max_length=7, null=True, blank=True)
 
     def __str__(self) -> str:
         return f'{self.user.name} {(self.speciality)}'
