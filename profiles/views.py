@@ -107,7 +107,7 @@ def counselor_register(request):
 		awards = request.POST.get('awards',"")
 		fees = request.POST.get('fees',"")
 		id_proof = request.FILES['id_proof']
-		user = User.objects.get(username=request.user.username)
+		user = User.objects.get(id=request.user.id)
 		user.email = email
 		user.phone_number = phone_num
 		user.is_counselor=True
@@ -129,14 +129,17 @@ def awaiting_confirmation(request):
 	return render(request, 'profiles/awaiting_confirmation.html')
 
 def school_register(request):
+	print('haaha')
+	print(request.method)
 	if request.method == 'POST':
+		print('here')
+		user = User.objects.get(id=request.user.id)
 		board = request.POST.get('board')
 		phone_num = request.POST.get('pno')
 		email = request.POST.get('email')
 		address = request.POST.get('address')
 		state = request.POST.get('state')
 		city = request.POST.get('city')
-		user = User.objects.filter(username=request.user.username)[0]
 		user.email = email
 		user.phone_number = phone_num
 		user.is_school=True
