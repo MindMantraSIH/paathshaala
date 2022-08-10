@@ -377,7 +377,7 @@ def suggest():
     for i,feature in enumerate(features):
         if feature < 2.5:
             improvements.append(suggestions.get(i,""))
-    os.remove(os.getcwd() + "/data.csv")
+    # os.remove(os.getcwd() + "/data.csv")
     return improvements
 
 
