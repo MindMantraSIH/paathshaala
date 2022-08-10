@@ -18,3 +18,19 @@ from django.core.mail import send_mail
 import os
 import csv
 
+def insights():
+    roll_no = Student.objects.filter(user=request.user)[1]
+    df_s = pd.read_csv('Analytics/data/student_data.csv')
+    curr = df_s[df_s['Roll_number'] == roll_no]
+    std = df_s[df_s['Roll_number'] == roll_no].Standard.values[0]
+    std_df = df_s[df_s["Standard"] == std]
+    std_mean = std_df['Percent'].mean()
+    curr = df_s[df_s['Roll_number'] == s].Percent.values[0]
+    res = [std_mean, curr]
+    lab = ['Class Average', 'Student"s Percent']
+    fig = go.Figure([go.Bar(x=lab, y=res)])
+    graph1 = plotly.offline.plot(fig, auto_open=False, output_type="div")
+    context = {"graph": [graph1],
+               'name': request.user.name,
+               }
+    return render(request,"Analytics/student_dashboard.html", context)
