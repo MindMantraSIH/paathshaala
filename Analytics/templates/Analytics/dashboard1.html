@@ -156,7 +156,7 @@
             <div class="col-12">
               <div class="card">
                 <div class="card-body">
-                  <h5 class="card-title">Chart 1
+                  <h5 class="card-title">Classroom factors affecting Happiness Index
                     <!-- <span>/Today</span></h5> -->
 
                     <!-- Line Chart -->
@@ -175,7 +175,7 @@
             <div class="col-12">
               <div class="card">
                 <div class="card-body">
-                  <h5 class="card-title">Chart 2
+                  <h5 class="card-title">Curriculum dependent factors affecting Happiness Index
                     <!-- <span>/Today</span></h5> -->
 
                     <!-- Line Chart -->
@@ -192,7 +192,7 @@
             <div class="col-12">
               <div class="card" style="min-height:15rem">
                 <div class="card-body">
-                  <h5 class="card-title">View Acedemic Analysis of your standard </h5>
+                  <h5 class="card-title">View Academic Analysis of your standard </h5>
                   <div>
                       <span>
                         <button style="background: linear-gradient(to right, #fca336, #ff85ba);
@@ -384,8 +384,7 @@
                       <i class="fa-solid fa-upload"></i>
                     </div> -->
                     <div class="ps-3">
-                      <form method="POST" enctype="multipart/form-data" >
-                        
+                        <form method="POST" enctype="multipart/form-data" action="{% url 'csv' %}">
                         {% csrf_token %}
                         <div class="form-group">
                           <!-- <h6 style="font-size:1.5rem;">Choose a file</h6> -->

@@ -29,6 +29,7 @@ def happiness_index(request):
     output = []
     print(request.user)
     query_set = Data.objects.filter(school=request.user.school)
+    print(query_set)
     with open(os.getcwd() + "/data.csv", 'w',newline='') as file:
         writer = csv.writer(file)
         print(os.getcwd())
@@ -47,6 +48,7 @@ def happiness_index(request):
        'Are these problems being solved by the School?',
        'Any other factors , according to you , which contribute to happiness index'])
         for user in query_set:
+            print("Im here")
             print(user)
             output.append([user.levelc, user.env, user.teachersc, user.prevdisc, user.fecilities, user.timetable,
                        user.grpwork, user.mentalhlth, user.sportart, user.solveprob, user.creativecourse,
@@ -149,17 +151,51 @@ def dashboard(request):
     sizes = []
     diff = df[df['Level Of Courses (Difficulty)'] > 2]
     students_course_difficult = diff['Level Of Courses (Difficulty)'].count()
-    eas = df[df['Level Of Courses (Difficulty)'] < 2]
+    eas = df[df['Level Of Courses (Difficulty)'] <= 2]
     students_course_easy = eas['Level Of Courses (Difficulty)'].count()
-    students_course_easy += 1
+    # students_course_easy += 1
     print(students_course_easy)
     to_plot = {'Students finding course difficult': students_course_difficult,
                'Students finding Course Easy': students_course_easy}
     for x, y in to_plot.items():
         label.append(x)
         sizes.append(y)
+
+    fig0 = go.Figure(data=go.Scatterpolar(
+        r=[df['A Clean Environment'].mean(), df['Providing laboratory & workshop facilities'].mean(),
+           df['The school timetable'].mean(), df['Presenting more sporting & artistic classes'].mean(),
+           df['Being able to solve problems of the learner'].mean()],
+        theta=['A Clean Environment', 'Providing laboratory & workshop facilities',
+               'Effectiveness of school timetable', 'Presenting more sporting & artistic classes',
+               'Quality of doubt resolution'],
+        fill='toself'
+    ))
+
+    fig0.update_layout(
+        polar=dict(
+            radialaxis=dict(
+                visible=True
+            ),
+        ),
+        showlegend=False
+    )
+
+    features = ['Level Of Courses (Difficulty)', 'Course relevance',
+               'Critical learning of the learner']
+
+    fig1 = go.Figure(data=[
+        go.Bar(name='Rated greater than 2', x=features, y=[students_course_difficult,
+                                                           len(df[df['Course relevance'] > 2]),
+       len(df[df['Involve with fundamental and critical aspects of learner , about manner of living'] > 2])]),
+        go.Bar(name='Rated lower than or equal to 2', x=features, y=[students_course_difficult,
+                                                           len(df[df['Course relevance'] <= 2]),
+       len(df[df['Involve with fundamental and critical aspects of learner , about manner of living'] <= 2])])])
+    # Change the bar mode
+    fig1.update_layout(barmode='group')
+
+    graph1 = plotly.offline.plot(fig0, auto_open=False, output_type="div")
     fig = go.Figure(data=[go.Pie(labels=label, values=sizes)])
-    graph1 = plotly.offline.plot(fig, auto_open=False, output_type="div")
+    # graph1 = plotly.offline.plot(fig, auto_open=False, output_type="div")
     want = df[df['Courses should have creative and colorful instructional materials and fun activities.'] > 3]
     want_count = want['Courses should have creative and colorful instructional materials and fun activities.'].count()
     not_w = df[df['Courses should have creative and colorful instructional materials and fun activities.'] < 3]
@@ -168,7 +204,7 @@ def dashboard(request):
     res = [want_count, not_want_count]
     a = ['Want fun activities', 'Dont want fun activites']
     fig = go.Figure([go.Bar(x=a, y=res)])
-    graph2 = plotly.offline.plot(fig, auto_open=False, output_type="div")
+    graph2 = plotly.offline.plot(fig1, auto_open=False, output_type="div")
     fig = px.box(df, y=['Being able to solve problems of the learner'])
     graph3 = plotly.offline.plot(fig, auto_open=False, output_type="div")
     #   fig = px.line(coin_data, x="Date", y=coin_data.columns[3:4], width=1050, height=500)
@@ -341,6 +377,7 @@ def suggest():
     for i,feature in enumerate(features):
         if feature < 2.5:
             improvements.append(suggestions.get(i,""))
+    os.remove(os.getcwd() + "/data.csv")
     return improvements
 
 
