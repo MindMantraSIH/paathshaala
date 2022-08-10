@@ -123,7 +123,7 @@ def counselor_register(request):
 		user.save()
 		return redirect('awaiting-confirmation')
 	
-	return render(request, 'profiles/counselor_register.html')
+	return render(request, 'profiles/counsellor_register.html')
 
 def awaiting_confirmation(request):
 	return render(request, 'profiles/awaiting_confirmation.html')

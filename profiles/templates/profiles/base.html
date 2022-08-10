@@ -37,7 +37,7 @@
   <div class="site-wrapper overflow-hidden position-relative">
     <header class="site-header site-header--menu-right landing-14-menu site-header--absolute site-header--sticky">
       <div class="container">
-        <nav class="navbar site-navbar">
+        <nav class="navbar site-navbar sticky-top">
           <img src="{% static 'profiles/circular paathshala logo.png' %}" alt=""
             style="height: 3rem ; border-radius: 50%; margin-right: 1rem;">
           <a href="{% url 'home' %}" style=" color: inherit;"><span>
@@ -93,9 +93,6 @@
                     {% endif %}
                   </ul>
                 </li>
-                {% comment %} <li class="nav-item">
-                  <a href="#" class="nav-link-item">FEEDBACK</a>
-                </li> {% endcomment %}
                 <li class="nav-item">
                   <a href="#" class="nav-link-item">CONTACT US</a>
                 </li>
