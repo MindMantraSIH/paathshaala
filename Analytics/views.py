@@ -205,11 +205,39 @@ def dashboard(request):
     a = ['Want fun activities', 'Dont want fun activites']
     fig = go.Figure([go.Bar(x=a, y=res)])
     graph2 = plotly.offline.plot(fig1, auto_open=False, output_type="div")
-    fig = px.box(df, y=['Being able to solve problems of the learner'])
-    graph3 = plotly.offline.plot(fig, auto_open=False, output_type="div")
+
+    fig3 = go.Figure(data=[go.Pie(labels=["<1","2-3","3-4","4-5"],
+                                 values=[len(df[df['Mental health assessment of all students'] <= 1]),
+                                         len(df[(df['Mental health assessment of all students'] > 1) &
+                                                (df['Mental health assessment of all students'] <= 2)]),
+                                         len(df[(df['Mental health assessment of all students'] > 2) &
+                                                (df['Mental health assessment of all students'] <= 3)]),
+                                         len(df[(df['Mental health assessment of all students'] > 3) &
+                                                (df['Mental health assessment of all students'] <= 4)]),
+                                         len(df[(df['Mental health assessment of all students'] > 4) &
+                                                (df['Mental health assessment of all students'] <= 5)])
+                                         ],
+                    pull=[0.3, 0, 0, 0])])
+
+    graph3 = plotly.offline.plot(fig3, auto_open=False, output_type="div")
     #   fig = px.line(coin_data, x="Date", y=coin_data.columns[3:4], width=1050, height=500)
     #   graph4 = plotly.offline.plot(fig, auto_open=False, output_type="div")
-    context = {"graph": [graph1, graph2, graph3],
+    fig4 = go.Figure(data=go.Scatter(x=['Discrimination prevention',
+                                        'Group Performance',
+                                        'Extracurriculars',
+                                        'Individual attention',
+                                        'Problems solved',
+                                        'Age-based conversations'
+                                        ], y=[df['Preventing Discrimination and Persuasion'].mean(),
+                                              df['Performing group work'].mean(),
+                                              df['Presenting more sporting & artistic classes'].mean(),
+                                              df['Focus on the individual'].mean(),
+                                              df['Are these problems being solved by the School?'].mean(),
+                                              df['Issues of concern should be made a point of conversation within age appropriate classrooms and children made aware of existing realities.'].mean()])
+                     )
+    graph4 = plotly.offline.plot(fig4, auto_open=False, output_type="div")
+
+    context = {"graph": [graph1, graph2, graph3,graph4],
                'name': request.user.school,
                 'city': request.user.school.city,
                 'state': request.user.school.state,
