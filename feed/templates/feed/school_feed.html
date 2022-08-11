@@ -1,5 +1,5 @@
 {% extends "profiles/base.html" %}
-{%include "profiles/base.html"}
+{% include "profiles/base.html" %}
 {% load static %}
 
 
@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="{% static 'feed/school_feed.css' %}">
 <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
 {% endblock connectcss %}
 
 {% block content %}
@@ -127,7 +128,7 @@
 
                     <button type="submit" name="post_slug" value="{{post.slug}}" style="border: 0;"><span class="material-symbols-outlined">
                             thumb_up
-                        </span><strong class="text-xl-center" id='upvote_count{{post.slug}}'> {{post.number_of_upvotes }}</strong></button>
+                        </span></button><strong class="text-xl-center" id='upvote_count{{post.slug}}'> {{post.number_of_upvotes }}</strong>
 
 
 
