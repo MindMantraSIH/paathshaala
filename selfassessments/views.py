@@ -9,20 +9,34 @@ from django.core.mail import send_mail
 
 def getdata(request):
     print(request.method)
-    all=[]
+    all={}
     if request.method == 'POST':
         print(request.POST.get("gen"))
-        for i in ['std','gen','hob','act','edu','inc','extra','play','sleep','comp','prep','sport','anx','secure','conf','soc','add','email']:
+        for i in ['d1','s1','an1','an2','d2','an3','ad1an4','d3','s2','s3','ad2','ad3','p1','p2','s4','d4','p3','s5','email']:
             ans=request.POST.get(i)
-            all.append(ans)
+            all[i]=float(ans)
+        dep = all['d1']+all['d2']+all['d3']+all['d4']
+        st = all['s1']+all['s2']+all['s3']+all['s4']+all['s5']
+        anx = all['an1']+all['an2']+all['an3']+all['ad1an4']
+        ad = all['ad1an4']+all['ad2']+all['ad3']
+        p = all['p1']+all['p2']+all['p3']
+        tot = dep + st+anx+ad+p
         print(all)
         subject = 'Self Assessment Report'
         message = "Dear User, \n" \
-                  "Thank you for using our application. Here are some resources to help you based on the assessment: \n" \
+                  "Thank you for using our application.\n" \
+                  "This is your final report based on your mental health assessment: \n" \
+                  "(Check up with your doctor for an accurate assessment) \n"\
+                  "Depression: %f % \n"\
+                  "Stress: %f % \n"\
+                  "Anxiety: %f % \n"\
+                  "ADHD: %f % \n"\
+                  "Pressure: %f % \n"\
+                  "Here are some resources to help you understand mental health issues: \n" \
                   "https://www.verywellfamily.com/improve-childrens-mental-health-4154379\n" \
                   " https://www.parents.com/health/healthy-happy-kids/why-and-how-to-teach-kids-mindfulness/ \n" \
                   "https://kidshelpphone.ca/get-info/how-practice-self-care/ \n" \
-                  "https://www.mhanational.org/what-every-child-needs-good-mental-health"
+                  "https://www.mhanational.org/what-every-child-needs-good-mental-health", dep*100/tot,st*100/tot,anx*100/tot,ad*100/tot,p*100/tot
         email_from = settings.EMAIL_HOST_USER
         recipient_list = [all[-1]]
         send_mail( subject, message, email_from, recipient_list )
