@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 import smtplib
-
+from django.contrib import messages
 from django.conf import settings
 from django.core.mail import send_mail
 
@@ -40,5 +40,6 @@ def getdata(request):
         email_from = settings.EMAIL_HOST_USER
         recipient_list = [all[-1]]
         send_mail( subject, message, email_from, recipient_list )
+        messages.success(request, 'The results are sent to your email.')
         return redirect('getdata')
     return render(request, 'selfassessments/selfasses.html')
