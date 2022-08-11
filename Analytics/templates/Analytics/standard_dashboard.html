@@ -130,23 +130,19 @@
             </div><!-- End Happiness Index Card -->
 
             <!-- Feedback Card -->
-            <div class="col-xxl-4 col-xl-12">
-              <div class="card info-card customers-card">
+          <div class="col-xxl-4 col-md-6">
+              <div class="card info-card revenue-card">
                 <div class="card-body">
-                  <h5 class="card-title">No. of Feedbacks
-                    <!-- <span>| This Year</span></h5> -->
-                    <div class="d-flex align-items-center" style="margin-top: 1rem; margin-bottom: -0.7rem;">
-                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center"
-                        style="background-color:rgba(249, 252, 139, 0.7);">
-                        <i class="fa-solid fa-comment-dots" style="color:#fee648;"></i>
+                  <h5 class="card-title">Standard
+                    <!-- <span>| This Month</span></h5> -->
+                    <div class="d-flex align-items-center" style="margin-top: 1rem; margin-bottom:-0.7rem">
+                      <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                        <i class="fa-solid fa-ranking-star" style="color:#FF85BA;"></i>
                       </div>
                       <div class="ps-3">
-                        <h6>FB</h6>
-                        <!-- <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span> -->
+                        <h6>{{ std }}</h6>
+                        <!-- <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span> -->
                       </div>
-                      <span>
-                        <button type="submit" class="button2">Send Feedback</button>
-                      </span>
                     </div>
                 </div>
               </div>
@@ -356,50 +352,7 @@
         <!-- Right side columns -->
         <div class="col-lg-4">
 
-          <!-- Suggestions -->
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Suggestions
-                <!-- <span>| Today</span> -->
-              </h5>
-              <div class="news">
-                {% for i in improve %}
-                <div>
-                  <h4><a href="#">{{ i }}</a></h4>
-                  <p>Sit recusandae non aspernatur laboriosam. Quia enim eligendi sed ut harum...</p>
-                </div>
-                {% endfor %}
-              </div>
-            </div>
-          </div><!-- End Suggestions -->
 
-          <!-- upload student database Card -->
-            <div class="card info-card sales-card">
-              <div class="card-body">
-                <h5 class="card-title">Upload Student Database Here
-                  <!-- <span>| Today</span> -->
-                </h5>
-                  <div class="d-flex align-items-center" >
-                    <!-- <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                      <i class="fa-solid fa-upload"></i>
-                    </div> -->
-                    <div class="ps-3">
-                        <form method="POST" enctype="multipart/form-data" action="{% url 'csv' %}">
-                        {% csrf_token %}
-                        <div class="form-group">
-                          <!-- <h6 style="font-size:1.5rem;">Choose a file</h6> -->
-                          <div>
-                            <input type="file" class="form-control-file" id="exampleFormControlFile1" name="csv">
-                          </div>
-                        <button type="submit" class="button3" ><i class="fa-solid fa-upload"></i></button>
-                        </div>
-                    </form>
-                      <!-- <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span> -->
-                    </div>
-                  </div>
-              </div>
-            </div>
-          <!-- End name Card -->
 
           <!-- Chart 3 -->
           <div class="card">
