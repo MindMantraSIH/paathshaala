@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 /*!
  * Bootstrap v4.5.3 (https://getbootstrap.com/)
 
@@ -111,7 +111,9 @@
 -------------------------------------------------------------------*/
 
 
-
+.bi{
+  margin-right: 1vh;
+}
 
 /*-------------------------------------------------------------------*/
 /* === Core Styles === */
@@ -605,7 +607,7 @@ code {
 
 /* Footer */
 .footer {
-  background: #f4f5fa;
+  /* background: #f4f5fa; */
   padding: 0 1.812rem 2.062rem 1.812rem;
   transition: all 0.25s ease;
   -moz-transition: all 0.25s ease;
@@ -942,7 +944,7 @@ code {
   padding-top: 24px;
   padding-bottom: 24px;
   z-index: 2;
-  background: #f4f5fa;
+  /* background: #f4f5fa; */
   z-index: 999;
 }
 
@@ -1492,7 +1494,7 @@ dl li {
   padding-left: 0;
   padding-right: 0;
   padding-top: 1.875rem;
-  background: #f4f5fa;
+  /* background: #f4f5fa; */
 }
 
 .page-body-wrapper.full-page-wrapper {
@@ -2188,7 +2190,7 @@ dl li {
 
 
 
-=======
+
 /**
 * Template Name: NiceAdmin - v2.3.1
 * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
@@ -2636,5 +2638,4 @@ h6 {
   position: absolute;
 }
 
-/* buttonsss */
->>>>>>> 7020c2a2a05f06feed7713bfc361b903b5ca2904
+
