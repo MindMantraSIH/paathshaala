@@ -353,12 +353,12 @@ def suggest():
 
 def student_dashboard(request):
     student = Student.objects.get(user=request.user)
-    print(student)
+    #print(student)
     roll_no = int(student.roll_number)
-    print(roll_no)
+    #print(roll_no)
     df_s = pd.read_csv('Analytics/data/student_data.csv')
     curr = df_s[df_s['Roll_number'] == roll_no]
-    print(curr)
+    #print(curr)
     std = df_s[df_s['Roll_number'] == roll_no].Standard.values[0]
     std_df = df_s[df_s["Standard"] == std]
     std_mean = std_df['Percent'].mean()
