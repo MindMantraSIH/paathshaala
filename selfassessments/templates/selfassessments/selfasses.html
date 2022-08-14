@@ -1,357 +1,394 @@
-{% extends "profiles/base.html" %}
+{% include "profiles/base.html" %}
 {% load static %}
 {% block connectcss %}
-<link rel="stylesheet" href="{% static 'selfassessments/selfassess.css' %}">
+<style>
+    input[type=text] {
+        width: 60rem;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+        background-color: #bff5fa;
+        color: black;
+        border: 0.5px solid #bff5fa !important;
+        box-shadow: 3px 3px 5px #888888;
+        margin: 2rem;
+        width: 10rem;
+        border-radius: 2vh;
+        height: auto;
+    }
+
+    .btn:not(:disabled):not(.disabled) {
+        background-color: #bff5fa;
+    }
+
+    .btn-group-toggle :hover {
+        background-color: #fee648 !important;
+        color: #000;
+    }
+
+    .active {
+        background-color: #fee648 !important;
+        color: #000 !important;
+    }
+
+    .btn-group>.btn-group:not(:last-child)>.btn,
+    .btn-group>.btn:not(:last-child):not(.dropdown-toggle) {
+        border-radius: 2vh;
+    }
+
+    .btn-group>.btn-group:not(:first-child)>.btn,
+    .btn-group>.btn:not(:first-child) {
+        border-radius: 2vh;
+    }
+
+    .card {
+        margin: 3rem;
+        box-shadow: 3px 3px 5px #888888;
+        border-radius: 2vh;
+        padding: 10px;
+    }
+</style>
 {% endblock connectcss %}
 {% block content %}
-<form method="POST" action="">
-    {% csrf_token %}
-    <div class="container " style="margin-top: 20vh;">
-        <h2 style="margin-top: 2vh !important;">SELF ASSESSMENT</h2>
-        <ul class="responsive-table">
-            <li class="table-row">
-                <div class="col col-1">1. Your Standard</div>
-                <div class="col col-2">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="std" id="inlineRadio1" value="1">
-                        <label class="form-check-label" for="inlineRadio1">1</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="std" id="inlineRadio2" value="2">
-                        <label class="form-check-label" for="inlineRadio2">2</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="std" id="inlineRadio3" value="3">
-                        <label class="form-check-label" for="inlineRadio3">3</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="std" id="inlineRadio4" value="4">
-                        <label class="form-check-label" for="inlineRadio4">4</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="std" id="inlineRadio5" value="5">
-                        <label class="form-check-label" for="inlineRadio5">5</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="std" id="inlineRadio6" value="6">
-                        <label class="form-check-label" for="inlineRadio6">6</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="std" id="inlineRadio7" value="7">
-                        <label class="form-check-label" for="inlineRadio7">7</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="std" id="inlineRadio8" value="8">
-                        <label class="form-check-label" for="inlineRadio8">8</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="std" id="inlineRadio9" value="9">
-                        <label class="form-check-label" for="inlineRadio9">9</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="std" id="inlineRadio10" value="10">
-                        <label class="form-check-label" for="inlineRadio10">10</label>
+<div class=" position-relative z-index-1 overflow-hidden">
+    <div class="container" style="margin-top: 15vh;">
+        <h2 style="margin-top: 2vh !important;text-align: center;">SELF ASSESSMENT</h2>
+        <h4 style="text-align: center;"> It is recommended to answer these questions in the presence of an adult</h4>
+        <h4 style="text-align: center;">Rate the following as per the frequency of occurences</h4>
+        <form method="POST" action="">
+            {% csrf_token %}
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Trouble falling or staying asleep, or sleeping too much ?</h5>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="d1">Never
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="d1">Sometimes
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="d1">Everyday
+                        </label>
                     </div>
                 </div>
+            </div>
 
-            </li>
-            <li class="table-row">
-                <div class="col col-1">2. Your Gender</div>
-                <div class="col col-2">
-                    <div class="form-check form-check-inline">
-                        <input type="text" name="gen" placeholder="Enter your gender" class="form-control">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Feeling tired or having little energy ?</h5>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="s1">Never
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="s1">Sometimes
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="s1">Everyday
+                        </label>
                     </div>
                 </div>
+            </div>
 
-            </li>
-            <li class="table-row">
-                <div class="col col-1">3. Your Hobbies </div>
-                <div class="col col-2">
-                    <div class="form-check form-check-inline">
-                        <input type="text" name="hob" placeholder="Enter Hobbies" id="hobbies" class="form-control">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Poor appetite or overeating ?</h5>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="an1">Never
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="an1">Sometimes
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="an1">Everyday
+                        </label>
                     </div>
+                </div>
+            </div>
 
-            </li>
-            <li class="table-row">
-                <div class="col col-1">4. Your Extracurricular activities </div>
-                <div class="col col-2">
-                    <div class="form-check form-check-inline">
-                        <input type="text" name="act" placeholder="Enter activities" class="form-control">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Trouble concentrating on things such as studying or watching T.V ?</h5>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="an2">Never
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="an2">Sometimes
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="an2">Everyday
+                        </label>
                     </div>
                 </div>
+            </div>
 
-            </li>
-            <li class="table-row">
-                <div class="col col-1">5. Your Parents Education</div>
-                <div class="col col-2">
-                    <div class="form-check form-check-inline">
-                        <input type="text" name="edu" placeholder="Enter Education" class="form-control">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Feeling Sad?</h5>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="d2">Never
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="d2">Sometimes
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="d2">Everyday
+                        </label>
                     </div>
                 </div>
-            </li>
-            <li class="table-row">
-                <div class="col col-1">6. Your Family Income</div>
-                <div class="col col-2">
-                    <div class="form-check form-check-inline">
-                        <input type="text" name="inc" placeholder="Enter Family Income" class="form-control">
-                    </div>
-            </li>
-            <li class="table-row">
-                <div class="col col-1">7. Extra tuitions apart from school</div>
-                <div class="col col-2">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="extra" id="inlineRadio1" value="Yes">
-                        <label class="form-check-label" for="inlineRadio1">Yes</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="extra" id="inlineRadio2" value="No">
-                        <label class="form-check-label" for="inlineRadio2">No</label>
+            </div>
+
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Worrying too much?</h5>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="an3">Never
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="an3">Sometimes
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="an3">Everyday
+                        </label>
                     </div>
                 </div>
-            </li>
-            <li class="table-row">
-                <div class="col col-1">8. Your average daily play hours</div>
-                <div class="col col-2">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="play" id="inlineRadio1" value="1">
-                        <label class="form-check-label" for="inlineRadio1">1</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="play" id="inlineRadio2" value="2">
-                        <label class="form-check-label" for="inlineRadio2">2</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="play" id="inlineRadio3" value="3">
-                        <label class="form-check-label" for="inlineRadio3">3</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="play" id="inlineRadio4" value="4">
-                        <label class="form-check-label" for="inlineRadio4">4</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="play" id="inlineRadio5" value="5">
-                        <label class="form-check-label" for="inlineRadio5">5</label>
+            </div>
+
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Feeling fidgety, restless and easily bored?</h5>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="ad1an4">Never
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="ad1an4">Sometimes
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="ad1an4">Everyday
+                        </label>
                     </div>
                 </div>
-            </li>
-            <li class="table-row">
-                <div class="col col-1">9. Your Hours of sleep</div>
-                <div class="col col-2">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="sleep" id="forhrs1" value="1">
-                        <label class="form-check-label" for="forhrs1">1</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="sleep" id="forhrs2" value="2">
-                        <label class="form-check-label" for="forhrs2">2</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="sleep" id="forhrs3" value="3">
-                        <label class="form-check-label" for="forhrs3">3</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="sleep" id="forhrs4" value="4">
-                        <label class="form-check-label" for="forhrs4">4</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="sleep" id="forhrs5" value="5">
-                        <label class="form-check-label" for="forhrs5">5</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="sleep" id="forhrs6" value="6">
-                        <label class="form-check-label" for="forhrs6">6</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="sleep" id="forhrs7" value="7">
-                        <label class="form-check-label" for="forhrs7">7</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="sleep" id="forhrs8" value="8">
-                        <label class="form-check-label" for="forhrs8">8</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="sleep" id="forhrs9" value="9">
-                        <label class="form-check-label" for="forhrs9">9</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="sleep" id="forhrs10" value="10">
-                        <label class="form-check-label" for="forhrs10">10</label>
+            </div>
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Feeling Irritated?</h5>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="d3">Never
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="d3">Sometimes
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="d3">Everyday
+                        </label>
                     </div>
                 </div>
-            </li>
-            <li class="table-row">
-                <div class="col col-1">10. Competitive exams - participation</div>
-                <div class="col col-2">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="comp" id="parti1" value="Yes">
-                        <label class="form-check-label" for="parti1">Yes</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="comp" id="parti2" value="No">
-                        <label class="form-check-label" for="parti1">No</label>
-                    </div>
-                </div>
-            </li>
-            <li class="table-row">
-                <div class="col col-1">11. When do you start preparing for your exams?</div>
-                <div class="col col-2">
-                    <div class="form-check form-check-inline">
-                        <input type="text" name="prep" placeholder="Answer" id="exam" class="form-control">
+            </div>
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Having Nightmares?</h5>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="s2">Never
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="s2">Sometimes
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="s2">Everyday
+                        </label>
                     </div>
                 </div>
-            </li>
-            <li class="table-row">
-                <div class="col col-1">12. How likely are you to take part in sports?</div>
-                <div class="col col-2">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="sport" id="sportst1" value="1">
-                        <label class="form-check-label" for="sports1">1</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="sport" id="sports2" value="2">
-                        <label class="form-check-label" for="sports2">2</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="sport" id="sports3" value="3">
-                        <label class="form-check-label" for="sports3">3</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="sport" id="sports4" value="4">
-                        <label class="form-check-label" for="sports4">4</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="sport" id="sports5" value="5">
-                        <label class="form-check-label" for="sports5">5</label>
+            </div>
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Having stomach aches?</h5>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="s3">Never
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="s3">Sometimes
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="s3">Everyday
+                        </label>
                     </div>
                 </div>
-            </li>
-            <li class="table-row">
-                <div class="col col-1">13. Level of anxiety and pressure felt during exams</div>
-                <div class="col col-2">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="anx" id="anx1" value="1">
-                        <label class="form-check-label" for="anx1">1</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="anx" id="anx2" value="2">
-                        <label class="form-check-label" for="anx2">2</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="anx" id="anx3" value="3">
-                        <label class="form-check-label" for="anx3">3</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="anx" id="anx4" value="4">
-                        <label class="form-check-label" for="anx4">4</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="anx" id="anx5" value="5">
-                        <label class="form-check-label" for="anx5">5</label>
+            </div>
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Being Impulsive ?</h5>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="ad2">Never
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="ad2">Sometimes
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="ad2">Everyday
+                        </label>
                     </div>
                 </div>
-            </li>
-            <li class="table-row">
-                <div class="col col-1">14. How secure do you fel at home?</div>
-                <div class="col col-2">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="secure" id="inlineRadio1" value="1">
-                        <label class="form-check-label" for="inlineRadio1">1</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="secure" id="inlineRadio2" value="2">
-                        <label class="form-check-label" for="inlineRadio2">2</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="secure" id="inlineRadio3" value="3">
-                        <label class="form-check-label" for="inlineRadio3">3</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="secure" id="inlineRadio4" value="4">
-                        <label class="form-check-label" for="inlineRadio4">4</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="secure" id="inlineRadio5" value="5">
-                        <label class="form-check-label" for="inlineRadio5">5</label>
+            </div>
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Having less attention span ?</h5>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="ad3">Never
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="ad3">Sometimes
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="ad3">Everyday
+                        </label>
                     </div>
                 </div>
-            </li>
-            <li class="table-row">
-                <div class="col col-1">15. How confident are you?</div>
-                <div class="col col-2">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="conf" id="inlineRadio1" value="1">
-                        <label class="form-check-label" for="inlineRadio1">1</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="conf" id="inlineRadio2" value="2">
-                        <label class="form-check-label" for="inlineRadio2">2</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="conf" id="inlineRadio3" value="3">
-                        <label class="form-check-label" for="inlineRadio3">3</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="conf" id="inlineRadio4" value="4">
-                        <label class="form-check-label" for="inlineRadio4">4</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="conf" id="inlineRadio5" value="5">
-                        <label class="form-check-label" for="inlineRadio5">5</label>
+            </div>
+
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Parents' Education</h5>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="p1"> Secondary Education(10th pass)
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="p1"> Higher Secondary Education(12th pass)
+                        </label>
+                        <label class="btn btn-secondary" style="padding-top: 1rem;">
+                            <input type="radio" name="p1">College Graduate
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="p1"> Higher Education (Post graduate, PhD)
+                        </label>
                     </div>
                 </div>
-            </li>
-            <li class="table-row">
-                <div class="col col-1">16. How socially active are you?</div>
-                <div class="col col-2">
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="soc" id="inlineRadio1" value="1">
-                        <label class="form-check-label" for="inlineRadio1">1</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="soc" id="inlineRadio2" value="2">
-                        <label class="form-check-label" for="inlineRadio2">2</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="soc" id="inlineRadio3" value="3">
-                        <label class="form-check-label" for="inlineRadio3">3</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="soc" id="inlineRadio4" value="4">
-                        <label class="form-check-label" for="inlineRadio4">4</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="soc" id="inlineRadio5" value="5">
-                        <label class="form-check-label" for="inlineRadio5">5</label>
+            </div>
+
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Family Income</h5>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="p2"> &lt; 2 L.p.a
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="p2"> 2-4 L.p.a
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="p2">4-18 L.p.a
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="p2"> &gt; 18 L.p.a
+                        </label>
                     </div>
                 </div>
-            </li>
-            <li class="table-row">
-                <div class="col col-1">17. Additional thoughts</div>
-                <div class="col col-2">
-                    <div class="form-check form-check-inline">
-                        <input type="text" name="add">
-                    </div>
-            </li>
-            <li class="table-row">
-                <div class="col col-1">18. Your Email</div>
-                <div class="col col-2">
-                    <div class="form-check form-check-inline">
-                        <input type="text" name="email" placeholder="Enter your email">
+            </div>
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">How many tutions do you go to?</h5>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="s4">0
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="s4">1
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="s4">2
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="s4">&gt; 2
+                        </label>
                     </div>
                 </div>
-            </li>
-        </ul>
+            </div>
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Playing time in hours</h5>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="d4">0
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="d4">1-2
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="d4">3-5
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="d4">&gt; 5
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Number of competitive exams you appear for</h5>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="p3">0
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="p3">1
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="p3">2-4
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="p3">&gt; 4
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Number of extracurricular activities/hobbies</h5>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="s5">0
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="s5">1-3
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="s5">4-5
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="s5">&gt; 5
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Email</h5>
+                    <div class="row d-flex justify-content-center">
+                        <div>
+                            <input type="text" name="email" placeholder="Enter your email" class="form-control">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Submit button -->
+            <div class="align-self-center mx-auto text-center">
+                <button type="submit" class="btn btn-secondary" Value="Submit">
+                    Submit
+                </button>
+            </div>
+        </form>
     </div>
-    <!-- Submit button -->
-    <div class="align-self-center mx-auto text-center">
-        <button type="submit" class="btn btn-primary btn-danger-gradiant" Value="Submit">
-            Submit
-        </button>
-    </div>
-
-</form>
 </div>
-</div>
-</div>
-
 {% endblock content %}
