@@ -29,7 +29,7 @@
 }
 .btn > .btn-primary {
     /* background-color: #fbff79 !important; */
-    background: linear-gradient(to right, #bff5fa, #bdffb0) !important;
+    background: linear-gradient(to right, #70dceb, #9bdf68) !important;
     color: #1b1d21 !important;
     border: #1b1d21 !important;
     text-decoration: none;
@@ -42,7 +42,7 @@
     color: #1b1d21 !important;
 }
 .badge-primary{
-    background: linear-gradient(to right, #bff5fa, #bdffb0) !important;
+    background: linear-gradient(to right, #70dceb, #bdffb0) !important;
     color: #1b1d21 !important;
 }
 .card-link{
@@ -56,5 +56,5 @@
 } */
 .btn-outline-primary {
     border-color: #1b1d21 !important;
-    background:linear-gradient(to right, #bff5fa, #bdffb0) !important;
+    background:linear-gradient(to right, #70dceb, #bdffb0) !important;
 }
