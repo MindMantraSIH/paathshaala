@@ -13,7 +13,7 @@ import os
 from plotly.subplots import make_subplots
 import plotly.graph_objects as go
 from .models import Academics
-from profiles.models import School
+from profiles.models import School, Student
 import smtplib
 from suggestions.models import Data
 from django.conf import settings
@@ -22,6 +22,7 @@ import os
 import csv
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 from sklearn.decomposition import NMF, LatentDirichletAllocation
+
 
 
 
@@ -602,3 +603,65 @@ def standard_analytics(request, std):
 
 # def dashboard1(request):
 #     return render(request, "Analytics/dashboard1.html")
+
+def student_dashboard(request):
+    student = Student.objects.get(user=request.user)
+    #print(student)
+    roll_no = int(student.roll_number)
+    #print(roll_no)
+    df_s = pd.read_csv('Analytics/data/student_data.csv')
+    curr = df_s[df_s['Roll_number'] == roll_no]
+    #print(curr)
+    std = df_s[df_s['Roll_number'] == roll_no].Standard.values[0]
+    std_df = df_s[df_s["Standard"] == std]
+    std_mean = std_df['Percent'].mean()
+    curr = df_s[df_s['Roll_number'] == roll_no].Percent.values[0]
+    res = [std_mean, curr]
+    lab = ['Class Average', 'Student"s Percent']
+    fig1 = go.Figure([go.Bar(x=lab, y=res)])
+    graph1 = plotly.offline.plot(fig1, auto_open=False, output_type="div")
+    x = df_s[df_s['Roll_number'] == roll_no]
+    subjects = ['English', 'Hindi', 'Maths', 'Science', 'History', 'Geography']
+    marks = [x.English.values[0], x.Hindi.values[0], x.Maths.values[0], x.Science.values[0], x.History.values[0],
+             x.Geography.values[0]]
+    fig2 = go.Figure(data=[go.Pie(labels=subjects, values=marks, pull=[0.1, 0.1, 0.1, 0.1, 0.1])])
+    graph2 = plotly.offline.plot(fig2, auto_open=False, output_type="div")
+
+    fig3 = go.Figure(data=go.Scatterpolar(
+        r=[x['How interactive in class'].values[0], x['Assignments on time'].values[0],
+           x['Attentive in class'].values[0], x['Participation in extra curricular'].values[0]],
+        theta=['How interactive in class', 'Assignments on time', 'Attentive in class',
+               'Participation in extra curricular'],
+        fill='toself'
+    ))
+
+    fig3.update_layout(
+        polar=dict(
+            radialaxis=dict(
+                visible=True
+            ),
+        ),
+        showlegend=False
+    )
+    graph3 = plotly.offline.plot(fig3, auto_open=False, output_type="div")
+
+    fig4 = go.Figure(data=go.Scatterpolar(
+        r=[x['Creativity'].values[0], x['confidence'].values[0], x['Social relationships'].values[0],
+           x['Obedient'].values[0]],
+        theta=['Creativity', 'confidence', 'Social relationships', 'Obedient'],
+        fill='toself'
+    ))
+
+    fig4.update_layout(
+        polar=dict(
+            radialaxis=dict(
+                visible=True
+            ),
+        ),
+        showlegend=False
+    )
+    graph4 = plotly.offline.plot(fig4, auto_open=False, output_type="div")
+    context = {"graph": [graph1, graph2, graph3, graph4],
+               'name': request.user.name,
+               }
+    return render(request,"Analytics/student_dashboard.html",context)
