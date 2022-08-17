@@ -611,7 +611,7 @@ def student_dashboard(request):
     #print(roll_no)
     df_s = pd.read_csv('Analytics/data/student_data.csv')
     curr = df_s[df_s['Roll_number'] == roll_no]
-    #print(curr)
+    # print(curr)
     std = df_s[df_s['Roll_number'] == roll_no].Standard.values[0]
     std_df = df_s[df_s["Standard"] == std]
     std_mean = std_df['Percent'].mean()
