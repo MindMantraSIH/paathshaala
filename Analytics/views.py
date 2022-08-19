@@ -246,15 +246,16 @@ def upload_csv(request):
             elements = line.split(',')
             print(elements)
             p = Academics.objects.create(school = request.user.school,roll_no=elements[0],
-                                         name=elements[1], standard = elements[2],
-                                         english = float(elements[3]), hindi = float(elements[4]),
-                                         maths=float(elements[5]), science=float(elements[6]),
-                                         geo=float(elements[7]),percent=float(elements[8]),
-                                         interactivity=float(elements[9]),
-                                         timely_submissions=float(elements[10]),
-                                         attentiveness=float(elements[11]), creativity=float(elements[12]),
-                                         participation=float(elements[13]), confidence=float(elements[14]),
-                                         social_relationship=float(elements[15]), obedience=float(elements[16])
+                                         name=elements[1], standard = elements[2], division= elements[3],
+                                         english = float(elements[4]), hindi = float(elements[5]),
+                                         maths=float(elements[6]), science=float(elements[7]),
+                                         history= float(elements[8]),
+                                         geo=float(elements[9]),percent=float(elements[10]),
+                                         interactivity=float(elements[11]),
+                                         timely_submissions=float(elements[12]),
+                                         attentiveness=float(elements[13]), creativity=float(elements[14]),
+                                         participation=float(elements[15]), confidence=float(elements[16]),
+                                         social_relationship=float(elements[17]), obedience=float(elements[18])
                                          )
             print("Hello",p)
             # except:

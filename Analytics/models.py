@@ -13,6 +13,7 @@ class Academics(models.Model):
     roll_no = models.CharField(max_length=50, primary_key= True)
     name = models.CharField(max_length=50)
     standard = models.CharField(max_length=3)
+    division = models.CharField(max_length=3)
     english = models.FloatField(blank=True,null=True)
     hindi = models.FloatField(blank=True,null=True)
     maths = models.FloatField(blank=True, null=True)
