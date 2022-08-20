@@ -35,6 +35,10 @@ class Student(models.Model):
     roll_number = models.CharField(max_length=20)
     school = models.ForeignKey(School, on_delete=models.CASCADE)
     pincode = models.CharField(max_length=10, blank=True, null=True)
+    std = models.CharField(max_length=10)
+    division = models.CharField(max_length=10)
+
+
 
     def __str__(self) -> str:
         return f'{self.school.user.name}: {self.roll_number}'
