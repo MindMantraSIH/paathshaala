@@ -13,7 +13,7 @@ import os
 from plotly.subplots import make_subplots
 import plotly.graph_objects as go
 from .models import Academics
-from profiles.models import School
+from profiles.models import School, Student
 import smtplib
 from suggestions.models import Data
 from django.conf import settings
@@ -22,6 +22,7 @@ import os
 import csv
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 from sklearn.decomposition import NMF, LatentDirichletAllocation
+
 
 
 
@@ -157,10 +158,6 @@ def dashboard(request):
     print(students_course_easy)
     to_plot = {'Students finding course difficult': students_course_difficult,
                'Students finding Course Easy': students_course_easy}
-    for x, y in to_plot.items():
-        label.append(x)
-        sizes.append(y)
-
     fig0 = go.Figure(data=go.Scatterpolar(
         r=[df['A Clean Environment'].mean(), df['Providing laboratory & workshop facilities'].mean(),
            df['The school timetable'].mean(), df['Presenting more sporting & artistic classes'].mean(),
@@ -195,15 +192,6 @@ def dashboard(request):
 
     graph1 = plotly.offline.plot(fig0, auto_open=False, output_type="div")
     fig = go.Figure(data=[go.Pie(labels=label, values=sizes)])
-    # graph1 = plotly.offline.plot(fig, auto_open=False, output_type="div")
-    want = df[df['Courses should have creative and colorful instructional materials and fun activities.'] > 3]
-    want_count = want['Courses should have creative and colorful instructional materials and fun activities.'].count()
-    not_w = df[df['Courses should have creative and colorful instructional materials and fun activities.'] < 3]
-    not_want_count = not_w[
-        'Courses should have creative and colorful instructional materials and fun activities.'].count()
-    res = [want_count, not_want_count]
-    a = ['Want fun activities', 'Dont want fun activites']
-    fig = go.Figure([go.Bar(x=a, y=res)])
     graph2 = plotly.offline.plot(fig1, auto_open=False, output_type="div")
 
     fig3 = go.Figure(data=[go.Pie(labels=["<1","2-3","3-4","4-5"],
@@ -220,8 +208,6 @@ def dashboard(request):
                     pull=[0.3, 0, 0, 0])])
 
     graph3 = plotly.offline.plot(fig3, auto_open=False, output_type="div")
-    #   fig = px.line(coin_data, x="Date", y=coin_data.columns[3:4], width=1050, height=500)
-    #   graph4 = plotly.offline.plot(fig, auto_open=False, output_type="div")
     fig4 = go.Figure(data=go.Scatter(x=['Discrimination prevention',
                                         'Group Performance',
                                         'Extracurriculars',
@@ -253,18 +239,27 @@ def upload_csv(request):
         lines = csv.read().decode().split('\r\n')
         print(lines)
         for i,line in enumerate(lines):
-            try:
-                print(line)
-                if i == 0 or i == len(lines) -1:
-                    continue
-                elements = line.split(',')
-                print(elements)
-                p = Academics.objects.create(school = request.user.school,name=elements[0],
-                                             email=elements[1], english = elements[2], roll_no = elements[3])
-                print(p)
-            except:
-                pass
-
+            # try:
+            print(line)
+            if i == 0 or i == len(lines) -1:
+                continue
+            elements = line.split(',')
+            print(elements)
+            p = Academics.objects.create(school = request.user.school,roll_no=elements[0],
+                                         name=elements[1], standard = elements[2],
+                                         english = float(elements[3]), hindi = float(elements[4]),
+                                         maths=float(elements[5]), science=float(elements[6]),
+                                         geo=float(elements[7]),percent=float(elements[8]),
+                                         interactivity=float(elements[9]),
+                                         timely_submissions=float(elements[10]),
+                                         attentiveness=float(elements[11]), creativity=float(elements[12]),
+                                         participation=float(elements[13]), confidence=float(elements[14]),
+                                         social_relationship=float(elements[15]), obedience=float(elements[16])
+                                         )
+            print("Hello",p)
+            # except:
+            #     pass
+        print("hulllllllllllllllllllllllaaaaaaaaaaaaaaaaaaaarrrrrrrrrrrrrrrrrrrrrrraaaaaaaaaaaaaaaaaaaaaaaaa")
         happiness_index(request)
         ranking()
         s = suggest()
@@ -273,30 +268,81 @@ def upload_csv(request):
     sizes = []
     diff = df[df['Level Of Courses (Difficulty)'] > 2]
     students_course_difficult = diff['Level Of Courses (Difficulty)'].count()
-    eas = df[df['Level Of Courses (Difficulty)'] < 2]
+    eas = df[df['Level Of Courses (Difficulty)'] <= 2]
     students_course_easy = eas['Level Of Courses (Difficulty)'].count()
-    students_course_easy += 1
+    # students_course_easy += 1
     print(students_course_easy)
     to_plot = {'Students finding course difficult': students_course_difficult,
                'Students finding Course Easy': students_course_easy}
-    for x, y in to_plot.items():
-        label.append(x)
-        sizes.append(y)
+    fig0 = go.Figure(data=go.Scatterpolar(
+        r=[df['A Clean Environment'].mean(), df['Providing laboratory & workshop facilities'].mean(),
+           df['The school timetable'].mean(), df['Presenting more sporting & artistic classes'].mean(),
+           df['Being able to solve problems of the learner'].mean()],
+        theta=['A Clean Environment', 'Providing laboratory & workshop facilities',
+               'Effectiveness of school timetable', 'Presenting more sporting & artistic classes',
+               'Quality of doubt resolution'],
+        fill='toself'
+    ))
+
+    fig0.update_layout(
+        polar=dict(
+            radialaxis=dict(
+                visible=True
+            ),
+        ),
+        showlegend=False
+    )
+
+    features = ['Level Of Courses (Difficulty)', 'Course relevance',
+                'Critical learning of the learner']
+
+    fig1 = go.Figure(data=[
+        go.Bar(name='Rated greater than 2', x=features, y=[students_course_difficult,
+                                                           len(df[df['Course relevance'] > 2]),
+                                                           len(df[df[
+                                                                      'Involve with fundamental and critical aspects of learner , about manner of living'] > 2])]),
+        go.Bar(name='Rated lower than or equal to 2', x=features, y=[students_course_difficult,
+                                                                     len(df[df['Course relevance'] <= 2]),
+                                                                     len(df[df[
+                                                                                'Involve with fundamental and critical aspects of learner , about manner of living'] <= 2])])])
+    # Change the bar mode
+    fig1.update_layout(barmode='group')
+
+    graph1 = plotly.offline.plot(fig0, auto_open=False, output_type="div")
     fig = go.Figure(data=[go.Pie(labels=label, values=sizes)])
-    graph1 = plotly.offline.plot(fig, auto_open=False, output_type="div")
-    want = df[df['Courses should have creative and colorful instructional materials and fun activities.'] > 3]
-    want_count = want['Courses should have creative and colorful instructional materials and fun activities.'].count()
-    not_w = df[df['Courses should have creative and colorful instructional materials and fun activities.'] < 3]
-    not_want_count = not_w[
-        'Courses should have creative and colorful instructional materials and fun activities.'].count()
-    res = [want_count, not_want_count]
-    a = ['Want fun activities', 'Dont want fun activites']
-    fig = go.Figure([go.Bar(x=a, y=res)])
-    graph2 = plotly.offline.plot(fig, auto_open=False, output_type="div")
-    fig = px.box(df, y=['Being able to solve problems of the learner'])
-    graph3 = plotly.offline.plot(fig, auto_open=False, output_type="div")
+    graph2 = plotly.offline.plot(fig1, auto_open=False, output_type="div")
+
+    fig3 = go.Figure(data=[go.Pie(labels=["<1", "2-3", "3-4", "4-5"],
+                                  values=[len(df[df['Mental health assessment of all students'] <= 1]),
+                                          len(df[(df['Mental health assessment of all students'] > 1) &
+                                                 (df['Mental health assessment of all students'] <= 2)]),
+                                          len(df[(df['Mental health assessment of all students'] > 2) &
+                                                 (df['Mental health assessment of all students'] <= 3)]),
+                                          len(df[(df['Mental health assessment of all students'] > 3) &
+                                                 (df['Mental health assessment of all students'] <= 4)]),
+                                          len(df[(df['Mental health assessment of all students'] > 4) &
+                                                 (df['Mental health assessment of all students'] <= 5)])
+                                          ],
+                                  pull=[0.3, 0, 0, 0])])
+
+    graph3 = plotly.offline.plot(fig3, auto_open=False, output_type="div")
+    fig4 = go.Figure(data=go.Scatter(x=['Discrimination prevention',
+                                        'Group Performance',
+                                        'Extracurriculars',
+                                        'Individual attention',
+                                        'Problems solved',
+                                        'Age-based conversations'
+                                        ], y=[df['Preventing Discrimination and Persuasion'].mean(),
+                                              df['Performing group work'].mean(),
+                                              df['Presenting more sporting & artistic classes'].mean(),
+                                              df['Focus on the individual'].mean(),
+                                              df['Are these problems being solved by the School?'].mean(),
+                                              df[
+                                                  'Issues of concern should be made a point of conversation within age appropriate classrooms and children made aware of existing realities.'].mean()])
+                     )
+    graph4 = plotly.offline.plot(fig4, auto_open=False, output_type="div")
     r = lda()
-    context = {"graph": [graph1, graph2, graph3],
+    context = {"graph": [graph1, graph2, graph3,graph4],
         'name': request.user.school,
         'city': request.user.school.city,
         'state': request.user.school.state,
@@ -325,29 +371,80 @@ def send(request):
     sizes = []
     diff = df[df['Level Of Courses (Difficulty)'] > 2]
     students_course_difficult = diff['Level Of Courses (Difficulty)'].count()
-    eas = df[df['Level Of Courses (Difficulty)'] < 2]
+    eas = df[df['Level Of Courses (Difficulty)'] <= 2]
     students_course_easy = eas['Level Of Courses (Difficulty)'].count()
-    students_course_easy += 1
+    # students_course_easy += 1
     print(students_course_easy)
     to_plot = {'Students finding course difficult': students_course_difficult,
                'Students finding Course Easy': students_course_easy}
-    for x, y in to_plot.items():
-        label.append(x)
-        sizes.append(y)
+    fig0 = go.Figure(data=go.Scatterpolar(
+        r=[df['A Clean Environment'].mean(), df['Providing laboratory & workshop facilities'].mean(),
+           df['The school timetable'].mean(), df['Presenting more sporting & artistic classes'].mean(),
+           df['Being able to solve problems of the learner'].mean()],
+        theta=['A Clean Environment', 'Providing laboratory & workshop facilities',
+               'Effectiveness of school timetable', 'Presenting more sporting & artistic classes',
+               'Quality of doubt resolution'],
+        fill='toself'
+    ))
+
+    fig0.update_layout(
+        polar=dict(
+            radialaxis=dict(
+                visible=True
+            ),
+        ),
+        showlegend=False
+    )
+
+    features = ['Level Of Courses (Difficulty)', 'Course relevance',
+                'Critical learning of the learner']
+
+    fig1 = go.Figure(data=[
+        go.Bar(name='Rated greater than 2', x=features, y=[students_course_difficult,
+                                                           len(df[df['Course relevance'] > 2]),
+                                                           len(df[df[
+                                                                      'Involve with fundamental and critical aspects of learner , about manner of living'] > 2])]),
+        go.Bar(name='Rated lower than or equal to 2', x=features, y=[students_course_difficult,
+                                                                     len(df[df['Course relevance'] <= 2]),
+                                                                     len(df[df[
+                                                                                'Involve with fundamental and critical aspects of learner , about manner of living'] <= 2])])])
+    # Change the bar mode
+    fig1.update_layout(barmode='group')
+
+    graph1 = plotly.offline.plot(fig0, auto_open=False, output_type="div")
     fig = go.Figure(data=[go.Pie(labels=label, values=sizes)])
-    graph1 = plotly.offline.plot(fig, auto_open=False, output_type="div")
-    want = df[df['Courses should have creative and colorful instructional materials and fun activities.'] > 3]
-    want_count = want['Courses should have creative and colorful instructional materials and fun activities.'].count()
-    not_w = df[df['Courses should have creative and colorful instructional materials and fun activities.'] < 3]
-    not_want_count = not_w[
-        'Courses should have creative and colorful instructional materials and fun activities.'].count()
-    res = [want_count, not_want_count]
-    a = ['Want fun activities', 'Dont want fun activites']
-    fig = go.Figure([go.Bar(x=a, y=res)])
-    graph2 = plotly.offline.plot(fig, auto_open=False, output_type="div")
-    fig = px.box(df, y=['Being able to solve problems of the learner'])
-    graph3 = plotly.offline.plot(fig, auto_open=False, output_type="div")
-    context = {"graph": [graph1, graph2, graph3],
+    graph2 = plotly.offline.plot(fig1, auto_open=False, output_type="div")
+
+    fig3 = go.Figure(data=[go.Pie(labels=["<1", "2-3", "3-4", "4-5"],
+                                  values=[len(df[df['Mental health assessment of all students'] <= 1]),
+                                          len(df[(df['Mental health assessment of all students'] > 1) &
+                                                 (df['Mental health assessment of all students'] <= 2)]),
+                                          len(df[(df['Mental health assessment of all students'] > 2) &
+                                                 (df['Mental health assessment of all students'] <= 3)]),
+                                          len(df[(df['Mental health assessment of all students'] > 3) &
+                                                 (df['Mental health assessment of all students'] <= 4)]),
+                                          len(df[(df['Mental health assessment of all students'] > 4) &
+                                                 (df['Mental health assessment of all students'] <= 5)])
+                                          ],
+                                  pull=[0.3, 0, 0, 0])])
+
+    graph3 = plotly.offline.plot(fig3, auto_open=False, output_type="div")
+    fig4 = go.Figure(data=go.Scatter(x=['Discrimination prevention',
+                                        'Group Performance',
+                                        'Extracurriculars',
+                                        'Individual attention',
+                                        'Problems solved',
+                                        'Age-based conversations'
+                                        ], y=[df['Preventing Discrimination and Persuasion'].mean(),
+                                              df['Performing group work'].mean(),
+                                              df['Presenting more sporting & artistic classes'].mean(),
+                                              df['Focus on the individual'].mean(),
+                                              df['Are these problems being solved by the School?'].mean(),
+                                              df[
+                                                  'Issues of concern should be made a point of conversation within age appropriate classrooms and children made aware of existing realities.'].mean()])
+                     )
+    graph4 = plotly.offline.plot(fig4, auto_open=False, output_type="div")
+    context = {"graph": [graph1, graph2, graph3,graph4],
         'name': request.user.school,
         'city': request.user.school.city,
         'state': request.user.school.state,
@@ -410,7 +507,161 @@ def suggest():
 
 
 
+def standard_analytics(request, std):
+    output = []
+    query_set = Academics.objects.filter(school=request.user.school,standard=std)
+    print(query_set)
+    with open(os.getcwd() + "/standard_data.csv", 'w', newline='') as file:
+        writer = csv.writer(file)
+        print(os.getcwd())
+        writer.writerow(['Roll_number', 'Name', 'School', 'Standard', 'English', 'Hindi',
+       'Maths', 'Science', 'History', 'Geography', 'Percent',
+       'How interactive in class', 'Assignments on time', 'Attentive in class',
+       'Creativity', 'Participation in extra curricular', 'Confidence',
+       'Social relationships', 'Obedient'])
+        for user in query_set:
+            print("Im here")
+            print(user)
+            output.append([user.roll_no, user.name, user.standard, user.english, user.hindi, user.maths,
+                           user.science, user.history, user.geo, user.percent, user.interactivity,
+                           user.timely_submissions, user.attentiveness, user.creativity,
+                           user.participation, user.confidence, user.social_relationship,
+                           user.obedience])
+        writer.writerows(output)
+    print()
+    df = pd.read_csv(os.getcwd() + "/standard_data.csv")
+    fig0 = go.Figure(data=go.Scatterpolar(
+        r=[df['English'].mean(), df['Hindi'].mean(),
+           df['Maths'].mean(), df['Science'].mean(),
+           df['History'].mean(), df['Geography'].mean()],
+        theta=['English', 'Hindi',
+       'Maths', 'Science', 'History', 'Geography'],
+        fill='toself'
+    ))
+
+    fig0.update_layout(
+        polar=dict(
+            radialaxis=dict(
+                visible=True
+            ),
+        ),
+        showlegend=False
+    )
+    graph1 = plotly.offline.plot(fig0, auto_open=False, output_type="div")
+
+    features = ['How interactive in class', 'Assignments on time', 'Attentive in class',]
+
+    fig1 = go.Figure(data=[
+        go.Bar(name='Rated greater than 2', x=features, y=[len(df[df['How interactive in class'] > 2]),
+                                                           len(df[df['Assignments on time'] > 2]),
+                                                           len(df[df['Attentive in class'] > 2])]),
+        go.Bar(name='Rated lower than or equal to 2', x=features, y=[
+                                                           len(df[df['How interactive in class'] <= 2]),
+                                                           len(df[df['Assignments on time'] <= 2]),
+                                                           len(df[df['Attentive in class'] <= 2])])])
+    # Change the bar mode
+    fig1.update_layout(barmode='group')
+    graph2 = plotly.offline.plot(fig1, auto_open=False, output_type="div")
+
+    fig3 = go.Figure(data=[go.Pie(labels=["<1","2-3","3-4","4-5"],
+                                 values=[len(df[df['Percent'] <= 20]),
+                                         len(df[(df['Percent'] > 20) &
+                                                (df['Percent'] <= 40)]),
+                                         len(df[(df['Percent'] > 40) &
+                                                (df['Percent'] <= 60)]),
+                                         len(df[(df['Percent'] > 60) &
+                                                (df['Percent'] <= 80)]),
+                                         len(df[(df['Percent'] > 80) &
+                                                (df['Percent'] <= 100)])
+                                         ],
+                    pull=[0.3, 0, 0, 0])])
+
+    graph3 = plotly.offline.plot(fig3, auto_open=False, output_type="div")
+
+    fig4 = go.Figure(data=go.Scatter(x=['Creativity',
+                                        'Participation in extra curricular',
+                                        'Confidence',
+                                        'Social relationships',
+                                        'Obedient'
+                                        ], y=[df['Creativity'].mean(),
+                                              df['Participation in extra curricular'].mean(),
+                                              df['Confidence'].mean(),
+                                              df['Social relationships'].mean(),
+                                              df['Obedient'].mean()]))
+    graph4 = plotly.offline.plot(fig4, auto_open=False, output_type="div")
+    context = {"graph": [graph1, graph2, graph3,graph4],
+               'name': request.user.school,
+                'city': request.user.school.city,
+                'state': request.user.school.state,
+               'rank': request.user.school.rank,
+               'std':std,
+               'happinessindex': request.user.school.happiness_score
+               }
+    return render(request,"Analytics/standard_dashboard.html",context)
+# return render(request, "Analytics/dashboard1.html")
 
 
 # def dashboard1(request):
 #     return render(request, "Analytics/dashboard1.html")
+
+def student_dashboard(request):
+    student = Student.objects.get(user=request.user)
+    #print(student)
+    roll_no = int(student.roll_number)
+    #print(roll_no)
+    df_s = pd.read_csv('Analytics/data/student_data.csv')
+    curr = df_s[df_s['Roll_number'] == roll_no]
+    # print(curr)
+    std = df_s[df_s['Roll_number'] == roll_no].Standard.values[0]
+    std_df = df_s[df_s["Standard"] == std]
+    std_mean = std_df['Percent'].mean()
+    curr = df_s[df_s['Roll_number'] == roll_no].Percent.values[0]
+    res = [std_mean, curr]
+    lab = ['Class Average', 'Student"s Percent']
+    fig1 = go.Figure([go.Bar(x=lab, y=res)])
+    graph1 = plotly.offline.plot(fig1, auto_open=False, output_type="div")
+    x = df_s[df_s['Roll_number'] == roll_no]
+    subjects = ['English', 'Hindi', 'Maths', 'Science', 'History', 'Geography']
+    marks = [x.English.values[0], x.Hindi.values[0], x.Maths.values[0], x.Science.values[0], x.History.values[0],
+             x.Geography.values[0]]
+    fig2 = go.Figure(data=[go.Pie(labels=subjects, values=marks, pull=[0.1, 0.1, 0.1, 0.1, 0.1])])
+    graph2 = plotly.offline.plot(fig2, auto_open=False, output_type="div")
+
+    fig3 = go.Figure(data=go.Scatterpolar(
+        r=[x['How interactive in class'].values[0], x['Assignments on time'].values[0],
+           x['Attentive in class'].values[0], x['Participation in extra curricular'].values[0]],
+        theta=['How interactive in class', 'Assignments on time', 'Attentive in class',
+               'Participation in extra curricular'],
+        fill='toself'
+    ))
+
+    fig3.update_layout(
+        polar=dict(
+            radialaxis=dict(
+                visible=True
+            ),
+        ),
+        showlegend=False
+    )
+    graph3 = plotly.offline.plot(fig3, auto_open=False, output_type="div")
+
+    fig4 = go.Figure(data=go.Scatterpolar(
+        r=[x['Creativity'].values[0], x['confidence'].values[0], x['Social relationships'].values[0],
+           x['Obedient'].values[0]],
+        theta=['Creativity', 'confidence', 'Social relationships', 'Obedient'],
+        fill='toself'
+    ))
+
+    fig4.update_layout(
+        polar=dict(
+            radialaxis=dict(
+                visible=True
+            ),
+        ),
+        showlegend=False
+    )
+    graph4 = plotly.offline.plot(fig4, auto_open=False, output_type="div")
+    context = {"graph": [graph1, graph2, graph3, graph4],
+               'name': request.user.name,
+               }
+    return render(request,"Analytics/student_dashboard.html",context)

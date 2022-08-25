@@ -1,5 +1,4 @@
 
-
 .h7 {
     font-size: 0.8rem;
 }
@@ -10,8 +9,8 @@
 
 @media (min-width: 992px) {
     .gedf-main {
-        padding-left: 4rem;
-        padding-right: 4rem;
+        padding-left: 2rem;
+        padding-right: 2rem;
     }
     .gedf-card {
         margin-bottom: 2.77rem;
@@ -28,9 +27,9 @@
     0 10px 10px rgba(0,0,0,0.22);
     border-radius: 10px;
 }
-.btn-primary {
+.btn > .btn-primary {
     /* background-color: #fbff79 !important; */
-    background: linear-gradient(to right, #fbff79, #ffc680) !important;
+    background: linear-gradient(to right, #70dceb, #9bdf68) !important;
     color: #1b1d21 !important;
     border: #1b1d21 !important;
     text-decoration: none;
@@ -43,19 +42,19 @@
     color: #1b1d21 !important;
 }
 .badge-primary{
-    background: linear-gradient(to right, #fbff79, #ffc680) !important;
+    background: linear-gradient(to right, #70dceb, #bdffb0) !important;
     color: #1b1d21 !important;
 }
 .card-link{
     color: #1b1d21 !important;
 }
-.card-footer a:hover {
+/* .card-footer a:hover {
     color: #ffc680 !important;
 }
 .card-link a:hover {
     color: #ffc680 !important;
-}
+} */
 .btn-outline-primary {
     border-color: #1b1d21 !important;
-    background:linear-gradient(to right, #fbff79, #ffc680) !important;
+    background:linear-gradient(to right, #70dceb, #bdffb0) !important;
 }

@@ -17,6 +17,7 @@
       border: #000 !important;
       box-shadow: #789092 !important;
       box-shadow:3px 3px 5px #888888; 
+      margin-right: 5vh !important;
     }
     #submit{
       background-color:  #bff5fa!important;
@@ -33,7 +34,7 @@
   {% endblock connectcss %} 
 
   {% block content %}
-    <section class="h-100 bg-dark">
+    <section class="h-100 bg-light">
         <div class="container py-5 h-100">
           <div class="row d-flex justify-content-center align-items-center h-100" style="margin-top: 7vh;">
             <div class="col">
@@ -67,7 +68,7 @@
                             <div class="col-md-6 mb-4">
                               <div class="form-outline">
                                 <label class="form-label" for="email">Email</label>
-                                    <input type="text" id="email" class="form-control form-control-lg" />
+                                    <input type="text" id="email" class="form-control form-control-lg" name="email" />
                               </div>
                             </div>
                             <div class="col-md-6 mb-4">
@@ -102,13 +103,14 @@
             
                       </div>
                       <div class="form-outline mb-4">
+                        <label class="form-label" for="id_proof">Medical ID Proof</label>
                         <input type="file" id="id_proof" class="form-control form-control-lg" name="id_proof" />
                       </div>
       
       
                       <div class="d-flex justify-content-end pt-3">
-                        <button type="button" class="btn btn-light btn-lg" id="reset">Reset all</button>
-                        <button type="button" class="btn btn-warning btn-lg ms-2" id="submit">Submit form</button>
+                        <button type="reset" class="btn btn-light btn-lg" id="reset">Reset all</button>
+                        <button type="submit" class="btn btn-warning btn-lg ms-2" id="submit">Submit form</button>
                       </div>
       
                     </div>

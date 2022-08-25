@@ -1,23 +1,15 @@
-{% extends "forum/base-temp.html" %}
+{% extends "profiles/base.html" %}
 {% load static %}
 {% block title %}Forums{% endblock title %}
-{% block body %}
+{% block connectcss %}
+<link href="{% static 'forum/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+<link href="{% static 'forum/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+<link href="{% static 'forum/style.css' %}" rel="stylesheet">
+{% endblock connectcss %}
+{% block content %}
 
-<main id="main">
+<main id="main" class="mt-5">
 
-    <!-- ======= Breadcrumbs ======= -->
-    <section id="breadcrumbs" class="breadcrumbs">
-      <div class="container">
-
-        <ol>
-          <li><a>Home</a></li>
-          <li><a href="{% url 'forum' %}">Blog</a></li>
-          <li>Blog Single</li>
-        </ol>
-        <h2>Blog Single</h2>
-
-      </div>
-    </section><!-- End Breadcrumbs -->
 
     <!-- ======= Blog Single Section ======= -->
     <section id="blog" class="blog">
@@ -98,7 +90,7 @@
     </section><!-- End Blog Single Section -->
   </main><!-- End #main -->
 
-{% endblock body%}
+{% endblock content %}
 
 {% block script %}
 <script>

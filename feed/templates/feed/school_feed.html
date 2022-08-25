@@ -1,21 +1,21 @@
-{% extends "profiles/base.html" %}
+{% include "profiles/base.html" %}
 {% load static %}
-
 
 {% block connectcss %}
 <link rel="stylesheet" href="{% static 'feed/school_feed.css' %}">
 <link rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
 {% endblock connectcss %}
 
 {% block content %}
-<div class="container-fluid gedf-wrapper" style="margin-top: 20vh;margin-left: 4vh;margin-right: 4vh;">
+<div class="container-fluid gedf-wrapper" style="margin-top: 20vh;">
     <div class="row">
         <div class="col-md-3">
-            <div class="card" style="border-radius: 9vh !important;">
-                <img class="card-img-top" src="{% static 'feed/school.png' %}" alt="Card image cap">
+            <div class="card rounded" style="margin-bottom: 1rem;" >
+                {% comment %} <img class="card-img-top" src="{% static 'feed/school.png' %}" alt="Card image cap"> {% endcomment %}
                 <div class="card-header h5">
-                    {{ school.user.name }}
+                    School : {{ school.user.name }}
                 </div>
                 <div class="card-body">
                     <div class="h6 text-muted">Board: {{ school.board }}</div>
@@ -24,25 +24,9 @@
                 
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">
-                        <div class="h6 text-muted">School Rank</div>
-                        {% if school.rank %}
-                        <div class="h5">{{ school.rank }}</div>
-                        {% else %}
-                        <div class="h5">NA</div>
-                        {% endif %}
-                    </li>
-                    <li class="list-group-item">
                         <div class="h6 text-muted">Location</div>
                         <div class="h6">State: {{ school.state }}</div>
                         <div class="h6">City: {{ school.city }}</div>
-                    </li>
-                    <li class="list-group-item">
-                        <div class="h6 text-muted">Your Happiness Index:</div>
-                        {% if school.rank %}
-                        <div class="h5">{{ school.happiness_score|floatformat:2 }}</div>
-                        {% else %}
-                        <div class="h5">NA</div>
-                        {% endif %}
                     </li>
                 </ul>
             </div>
@@ -63,7 +47,7 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="images-tab" data-toggle="tab" role="tab" aria-controls="images"
-                                    aria-selected="false" href="#images" style="color: #ffc680 !important;">Images</a>
+                                    aria-selected="false" href="#images" style="color: #70dcab !important;">Images</a>
                             </li>
                         </ul>
                     </div>
@@ -93,8 +77,8 @@
                         </div>
                         <div class="btn-toolbar justify-content-between">
                             <div class="btn-group">
-                                <input type="submit" name='type' value="Share" class="btn btn-primary">
-                                {% comment %} <button type="submit" class="btn btn-primary">share</button> {% endcomment %}
+                                <input type="submit" name='type' value="Share" class="btn btn-primary" style="background: #70dceb !important;">
+                                {% comment %} <button type="submit" class="btn btn-primary" >share</button> {% endcomment %}
                             </div>
 
                         </div>
@@ -142,7 +126,7 @@
 
                     <button type="submit" name="post_slug" value="{{post.slug}}" style="border: 0;"><span class="material-symbols-outlined">
                             thumb_up
-                        </span><strong class="text-xl-center" id='upvote_count{{post.slug}}'> {{post.number_of_upvotes }}</strong></button>
+                        </span></button><strong class="text-xl-center" id='upvote_count{{post.slug}}'> {{post.number_of_upvotes }}</strong>
 
 
 
@@ -150,6 +134,32 @@
             </div>
             <!-- Post /////-->
             {% endfor %}
+        </div>
+        <div class="col-md-3">
+            <div class="card rounded" >
+                <div class="card-header">
+                  School Details
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">
+                    <div class="h6 text-muted">School Rank</div>
+                    {% if school.rank %}
+                    <div class="h5">{{ school.rank }}</div>
+                    {% else %}
+                    <div class="h5">NA</div>
+                    {% endif %}
+                  </li>
+                  <li class="list-group-item">
+                    <div class="h6 text-muted">Your Happiness Index:</div>
+                    {% if school.rank %}
+                    <div class="h5">{{ school.happiness_score|floatformat:2 }}</div>
+                    {% else %}
+                    <div class="h5">NA</div>
+                    {% endif %}
+                </li>
+                  
+                </ul>
+              </div>
         </div>
 
     </div>
