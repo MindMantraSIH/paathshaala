@@ -4,13 +4,14 @@ from autoslug import AutoSlugField
 from django.utils import timezone
 from django.contrib.auth.models import AbstractUser
 from django.urls import reverse
-from profiles.models import School
+from profiles.models import School, Student
 
 # Create your models here.
 
 class Academics(models.Model):
     school = models.ForeignKey(School,on_delete=models.CASCADE)
-    roll_no = models.CharField(max_length=50, primary_key= True)
+    student = models.ForeignKey(Student,on_delete=models.CASCADE, blank=True, null=True)
+    roll_no = models.CharField(max_length=500, primary_key= True)
     name = models.CharField(max_length=50)
     standard = models.CharField(max_length=3)
     division = models.CharField(max_length=3)
@@ -29,6 +30,5 @@ class Academics(models.Model):
     confidence = models.FloatField(blank=True,null=True)
     social_relationship = models.FloatField(blank=True,null=True)
     obedience = models.FloatField(blank=True, null=True)
-
 
 

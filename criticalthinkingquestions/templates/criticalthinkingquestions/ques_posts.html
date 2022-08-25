@@ -1,0 +1,24 @@
+
+{% for post in posts %}
+<article class="entry">
+    <h2 class="entry-title">
+        <a href="#">{{ post.title }}</a>
+    </h2>
+    <div class="entry-meta">
+        <ul>
+            <li class="d-flex align-items-center"><i class="bi bi-clock"></i><time datetime="2020-01-01">{{ post.timestamp }}</time>
+            </li>
+            {% comment %} <li class="d-flex align-items-center"><a href="#"><i
+                        class="bi bi-chat-dots"></i>12 Comments</a></li> {% endcomment %}
+        </ul>
+    </div>
+    <div class="entry-content">
+        <p>
+            Write your thoughts on this topic...
+        </p>
+        <div class="read-more">
+            <a href="{% url 'post_detail' post.slug %}">-></a>
+        </div>
+    </div>
+</article><!-- End blog entry -->
+{% endfor %}

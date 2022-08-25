@@ -6,6 +6,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 import hashlib
+from Analytics.populate_database import create_student_data_csv, database_happiness_index_survey
 import json
 import urllib
 import requests
@@ -95,6 +96,8 @@ def loginregister(request):
 	return render(request, 'profiles/loginregister.html')
 
 def home(request):
+	# database_happiness_index_survey()
+	# create_student_data_csv(request.user.id)
 	if request.user.is_authenticated:
 		print("User is logged in :)")
 		print(f"Username --> {request.user.username}")

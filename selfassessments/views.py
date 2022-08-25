@@ -22,17 +22,29 @@ def getdata(request):
         ad = all['ad1an4']+all['ad2']+all['ad3']
         p = all['p1']+all['p2']+all['p3']
         tot = dep + st+anx+ad+p
+        dep_percent=dep*100/tot
+        st_percent=st*100/tot
+        anx_percent=anx*100/tot
+        ad_percent=ad*100/tot
+        p_percent=p*100/tot
         print(all)
+        dep_percent=dep*100/tot
+        st_percent=st*100/tot
+        anx_percent=anx*100/tot
+        ad_percent=ad*100/tot
+        p_percent=p*100/tot
+        context={
+            'dep_percent':dep_percent,'st_percent':st_percent,'anx_percent':anx_percent,'ad_percent':ad_percent,'p_percent':p_percent}
         subject = 'Self Assessment Report'
         message = "Dear User, \n" \
                   "Thank you for using our application.\n" \
                   "This is your final report based on your mental health assessment: \n" \
                   "(Check up with your doctor for an accurate assessment) \n"\
-                  f"Depression: {dep*100/tot} % \n"\
-                  f"Stress: {st*100/tot} % \n"\
-                  f"Anxiety: {anx*100/tot} % \n"\
-                  f"ADHD: {ad*100/tot} % \n"\
-                  f"Pressure: {p*100/tot} % \n"\
+                  f"Depression: {dep_percent} % \n"\
+                  f"Stress: {st_percent} % \n"\
+                  f"Anxiety: {anx_percent} % \n"\
+                  f"ADHD: {ad_percent} % \n"\
+                  f"Pressure: {p_percent} % \n"\
                   "Here are some resources to help you understand mental health issues: \n" \
                   "https://www.verywellfamily.com/improve-childrens-mental-health-4154379\n" \
                   " https://www.parents.com/health/healthy-happy-kids/why-and-how-to-teach-kids-mindfulness/ \n" \
@@ -44,5 +56,5 @@ def getdata(request):
         print(type(subject),type(message),type(email_from),type(recipient_list))
         send_mail( subject, message[0], email_from, recipient_list )
         messages.success(request, 'The results are sent to your email.')
-        return redirect('getdata')
+        return render(request,'selfassessments/results.html',context)
     return render(request, 'selfassessments/selfasses.html')
