@@ -7,7 +7,7 @@
 <main id="main">
     <section>
         <div class="container">
-            <div class="card">
+            <!-- <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">Classroom factors affecting Happiness Index
                         <!-- <span>/Today</span></h5> -->
@@ -17,9 +17,33 @@
 
                         <!-- End Line Chart -->
 
-                </div>
+                <!-- </div> -->
 
-            </div>
+            <!-- </div> --> 
+            {% for s in school %}
+            <article class="entry">
+                <h2 class="entry-title">
+                    Rank: #{{ s.rank }}
+                </h2>
+                <div class="entry-meta">
+                    <ul>
+                        <li class="d-flex align-items-center"><i class="bi bi-clock"></i><time datetime="2020-01-01">{{ post.timestamp }}</time>
+                        </li>
+                    </ul>
+                </div>
+                <div class="entry-content">
+                    <a href="{% url 'school-feed' s.user.slug %}" ><h5 class="card-title">{{ s.user }} </h5></a>
+                                <p class="card-text">
+                                    <div>
+                                        <div >
+                                        <div >Board: {{ s.board }}<br>City: {{ s.city }}, State: {{ s.state }}<br>
+                                        Address: {{ s.address }}</div>
+                                        
+                                    </div>
+                                </p>
+                </div>
+            </article>
+            {% endfor %}
         </div>
     </section>
 </main>

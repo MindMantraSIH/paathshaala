@@ -78,4 +78,56 @@ body {
       width: 50%;
     }
   }
+
+  .entry {
+    padding: 30px;
+    margin-bottom: 60px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  }
+  .entry .entry-title {
+    font-size: 28px;
+    font-weight: bold;
+    padding: 0;
+    margin: 0 0 20px 0;
+  }
+
+  .entry .entry-title a {
+    color: #493c3e;
+    transition: 0.3s;
+  }
+
+  .blog .entry .entry-meta {
+    margin-bottom: 15px;
+    color: #b1a0a3;
+  }
+  
+  .blog .entry .entry-meta ul {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .entry .entry-meta ul li+li {
+    padding-left: 20px;
+  }
+  
+  .entry .entry-meta i {
+    font-size: 16px;
+    margin-right: 8px;
+    line-height: 0;
+  }
+  
+  .entry .entry-meta a {
+    color: #777777;
+    font-size: 14px;
+    display: inline-block;
+    line-height: 1;
+  }
+  
+  .entry .entry-content p {
+    line-height: 24px;
+  }
   
