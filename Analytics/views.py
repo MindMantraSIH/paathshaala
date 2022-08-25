@@ -103,6 +103,22 @@ def happiness_index(request):
     # print(np.log(happiness_index.sum()))
 
     def standard_HI(features, weights):
+        hi_standard = ""
+        for std in range(1,10):
+            happiness_index = 0
+            features = features[features["std"] == std]
+            for i in range(features.shape[0]):
+                intermediate = weights * features.iloc[i, :]
+                happiness_index += intermediate.values.sum() * 10 ** (-1 * np.log(intermediate.values.sum()))
+                # weights*features[i,:].values
+            happiness_index = np.log(happiness_index / features.shape[0])
+            hi_standard += str(happiness_index) + " "
+
+
+
+
+
+
 
 
 
@@ -466,19 +482,19 @@ def send(request):
     }
     return render(request, 'Analytics/dashboard1.html1', context)
 
-def lda():
-    schools = Data.objects.all()
-    suggestions = []
-    for i,school in enumerate(schools):
-        suggestions.append(school.others)
-    print(suggestions)
-    no_features = 1000
-    tf_vectorizer = CountVectorizer(max_df=0.95, min_df=2, max_features=no_features, stop_words='english')
-    tf = tf_vectorizer.fit_transform(suggestions)
-    tf_feature_names = tf_vectorizer.get_feature_names()
-    no_topics = 1
-    lda = LatentDirichletAllocation(no_topics, max_iter=5, learning_method='online', learning_offset=50.,
-                                    random_state=0).fit(tf)
+    def lda():
+        schools = Data.objects.all()
+        suggestions = []
+        for i, school in enumerate(schools):
+            suggestions.append(school.others)
+        print(suggestions)
+        no_features = 1000
+        tf_vectorizer = CountVectorizer(max_features=no_features, stop_words='english')
+        tf = tf_vectorizer.fit_transform(suggestions)
+        tf_feature_names = tf_vectorizer.get_feature_names()
+        no_topics = 1
+        lda = LatentDirichletAllocation(no_topics, max_iter=5, learning_method='online', learning_offset=50.,
+                                        random_state=0).fit(tf)
 
     def display_topics(model, feature_names, no_top_words):
         for topic_idx, topic in enumerate(model.components_):
@@ -602,6 +618,7 @@ def standard_analytics(request, std):
                                               df['Social relationships'].mean(),
                                               df['Obedient'].mean()]))
     graph4 = plotly.offline.plot(fig4, auto_open=False, output_type="div")
+
     context = {"graph": [graph1, graph2, graph3,graph4],
                'name': request.user.school,
                 'city': request.user.school.city,
