@@ -104,10 +104,13 @@ def happiness_index(request):
     def standard_Happiness(features, weights):
         hi_standard = ""
         fn = len(features)
-        for std in range(1,10):
+        print(fn)
+        for std in range(1,11):
             happiness_index = 0
             print(features)
-            features = features[features["Standard"] == str(std)]
+            features = features[features["Standard"] == std]
+            print(features)
+            print(features.shape[0])
             for i in range(features.shape[0]):
                 intermediate = weights * features.drop(["Standard"], axis=1).iloc[i, :]
                 happiness_index += intermediate.values.sum() * 10 ** (-1 * np.log(intermediate.values.sum()))
@@ -117,10 +120,10 @@ def happiness_index(request):
             hi_standard += str(happiness_index) + " "
         return hi_standard
 
-    std_happiness = standard_Happiness(features,weights)
-    print(std_happiness)
-    school.standard_HI = std_happiness
-    school.save()
+    # std_happiness = standard_Happiness(features,weights)
+    # print(std_happiness)
+    # school.standard_HI = std_happiness
+    # school.save()
 
 
 
