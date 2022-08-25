@@ -25,6 +25,8 @@ class School(models.Model):
     rank = models.IntegerField(blank=True,null=True)
     happiness_score = models.FloatField(blank=True,null=True)
     board = models.CharField(max_length=50)
+    standard_HI = models.CharField(max_length=100,null=True)
+    year = models.CharField(max_length=5,null=True)
 
 
     def __str__(self) -> str:
@@ -35,9 +37,12 @@ class Student(models.Model):
     roll_number = models.CharField(max_length=20)
     school = models.ForeignKey(School, on_delete=models.CASCADE)
     pincode = models.CharField(max_length=10, blank=True, null=True)
+    std = models.CharField(max_length=10)
+    division = models.CharField(max_length=10)
+
 
     def __str__(self) -> str:
-        return f'{self.school.user.name}: {self.roll_number}'
+        return f'{self.school.user.name}: {self.roll_number} : {self.std} : {self.division}'
 
 class Counselor(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE,primary_key=True)

@@ -1,0 +1,49 @@
+{% extends 'profiles/base.html' %}
+{% load static %}
+{% block connectcss %}
+<style>
+    .sec1 {
+        
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        
+
+
+    }
+    body{
+            background-image: url("{% static 'ranking/paathshala.jpg' %} ");
+        }
+</style>
+{% endblock connectcss %}
+{% block content%}
+    <section style="width: 75%; margin-left: 12%;">
+        <div>
+            <h3 style="text-align: center;">
+                School Rankings
+            </h3>
+        </div>
+        {% for s in school %}
+            <div class="container ">
+                <div class="row m-3">
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-header">
+                                <h6>Rank: #{{ s.rank }} </h6>
+                            </div>
+                            <div class="card-body">
+                                <a href="{% url 'school-feed' s.user.slug %}" ><h5 class="card-title">{{ s.user }} </h5></a>
+                                <p class="card-text">
+                                    <div>
+                                        <div >
+                                        <div >{{ s.board }}<br>{{ s.city }}, {{ s.state }}<br>
+                                        {{ s.address }}</div>
+                                        
+                                    </div>
+                                </p>
+                            </div>
+                        </div>
+                    </div>  
+                </div>
+            </div>
+        {% endfor %}
+    </section>
+{% endblock content %}

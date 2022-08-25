@@ -1,0 +1,87 @@
+{% load static %}
+<header class="site-header site-header--menu-right landing-14-menu site-header--absolute site-header--sticky">
+    <div class="container">
+      <nav class="navbar site-navbar">
+        <a href="{% url 'home' %}"><img src="{% static 'profiles/circular paathshala logo.png' %}" alt=""
+            style="height: 3rem ; border-radius: 50%; margin-right: 1rem;"></a>
+        <a href="{% url 'home' %}" style=" color: inherit;"><span>
+            <h3 style="margin-top: 0.3rem ;">PAATHSHALA</h3>
+          </span> </a>
+        <div class="menu-block-wrapper">
+          <div class="menu-overlay"></div>
+          <nav class="menu-block" id="append-menu-header">
+            <div class="mobile-menu-head">
+              <div class="go-back">
+                <i class="fa fa-angle-left"></i>
+              </div>
+              <div class="current-menu-title"></div>
+              <div class="mobile-menu-close">&times;</div>
+            </div>
+            <ul class="site-menu-main">
+              <li class="nav-item">
+                <a href="{% url 'home' %}" class="nav-link-item">HOME</a>
+              </li>
+              <li class="nav-item nav-item-has-children">
+                <a href="#" class="nav-link-item drop-trigger">SERVICES<i class="fas fa-angle-down"></i>
+                </a>
+                <ul class="sub-menu" id="submenu-9">
+                  <li class="sub-menu--item">
+                    <a href="{% url 'getdata' %}">SELF ASSESSMENT</a>
+                  </li>
+                  <li class="sub-menu--item">
+                    <a href="{% url 'schoolinfo' %}">SCHOOL RANK</a>
+                  </li>
+                  <li class="sub-menu--item">
+                    <a href="{% url 'forum' %}">FORUM</a>
+                  </li>
+                  <li class="sub-menu--item">
+                    <a href="{% url 'counselling' %}">HELP CENTER</a>
+                  </li>
+                  <!-- if user is school -->
+                  {% if user.is_school %}
+                  <li class="sub-menu--item">
+                    <a href="{% url 'school-feed' user.slug %}">FEED</a>
+                  </li>
+                  <li class="sub-menu--item">
+                    <a href="{% url 'Dashboard' %}">DASHBOARD</a>
+                  </li>
+                  {% endif %}
+                  <!-- if user is student -->
+                  {% if user.is_student %}
+                  <li class="sub-menu--item">
+                    <a href="{% url 'school-feed' user.student.school.user.slug %}">FEED</a>
+                  </li>
+                  <li class="sub-menu--item">
+                    <a href="{% url 'savedata' %}">FEEDBACK</a>
+                  </li>
+                  <li class="sub-menu--item">
+                    <a href="{% url 'Student-Dashboard' %}">DASHBOARD</a>
+                  </li>
+                  {% endif %}
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link-item">CONTACT US</a>
+              </li>
+              <li class="nav-item">
+                {% if user.is_school or user.is_student or user.is_counselor %}
+                <a class="nav-link-item" href="{% url 'logout' %}">
+                  LOGOUT
+                </a>
+                {% elif not user.is_authenticated %}
+                <a class="nav-link-item" href="{% url 'loginregister' %}">
+                  LOGIN/SIGN UP
+                </a>
+                {% endif %}
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <!-- mobile menu trigger -->
+        <div class="mobile-menu-trigger">
+          <span></span>
+        </div>
+        <!--/.Mobile Menu Hamburger Ends-->
+      </nav>
+    </div>
+  </header>

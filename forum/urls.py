@@ -8,7 +8,7 @@ urlpatterns = [
     path("add_comment", views.add_comment, name="add_comment"),
     path("delete_post", views.delete_post, name="delete_post"),
     path("delete_comment", views.delete_comment, name="delete_comment"),
-    
+    path("counselor-forum", views.counselor_forum, name="counselor_forum"),
     # path("discussion/<str:slug>/reply", views.replies, name="replies"),
     # path("discussion/<str:slug>/comment", views.comment, name="comment"),
     # path("discussion/<str:slug>/update", views.discussionUpdate, name="discussionUpdate"),
