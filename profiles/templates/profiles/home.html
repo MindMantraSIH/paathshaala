@@ -1,11 +1,11 @@
-{% extends "profiles/base.html" %}
+{% extends "forum/base-temp.html" %}
 {% load static %}
- {% block connectcss %} 
+ {% block style %} 
 <link rel="stylesheet" href="{% static 'profiles/main.css' %}">
 <link rel="stylesheet" href="{% static 'profiles/aos.min.css' %}">
-{% endblock connectcss %} 
+{% endblock style %} 
 
-{% block content %}
+{% block body %}
 <!-- Hero Area -->
 <div class="hero-area-l-14 position-relative z-index-1 overflow-hidden" style="background: url('static/profiles/hero-bg.png');background-repeat: no-repeat; background-position: center right;margin-top: -3rem;">
     <div class="container">
@@ -266,7 +266,7 @@
   </div>
 
 
-{% endblock content %}
+{% endblock body %}
 
 {% block script %}
   <!-- Vendor Scripts -->

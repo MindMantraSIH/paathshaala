@@ -179,3 +179,6 @@ def school_register(request):
 def logout_view(request):
 	logout(request)
 	return redirect('home')
+
+def nav_new(request):
+	return render(request, 'profiles/nav_new.html')

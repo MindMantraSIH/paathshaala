@@ -1,4 +1,5 @@
 from http.client import HTTPResponse
+from uuid import RESERVED_FUTURE
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 
@@ -107,3 +108,8 @@ def counselor_forum(request):
             return redirect("awaiting-confirmation")
     else:
         return JsonResponse({"message":'Not Allowed'})
+
+
+def base_temp(request):
+    return render(request, 'forum/base-temp.html')
+    

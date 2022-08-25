@@ -1,0 +1,76 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'profiles/navstyle.css' %}">
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+<header>
+  <nav class="navbar1">
+    <div class="content">
+      <div class="logo">
+        <a href="{% url 'home' %}"><img src="{% static 'profiles/circular paathshala logo.png' %}" alt=""
+          style="height:2.2rem; border-radius:5rem; position:absolute;margin-top: 0.4rem;">
+          <span style="position: relative; margin-left: 2.8rem;">PAATHSHALA</span>
+          
+        </a>
+      </div>
+      <ul class="menu-list mt-2">
+        <div class="icon cancel-btn" style="color:black;">
+          <i class="fas fa-times"></i>
+        </div>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li class="dropdown1"><a href="#" >Services</a>
+            <ul class="dropdown-content1" id="submenu-9">
+                <li>
+                  <a href="{% url 'getdata' %}" style="color:black;">SELF ASSESSMENT</a>
+                </li>
+                <li>
+                  <a href="{% url 'schoolinfo' %}" style="color:black;">SCHOOL RANK</a>
+                </li>
+                <li>
+                  <a href="{% url 'forum' %}" style="color:black;">FORUM</a>
+                </li>
+                <li>
+                  <a href="{% url 'counselling' %}" style="color:black;">HELP CENTER</a>
+                </li>
+                <!-- if user is school -->
+                {% if user.is_school %}
+                <li>
+                  <a href="{% url 'school-feed' user.slug %}" style="color:black;">FEED</a>
+                </li>
+                <li>
+                  <a href="{% url 'Dashboard' %}" style="color:black;">DASHBOARD</a>
+                </li>
+                {% endif %}
+                <!-- if user is student -->
+                {% if user.is_student %}
+                <li>
+                  <a href="{% url 'school-feed' user.student.school.user.slug %}" style="color:black;">FEED</a>
+                </li>
+                <li>
+                  <a href="{% url 'savedata' %}" style="color:black;">FEEDBACK</a>
+                </li>
+                <li>
+                  <a href="{% url 'Student-Dashboard' %}" style="color:black;">DASHBOARD</a>
+                </li>
+                {% endif %}
+              </ul>
+        </li>
+        <li><a href="#">Contact us</a></li>
+        <li>{% if user.is_school or user.is_student or user.is_counselor %}
+            <a href="{% url 'logout' %}">
+              LOGOUT
+            </a>
+            {% elif not user.is_authenticated %}
+            <a href="{% url 'loginregister' %}">
+              LOGIN/SIGN UP
+            </a>
+            {% endif %}</li>
+      </ul>
+      <div class="icon menu-btn">
+        <i class="fas fa-bars"></i>
+      </div>
+    </div>
+  </nav>
+  <div style="height: 3.8rem;"></div>
+
+  
+</header>
+
