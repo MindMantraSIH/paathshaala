@@ -25,7 +25,7 @@ class School(models.Model):
     rank = models.IntegerField(blank=True,null=True)
     happiness_score = models.FloatField(blank=True,null=True)
     board = models.CharField(max_length=50)
-    standard_HI = models.CharField(max_length=100,null=True)
+    standard_HI = models.CharField(max_length=100,null=True,blank=True)
     year = models.CharField(max_length=5,null=True)
 
 

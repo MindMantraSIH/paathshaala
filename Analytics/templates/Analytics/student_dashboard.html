@@ -1,10 +1,10 @@
-{% include "profiles/base.html" %}
+{% extends "forum/base-temp.html" %}
 {% load static %}
-{% block connectcss %}
+{% block style %}
 <link rel="stylesheet" href="{%static 'Analytics/style.css'%}">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-{% endblock connectcss %}
-{% block content %}
+{% endblock style %}
+{% block body %}
 <div class="container-fluid page-body-wrapper" style="margin-top:15vh;">
   <!-- partial -->
   <!-- partial:partials/_sidebar.html -->
@@ -107,4 +107,4 @@
 <!-- page-body-wrapper ends -->
 </div>
 <!-- container-scroller -->
-{% endblock content %}
+{% endblock body %}

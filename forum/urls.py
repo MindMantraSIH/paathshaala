@@ -14,10 +14,7 @@ urlpatterns = [
     # path("discussion/<str:slug>/update", views.discussionUpdate, name="discussionUpdate"),
     # path("discussion/<str:slug>/delete", views.discussionDelete, name="discussionDelete"),
     #path("discussion/<int:pk>/", views.replyUpdate, name="replyUpdate"),
-<<<<<<< HEAD
+
     path("base/", views.base_temp, name="base"),
+
 ]
-=======
-    #path("myprofile/", views.myprofile, name="Myprofile"),
-]
->>>>>>> 839c708dde7f16fa95adc2c954fe040c40e62048

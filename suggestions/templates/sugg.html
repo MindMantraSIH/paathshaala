@@ -1,6 +1,6 @@
 {% include "forum/base-temp.html" %}
 {% load static %}
-{% block connectcss %}
+{% block style %}
 <style>
     /* input[type=text] {
         width: 60rem;
@@ -50,8 +50,8 @@
         padding: 10px;
     }
 </style>
-{% endblock connectcss %}
-{% block content %}
+{% endblock style %}
+{% block body %}
 <div class=" position-relative z-index-1 overflow-hidden">
     <div class="container" style="margin-top: 15vh;">
         <h2 style="margin-top: 2vh !important;text-align: center;">Survey of Happiness Index in School Index</h2>
@@ -593,4 +593,4 @@
         </form>
     </div>
 </div>
-{% endblock content %}
+{% endblock body %}
