@@ -21,6 +21,11 @@ def getdata(request):
         ad = all['ad1an4']+all['ad2']+all['ad3']
         p = all['p1']+all['p2']+all['p3']
         tot = dep + st+anx+ad+p
+        dep_percent=dep*100/tot
+        st_percent=st*100/tot
+        anx_percent=anx*100/tot
+        ad_percent=ad*100/tot
+        p_percent=p*100/tot
         print(all)
         subject = 'Self Assessment Report'
         message = "Dear User, \n" \
