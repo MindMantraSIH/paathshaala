@@ -24,9 +24,9 @@ urlpatterns = [
     path('forum/', include('forum.urls')),
     path('analytics/', include('Analytics.urls')),
     path('feed/', include('feed.urls')),
-    path('selfassess/', include('selfassessments.urls')),
-    path('sugg/', include('suggestions.urls')),   
+    path('selfassessments/', include('selfassessments.urls')),
+    path('suggestions/', include('suggestions.urls')),   
     path('counsel/', include('counsellor.urls')),   
     path('', home, name='home'),
-    path('ques/', include('criticalthinkingquestions.urls')),
+    path('thinking-questions/', include('criticalthinkingquestions.urls')),
 ]
