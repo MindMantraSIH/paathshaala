@@ -131,12 +131,6 @@ def happiness_index(request):
 
 
 
-
-
-
-
-
-
 def calculate_weights(number_categories, normalized_ratings):
     weight_students = []
     weight_teachers = []
@@ -675,22 +669,65 @@ def standard_analytics(request, std):
 #     return render(request, "Analytics/dashboard1.html")
 
 def student_dashboard(request):
-    student = Student.objects.get(user=request.user)
+    output = []
+    print(request.user)
+    query_set = Academics.objects.filter(school=request.user.student.school)
+    print(query_set)
+    with open(os.getcwd() + "/student_data.csv", 'w', newline='') as file:
+        writer = csv.writer(file)
+        print(os.getcwd())
+        writer.writerow(['Roll_number', 'Name', 'Standard', 'Division','English', 'Hindi',
+       'Maths', 'Science', 'History', 'Geography', 'Percent',
+       'How interactive in class', 'Assignments on time', 'Attentive in class',
+       'Creativity', 'Participation in extra curricular', 'Confidence',
+       'Social relationships', 'Obedient'])
+        for user in query_set:
+            print("Im here")
+            print(user)
+            output.append([user.roll_no, user.name, user.standard, user.division, user.english, user.hindi,
+                           user.maths, user.science, user.history, user.geo, user.percent,
+                           user.interactivity, user.timely_submissions, user.attentiveness, user.participation,
+                           user.confidence,user.social_relationship,user.obedience])
+        writer.writerows(output)
+
+    x = Student.objects.get(user=request.user)
+    #print(x)
+
     #print(student)
-    roll_no = int(student.roll_number)
+    student = Student.objects.get(user=request.user)
+    #print(student.std)
+    #print(type(student.std))
+    standard = int(student.std)
+    str_std = student.std
+    div = student.division
+    year = '2022'
+    #print(div)
+    rno = student.roll_number
+    str_rno = str(student.roll_number)
+    school = x.school.user.name
+    #roll_no =
     #print(roll_no)
-    df_s = pd.read_csv('Analytics/data/student_data.csv')
-    curr = df_s[df_s['Roll_number'] == roll_no]
-    # print(curr)
-    std = df_s[df_s['Roll_number'] == roll_no].Standard.values[0]
-    std_df = df_s[df_s["Standard"] == std]
+    r = [school,str_std,div,str_rno,'2022']
+    roll_no = " ".join(r)
+    #print(roll_no)
+    #roll_no = str(school +" " + standard +" " + div + " " + rno + "2022")
+
+    df_s = pd.read_csv(os.getcwd() + "/student_data.csv")
+    #print(df_s)
+    std_df = df_s[df_s['Standard'] == standard]
+    #print(std_df)
+    div = std_df[std_df['Division'] == div]
+    #print(div)
+    roll_no_df = div[div['Roll_number'] == roll_no]
+    #print(roll_no)
+    print(roll_no_df)
     std_mean = std_df['Percent'].mean()
-    curr = df_s[df_s['Roll_number'] == roll_no].Percent.values[0]
+    curr = roll_no_df[roll_no_df['Roll_number'] == roll_no].Percent.values[0]
     res = [std_mean, curr]
     lab = ['Class Average', 'Student"s Percent']
     fig1 = go.Figure([go.Bar(x=lab, y=res)])
     graph1 = plotly.offline.plot(fig1, auto_open=False, output_type="div")
-    x = df_s[df_s['Roll_number'] == roll_no]
+    x = roll_no_df[roll_no_df['Roll_number'] == roll_no]
     subjects = ['English', 'Hindi', 'Maths', 'Science', 'History', 'Geography']
     marks = [x.English.values[0], x.Hindi.values[0], x.Maths.values[0], x.Science.values[0], x.History.values[0],
              x.Geography.values[0]]
@@ -716,7 +753,7 @@ def student_dashboard(request):
     graph3 = plotly.offline.plot(fig3, auto_open=False, output_type="div")
 
     fig4 = go.Figure(data=go.Scatterpolar(
-        r=[x['Creativity'].values[0], x['confidence'].values[0], x['Social relationships'].values[0],
+        r=[x['Creativity'].values[0], x['Confidence'].values[0], x['Social relationships'].values[0],
            x['Obedient'].values[0]],
         theta=['Creativity', 'confidence', 'Social relationships', 'Obedient'],
         fill='toself'
@@ -735,3 +772,5 @@ def student_dashboard(request):
                'name': request.user.name,
                }
     return render(request,"Analytics/student_dashboard.html",context)
+
+

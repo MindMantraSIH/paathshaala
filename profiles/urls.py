@@ -13,4 +13,5 @@ urlpatterns = [
     path('school-login/',views.school_register,name="school-login"),
     path('student-login/',views.student_register,name="student-login"),
     path('logout/', views.logout_view, name='logout'),
+    path('new_nav/', views.nav_new, name='navbar'),
 ]
