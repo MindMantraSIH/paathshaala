@@ -141,11 +141,11 @@
                         <i class="fa-solid fa-comment-dots" style="color:#fee648;"></i>
                       </div>
                       <div class="ps-3">
-                        <h6>FB</h6>
+                        <h6>{{total_suggestions}}/{{total_students}}</h6>
                         <!-- <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span> -->
                       </div>
                       <span>
-                        <button type="submit" class="button2">Send Feedback</button>
+                        <button onclick="send_feedback()" class="button2">Send Feedback</button>
                       </span>
                     </div>
                 </div>
@@ -454,4 +454,26 @@
     </section>
 
   </main><!-- End #main -->
+  
   {% endblock body %}
+
+  {% block scripts %}
+  <script>
+  function send_feedback(){
+    $.ajax(
+        {
+            type:"POST",
+            url: "{% url 'send_feedback_mails' %}",
+            data:{
+                    'school': {{ school_user_id }},
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+            },
+            success: function( response ) 
+            {
+                console.log(response)
+            }
+         })
+  }
+  </script>
+  
+  {% endblock scripts %}

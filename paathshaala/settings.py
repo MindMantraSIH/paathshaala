@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'profiles.apps.ProfilesConfig',
     'ranking.apps.RankingConfig',
     'forum.apps.ForumConfig',
+    'criticalthinkingquestions.apps.CriticalthinkingquestionsConfig',
     'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',

@@ -23,7 +23,9 @@ import csv
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 from sklearn.decomposition import NMF, LatentDirichletAllocation
 import pickle as pkl
-
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
+from django.http import JsonResponse
 
 
 
@@ -168,6 +170,8 @@ def dashboard(request):
     df = pd.read_csv('Analytics/data/HI.csv')
     label = []
     sizes = []
+    total_suggestions = Data.objects.filter(school = request.user.school).count()
+    total_students = Student.objects.filter(school = request.user.school).count()
     diff = df[df['Level Of Courses (Difficulty)'] > 2]
     students_course_difficult = diff['Level Of Courses (Difficulty)'].count()
     eas = df[df['Level Of Courses (Difficulty)'] <= 2]
@@ -246,9 +250,35 @@ def dashboard(request):
                 'city': request.user.school.city,
                 'state': request.user.school.state,
                'rank': request.user.school.rank,
-               'happinessindex': request.user.school.happiness_score
+               'happinessindex': request.user.school.happiness_score,
+               'total_suggestions':total_suggestions,
+               'total_students': total_students,
+               'school_user_id': request.user.id
                }
     return render(request,'Analytics/dashboard1.html',context)
+
+def send_feedback_mails(request):
+    school_user = request.POST['school']
+    school = School.objects.get(user_id = school_user)
+    msg_plain = render_to_string('analytics/send_feedback_email.txt')
+    student_emails = []
+    students = Student.objects.filter(school=school)
+    for student in students:
+        if student.user.email:
+            student_emails.append(student.user.email)
+    try:
+        send_mail(
+            'Fill Feedback Form',
+            msg_plain,
+            'mindmantrasih@gmail.com', #sender
+            student_emails,
+            html_message=render_to_string('analytics/send_feedback_email.html'),
+        )
+        return JsonResponse({'response':'success'})
+    except Exception as e:
+        print(e)
+        return JsonResponse({'response':'failure'})
+    
 
 def upload_csv(request):
     if request.method == "POST":
