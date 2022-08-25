@@ -17,7 +17,7 @@ def create_student_data_csv():
     data =[]
     for standards in range(1,11):
         for divisions in ["A","B","C","D"]:
-            for roll_nos in range(1,46):
+            for roll_nos in range(1,11):
                 row = []
                 N = 7
                 name = ''.join(random.choices(string.ascii_uppercase +

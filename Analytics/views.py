@@ -102,27 +102,8 @@ def happiness_index(request):
     # print(happiness_index.sum())
     # print(np.log(happiness_index.sum()))
 
-    def standard_HI(std, weights):
-        df_actual = pd.read_csv(os.getcwd() + "/data.csv")
-        features = df_actual.iloc[:, :-1]
-        number_of_students = len(df[df["Who is filling this form?"] == "Student"])
-        number_of_teachers = len(df[df["Who is filling this form?"] == "Teacher"])
-        number_of_counsellors = len(df[df["Who is filling this form?"] == "Counsellor"])
-        number_categories = {"Students": number_of_students,
-                             "Teachers": number_of_teachers,
-                             "Counsellors": number_of_counsellors}
-        ratings_students = df[df["Who is filling this form?"] == "Student"].drop(
-            ["Timestamp", "Who is filling this form?"], axis=1)
-        ratings_teachers = df[df["Who is filling this form?"] == "Teacher"].drop(
-            ["Timestamp", "Who is filling this form?"], axis=1)
-        ratings_counsellors = df[df["Who is filling this form?"] == "Counsellor"].drop(
-            ["Timestamp", "Who is filling this form?"],
-            axis=1)
-        ratings = {"Students": ratings_students,
-                   "Teachers": ratings_teachers,
-                   "Counsellors": ratings_counsellors}
-        normalized_ratings = normalize_ratings(ratings)
-        weights = calculate_weights(number_categories, normalized_ratings)
+    def standard_HI(features, weights):
+
 
 
 
