@@ -6,3 +6,6 @@ def schoolinfo(request):
         'school':school,
     }
     return render(request,'ranking/Ranking.html',context)
+
+def councel_rank(request):
+    return render(request, "ranking/councel-rank.html")
