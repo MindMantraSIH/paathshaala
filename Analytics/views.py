@@ -22,6 +22,7 @@ import os
 import csv
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 from sklearn.decomposition import NMF, LatentDirichletAllocation
+import pickle as pkl
 
 
 
@@ -53,7 +54,7 @@ def happiness_index(request):
             print(user)
             output.append([user.levelc, user.env, user.teachersc, user.prevdisc, user.fecilities, user.timetable,
                        user.grpwork, user.mentalhlth, user.sportart, user.solveprob, user.creativecourse,
-                       user.foconindv, user.mannlearn, user.courserele, user.issuesofconc, user.aresolved, user.others])
+                       user.foconindv, user.mannlearn, user.courserele, user.issuesofconc, user.aresolved, user.otapers])
         writer.writerows(output)
     print()
     df = pd.read_csv("Analytics\data\HI.csv").iloc[:,:-1]
@@ -74,6 +75,13 @@ def happiness_index(request):
                 "Counsellors": ratings_counsellors}
     normalized_ratings = normalize_ratings(ratings)
     weights = calculate_weights(number_categories,normalized_ratings)
+    with open('weights_array.pkl', 'wb') as file:
+        # A new file will be created
+        pkl.dump(weights, file)
+
+    print(weights)
+    print(type(weights))
+    print(len(weights))
     happiness_index = 0
     print(features.shape)
     for i in range(features.shape[0]):
@@ -94,7 +102,7 @@ def happiness_index(request):
     # print(happiness_index.sum())
     # print(np.log(happiness_index.sum()))
 
-
+    def standard_HI(features, weights):
 
 
 
@@ -245,7 +253,10 @@ def upload_csv(request):
                 continue
             elements = line.split(',')
             print(elements)
-            p = Academics.objects.create(school = request.user.school,roll_no=elements[0],
+            p = Academics.objects.create(school = request.user.school,
+                                         roll_no= str(request.user.school) + " " +
+                                                  elements[2] + " " +elements[3]
+                                                  + " " +elements[0] + " " + elements[19],
                                          name=elements[1], standard = elements[2], division= elements[3],
                                          english = float(elements[4]), hindi = float(elements[5]),
                                          maths=float(elements[6]), science=float(elements[7]),
@@ -258,6 +269,7 @@ def upload_csv(request):
                                          social_relationship=float(elements[17]), obedience=float(elements[18])
                                          )
             print("Hello",p)
+            request
             # except:
             #     pass
         print("hulllllllllllllllllllllllaaaaaaaaaaaaaaaaaaaarrrrrrrrrrrrrrrrrrrrrrraaaaaaaaaaaaaaaaaaaaaaaaa")
@@ -515,7 +527,7 @@ def standard_analytics(request, std):
     with open(os.getcwd() + "/standard_data.csv", 'w', newline='') as file:
         writer = csv.writer(file)
         print(os.getcwd())
-        writer.writerow(['Roll_number', 'Name', 'School', 'Standard', 'English', 'Hindi',
+        writer.writerow(['Roll_number', 'Name', 'School', 'Standard', 'Division','English', 'Hindi',
        'Maths', 'Science', 'History', 'Geography', 'Percent',
        'How interactive in class', 'Assignments on time', 'Attentive in class',
        'Creativity', 'Participation in extra curricular', 'Confidence',
@@ -523,7 +535,7 @@ def standard_analytics(request, std):
         for user in query_set:
             print("Im here")
             print(user)
-            output.append([user.roll_no, user.name, user.standard, user.english, user.hindi, user.maths,
+            output.append([user.roll_no, user.name, user.standard, user.division, user.english, user.hindi, user.maths,
                            user.science, user.history, user.geo, user.percent, user.interactivity,
                            user.timely_submissions, user.attentiveness, user.creativity,
                            user.participation, user.confidence, user.social_relationship,

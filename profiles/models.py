@@ -25,6 +25,8 @@ class School(models.Model):
     rank = models.IntegerField(blank=True,null=True)
     happiness_score = models.FloatField(blank=True,null=True)
     board = models.CharField(max_length=50)
+    standard_HI = models.CharField(max_length=100,null=True)
+    year = models.CharField(max_length=5,null=True)
 
 
     def __str__(self) -> str:
@@ -37,7 +39,7 @@ class Student(models.Model):
     pincode = models.CharField(max_length=10, blank=True, null=True)
     std = models.CharField(max_length=10)
     division = models.CharField(max_length=10)
-
+    std_id = models.CharField(max_length=100,null=True)
 
 
     def __str__(self) -> str:

@@ -10,7 +10,7 @@ from profiles.models import School
 
 class Academics(models.Model):
     school = models.ForeignKey(School,on_delete=models.CASCADE)
-    roll_no = models.CharField(max_length=50, primary_key= True)
+    roll_no = models.CharField(max_length=100, primary_key= True)
     name = models.CharField(max_length=50)
     standard = models.CharField(max_length=3)
     division = models.CharField(max_length=3)
@@ -29,6 +29,5 @@ class Academics(models.Model):
     confidence = models.FloatField(blank=True,null=True)
     social_relationship = models.FloatField(blank=True,null=True)
     obedience = models.FloatField(blank=True, null=True)
-
 
 

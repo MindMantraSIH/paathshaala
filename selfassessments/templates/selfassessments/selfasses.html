@@ -1,5 +1,6 @@
 {% extends "profiles/base.html" %}
 {% load static %}
+{% block title %} Self Assessment {% endblock title %}
 {% block connectcss %}
 <style>
     /* input[type=text] {
@@ -49,9 +50,10 @@
         padding: 10px;
     }
 </style>
+
 {% endblock connectcss %}
 {% block content %}
-<div class=" position-relative z-index-1 overflow-hidden">
+<div class="position-relative z-index-1 overflow-hidden">
     <div class="container" style="margin-top: 15vh;">
         <h2 style="margin-top: 2vh !important;text-align: center;">SELF ASSESSMENT</h2>
         <h4 style="text-align: center;"> It is recommended to answer these questions in the presence of an adult</h4>
