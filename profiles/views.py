@@ -84,8 +84,10 @@ def loginregister(request):
 				login(request,user)
 				if user.is_school:
 					return redirect('school-feed', user.slug)
-				else:
+				elif user.is_student:
 					return redirect('school-feed',user.student.school.user.slug)
+				else:
+					return redirect('counselor_forum')
 			else:
 				return render(request, 'profiles/loginregister.html', {'message': 'Username or password is incorrect'})
 
