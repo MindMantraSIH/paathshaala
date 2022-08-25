@@ -19,7 +19,7 @@ def create_student_data_csv(school_id):
 	print('RUNNN')
 	for standards in range(1,11):
 		for divisions in ["A","B","C","D"]:
-			for roll_nos in range(1,11):
+			for roll_nos in range(1,3):
 				row = []
 				N = 7
 				name = ''.join(random.choices(string.ascii_uppercase +
@@ -51,7 +51,7 @@ def create_student_data_csv(school_id):
 	df.to_csv("student_data.csv",index=False)
 
 def database_happiness_index_survey():
-	columns = ['Level Of Courses (Difficulty)', 'A Clean Environment',
+	columns = ['Standard','Level Of Courses (Difficulty)', 'A Clean Environment',
 	   'Employing teachers with competency',
 	   'Preventing Discrimination and Persuasion',
 	   'Providing laboratory & workshop facilities', 'The school timetable',
@@ -72,7 +72,7 @@ def database_happiness_index_survey():
 			info = []
 			for fields in range(len(columns)-1):
 				info.append(np.random.randint(0, 5))
-			data = Data(school=sc, levelc=info[0], env=info[1], teachersc=info[2], prevdisc=info[3],
+			data = Data(school=sc,std=str(i+1), levelc=info[0], env=info[1], teachersc=info[2], prevdisc=info[3],
 						fecilities=info[4], timetable=info[5], grpwork=info[6], mentalhlth=info[7],
 						sportart=info[8], solveprob=info[9], creativecourse=info[10], foconindv=info[11],
 						mannlearn=info[12], courserele=info[13], issuesofconc=info[14],
@@ -81,7 +81,6 @@ def database_happiness_index_survey():
 			data.save()
 			counter += 1
 			print(counter)
-
 
 
 

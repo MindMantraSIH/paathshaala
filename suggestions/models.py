@@ -8,6 +8,7 @@ class Data(models.Model):
     # size = models.IntegerField(validators=[MinValueValidator(0),
     #                                    MaxValueValidator(5)])
     school = models.ForeignKey(School, on_delete=models.CASCADE, default=1)
+    std = models.CharField(max_length=3)
     levelc = models.IntegerField()
     env = models.IntegerField()
     teachersc = models.IntegerField()

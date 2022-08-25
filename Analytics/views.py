@@ -35,7 +35,7 @@ def happiness_index(request):
     with open(os.getcwd() + "/data.csv", 'w',newline='') as file:
         writer = csv.writer(file)
         print(os.getcwd())
-        writer.writerow(['Level Of Courses (Difficulty)', 'A Clean Environment',
+        writer.writerow(['Level Of Courses (Difficulty)', 'Standard','A Clean Environment',
        'Employing teachers with competency',
        'Preventing Discrimination and Persuasion',
        'Providing laboratory & workshop facilities', 'The school timetable',
@@ -52,7 +52,7 @@ def happiness_index(request):
         for user in query_set:
             print("Im here")
             print(user)
-            output.append([user.levelc, user.env, user.teachersc, user.prevdisc, user.fecilities, user.timetable,
+            output.append([user.levelc, user.std, user.env, user.teachersc, user.prevdisc, user.fecilities, user.timetable,
                        user.grpwork, user.mentalhlth, user.sportart, user.solveprob, user.creativecourse,
                        user.foconindv, user.mannlearn, user.courserele, user.issuesofconc, user.aresolved, user.others])
         writer.writerows(output)
@@ -75,9 +75,6 @@ def happiness_index(request):
                 "Counsellors": ratings_counsellors}
     normalized_ratings = normalize_ratings(ratings)
     weights = calculate_weights(number_categories,normalized_ratings)
-    with open('weights_array.pkl', 'wb') as file:
-        # A new file will be created
-        pkl.dump(weights, file)
 
     print(weights)
     print(type(weights))
@@ -85,10 +82,10 @@ def happiness_index(request):
     happiness_index = 0
     print(features.shape)
     for i in range(features.shape[0]):
-        intermediate = weights*features.iloc[i,:]
+        intermediate = weights*features.drop(["Standard"],axis =1).iloc[i,:]
         happiness_index += intermediate.values.sum() * 10 **(-1* np.log(intermediate.values.sum()))
         # weights*features[i,:].values
-    happiness_index = np.log(happiness_index/features.shape[0])
+    happiness_index = np.log(abs(happiness_index)/features.shape[0])
 
     # happiness_index = happiness_index* 10 ** np.log(happiness_index.sum())
 
@@ -102,19 +99,26 @@ def happiness_index(request):
     # print(happiness_index.sum())
     # print(np.log(happiness_index.sum()))
 
-    def standard_HI(features, weights):
+    def standard_Happiness(features, weights):
         hi_standard = ""
+        fn = len(features)
         for std in range(1,10):
             happiness_index = 0
-            features = features[features["std"] == std]
+            print(features)
+            features = features[features["Standard"] == str(std)]
             for i in range(features.shape[0]):
-                intermediate = weights * features.iloc[i, :]
+                intermediate = weights * features.drop(["Standard"], axis=1).iloc[i, :]
                 happiness_index += intermediate.values.sum() * 10 ** (-1 * np.log(intermediate.values.sum()))
                 # weights*features[i,:].values
-            happiness_index = np.log(happiness_index / features.shape[0])
+            print(features)
+            happiness_index = np.log(abs(happiness_index)/ fn)
             hi_standard += str(happiness_index) + " "
+        return hi_standard
 
-
+    std_happiness = standard_Happiness(features,weights)
+    print(std_happiness)
+    school.standard_HI = std_happiness
+    school.save()
 
 
 

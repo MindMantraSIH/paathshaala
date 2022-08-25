@@ -7,6 +7,7 @@ def savedata(request):
     if request.method=="POST":
         print("hello")
         school = request.user.student.school
+        std = request.POST.get('std')
         # print(request.user.student.school)
         levelc = request.POST.get('levelc')
         print(levelc)
@@ -26,7 +27,14 @@ def savedata(request):
         issuesofconc = request.POST.get('issuesofconc')
         aresolved = request.POST.get('aresolved')
         others = request.POST.get('others')
-        data = Data(school=school,levelc=levelc,env=env,teachersc=teachersc,prevdisc=prevdisc,fecilities=fecilities,timetable=timetable,grpwork=grpwork,mentalhlth=mentalhlth,sportart=sportart,solveprob=solveprob,creativecourse=creativecourse,foconindv=foconindv,mannlearn=mannlearn,courserele=courserele,issuesofconc=issuesofconc,aresolved=aresolved,others=others)
+        data = Data(school=school, std= std,levelc=levelc,
+                    env=env,teachersc=teachersc,prevdisc=prevdisc,
+                    fecilities=fecilities,timetable=timetable,
+                    grpwork=grpwork,mentalhlth=mentalhlth,
+                    sportart=sportart,solveprob=solveprob,
+                    creativecourse=creativecourse,foconindv=foconindv,
+                    mannlearn=mannlearn,courserele=courserele,
+                    issuesofconc=issuesofconc,aresolved=aresolved,others=others)
 
         data.save()
         print("done")
