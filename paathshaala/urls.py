@@ -28,4 +28,5 @@ urlpatterns = [
     path('sugg/', include('suggestions.urls')),   
     path('counsel/', include('counsellor.urls')),   
     path('', home, name='home'),
+    path('ques/', include('criticalthinkingquestions.urls')),
 ]
