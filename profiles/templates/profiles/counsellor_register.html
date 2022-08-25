@@ -1,6 +1,6 @@
-{% extends "profiles/base.html" %}
+{% extends "forum/base-temp.html" %}
 {% load static %}
-{% block connectcss %} 
+{% block style %} 
 <link rel="stylesheet" href="{% static 'profiles/main.css' %}">
   <style>
     card-registration,select-input,form-control[readonly]:not([disabled]) {
@@ -31,9 +31,9 @@
       color: #000 !important;
     }
   </style>
-  {% endblock connectcss %} 
+  {% endblock style %} 
 
-  {% block content %}
+  {% block body %}
     <section class="h-100 bg-light">
         <div class="container py-5 h-100">
           <div class="row d-flex justify-content-center align-items-center h-100" style="margin-top: 7vh;">
@@ -122,4 +122,4 @@
         </div>
       </section>
     
-{% endblock content %}
+{% endblock body %}

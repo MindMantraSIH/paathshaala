@@ -1,13 +1,13 @@
-{% extends "profiles/base.html" %}
+{% extends "forum/base-temp.html" %}
 {% load static %}
- {% block connectcss %} 
+ {% block style %} 
 <link rel="stylesheet" href="{% static 'profiles/main.css' %}">
 <link rel="stylesheet" href="{% static 'profiles/aos.min.css' %}">
-{% endblock connectcss %} 
+{% endblock style %} 
 
-{% block content %}
+{% block body %}
 <!-- Hero Area -->
-<div class="hero-area-l-14 position-relative z-index-1 overflow-hidden" style="background: url('static/profiles/hero-bg.png');background-repeat: no-repeat; background-position: center right;margin-top: -3rem;">
+<div class="hero-area-l-14 position-relative z-index-1 overflow-hidden" style="background: url('static/profiles/hero-bg.png');background-repeat: no-repeat; background-position: center right; margin-top: 2rem;">
     <div class="container">
       <div class="row position-relative justify-content-center">
         <div class="col-xl-5 col-lg-6 col-md-8 col-sm-10 pr-0 " data-aos="fade-right" data-aos-duration="800" data-aos-once="true">
@@ -179,13 +179,16 @@
       </div>
     </div>
   </div>
-{% endblock content %}
+
+
+
+{% endblock body %}
+
 
 {% block script %}
   <!-- Vendor Scripts -->
-  <script src="{% static 'profiles/vendor.min.js' %}"></script>
+  <!-- <script src="{% static 'profiles/vendor.min.js' %}"></script> -->
   <script src="{% static 'profiles/aos.min.js' %}"></script>
-  <script src="{% static 'profiles/menu.js' %}"></script>
   <!-- Activation Script -->
   <script src="{% static 'profiles/custom.js' %}"></script>
 {% endblock script %}
