@@ -39,11 +39,10 @@ class Student(models.Model):
     pincode = models.CharField(max_length=10, blank=True, null=True)
     std = models.CharField(max_length=10)
     division = models.CharField(max_length=10)
-    std_id = models.CharField(max_length=100,null=True)
 
 
     def __str__(self) -> str:
-        return f'{self.school.user.name}: {self.roll_number}'
+        return f'{self.school.user.name}: {self.roll_number} : {self.std} : {self.division}'
 
 class Counselor(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE,primary_key=True)

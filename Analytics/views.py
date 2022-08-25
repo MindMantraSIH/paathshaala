@@ -54,7 +54,7 @@ def happiness_index(request):
             print(user)
             output.append([user.levelc, user.env, user.teachersc, user.prevdisc, user.fecilities, user.timetable,
                        user.grpwork, user.mentalhlth, user.sportart, user.solveprob, user.creativecourse,
-                       user.foconindv, user.mannlearn, user.courserele, user.issuesofconc, user.aresolved, user.otapers])
+                       user.foconindv, user.mannlearn, user.courserele, user.issuesofconc, user.aresolved, user.others])
         writer.writerows(output)
     print()
     df = pd.read_csv("Analytics\data\HI.csv").iloc[:,:-1]
@@ -269,7 +269,10 @@ def upload_csv(request):
                 continue
             elements = line.split(',')
             print(elements)
+            school_obj = School.objects.get(user = request.user)
+            student_obj = Student.objects.filter(school = school_obj, roll_number=elements[0], std=elements[2], division=elements[3])[0]
             p = Academics.objects.create(school = request.user.school,
+                                        student = student_obj,
                                          roll_no= str(request.user.school) + " " +
                                                   elements[2] + " " +elements[3]
                                                   + " " +elements[0] + " " + elements[19],
