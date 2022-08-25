@@ -9,7 +9,7 @@ from profiles.models import Student, User, School as Student_school
 
 
 
-def create_student_data_csv():
+def create_student_data_csv(school_id):
 	columns = ['Roll_number', 'Name', 'Standard', 'Division','English', 'Hindi',
 	   'Maths', 'Science', 'History', 'Geography', 'Percent',
 	   'How interactive in class', 'Assignments on time', 'Attentive in class',
@@ -45,7 +45,7 @@ def create_student_data_csv():
 				student.roll_number = roll_nos
 				student.std = standards
 				student.division = divisions
-				student.school = Student_school.objects.get(user_id=3)
+				student.school = Student_school.objects.get(user_id=school_id)
 				student.save()
 	df = pd.DataFrame(data, columns =columns)
 	df.to_csv("student_data.csv",index=False)

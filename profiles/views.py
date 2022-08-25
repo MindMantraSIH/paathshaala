@@ -97,7 +97,7 @@ def loginregister(request):
 
 def home(request):
 	# database_happiness_index_survey()
-	# create_student_data_csv()
+	# create_student_data_csv(request.user.id)
 	if request.user.is_authenticated:
 		print("User is logged in :)")
 		print(f"Username --> {request.user.username}")
