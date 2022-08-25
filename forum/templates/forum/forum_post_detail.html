@@ -99,7 +99,7 @@
         $.ajax(
         {
             type:"POST",
-            url: "{% url 'add_comment' %}",
+            url: "{% url 'forum_add_comment' %}",
             data:{
                     'post_id': '{{ post.id }}',
                     'comment': comment,
@@ -128,7 +128,7 @@
         $.ajax(
         {
             type:"POST",
-            url: "{% url 'delete_post' %}",
+            url: "{% url 'forum_delete_post' %}",
             data:{
                     'post_id': '{{ post.id }}',
                     csrfmiddlewaretoken: '{{ csrf_token }}',
@@ -157,7 +157,7 @@
         $.ajax(
         {
             type:"POST",
-            url: "{% url 'add_post' %}",
+            url: "{% url 'forum_add_post' %}",
             data:{
                     'title': title,
                     'post_id': '{{ post.id }}',
@@ -193,7 +193,7 @@
         $.ajax(
         {
             type:"POST",
-            url: "{% url 'delete_comment' %}",
+            url: "{% url 'forum_delete_comment' %}",
             data:{
                     'comment_id': id,
                     csrfmiddlewaretoken: '{{ csrf_token }}',
