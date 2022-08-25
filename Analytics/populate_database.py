@@ -19,7 +19,7 @@ def create_student_data_csv(school_id):
 	print('RUNNN')
 	for standards in range(1,11):
 		for divisions in ["A","B","C","D"]:
-			for roll_nos in range(1,11):
+			for roll_nos in range(1,3):
 				row = []
 				N = 7
 				name = ''.join(random.choices(string.ascii_uppercase +
@@ -51,7 +51,7 @@ def create_student_data_csv(school_id):
 	df.to_csv("student_data.csv",index=False)
 
 def database_happiness_index_survey():
-	columns = ['Level Of Courses (Difficulty)', 'A Clean Environment',
+	columns = ['Standard','Level Of Courses (Difficulty)', 'A Clean Environment',
 	   'Employing teachers with competency',
 	   'Preventing Discrimination and Persuasion',
 	   'Providing laboratory & workshop facilities', 'The school timetable',
