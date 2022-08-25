@@ -4,7 +4,7 @@ import smtplib
 from django.contrib import messages
 from django.conf import settings
 from django.core.mail import send_mail
-
+from django.template.loader import render_to_string
 
 
 def getdata(request):
@@ -49,7 +49,12 @@ def getdata(request):
         recipient_list = [email]
         print(message)
         print(type(subject),type(message),type(email_from),type(recipient_list))
-        send_mail( subject, message[0], email_from, recipient_list )
+        send_mail(
+            subject,
+            message,
+            'mindmantrasih@gmail.com', #sender
+            recipient_list,
+        )
         messages.success(request, 'The results are sent to your email.')
         return render(request,'selfassessments/results.html',context)
     return render(request, 'selfassessments/selfasses.html')
