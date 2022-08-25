@@ -1,6 +1,6 @@
 from django.db import models
 from autoslug import AutoSlugField
-from profiles.models import School
+from profiles.models import School, Student
 from django.core.validators import MinValueValidator, MaxValueValidator
 
 
@@ -8,6 +8,7 @@ class Data(models.Model):
     # size = models.IntegerField(validators=[MinValueValidator(0),
     #                                    MaxValueValidator(5)])
     school = models.ForeignKey(School, on_delete=models.CASCADE, default=1)
+    student = models.ForeignKey(Student, on_delete=models.CASCADE, blank=True, null=True)
     levelc = models.IntegerField()
     env = models.IntegerField()
     teachersc = models.IntegerField()

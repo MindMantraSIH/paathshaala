@@ -66,21 +66,20 @@ def database_happiness_index_survey():
 	   'Are these problems being solved by the School?',
 	   'Any other factors , according to you , which contribute to happiness index']
 	schools = School.objects.all()
-	counter = 0
 	for sc in schools:
-		for i in range(10):
+		students = Student.objects.filter(school = sc)
+		for student in students:
 			info = []
-			for fields in range(len(columns)-1):
+			for _ in range(len(columns)-1):
 				info.append(np.random.randint(0, 5))
-			data = Data(school=sc, levelc=info[0], env=info[1], teachersc=info[2], prevdisc=info[3],
+			data = Data(school=sc, student=student, levelc=info[0], env=info[1], teachersc=info[2], prevdisc=info[3],
 						fecilities=info[4], timetable=info[5], grpwork=info[6], mentalhlth=info[7],
 						sportart=info[8], solveprob=info[9], creativecourse=info[10], foconindv=info[11],
 						mannlearn=info[12], courserele=info[13], issuesofconc=info[14],
 						aresolved=info[15],
 						others="Cleanliness is very important")
 			data.save()
-			counter += 1
-			print(counter)
+
 
 
 
