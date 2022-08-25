@@ -14,6 +14,9 @@ class User(AbstractUser):
     phone_number = models.CharField(max_length=10)
     email = models.EmailField()
 
+    def __str__(self) -> str:
+        return self.name
+
 class School(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE,primary_key=True)
     state = models.CharField(max_length=50)
@@ -32,6 +35,10 @@ class Student(models.Model):
     roll_number = models.CharField(max_length=20)
     school = models.ForeignKey(School, on_delete=models.CASCADE)
     pincode = models.CharField(max_length=10, blank=True, null=True)
+    std = models.CharField(max_length=10)
+    division = models.CharField(max_length=10)
+
+
 
     def __str__(self) -> str:
         return f'{self.school.user.name}: {self.roll_number}'
@@ -48,6 +55,7 @@ class Counselor(models.Model):
     fees = models.CharField(max_length=50, null=True, blank=True)
     latitude = models.CharField(max_length=7, null=True, blank=True)
     longitude = models.CharField(max_length=7, null=True, blank=True)
+    is_active = models.BooleanField(default=False)
 
     def __str__(self) -> str:
         return f'{self.user.name} {(self.speciality)}'

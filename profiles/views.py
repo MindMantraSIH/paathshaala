@@ -27,6 +27,8 @@ def student_register(request):
 		print(school)
 		student.school = School.objects.get(user_id=school)
 		student.pincode = request.POST.get('pincode','')
+		user.std = request.POST.get('standard','')
+		user.division = request.POST.get('division','')
 		student.save()
 		user.save()  
 		messages.success(request, f'Your account has been created! You are now able to log in')
@@ -81,8 +83,10 @@ def loginregister(request):
 				login(request,user)
 				if user.is_school:
 					return redirect('school-feed', user.slug)
-				else:
+				elif user.is_student:
 					return redirect('school-feed',user.student.school.user.slug)
+				else:
+					return redirect('counselor_forum')
 			else:
 				return render(request, 'profiles/loginregister.html', {'message': 'Username or password is incorrect'})
 
