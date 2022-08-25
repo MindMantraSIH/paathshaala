@@ -102,7 +102,7 @@ def happiness_index(request):
     # print(happiness_index.sum())
     # print(np.log(happiness_index.sum()))
 
-    def standard_HI(features, weights):
+    #def standard_HI(features, weights):
 
 
 
@@ -618,17 +618,41 @@ def standard_analytics(request, std):
 #     return render(request, "Analytics/dashboard1.html")
 
 def student_dashboard(request):
+    output = []
+    print(request.user)
+    query_set = Academics.objects.filter(school=request.user.student.school)
+    print(query_set)
+    with open(os.getcwd() + "/student_data.csv", 'w', newline='') as file:
+        writer = csv.writer(file)
+        print(os.getcwd())
+        writer.writerow(['Roll_number', 'Name', 'Standard', 'Division','English', 'Hindi',
+       'Maths', 'Science', 'History', 'Geography', 'Percent',
+       'How interactive in class', 'Assignments on time', 'Attentive in class',
+       'Creativity', 'Participation in extra curricular', 'Confidence',
+       'Social relationships', 'Obedient'])
+        for user in query_set:
+            print("Im here")
+            print(user)
+            output.append([user.roll_no, user.name, user.standard, user.division, user.english, user.hindi,
+                           user.maths, user.science, user.history, user.geo, user.percent,
+                           user.interactivity, user.timely_submissions, user.attentiveness, user.participation,
+                           user.confidence,user.social_relationship,user.obedience])
+        writer.writerows(output)
+    print()
+
     student = Student.objects.get(user=request.user)
     #print(student)
+    standard = int(student.std)
+    div = student.division
     roll_no = int(student.roll_number)
+
     #print(roll_no)
-    df_s = pd.read_csv('Analytics/data/student_data.csv')
-    curr = df_s[df_s['Roll_number'] == roll_no]
-    # print(curr)
-    std = df_s[df_s['Roll_number'] == roll_no].Standard.values[0]
-    std_df = df_s[df_s["Standard"] == std]
+    df_s = pd.read_csv(os.getcwd() + "/student_data.csv")
+    std_df = df_s[df_s['Standard'] == standard]
+    div = std_df[std_df['Division'] == div]
+    roll_no_df = div[div['Roll_number'] == roll_no]
     std_mean = std_df['Percent'].mean()
-    curr = df_s[df_s['Roll_number'] == roll_no].Percent.values[0]
+    curr = roll_no_df[roll_no_df['Roll_number'] == roll_no].Percent.values[0]
     res = [std_mean, curr]
     lab = ['Class Average', 'Student"s Percent']
     fig1 = go.Figure([go.Bar(x=lab, y=res)])
@@ -678,3 +702,5 @@ def student_dashboard(request):
                'name': request.user.name,
                }
     return render(request,"Analytics/student_dashboard.html",context)
+
+
