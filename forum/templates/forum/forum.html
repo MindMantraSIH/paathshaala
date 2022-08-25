@@ -1,6 +1,6 @@
-{% extends "profiles/base.html" %}
+{% include "profiles/base.html" %}
 {% load static %}
-{% block title %}Forums{% endblock title %}
+{% comment %} {% block title %}Forums{% endblock title %} {% endcomment %}
 {% block connectcss %}
 <link href="{% static 'forum/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
 <link href="{% static 'forum/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
