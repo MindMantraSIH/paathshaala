@@ -32,5 +32,12 @@ def savedata(request):
         data.save()
         print("done")
         return redirect('home')
-    return render(request,'sugg.html')
+    return render(request,'suggestions/sugg.html')
+
+
+def feedback(request):
+    return render(request, 'suggestions/Suggestions_flip.html')
+
+def feedback1(request):
+    return render(request, 'suggestions/Suggestions_flip1.html')
         

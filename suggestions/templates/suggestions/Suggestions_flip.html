@@ -1,0 +1,159 @@
+{% extends "forum/base-temp.html" %}
+{% load static %}
+{% block title %} Feedback {% endblock title %}
+{% block style %}
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,600');
+
+    .flip-card-3D-wrapper {
+        width: 100%;
+        height: 80%;
+        position: relative;
+        -o-perspective: 900px;
+        -webkit-perspective: 900px;
+        -ms-perspective: 900px;
+        perspective: 900px;
+    }
+
+    #flip-card {
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        margin: 50px auto;
+        position: absolute;
+        -o-transition: all 1s ease-in-out;
+        -webkit-transition: all 1s ease-in-out;
+        -ms-transition: all 1s ease-in-out;
+        transition: all 1s ease-in-out;
+        -o-transform-style: preserve-3d;
+        -webkit-transform-style: preserve-3d;
+        -ms-transform-style: preserve-3d;
+        transform-style: preserve-3d;
+    }
+
+    .do-flip {
+        -o-transform: rotateY(-180deg);
+        -webkit-transform: rotateY(-180deg);
+        -ms-transform: rotateY(-180deg);
+        transform: rotateY(-180deg);
+    }
+
+    #flip-card-btn-turn-to-back,
+    #flip-card-btn-turn-to-front {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        width: 40px;
+        height: 40px;
+        background: white;
+        cursor: pointer;
+        visibility: hidden;
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 600;
+        font-size: .7em;
+        padding: 0;
+        color: grey;
+        border: 1px solid grey;
+    }
+
+    #flip-card .flip-card-front,
+    #flip-card .flip-card-back {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        -o-backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        -ms-backface-visibility: hidden;
+        backface-visibility: hidden;
+        z-index: 2;
+        -webkit-box-shadow: 5px 6px 32px 2px rgba(133, 133, 133, 0.71);
+        -moz-box-shadow: 5px 6px 32px 2px rgba(133, 133, 133, 0.71);
+        box-shadow: 5px 6px 32px 2px rgba(133, 133, 133, 0.71);
+    }
+
+    #flip-card .flip-card-front {
+        background: lightgreen;
+        border: 1px solid grey;
+    }
+
+    #flip-card .flip-card-back {
+        background: lightblue;
+        border: 1px solid grey;
+        -o-transform: rotateY(180deg);
+        -webkit-transform: rotateY(180deg);
+        -ms-transform: rotateY(180deg);
+        transform: rotateY(180deg);
+    }
+
+    #flip-card .flip-card-front p,
+    #flip-card .flip-card-back p {
+        color: grey;
+        display: block;
+        position: absolute;
+        top: 40%;
+        width: 100%;
+    }
+
+    .button1 {
+        width: 100px;
+        height: 30px;
+        border-width: 0.2px;
+        border-color: grey;
+        margin-top: 10%;
+        color: grey;
+        cursor: pointr;
+
+    }
+
+    @media(max-width:768px) {
+        .button1 {
+            margin-top: 20%;
+        }
+    }
+
+    .button1:hover {
+        background-color: lightgreen;
+        ;
+    }
+</style>
+{% endblock style %}
+{% block body %}
+<main class="container jumbotron mt-5" style="height:500px;">
+
+    <div class="flip-card-3D-wrapper" id="slider_card">
+        <div id="flip-card">
+            <div class="flip-card-front">
+                <p style="margin-top:-2rem;">We buried my brother with his dreams. On colored scraps of paper my young son, Teddy, and I scrawled all the fantasies Abe never achieved for lack of trying: hero, quarterback, singer, actor and more and crammed them in the satin folds of his coffin along with his favorite bottle of Jack and a pack of Camels.</p>
+            </div>
+        </div>
+    </div>
+    <div id="next_button">
+        <span><button class="button1" onclick="location.href = 'http://127.0.0.1:8000/suggestions';">Next</button></span>
+    </div>
+
+</main>
+
+
+{% endblock body %}
+{% block script %}
+<script>
+    document.addEventListener('DOMContentLoaded', function (event) {
+
+        document.getElementById('flip-card-btn-turn-to-back').style.visibility = 'visible';
+        document.getElementById('flip-card-btn-turn-to-front').style.visibility = 'visible';
+
+        document.getElementById('flip-card-btn-turn-to-back').onclick = function () {
+            document.getElementById('flip-card').classList.toggle('do-flip');
+        };
+
+        document.getElementById('flip-card-btn-turn-to-front').onclick = function () {
+            document.getElementById('flip-card').classList.toggle('do-flip');
+        };
+
+    });
+
+    
+
+</script>
+
+{% endblock script %}

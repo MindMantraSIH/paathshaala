@@ -4,4 +4,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path('',views.savedata,name="savedata"),
+    path('feedback/', views.feedback, name="feedback"),
+    path('feedback1/', views.feedback1, name="feedback1"),
 ]
