@@ -1,0 +1,395 @@
+{% include "forum/base-temp.html" %}
+{% load static %}
+{% block style %}
+<style>
+    /* input[type=text] {
+        width: 60rem;
+    } */
+
+    .btn-primary,
+    .btn-secondary {
+        background-color: #bff5fa;
+        color: black;
+        border: 0.5px solid #bff5fa !important;
+        box-shadow: 3px 3px 5px #888888;
+        margin:0.5rem;
+        /* width: rem; */
+        border-radius: 2vh;
+        height: auto;
+    }
+
+    .btn:not(:disabled):not(.disabled) {
+        background-color: #bff5fa;
+    }
+
+    .btn-group-toggle :hover {
+        background-color: #fee648 !important;
+        color: #000;
+    }
+    .active {
+        background-color: #fee648 !important;
+        color: #000 !important;
+    }
+
+    .btn-group>.btn-group:not(:last-child)>.btn,
+    .btn-group>.btn:not(:last-child):not(.dropdown-toggle) {
+        border-radius: 2vh;
+    }
+
+    .btn-group>.btn-group:not(:first-child)>.btn,
+    .btn-group>.btn:not(:first-child) {
+        border-radius: 2vh;
+    }
+
+    .card {
+        margin: auto;
+        margin-bottom: 3rem !important;
+        margin-top: 3rem !important;
+        box-shadow: 3px 3px 5px #888888;
+        border-radius: 2vh;
+        padding: 10px;
+        width: 40rem;
+    }
+</style>
+{% endblock style %}
+{% block body %}
+<div class=" position-relative z-index-1 overflow-hidden">
+    <div class="container" style="margin-top: 15vh;">
+        <h2 style="margin-top: 2vh !important;text-align: center;">Survey of Happiness Index in School Students - Group 3</h2>
+        <form method="POST" action="">
+            {% csrf_token %}
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">How burdensome are the courses</h5>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="levelc" value="1">1
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="levelc" value="2">2
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="levelc" value="3">3
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="levelc" value="4">4
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="levelc" value="5">5
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Are Training Life Skills provided</h5>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="train" value="1">1
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="train" value="2">2
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="train" value="3">3
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="train" value="4">4
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="train" value="5">5
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Is exam in compliance with the course content</h5>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="exam" value="1">1
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="exam" value="2">2
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="exam" value="3">3
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="exam" value="4">4
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="exam" value="5">5
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Are hours for training of imagination and innovation allocated</h5>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="alhours" value="1">1
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="alhours" value="2">2
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="alhours" value="3">3
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="alhours" value="4">4
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="alhours" value="5">5
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Do you get support of family and teachers?</h5>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="support" value="1">1
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="support" value="2">2
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="support" value="3">3
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="support" value="4">4
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="support" value="5">5
+                        </label>
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Do you feel anxiety and pressure to get results?</h5>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="anxiety" value="1">1
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="anxiety" value="2">2
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="anxiety" value="3">3
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="anxiety" value="4">4
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="anxiety" value="5">5
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Do you feel alienated by peers</h5>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="alienated" value="1">1
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="alienated" value="2">2
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="alienated" value="3">3
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="alienated" value="4">4
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="alienated" value="5">5
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Do you feel like all the burden of your family is on your shoulders?</h5>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="fam_burd" value="1">1
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="fam_burd" value="2">2
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="fam_burd" value="3">3
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="fam_burd" value="4">4
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="fam_burd" value="5">5
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Do you feel insecure looking at the success of your peers?</h5>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="insecure" value="1">1
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="insecure" value="2">2
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="insecure" value="3">3
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="insecure" value="4">4
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="insecure" value="5">5
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Does your learning involve fundamental and critical aspects of manner of living</h5>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="manner" value="1">1
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="manner" value="2">2
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="manner" value="3">3
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="manner" value="4">4
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="manner" value="5">5
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Do you pressured to get good results in exams?</h5>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="anxiety2" value="1">1
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="anxiety2" value="2">2
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="anxiety2" value="3">3
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="anxiety2" value="4">4
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="anxiety2" value="5">5
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">How burdensome are the courses</h5>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="levelc2" value="1">1
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="levelc2" value="2">2
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="levelc2" value="3">3
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="levelc2" value="4">4
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="levelc2" value="5">5
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card text-center">
+                <div class="card-body" style="padding: 0.5rem !important;">
+                    <h5 class="card-title">Any other factors, according to you which contribute to happiness index</h5>
+                </div>
+                <div style="margin-bottom:1rem;">
+                    <input type="text" name="others" placeholder="Enter your suggestions" class="form-control">
+                </div>
+            </div>
+
+            <div class="card text-center">
+                <div class="card-body" style="padding: 0.5rem !important;">
+                    <h5 class="card-title">Do you have any solution for the above mentioned problem(/s)?(Write your solution below)</h5>
+                </div>
+                <div style="margin-bottom:1rem;">
+                    <input type="text" name="solution" placeholder="Enter your suggestions" class="form-control">
+                </div>
+            </div>
+            
+
+
+            <!-- Submit button -->
+            <div class="align-self-center mx-auto text-center">
+                <button type="submit" class="btn btn-secondary" Value="Submit">
+                    Submit
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock body %}
+{% block script %}
+    <script>
+        function check(){
+           og_anxiety =  $("input[type='radio'][name='anxiety']:checked").val();
+           second_anxiety =  $("input[type='radio'][name='anxiety2']:checked").val();
+           course_og_val=$("input[type='radio'][name='levelc']:checked").val();
+           course_val=$("input[type='radio'][name='levelc2']:checked").val();
+        //    console.log(og_val,second_val);
+           if((og_anxiety!=second_anxiety ) || (course_og_val!=course_val)){
+            Swal.fire({
+            title: 'Error',
+            text: "Please fill the form attentively",
+            icon: 'warning',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'Refill it!'
+            }).then((result) => {
+            if (result.isConfirmed) {
+                location.reload();
+            }
+            })
+            
+        }
+    }
+    </script>
+
+{% endblock script %}

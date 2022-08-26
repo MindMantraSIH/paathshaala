@@ -22,7 +22,10 @@ import os
 import csv
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 from sklearn.decomposition import NMF, LatentDirichletAllocation
-
+import pickle as pkl
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
+from django.http import JsonResponse
 
 
 
@@ -34,7 +37,7 @@ def happiness_index(request):
     with open(os.getcwd() + "/data.csv", 'w',newline='') as file:
         writer = csv.writer(file)
         print(os.getcwd())
-        writer.writerow(['Level Of Courses (Difficulty)', 'A Clean Environment',
+        writer.writerow(['Level Of Courses (Difficulty)', 'Standard','A Clean Environment',
        'Employing teachers with competency',
        'Preventing Discrimination and Persuasion',
        'Providing laboratory & workshop facilities', 'The school timetable',
@@ -51,7 +54,7 @@ def happiness_index(request):
         for user in query_set:
             print("Im here")
             print(user)
-            output.append([user.levelc, user.env, user.teachersc, user.prevdisc, user.fecilities, user.timetable,
+            output.append([user.levelc, user.std, user.env, user.teachersc, user.prevdisc, user.fecilities, user.timetable,
                        user.grpwork, user.mentalhlth, user.sportart, user.solveprob, user.creativecourse,
                        user.foconindv, user.mannlearn, user.courserele, user.issuesofconc, user.aresolved, user.others])
         writer.writerows(output)
@@ -74,13 +77,17 @@ def happiness_index(request):
                 "Counsellors": ratings_counsellors}
     normalized_ratings = normalize_ratings(ratings)
     weights = calculate_weights(number_categories,normalized_ratings)
+
+    print(weights)
+    print(type(weights))
+    print(len(weights))
     happiness_index = 0
     print(features.shape)
     for i in range(features.shape[0]):
-        intermediate = weights*features.iloc[i,:]
+        intermediate = weights*features.drop(["Standard"],axis =1).iloc[i,:]
         happiness_index += intermediate.values.sum() * 10 **(-1* np.log(intermediate.values.sum()))
         # weights*features[i,:].values
-    happiness_index = np.log(happiness_index/features.shape[0])
+    happiness_index = np.log(abs(happiness_index)/features.shape[0])
 
     # happiness_index = happiness_index* 10 ** np.log(happiness_index.sum())
 
@@ -94,9 +101,29 @@ def happiness_index(request):
     # print(happiness_index.sum())
     # print(np.log(happiness_index.sum()))
 
+    def standard_Happiness(features, weights):
+        hi_standard = ""
+        fn = len(features)
+        print(fn)
+        for std in range(1,11):
+            happiness_index = 0
+            print(features)
+            features = features[features["Standard"] == std]
+            print(features)
+            print(features.shape[0])
+            for i in range(features.shape[0]):
+                intermediate = weights * features.drop(["Standard"], axis=1).iloc[i, :]
+                happiness_index += intermediate.values.sum() * 10 ** (-1 * np.log(intermediate.values.sum()))
+                # weights*features[i,:].values
+            print(features)
+            happiness_index = np.log(abs(happiness_index)/ fn)
+            hi_standard += str(happiness_index) + " "
+        return hi_standard
 
-
-
+    # std_happiness = standard_Happiness(features,weights)
+    # print(std_happiness)
+    # school.standard_HI = std_happiness
+    # school.save()
 
 
 
@@ -150,6 +177,8 @@ def dashboard(request):
     df = pd.read_csv('Analytics/data/HI.csv')
     label = []
     sizes = []
+    total_suggestions = Data.objects.filter(school = request.user.school).count()
+    total_students = Student.objects.filter(school = request.user.school).count()
     diff = df[df['Level Of Courses (Difficulty)'] > 2]
     students_course_difficult = diff['Level Of Courses (Difficulty)'].count()
     eas = df[df['Level Of Courses (Difficulty)'] <= 2]
@@ -228,9 +257,35 @@ def dashboard(request):
                 'city': request.user.school.city,
                 'state': request.user.school.state,
                'rank': request.user.school.rank,
-               'happinessindex': request.user.school.happiness_score
+               'happinessindex': request.user.school.happiness_score,
+               'total_suggestions':total_suggestions,
+               'total_students': total_students,
+               'school_user_id': request.user.id
                }
     return render(request,'Analytics/dashboard1.html',context)
+
+def send_feedback_mails(request):
+    school_user = request.POST['school']
+    school = School.objects.get(user_id = school_user)
+    msg_plain = render_to_string('analytics/send_feedback_email.txt')
+    student_emails = []
+    students = Student.objects.filter(school=school)
+    for student in students:
+        if student.user.email:
+            student_emails.append(student.user.email)
+    try:
+        send_mail(
+            'Fill Feedback Form',
+            msg_plain,
+            'mindmantrasih@gmail.com', #sender
+            student_emails,
+            html_message=render_to_string('analytics/send_feedback_email.html'),
+        )
+        return JsonResponse({'response':'success'})
+    except Exception as e:
+        print(e)
+        return JsonResponse({'response':'failure'})
+    
 
 def upload_csv(request):
     if request.method == "POST":
@@ -245,18 +300,26 @@ def upload_csv(request):
                 continue
             elements = line.split(',')
             print(elements)
-            p = Academics.objects.create(school = request.user.school,roll_no=elements[0],
-                                         name=elements[1], standard = elements[2],
-                                         english = float(elements[3]), hindi = float(elements[4]),
-                                         maths=float(elements[5]), science=float(elements[6]),
-                                         geo=float(elements[7]),percent=float(elements[8]),
-                                         interactivity=float(elements[9]),
-                                         timely_submissions=float(elements[10]),
-                                         attentiveness=float(elements[11]), creativity=float(elements[12]),
-                                         participation=float(elements[13]), confidence=float(elements[14]),
-                                         social_relationship=float(elements[15]), obedience=float(elements[16])
+            school_obj = School.objects.get(user = request.user)
+            student_obj = Student.objects.filter(school = school_obj, roll_number=elements[0], std=elements[2], division=elements[3])[0]
+            p = Academics.objects.create(school = request.user.school,
+                                        student = student_obj,
+                                         roll_no= str(request.user.school) + " " +
+                                                  elements[2] + " " +elements[3]
+                                                  + " " +elements[0] + " " + elements[19],
+                                         name=elements[1], standard = elements[2], division= elements[3],
+                                         english = float(elements[4]), hindi = float(elements[5]),
+                                         maths=float(elements[6]), science=float(elements[7]),
+                                         history= float(elements[8]),
+                                         geo=float(elements[9]),percent=float(elements[10]),
+                                         interactivity=float(elements[11]),
+                                         timely_submissions=float(elements[12]),
+                                         attentiveness=float(elements[13]), creativity=float(elements[14]),
+                                         participation=float(elements[15]), confidence=float(elements[16]),
+                                         social_relationship=float(elements[17]), obedience=float(elements[18])
                                          )
             print("Hello",p)
+            request
             # except:
             #     pass
         print("hulllllllllllllllllllllllaaaaaaaaaaaaaaaaaaaarrrrrrrrrrrrrrrrrrrrrrraaaaaaaaaaaaaaaaaaaaaaaaa")
@@ -456,11 +519,11 @@ def send(request):
 def lda():
     schools = Data.objects.all()
     suggestions = []
-    for i,school in enumerate(schools):
+    for i, school in enumerate(schools):
         suggestions.append(school.others)
     print(suggestions)
     no_features = 1000
-    tf_vectorizer = CountVectorizer(max_df=0.95, min_df=2, max_features=no_features, stop_words='english')
+    tf_vectorizer = CountVectorizer(max_features=no_features, stop_words='english')
     tf = tf_vectorizer.fit_transform(suggestions)
     tf_feature_names = tf_vectorizer.get_feature_names()
     no_topics = 1
@@ -471,7 +534,7 @@ def lda():
         for topic_idx, topic in enumerate(model.components_):
             print("Topic %d:" % (topic_idx))
             return " ".join([feature_names[i]
-                      for i in topic.argsort()[:-no_top_words - 1:-1]])
+                        for i in topic.argsort()[:-no_top_words - 1:-1]])
 
     no_top_words = 5
     display_topics(lda, tf_feature_names, no_top_words)
@@ -514,7 +577,7 @@ def standard_analytics(request, std):
     with open(os.getcwd() + "/standard_data.csv", 'w', newline='') as file:
         writer = csv.writer(file)
         print(os.getcwd())
-        writer.writerow(['Roll_number', 'Name', 'School', 'Standard', 'English', 'Hindi',
+        writer.writerow(['Roll_number', 'Name', 'School', 'Standard', 'Division','English', 'Hindi',
        'Maths', 'Science', 'History', 'Geography', 'Percent',
        'How interactive in class', 'Assignments on time', 'Attentive in class',
        'Creativity', 'Participation in extra curricular', 'Confidence',
@@ -522,7 +585,7 @@ def standard_analytics(request, std):
         for user in query_set:
             print("Im here")
             print(user)
-            output.append([user.roll_no, user.name, user.standard, user.english, user.hindi, user.maths,
+            output.append([user.roll_no, user.name, user.standard, user.division, user.english, user.hindi, user.maths,
                            user.science, user.history, user.geo, user.percent, user.interactivity,
                            user.timely_submissions, user.attentiveness, user.creativity,
                            user.participation, user.confidence, user.social_relationship,
@@ -589,6 +652,7 @@ def standard_analytics(request, std):
                                               df['Social relationships'].mean(),
                                               df['Obedient'].mean()]))
     graph4 = plotly.offline.plot(fig4, auto_open=False, output_type="div")
+
     context = {"graph": [graph1, graph2, graph3,graph4],
                'name': request.user.school,
                 'city': request.user.school.city,
@@ -605,22 +669,74 @@ def standard_analytics(request, std):
 #     return render(request, "Analytics/dashboard1.html")
 
 def student_dashboard(request):
-    student = Student.objects.get(user=request.user)
+    output = []
+    print(request.user)
+    query_set = Academics.objects.filter(school=request.user.student.school)
+    print(query_set)
+    with open(os.getcwd() + "/student_data.csv", 'w', newline='') as file:
+        writer = csv.writer(file)
+        print(os.getcwd())
+        writer.writerow(['Roll_number', 'Name', 'Standard', 'Division','English', 'Hindi',
+       'Maths', 'Science', 'History', 'Geography', 'Percent',
+       'How interactive in class', 'Assignments on time', 'Attentive in class',
+       'Creativity', 'Participation in extra curricular', 'Confidence',
+       'Social relationships', 'Obedient'])
+        for user in query_set:
+            print("Im here")
+            print(user)
+            output.append([user.roll_no, user.name, user.standard, user.division, user.english, user.hindi,
+                           user.maths, user.science, user.history, user.geo, user.percent,
+                           user.interactivity, user.timely_submissions, user.attentiveness, user.participation,
+                           user.confidence,user.social_relationship,user.obedience])
+        writer.writerows(output)
+
+    x = Student.objects.get(user=request.user)
+    #print(x)
+
     #print(student)
-    roll_no = int(student.roll_number)
+    student = Student.objects.get(user=request.user)
+    # data_obj = Data.objects.get(student=student)
+    # file = []
+    # with open("someobject.pickle", "rb") as input_file:
+    #     weights = pkl.loads(input_file)
+    #     print(weights)
+    # print(weights)
+    
+    # hi = weights*features.drop(["Standard"],axis =1).iloc[i,:]
+
+    #print(student.std)
+    #print(type(student.std))
+    standard = int(student.std)
+    str_std = student.std
+    div = student.division
+    year = '2022'
+    #print(div)
+    rno = student.roll_number
+    str_rno = str(student.roll_number)
+    school = x.school.user.name
+    #roll_no =
     #print(roll_no)
-    df_s = pd.read_csv('Analytics/data/student_data.csv')
-    curr = df_s[df_s['Roll_number'] == roll_no]
-    # print(curr)
-    std = df_s[df_s['Roll_number'] == roll_no].Standard.values[0]
-    std_df = df_s[df_s["Standard"] == std]
+    r = [school,str_std,div,str_rno,'2022']
+    roll_no = " ".join(r)
+    #print(roll_no)
+    #roll_no = str(school +" " + standard +" " + div + " " + rno + "2022")
+
+    df_s = pd.read_csv(os.getcwd() + "/student_data.csv")
+    #print(df_s)
+    std_df = df_s[df_s['Standard'] == standard]
+    #print(std_df)
+    div = std_df[std_df['Division'] == div]
+    #print(div)
+    roll_no_df = div[div['Roll_number'] == roll_no]
+    #print(roll_no)
+    print(roll_no_df)
     std_mean = std_df['Percent'].mean()
-    curr = df_s[df_s['Roll_number'] == roll_no].Percent.values[0]
+    curr = roll_no_df[roll_no_df['Roll_number'] == roll_no].Percent.values[0]
     res = [std_mean, curr]
     lab = ['Class Average', 'Student"s Percent']
     fig1 = go.Figure([go.Bar(x=lab, y=res)])
     graph1 = plotly.offline.plot(fig1, auto_open=False, output_type="div")
-    x = df_s[df_s['Roll_number'] == roll_no]
+    x = roll_no_df[roll_no_df['Roll_number'] == roll_no]
     subjects = ['English', 'Hindi', 'Maths', 'Science', 'History', 'Geography']
     marks = [x.English.values[0], x.Hindi.values[0], x.Maths.values[0], x.Science.values[0], x.History.values[0],
              x.Geography.values[0]]
@@ -646,7 +762,7 @@ def student_dashboard(request):
     graph3 = plotly.offline.plot(fig3, auto_open=False, output_type="div")
 
     fig4 = go.Figure(data=go.Scatterpolar(
-        r=[x['Creativity'].values[0], x['confidence'].values[0], x['Social relationships'].values[0],
+        r=[x['Creativity'].values[0], x['Confidence'].values[0], x['Social relationships'].values[0],
            x['Obedient'].values[0]],
         theta=['Creativity', 'confidence', 'Social relationships', 'Obedient'],
         fill='toself'
@@ -665,3 +781,5 @@ def student_dashboard(request):
                'name': request.user.name,
                }
     return render(request,"Analytics/student_dashboard.html",context)
+
+

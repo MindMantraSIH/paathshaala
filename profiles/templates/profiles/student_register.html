@@ -1,8 +1,8 @@
-{% extends "profiles/base.html" %}
+{% extends "forum/base-temp.html" %}
 {% load static %}
 
 
- {% block connectcss %} 
+ {% block style %} 
 <link rel="stylesheet" href="{% static 'profiles/main.css' %}">
   <style>
     card-registration,select-input,form-control[readonly]:not([disabled]) {
@@ -33,9 +33,9 @@
       color: #000 !important;
     }
   </style>
-  {% endblock connectcss %} 
+  {% endblock style %} 
 
-{% block content %}
+{% block body %}
     <section class="h-100 bg-light">
         <div class="container py-5 h-100">
           <div class="row d-flex justify-content-center align-items-center h-100" style="margin-top: 7vh;">
@@ -77,6 +77,20 @@
                         </div>
                         <div class="col-md-4 mb-4">
                           <div class="form-outline">
+                            <label class="form-label" for="standard">Standard</label>
+                            <input type="text" id="standard" name="standard" class="form-control form-control-lg" />
+                          </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                          <div class="form-outline">
+                            <label class="form-label" for="division">Division</label>
+                            <input type="text" id="division" name="division" class="form-control form-control-lg" />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6 mb-4">
+                          <div class="form-outline">
                             <label class="form-label" for="schoolname">School Name</label>
                             <select name="schoolname" id="schoolname" class="form-control form-control-lg">
                               <option value="" selected disabled></option>
@@ -87,7 +101,7 @@
                             </select>
                           </div>
                         </div>
-                        <div class="col-md-4 mb-4">
+                        <div class="col-md-6 mb-4">
                           <div class="form-outline">
                             <label class="form-label" for="pincode">Pincode</label>
                             <input type="text" id="pincode" name="pincode" class="form-control form-control-lg" />
@@ -108,4 +122,4 @@
         </div>
       </section>
     
-      {% endblock content %}
+      {% endblock body %}

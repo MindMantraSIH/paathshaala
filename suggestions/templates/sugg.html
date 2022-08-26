@@ -1,10 +1,10 @@
-{% include "profiles/base.html" %}
+{% include "forum/base-temp.html" %}
 {% load static %}
-{% block connectcss %}
+{% block style %}
 <style>
-    input[type=text] {
+    /* input[type=text] {
         width: 60rem;
-    }
+    } */
 
     .btn-primary,
     .btn-secondary {
@@ -12,7 +12,8 @@
         color: black;
         border: 0.5px solid #bff5fa !important;
         box-shadow: 3px 3px 5px #888888;
-        margin: 2rem;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
         width: 10rem;
         border-radius: 2vh;
         height: auto;
@@ -49,8 +50,8 @@
         padding: 10px;
     }
 </style>
-{% endblock connectcss %}
-{% block content %}
+{% endblock style %}
+{% block body %}
 <div class=" position-relative z-index-1 overflow-hidden">
     <div class="container" style="margin-top: 15vh;">
         <h2 style="margin-top: 2vh !important;text-align: center;">Survey of Happiness Index in School Index</h2>
@@ -63,15 +64,23 @@
                         <label class="btn btn-secondary">
                             <input type="radio" name="levelc" value="1">1
                         </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
                             <input type="radio" name="levelc" value="2">2
                         </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
                             <input type="radio" name="levelc" value="3">3
                         </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
                             <input type="radio" name="levelc" value="4">4
                         </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
                             <input type="radio" name="levelc" value="5">5
                         </label>
@@ -86,15 +95,23 @@
                         <label class="btn btn-secondary">
                             <input type="radio" name="env" value="1">1
                         </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
                             <input type="radio" name="env" value="2">2
                         </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
                             <input type="radio" name="env" value="3">3
                         </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
                             <input type="radio" name="env" value="4">4
                         </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
                             <input type="radio" name="env" value="5">5
                         </label>
@@ -109,15 +126,23 @@
                         <label class="btn btn-secondary">
                             <input type="radio" name="teachersc" value="1">1
                         </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
                             <input type="radio" name="teachersc" value="2">2
                         </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
                             <input type="radio" name="teachersc" value="3">3
                         </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
                             <input type="radio" name="teachersc" value="4">4
                         </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
                             <input type="radio" name="teachersc" value="5">5
                         </label>
@@ -132,15 +157,23 @@
                         <label class="btn btn-secondary">
                             <input type="radio" name="prevdic" value="1">1
                         </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
                             <input type="radio" name="prevdisc" value="2">2
                         </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
                             <input type="radio" name="prevdisc" value="3">3
                         </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
                             <input type="radio" name="prevdisc" value="4">4
                         </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
                             <input type="radio" name="prevdisc" value="5">5
                         </label>
@@ -150,24 +183,72 @@
 
             <div class="card text-center">
                 <div class="card-body">
-                    <h5 class="card-title">Providing Laboratory and workshop facilities</h5>
-                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <label class="btn btn-secondary">
-                            <input type="radio" name="fecilities" value="1">1
-                        </label>
-                        <label class="btn btn-secondary">
-                            <input type="radio" name="fecilities" value="2">2
-                        </label>
-                        <label class="btn btn-secondary">
-                            <input type="radio" name="fecilities" value="3">3
-                        </label>
-                        <label class="btn btn-secondary">
-                            <input type="radio" name="fecilities" value="4">4
-                        </label>
-                        <label class="btn btn-secondary">
-                            <input type="radio" name="fecilities" value="5">5
-                        </label>
+                    <h5 class="card-title">Providing Laboratory og workshop facilities</h5>
+                    <div id="original">
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-secondary">
+                                <input type="radio" name="fecilities" value="1">1
+                            </label>
+                        </div>
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-secondary">
+                                <input type="radio" name="fecilities" value="2">2
+                            </label>
+                        </div>
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-secondary">
+                                <input type="radio" name="fecilities" value="3">3
+                            </label>
+                        </div>
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-secondary">
+                                <input type="radio" name="fecilities" value="4">4
+                            </label>
+                        </div>
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-secondary">
+                                <input type="radio" name="fecilities" value="5">5
+                            </label>
+                        </div>
                     </div>
+                        
+                    </div>
+                    
+              
+            </div>
+
+
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Providing Laboratory hehe workshop facilities</h5>
+                    <div id="fac" onchange="check()">
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-secondary">
+                                <input type="radio" name="fecilities1" value="1">1
+                            </label>
+                        </div>
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-secondary">
+                                <input type="radio" name="fecilities1" value="2">2
+                            </label>
+                        </div>
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-secondary">
+                                <input type="radio" name="fecilities1" value="3">3
+                            </label>
+                        </div>
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-secondary">
+                                <input type="radio" name="fecilities1" value="4">4
+                            </label>
+                        </div>
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-secondary">
+                                <input type="radio" name="fecilities1" value="5">5
+                            </label>
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
 
@@ -178,15 +259,23 @@
                         <label class="btn btn-secondary">
                             <input type="radio" name="timetable" value="1">1
                         </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
                             <input type="radio" name="timetable" value="2">2
                         </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
                             <input type="radio" name="timetable" value="3">3
                         </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
                             <input type="radio" name="timetable" value="4">4
                         </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
                             <input type="radio" name="timetable" value="5">5
                         </label>
@@ -201,15 +290,23 @@
                         <label class="btn btn-secondary">
                             <input type="radio" name="grpwork" value="1">1
                         </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
                             <input type="radio" name="grpwork" value="2">2
                         </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
                             <input type="radio" name="grpwork" value="3">3
                         </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
                             <input type="radio" name="grpwork" value="4">4
                         </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
                             <input type="radio" name="grpwork" value="5">5
                         </label>
@@ -219,20 +316,28 @@
 
             <div class="card text-center">
                 <div class="card-body">
-                    <h5 class="card-title">Mental Health assessmentof all students</h5>
+                    <h5 class="card-title">Mental Health assessment of all students</h5>
                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
                             <input type="radio" name="mentalhlth" value="1">1
                         </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
                             <input type="radio" name="mentalhlth" value="2">2
                         </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
                             <input type="radio" name="mentalhlth" value="3">3
                         </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
                             <input type="radio" name="mentalhlth" value="4">4
                         </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
                             <input type="radio" name="mentalhlth" value="5">5
                         </label>
@@ -247,15 +352,23 @@
                         <label class="btn btn-secondary">
                             <input type="radio" name="sportart" value="1">1
                         </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
                             <input type="radio" name="sportart" value="2">2
                         </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
                             <input type="radio" name="sportart" value="3">3
                         </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
                             <input type="radio" name="sportart" value="4">4
                         </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
                             <input type="radio" name="sportart" value="5">5
                         </label>
@@ -270,15 +383,23 @@
                         <label class="btn btn-secondary">
                             <input type="radio" name="solveprob" value="1">1
                         </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
                             <input type="radio" name="solveprob" value="2">2
                         </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
                             <input type="radio" name="solveprob" value="3">3
                         </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
                             <input type="radio" name="solveprob" value="4">4
                         </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
                             <input type="radio" name="solveprob" value="5">5
                         </label>
@@ -293,15 +414,23 @@
                         <label class="btn btn-secondary">
                             <input type="radio" name="creativecourse" value="1">1
                         </label>
+                        </div>
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
                             <input type="radio" name="creativecourse" value="2">2
                         </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
                             <input type="radio" name="creativecourse" value="3">3
                         </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
                             <input type="radio" name="creativecourse" value="4">4
                         </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
                             <input type="radio" name="creativecourse" value="5">5
                         </label>
@@ -316,15 +445,23 @@
                         <label class="btn btn-secondary">
                             <input type="radio" name="foconindv" value="1">1
                         </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
                             <input type="radio" name="foconindv" value="2">2
                         </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
                             <input type="radio" name="foconindv" value="3">3
                         </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
                             <input type="radio" name="foconindv" value="4">4
                         </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
                             <input type="radio" name="foconindv" value="5">5
                         </label>
@@ -339,15 +476,23 @@
                         <label class="btn btn-secondary">
                             <input type="radio" name="mannlearn" value="1">1
                         </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
                             <input type="radio" name="mannlearn" value="2">2
                         </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
                             <input type="radio" name="mannlearn" value="3">3
                         </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
                             <input type="radio" name="mannlearn" value="4">4
                         </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
                             <input type="radio" name="mannlearn" value="5">5
                         </label>
@@ -362,17 +507,56 @@
                         <label class="btn btn-secondary">
                             <input type="radio" name="courserele" value="1">1
                         </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
                             <input type="radio" name="courserele" value="2">2
                         </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
                             <input type="radio" name="courserele" value="3">3
                         </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
                             <input type="radio" name="courserele" value="4">4
                         </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
                             <input type="radio" name="courserele" value="5">5
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Providing Laboratory and workshop facilities</h5>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="fecilities2" value="1">1
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="fecilities2" value="2">2
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="fecilities2" value="3">3
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="fecilities2" value="4">4
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="fecilities2" value="5">5
                         </label>
                     </div>
                 </div>
@@ -386,17 +570,56 @@
                         <label class="btn btn-secondary">
                             <input type="radio" name="issuesofconc" value="1">1
                         </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
                             <input type="radio" name="issuesofconc" value="2">2
                         </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
                             <input type="radio" name="issuesofconc" value="3">3
                         </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
                             <input type="radio" name="issuesofconc" value="4">4
                         </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
                             <input type="radio" name="issuesofconc" value="5">5
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Employing teachers with competency</h5>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="teachersc2" value="1">1
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="teachersc2" value="2">2
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="teachersc2" value="3">3
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="teachersc2" value="4">4
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="teachersc2" value="5">5
                         </label>
                     </div>
                 </div>
@@ -409,33 +632,69 @@
                         <label class="btn btn-secondary">
                             <input type="radio" name="aresolved" value="1">1
                         </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
                             <input type="radio" name="aresolved" value="2">2
                         </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
                             <input type="radio" name="aresolved" value="3">3
                         </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
                             <input type="radio" name="aresolved" value="4">4
                         </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
                             <input type="radio" name="aresolved" value="5">5
                         </label>
                     </div>
                 </div>
             </div>
-
-            
             <div class="card text-center">
-                <div class="card-body">
+                <div class="card-body" style="padding: 0.5rem !important;">
                     <h5 class="card-title">Any other factors, according to you which contribute to happiness index</h5>
-                    <div class="row d-flex justify-content-center">
-                        <div>
-                            <input type="text" name="others" placeholder="Enter your suggestions" class="form-control">
-                        </div>
-                    </div>
+                </div>
+                <div style="margin-bottom:1rem;">
+                    <input type="text" name="others" placeholder="Enter your suggestions" class="form-control">
                 </div>
             </div>
+
+            <div class="card text-center">
+                <div class="card-body" style="padding: 0.5rem !important;">
+                    <h5 class="card-title">Do you have any solution for the above mentioned problem(/s)?(Write your solution below)</h5>
+                </div>
+                <div style="margin-bottom:1rem;">
+                    <input type="text" name="solution" placeholder="Enter your proposed solution" class="form-control">
+                </div>
+            </div>
+
+            <div class="card text-center">
+                <div class="card-body" style="padding: 0.5rem !important;">
+                    <h5 class="card-title">Your Standard</h5>
+                </div>
+                <select class="custom-select" name="std">
+                    <option selected>Select Option</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
+                 <!-- <div style="margin-bottom:1rem;">
+                    <input type="text" name="others" placeholder="Enter your suggestions" class="form-control">
+                </div>  -->
+            </div>
+
             <!-- Submit button -->
             <div class="align-self-center mx-auto text-center">
                 <button type="submit" class="btn btn-secondary" Value="Submit">
@@ -445,4 +704,16 @@
         </form>
     </div>
 </div>
-{% endblock content %}
+{% endblock body %}
+{% block script %}
+    <script>
+        function check(){
+           og_val =  $("input[type='radio'][name='fecilities']:checked").val();
+           second_val =  $("input[type='radio'][name='fecilities1']:checked").val();
+           console.log(og_val,second_val);
+           if(og_val!=second_val){
+            swal("Please check your response values and fill again");}
+        }
+    </script>
+
+{% endblock script %}

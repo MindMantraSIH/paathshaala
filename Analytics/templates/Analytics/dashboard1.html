@@ -6,19 +6,8 @@
 <link href=  "{% static 'Analytics/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
 <link href="{% static 'Analytics/style.css' %}" rel="stylesheet">
 {% endblock style %}
-{% block body %} 
+{% block body %}
   <main id="main" class="main">
-
-    <div class="pagetitle">
-      <h1>Dashboard</h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item active">Dashboard</li>
-        </ol>
-      </nav>
-    </div><!-- End Page Title -->
-
     <section class="section dashboard">
       <div class="row">
 
@@ -141,11 +130,11 @@
                         <i class="fa-solid fa-comment-dots" style="color:#fee648;"></i>
                       </div>
                       <div class="ps-3">
-                        <h6>FB</h6>
+                        <h6>{{total_suggestions}}/{{total_students}}</h6>
                         <!-- <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span> -->
                       </div>
                       <span>
-                        <button type="submit" class="button2">Send Feedback</button>
+                        <button onclick="send_feedback()" class="button2">Send Feedback</button>
                       </span>
                     </div>
                 </div>
@@ -454,4 +443,26 @@
     </section>
 
   </main><!-- End #main -->
+  
   {% endblock body %}
+
+  {% block script %}
+  <script>
+  function send_feedback(){
+    $.ajax(
+        {
+            type:"POST",
+            url: "{% url 'send_feedback_mails' %}",
+            data:{
+                    'school': {{ school_user_id }},
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+            },
+            success: function( response ) 
+            {
+                console.log(response)
+            }
+         })
+  }
+  </script>
+  
+  {% endblock script %}

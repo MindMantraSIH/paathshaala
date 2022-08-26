@@ -1,7 +1,6 @@
-
-{% extends "profiles/base.html" %}
+{% extends "forum/base-temp.html" %}
 {% load static %}
-{% block connectcss %} 
+{% block style %} 
 <style>
     @import url(//fonts.googleapis.com/css?family=Montserrat:300,400,500);
 .contact3 .h1 {
@@ -43,9 +42,9 @@
   margin-top: 2vh;
 }
 </style>
-{% endblock connectcss %}
+{% endblock style %}
 
-{% block content %}
+{% block body %}
 <div class="contact3 py-5" style="margin-top: 2vh;">
     <div class="row no-gutters" style="margin:8vh;">
       <div class="container">
@@ -94,4 +93,4 @@
     </div>
   </div>
 
-{% endblock content %}
+{% endblock body %}

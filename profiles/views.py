@@ -6,6 +6,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 import hashlib
+from Analytics.populate_database import create_student_data_csv, database_happiness_index_survey
 import json
 import urllib
 import requests
@@ -27,6 +28,8 @@ def student_register(request):
 		print(school)
 		student.school = School.objects.get(user_id=school)
 		student.pincode = request.POST.get('pincode','')
+		user.std = request.POST.get('standard','')
+		user.division = request.POST.get('division','')
 		student.save()
 		user.save()  
 		messages.success(request, f'Your account has been created! You are now able to log in')
@@ -81,8 +84,10 @@ def loginregister(request):
 				login(request,user)
 				if user.is_school:
 					return redirect('school-feed', user.slug)
-				else:
+				elif user.is_student:
 					return redirect('school-feed',user.student.school.user.slug)
+				else:
+					return redirect('counselor_forum')
 			else:
 				return render(request, 'profiles/loginregister.html', {'message': 'Username or password is incorrect'})
 
@@ -91,6 +96,8 @@ def loginregister(request):
 	return render(request, 'profiles/loginregister.html')
 
 def home(request):
+	# database_happiness_index_survey()
+	# create_student_data_csv(request.user.id)
 	if request.user.is_authenticated:
 		print("User is logged in :)")
 		print(f"Username --> {request.user.username}")
@@ -175,3 +182,6 @@ def school_register(request):
 def logout_view(request):
 	logout(request)
 	return redirect('home')
+
+def nav_new(request):
+	return render(request, 'profiles/nav_new.html')

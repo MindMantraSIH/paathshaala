@@ -1,0 +1,5 @@
+Dear Student
+Please fill the feedback form.
+Link: http://127.0.0.1:8000/suggestions/
+Regards,
+The MindMantra team

@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+import os
+import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +27,7 @@ SECRET_KEY = 'django-insecure-w4upq4r34vxi31848^1qf^u9f2p+e3a+#9fspo#+*acc5&3@=q
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://paathshaala-mindmantra.herokuapp.com']
 
 
 # Application definition
@@ -39,6 +41,7 @@ INSTALLED_APPS = [
     'profiles.apps.ProfilesConfig',
     'ranking.apps.RankingConfig',
     'forum.apps.ForumConfig',
+    'criticalthinkingquestions.apps.CriticalthinkingquestionsConfig',
     'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -149,4 +152,12 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'mindmantrasih@gmail.com'
-EMAIL_HOST_PASSWORD = 'qkvzybalfazzjigf'
+EMAIL_HOST_PASSWORD = 'czgv gqql efxv hifn'
+
+
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+
+
+django_heroku.settings(locals())

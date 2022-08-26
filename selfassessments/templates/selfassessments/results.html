@@ -1,0 +1,84 @@
+{% extends "forum/base-temp.html" %}
+{% load static %}
+{% block style %}
+<style>
+    /* input[type=text] {
+        width: 60rem;
+    } */
+    .btn-primary,
+    .btn-secondary {
+        background-color: #bff5fa;
+        color: black;
+        border: 0.5px solid #bff5fa !important;
+        box-shadow: 3px 3px 5px #888888;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        width: 10rem;
+        border-radius: 2vh;
+        height: auto;
+    }
+
+    .btn:not(:disabled):not(.disabled) {
+        background-color: #bff5fa;
+    }
+
+    .btn-group-toggle :hover {
+        background-color: #fee648 !important;
+        color: #000 !important;
+    }
+
+    .active {
+        background-color: #fee648 !important;
+        color: #000 !important;
+    }
+
+    .btn-group>.btn-group:not(:last-child)>.btn,
+    .btn-group>.btn:not(:last-child):not(.dropdown-toggle) {
+        border-radius: 2vh;
+    }
+
+    .btn-group>.btn-group:not(:first-child)>.btn,
+    .btn-group>.btn:not(:first-child) {
+        border-radius: 2vh;
+    }
+
+    .card {
+        margin: 3rem;
+        box-shadow: 3px 3px 5px #888888;
+        border-radius: 2vh;
+        padding: 0;
+        width: 30rem;
+    }
+
+    .card-header {
+        background-color: #bff5fa;
+        border-radius: 2vh;
+        margin: 0;
+    }
+    p{
+        color: #000;
+    }
+</style>
+{% endblock style %}
+{% block body %}
+<div class=" position-relative z-index-1 overflow-hidden">
+    <div class="container" style="margin-top: 20vh;">
+        <!-- <h2 style="margin-top: 2vh !important;text-align: center;">SELF ASSESSMENT</h2> -->
+        <div class="card text-center mx-auto">
+            <div class="card-header">
+                <h6 class="text-muted">YOUR DEPRESSION TEST SCORE WAS</h6>
+                <h2 class=" text-uppercase font-weight-bold">MODERATE DEPRESSION</h2>
+            </div>
+            <div class="card-body">
+                <p>Thank you for using our application. <br> This is your final report based on your mental health assessment</p> 
+                <!-- <h5 class="card-title">Trouble falling or staying asleep, or sleeping too much ?</h5> -->
+                <p>Depression:{{ dep_percent}}%</p>
+                <p>Stress: {{st_percent}}%</p>
+                <p>Anxiety:{{anx_percent}}%</p>
+                <p>ADHD:{{ad_percent}}%</p>
+                <p>Pressure:{{p_percent}}%</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock body %}

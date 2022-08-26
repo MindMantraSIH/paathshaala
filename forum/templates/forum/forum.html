@@ -1,16 +1,17 @@
-{% extends "profiles/base.html" %}
+{% extends "forum/base-temp.html" %}
 {% load static %}
 {% block title %}Forums{% endblock title %}
-{% block connectcss %}
+{% block style %}
+{% comment %} {% block title %}Forums{% endblock title %} {% endcomment %}
 <link href="{% static 'forum/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
 <link href="{% static 'forum/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
 <link href="{% static 'forum/style.css' %}" rel="stylesheet">
-{% endblock connectcss %}
-{% block content  %}
+{% endblock style %}
+{% block body  %}
 
 
 
-<main id="main" class="mt-5">
+<main id="main">
 
     <!-- ======= Blog Section ======= -->
     <section id="blog" class="blog">
@@ -51,7 +52,7 @@
 
 </main><!-- End #main -->
 
-{% endblock content %}
+{% endblock body %}
 
 {% block script %}
 <script>
@@ -62,7 +63,7 @@
         $.ajax(
         {
             type:"POST",
-            url: "{% url 'add_post' %}",
+            url: "{% url 'forum_add_post' %}",
             data:{
                     'title': title,
                     'content': content,

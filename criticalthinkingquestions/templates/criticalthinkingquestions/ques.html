@@ -1,0 +1,76 @@
+{% extends "forum/base-temp.html" %}
+{% load static %}
+{% block title %}Brainstorming Area{% endblock title %}
+{% block style %}
+<link href="{% static 'criticalthinkingques/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+<link href="{% static 'criticalthinkingques/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+<link href="{% static 'criticalthinkingques/style.css' %}" rel="stylesheet">
+{% endblock style %}
+{% block body %}
+
+
+
+<main id="main" class="mt-5">
+
+    <!-- ======= Blog Section ======= -->
+    <section id="blog" class="blog">
+        <div class="container" data-aos="fade-up">
+            <div class="row">
+                <div class="col-lg-8 entries">
+                    <div class="reply-form" style="margin-top:-0.1rem; margin-bottom:3.7rem;">
+                        <h3 class="entry-title">
+                            <div>
+                                Add a new thread
+                            </div>
+                        </h3>
+                            <div class="row">
+                                <div class="col form-group">
+                                    <input name="Topic" type="text" id='title' class="form-control"
+                                        placeholder="Write a topic">
+                                </div>
+                            </div>
+                            
+                            <button onclick="submit_post()" class="btn btn-primary">Post topic</button>
+                    </div>
+                    <div id='previous-posts'>
+                        {% include 'criticalthinkingquestions/ques_posts.html' %}
+                    </div>
+
+                </div><!-- End blog entries list -->
+                
+
+            </div>
+
+        </div>
+    </section><!-- End Blog Section -->
+
+</main><!-- End #main -->
+
+{% endblock body %}
+
+{% block script %}
+<script>
+    function submit_post(){
+        var title = $('#title').val();
+       
+        console.log(title);
+        $.ajax(
+        {
+            type:"POST",
+            url: "{% url 'add_post' %}",
+            data:{
+                    'title': title,
+                   
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+            },
+            success: function( response ) 
+            {
+                $('#previous-posts').empty();
+                $('#previous-posts').html(response);
+               
+                $('#title').val('');
+            }
+         })
+    }
+</script>
+{% endblock script %}

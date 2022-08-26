@@ -1,49 +1,50 @@
-{% extends 'profiles/base.html' %}
+{% extends "forum/base-temp.html" %}
 {% load static %}
-{% block connectcss %}
-<style>
-    .sec1 {
-        
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        
+{% block style %}
+<link rel="stylesheet" href="{% static 'ranking/rank.css' %}">
+{% endblock style %}
+{% block body %}
+<main id="main">
+    <section>
+        <div class="container">
+            <!-- <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Classroom factors affecting Happiness Index
+                         <span>/Today</span></h5> -->
+
+                        <!-- Line Chart -->
 
 
-    }
-    body{
-            background-image: url("{% static 'ranking/paathshala.jpg' %} ");
-        }
-</style>
-{% endblock connectcss %}
-{% block content%}
-    <section style="width: 75%; margin-left: 12%;">
-        <div>
-            <h3 style="text-align: center;">
-                School Rankings
-            </h3>
-        </div>
-        {% for s in school %}
-            <div class="container ">
-                <div class="row m-3">
-                    <div class="col">
-                        <div class="card">
-                            <div class="card-header">
-                                <h6>Rank: #{{ s.rank }} </h6>
-                            </div>
-                            <div class="card-body">
-                                <a href="{% url 'school-feed' s.user.slug %}" ><h5 class="card-title">{{ s.user }} </h5></a>
+                        <!-- End Line Chart -->
+
+                <!-- </div> -->
+
+            <!-- </div> --> 
+            {% for s in school %}
+            <article class="entry">
+                <h2 class="entry-title">
+                    Rank: #{{ s.rank }}
+                </h2>
+                <div class="entry-meta">
+                    <ul>
+                        <li class="d-flex align-items-center"><i class="bi bi-clock"></i><time datetime="2020-01-01">{{ post.timestamp }}</time>
+                        </li>
+                    </ul>
+                </div>
+                <div class="entry-content">
+                    <a href="{% url 'school-feed' s.user.slug %}" ><h5 class="card-title">{{ s.user }} </h5></a>
                                 <p class="card-text">
                                     <div>
                                         <div >
-                                        <div >{{ s.board }}<br>{{ s.city }}, {{ s.state }}<br>
-                                        {{ s.address }}</div>
+                                        <div >Board: {{ s.board }}<br>City: {{ s.city }}, State: {{ s.state }}<br>
+                                        Address: {{ s.address }}</div>
                                         
                                     </div>
                                 </p>
-                            </div>
-                        </div>
-                    </div>  
                 </div>
-            </div>
-        {% endfor %}
+            </article>
+            {% endfor %}
+        </div>
     </section>
-{% endblock content %}
+</main>
+{% endblock body %}
