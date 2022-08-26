@@ -1,5 +1,4 @@
 from enum import unique
-from tkinter import CASCADE
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.timezone import now
