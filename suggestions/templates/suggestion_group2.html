@@ -1,11 +1,11 @@
-{% extends "forum/base-temp.html" %}
+{% include "forum/base-temp.html" %}
 {% load static %}
-{% block title %} Self Assessment {% endblock title %}
 {% block style %}
 <style>
     /* input[type=text] {
         width: 60rem;
     } */
+
     .btn-primary,
     .btn-secondary {
         background-color: #bff5fa;
@@ -50,426 +50,348 @@
         padding: 10px;
     }
 </style>
-
 {% endblock style %}
 {% block body %}
-<div class="position-relative z-index-1 overflow-hidden">
+<div class=" position-relative z-index-1 overflow-hidden">
     <div class="container" style="margin-top: 15vh;">
-        <h2 style="margin-top: 2vh !important;text-align: center;">SELF ASSESSMENT</h2>
-        <h4 style="text-align: center;"> It is recommended to answer these questions in the presence of an adult</h4>
-        <h4 style="text-align: center;">Rate the following as per the frequency of occurences</h4>
+        <h2 style="margin-top: 2vh !important;text-align: center;">Survey of Happiness Index in School Index - Group 2</h2>
         <form method="POST" action="">
             {% csrf_token %}
             <div class="card text-center">
                 <div class="card-body">
-                    <h5 class="card-title">Trouble falling or staying asleep, or sleeping too much ?</h5>
+                    <h5 class="card-title">How hard is your time table</h5>
                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
-                            <input type="radio" name="d1" value="0">Never
+                            <input type="radio" name="levelc" value="1">1
                         </label>
                     </div>
                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
-                            <input type="radio" name="d1" value="1">Sometimes
+                            <input type="radio" name="levelc" value="2">2
                         </label>
                     </div>
                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
-                            <input type="radio" name="d1" value="2">Everyday
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <div class="card text-center">
-                <div class="card-body">
-                    <h5 class="card-title">Feeling tired or having little energy ?</h5>
-                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <label class="btn btn-secondary">
-                            <input type="radio" name="s1" value="0">Never
+                            <input type="radio" name="levelc" value="3">3
                         </label>
                     </div>
                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
-                            <input type="radio" name="s1" value="1">Sometimes
+                            <input type="radio" name="levelc" value="4">4
                         </label>
                     </div>
                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
-                            <input type="radio" name="s1" value="2">Everyday
+                            <input type="radio" name="levelc" value="5">5
                         </label>
                     </div>
                 </div>
             </div>
-            <div class="card text-center">
-                <div class="card-body">
-                    <h5 class="card-title">Poor appetite or overeating ?</h5>
-                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <label class="btn btn-secondary">
-                            <input type="radio" name="an1" value="0">Never
-                        </label>
-                    </div>
-                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <label class="btn btn-secondary">
-                            <input type="radio" name="an1" value="1">Sometimes
-                        </label>
-                    </div>
-                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <label class="btn btn-secondary">
-                            <input type="radio" name="an1" value="2">Everyday
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <div class="card text-center">
-                <div class="card-body">
-                    <h5 class="card-title">Trouble concentrating on things such as studying or watching T.V ?</h5>
-                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <label class="btn btn-secondary">
-                            <input type="radio" name="an2" value="0">Never
-                        </label>
-                    </div>
-                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <label class="btn btn-secondary">
-                            <input type="radio" name="an2" value="1">Sometimes
-                        </label>
-                    </div>
-                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <label class="btn btn-secondary">
-                            <input type="radio" name="an2" value="2">Everyday
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <div class="card text-center">
-                <div class="card-body">
-                    <h5 class="card-title">Feeling Sad?</h5>
-                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <label class="btn btn-secondary">
-                            <input type="radio" name="d2" value="0">Never
-                        </label>
-                    </div>
 
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Does your school encourage extra curricular activities?</h5>
                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
-                            <input type="radio" name="d2" value="1">Sometimes
+                            <input type="radio" name="extra_curr" value="1">1
                         </label>
                     </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="extra_curr" value="2">2
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="extra_curr" value="3">3
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="extra_curr" value="4">4
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="extra_curr" value="5">5
+                        </label>
+                    </div>
+                </div>
+            </div>
 
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">How much are the courses relevant to your interest</h5>
                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
-                            <input type="radio" name="d2" value="2">Everyday
+                            <input type="radio" name="course_rev" value="1">1
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="course_rev" value="2">2
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="course_rev" value="3">3
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="course_rev" value="4">4
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="course_rev" value="5">5
                         </label>
                     </div>
                 </div>
             </div>
-            <div class="card text-center">
-                <div class="card-body">
-                    <h5 class="card-title">Worrying too much?</h5>
-                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <label class="btn btn-secondary">
-                            <input type="radio" name="an3" value="0">Never
-                        </label>
-                    </div>
-                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <label class="btn btn-secondary">
-                            <input type="radio" name="an3" value="1">Sometimes
-                        </label>
-                    </div>
-                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <label class="btn btn-secondary">
-                            <input type="radio" name="an3" value="2">Everyday
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <div class="card text-center">
-                <div class="card-body">
-                    <h5 class="card-title">Feeling fidgety, restless and easily bored?</h5>
-                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <label class="btn btn-secondary">
-                            <input type="radio" name="ad1an4" value="0">Never
-                        </label>
-                    </div>
-                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <label class="btn btn-secondary">
-                            <input type="radio" name="ad1an4" value="1">Sometimes
-                        </label>
-                    </div>
-                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <label class="btn btn-secondary">
-                            <input type="radio" name="ad1an4" value="2">Everyday
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <div class="card text-center">
-                <div class="card-body">
-                    <h5 class="card-title">Feeling Irritated?</h5>
-                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <label class="btn btn-secondary">
-                            <input type="radio" name="d3" value="0">Never
-                        </label>
-                    </div>
 
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Is the school environment free from violence and pressure</h5>
                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
-                            <input type="radio" name="d3" value="1">Sometimes
+                            <input type="radio" name="violence" value="1">1
                         </label>
                     </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="violence" value="2">2
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="violence" value="3">3
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="violence" value="4">4
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="violence" value="5">5
+                        </label>
+                    </div>
+                </div>
+            </div>
 
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Do you feel your teachers are competent</h5>
                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
-                            <input type="radio" name="d3" value="2">Everyday
+                            <input type="radio" name="teachers" value="1">1
                         </label>
                     </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="teachers" value="2">2
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="teachers" value="3">3
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="teachers" value="4">4
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="teachers" value="5">5
+                        </label>
+                    </div>
+                </div>
+            </div>
 
-                </div>
-            </div>
             <div class="card text-center">
                 <div class="card-body">
-                    <h5 class="card-title">Having Nightmares?</h5>
+                    <h5 class="card-title">Is your school environment clean</h5>
                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
-                            <input type="radio" name="s2" value="0">Never
+                            <input type="radio" name="environment" value="1">1
                         </label>
                     </div>
                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
-                            <input type="radio" name="s2" value="1">Sometimes
+                            <input type="radio" name="environment" value="2">2
                         </label>
                     </div>
                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
-                            <input type="radio" name="s2" value="2">Everyday
+                            <input type="radio" name="environment" value="3">3
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="environment" value="4">4
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="environment" value="5">5
                         </label>
                     </div>
                 </div>
             </div>
+
             <div class="card text-center">
                 <div class="card-body">
-                    <h5 class="card-title">Having stomach aches?</h5>
+                    <h5 class="card-title">How comfortable are you working in a group</h5>
                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
-                            <input type="radio" name="s3" value="0">Never
+                            <input type="radio" name="grpwork" value="1">1
                         </label>
                     </div>
                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
-                            <input type="radio" name="s3" value="1">Sometimes
+                            <input type="radio" name="grpwork" value="2">2
                         </label>
                     </div>
                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
-                            <input type="radio" name="s3" value="2">Everyday
+                            <input type="radio" name="grpwork" value="3">3
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="grpwork" value="4">4
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="grpwork" value="5">5
                         </label>
                     </div>
                 </div>
             </div>
+
             <div class="card text-center">
                 <div class="card-body">
-                    <h5 class="card-title">Being Impulsive ?</h5>
+                    <h5 class="card-title">How secure do you feel at school</h5>
                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
-                            <input type="radio" name="ad2" value="0">Never
+                            <input type="radio" name="secure" value="1">1
                         </label>
                     </div>
                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
-                            <input type="radio" name="ad2" value="1">Sometimes
+                            <input type="radio" name="secure" value="2">2
                         </label>
                     </div>
                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
-                            <input type="radio" name="ad2" value="2">Everyday
+                            <input type="radio" name="secure" value="3">3
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="secure" value="4">4
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="secure" value="5">5
                         </label>
                     </div>
                 </div>
             </div>
+
             <div class="card text-center">
                 <div class="card-body">
-                    <h5 class="card-title">Having less attention span ?</h5>
+                    <h5 class="card-title">Do you feel anxiety and pressure to get results</h5>
                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
-                            <input type="radio" name="ad3" value="0">Never
+                            <input type="radio" name="anxiety" value="1">1
                         </label>
                     </div>
                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
-                            <input type="radio" name="ad3" value="1">Sometimes
+                            <input type="radio" name="anxiety" value="2">2
                         </label>
                     </div>
                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
-                            <input type="radio" name="ad3" value="2">Everyday
+                            <input type="radio" name="anxiety" value="3">3
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="anxiety" value="4">4
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="anxiety" value="5">5
                         </label>
                     </div>
                 </div>
             </div>
+
             <div class="card text-center">
                 <div class="card-body">
-                    <h5 class="card-title">Parents' Education</h5>
+                    <h5 class="card-title">How socially active are you</h5>
                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
-                            <input type="radio" name="p1" value="2"> Secondary Education(10th pass)
+                            <input type="radio" name="socially_active" value="1">1
                         </label>
                     </div>
                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
-                            <input type="radio" name="p1" value="1"> Higher Secondary Education(12th pass)
-                        </label>
-                    </div>
-                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <label class="btn btn-secondary" style="padding-top: 0.7rem;">
-                            <input type="radio" name="p1" value="0">College Graduate
+                            <input type="radio" name="socially_active" value="2">2
                         </label>
                     </div>
                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
                         <label class="btn btn-secondary">
-                            <input type="radio" name="p1" value="0"> Higher Education (Post graduate, PhD)
+                            <input type="radio" name="socially_active" value="3">3
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="socially_active" value="4">4
+                        </label>
+                    </div>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="socially_active" value="5">5
                         </label>
                     </div>
                 </div>
             </div>
-            <div class="card text-center">
-                <div class="card-body">
-                    <h5 class="card-title">Family Income</h5>
-                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <label class="btn btn-secondary">
-                            <input type="radio" name="p2" value="2"> &lt; 2 L.p.a
-                        </label>
-                    </div>
-                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <label class="btn btn-secondary">
-                            <input type="radio" name="p2" value="1"> 2-4 L.p.a
-                        </label>
-                    </div>
-                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <label class="btn btn-secondary">
-                            <input type="radio" name="p2" value="0">4-18 L.p.a
-                        </label>
-                    </div>
-                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <label class="btn btn-secondary">
-                            <input type="radio" name="p2" value="0"> &gt; 18 L.p.a
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <div class="card text-center">
-                <div class="card-body">
-                    <h5 class="card-title">How many tutions do you go to?</h5>
-                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <label class="btn btn-secondary">
-                            <input type="radio" name="s4" value="0">0
-                        </label>
-                    </div>
-                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <label class="btn btn-secondary">
-                            <input type="radio" name="s4" value="0">1
-                        </label>
-                    </div>
-                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <label class="btn btn-secondary">
-                            <input type="radio" name="s4" value="1">2
-                        </label>
-                    </div>
-                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <label class="btn btn-secondary">
-                            <input type="radio" name="s4" value=">2">&gt; 2
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <div class="card text-center">
-                <div class="card-body">
-                    <h5 class="card-title">Playing time in hours</h5>
-                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <label class="btn btn-secondary">
-                            <input type="radio" name="d4" value="2">0
-                        </label>
-                    </div>
-                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <label class="btn btn-secondary">
-                            <input type="radio" name="d4" value="1">1-2
-                        </label>
-                    </div>
-                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <label class="btn btn-secondary">
-                            <input type="radio" name="d4" value="1">3-5
-                        </label>
-                    </div>
-                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <label class="btn btn-secondary">
-                            <input type="radio" name="d4" value="0">&gt; 5
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <div class="card text-center">
-                <div class="card-body">
-                    <h5 class="card-title">Number of competitive exams you appear for</h5>
-                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <label class="btn btn-secondary">
-                            <input type="radio" name="p3" value="0">0
-                        </label>
-                    </div>
-                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <label class="btn btn-secondary">
-                            <input type="radio" name="p3" value="1">1
-                        </label>
-                    </div>
-                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <label class="btn btn-secondary">
-                            <input type="radio" name="p3" value="1">2-4
-                        </label>
-                    </div>
-                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <label class="btn btn-secondary">
-                            <input type="radio" name="p3" value="2">&gt; 4
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <div class="card text-center">
-                <div class="card-body">
-                    <h5 class="card-title">Number of extracurricular activities/hobbies</h5>
-                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <label class="btn btn-secondary">
-                            <input type="radio" name="s5" value="2">0
-                        </label>
-                    </div>
-                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <label class="btn btn-secondary">
-                            <input type="radio" name="s5" value="0">1-3
-                        </label>
-                    </div>
-                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <label class="btn btn-secondary">
-                            <input type="radio" name="s5" value="1">4-5
-                        </label>
-                    </div>
-                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <label class="btn btn-secondary">
-                            <input type="radio" name="s5" value="2">&gt; 5
-                        </label>
-                    </div>
-                </div>
-            </div>
+
             <div class="card text-center">
                 <div class="card-body" style="padding: 0.5rem !important;">
-                    <h5 class="card-title">Email</h5>
+                    <h5 class="card-title">Any other factors, according to you which contribute to happiness index</h5>
                 </div>
                 <div style="margin-bottom:1rem;">
-                    <input type="text" name="email" placeholder="Enter your email" class="form-control">
+                    <input type="text" name="others" placeholder="Enter your suggestions" class="form-control">
                 </div>
             </div>
+
+            <div class="card text-center">
+                <div class="card-body" style="padding: 0.5rem !important;">
+                    <h5 class="card-title">Any proposed solution to tackle the above problems</h5>
+                </div>
+                <div style="margin-bottom:1rem;">
+                    <input type="text" name="solution" placeholder="Enter your solution" class="form-control">
+                </div>
+            </div>
+        
+
+
             <!-- Submit button -->
             <div class="align-self-center mx-auto text-center">
-                <div class="btn-group btn-group-toggle" data-toggle="buttons">
-
-                    <button type="submit" class="btn btn-secondary" Value="Submit"> Submit
-                    </button>
-                </div>
+                <button type="submit" class="btn btn-secondary" Value="Submit">
+                    Submit
+                </button>
             </div>
         </form>
     </div>
