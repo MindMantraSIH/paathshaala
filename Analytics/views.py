@@ -695,7 +695,10 @@ def student_dashboard(request):
 
     #print(student)
     student = Student.objects.get(user=request.user)
-    # data_obj = Data.objects.get(student=student)
+    user = Data.objects.get(student=student)
+
+
+
     # file = []
     # with open("someobject.pickle", "rb") as input_file:
     #     weights = pkl.loads(input_file)
