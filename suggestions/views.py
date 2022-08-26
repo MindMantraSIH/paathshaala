@@ -8,7 +8,7 @@ def savedata(request):
     std = student_obj.std
     if request.method=="POST":
         print("hello")
-        if 1 <= std <= 4:
+        if 1 <= int(std) <= 4:
             school = request.user.student.school
             playtime = request.POST.get('playtime')
             extra_curr = request.POST.get('extra_curr')
@@ -22,7 +22,7 @@ def savedata(request):
             solution = request.POST.get('solution')
             data = Data1(school=school,student=student_obj,playtime=playtime,extra_curr=extra_curr,difficult=difficult,materials=materials,fear=fear,environment=environment,like_sch=like_sch,like_friends=like_friends,others=others, solution=solution)
             data.save()
-        elif 5 <= std <= 8:
+        elif 5 <= int(std) <= 8:
             school = request.user.student.school
             levelc = request.POST.get('levelc')
             extra_curr = request.POST.get('extra_curr')
