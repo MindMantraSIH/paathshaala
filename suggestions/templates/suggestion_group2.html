@@ -26,7 +26,6 @@
         background-color: #fee648 !important;
         color: #000;
     }
-
     .active {
         background-color: #fee648 !important;
         color: #000 !important;
@@ -43,22 +42,25 @@
     }
 
     .card {
-        margin: 3rem;
+        margin: auto;
+        margin-bottom: 3rem !important;
+        margin-top: 3rem !important;
         box-shadow: 3px 3px 5px #888888;
         border-radius: 2vh;
         padding: 10px;
+        width: 40rem;
     }
 </style>
 {% endblock style %}
 {% block body %}
 <div class=" position-relative z-index-1 overflow-hidden">
     <div class="container" style="margin-top: 15vh;">
-        <h2 style="margin-top: 2vh !important;text-align: center;">Survey of Happiness Index in School Index - Group 2</h2>
+        <h2 style="margin-top: 2vh !important;text-align: center;">Survey of Happiness Index in School Students - Group 2</h2>
         <form method="POST" action="">
             {% csrf_token %}
             <div class="card text-center">
                 <div class="card-body">
-                    <h5 class="card-title">How hard is your time table</h5>
+                    <h5 class="card-title">How hard is your timetable</h5>
                     <div class="btn-group btn-group-toggle" data-toggle="buttons" id="original">
                         <label class="btn btn-secondary">
                             <input type="radio" name="levelc" value="1">1
@@ -351,13 +353,10 @@
                     <input type="text" name="solution" placeholder="Enter your solution" class="form-control">
                 </div>
             </div>
-            
-
-
-
+        
             <!-- Submit button -->
             <div class="align-self-center mx-auto text-center">
-                <button type="submit" class="btn btn-secondary" Value="Submit">
+                <button type="submit" class="btn btn-secondary" Value="Submit" id="submit-btn">
                     Submit
                 </button>
             </div>
