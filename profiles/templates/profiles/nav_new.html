@@ -56,11 +56,11 @@
         <li><a href="#">Contact us</a></li>
         <li>{% if user.is_school or user.is_student or user.is_counselor %}
             <a href="{% url 'logout' %}">
-              LOGOUT
+              Logout
             </a>
             {% elif not user.is_authenticated %}
             <a href="{% url 'loginregister' %}">
-              LOGIN/SIGN UP
+              Login/Sign Up
             </a>
             {% endif %}</li>
       </ul>
