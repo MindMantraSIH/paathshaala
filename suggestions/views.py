@@ -32,6 +32,7 @@ def savedata(request):
                 data = Data1(school=school,student=student_obj,playtime=playtime,extra_curr=extra_curr,difficult=difficult,materials=materials,fear=fear,environment=environment,like_sch=like_sch,like_friends=like_friends,others=others, solution=solution)
                 data.save()
                 print("valid")
+                return redirect('home')
         elif 5 <= int(std) <= 8:
             school = request.user.student.school
             levelc = request.POST.get('levelc')
@@ -52,6 +53,7 @@ def savedata(request):
                 data = Data2(school=school,student=student_obj,levelc=levelc,extra_curr=extra_curr,course_rev=course_rev,violence=violence,teachers=teachers,environment=environment,anxiety=anxiety,grpwork=grpwork,secure=secure,socially_active=socially_active,others=others, solution=solution)
                 data.save()
                 print("valid")
+                return redirect('home')
         else:
             school = request.user.student.school
             levelc = request.POST.get('levelc')
@@ -72,8 +74,8 @@ def savedata(request):
                 data = Data3(school=school,student=student_obj,levelc=levelc,life_skills=train,exam_in_acc_course=exam,innovation_time=alhours,support=support,alienated=alienated,anxiety=anxiety,family_burden=fam_burd,insecurity=insecure,fundamental_rules=manner,others=others,solution=solution)
                 data.save()
                 print("valid")
-            print("done")
-        return redirect('home')
+                print("done")
+                return redirect('home')
     
     if 1 <= int(std) <= 4:
         return render(request,'suggestion_group1.html') 
