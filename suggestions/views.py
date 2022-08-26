@@ -55,7 +55,7 @@ def savedata(request):
             data = Data3(school=school,student=student_obj,levelc=levelc,life_skills=train,exam_in_acc_course=exam,innovation_time=alhours,support=support,alienated=alienated,anxiety=anxiety,family_burden=fam_burd,insecurity=insecure,fundamental_rules=manner,others=others,solution=solution)
             data.save()
             print("done")
-            return redirect('home')
+        return redirect('home')
     
     if 1 <= int(std) <= 4:
         return render(request,'suggestion_group1.html') 
@@ -63,4 +63,7 @@ def savedata(request):
         return render(request,'suggestion_group2.html') 
     else:
         return render(request,'suggestion_group3.html') 
-        
+
+
+def show_video(request):
+    return render(request,'temp_sugg.html')

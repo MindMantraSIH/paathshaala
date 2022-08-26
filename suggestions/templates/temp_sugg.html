@@ -1,4 +1,5 @@
 <!doctype html>
+{% load static %}
 <html lang="en">
   <head>
     <!-- Required meta tags -->
@@ -7,21 +8,319 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+    <link href="https://vjs.zencdn.net/7.20.2/video-js.css" rel="stylesheet" />
     <title>Hello, world!</title>
   </head>
   <body>
     <h1>Hello, world!</h1>
-    <video width="400" controls>
-  <source src="video1.mp4" type="video/mp4">
+<!--    <video width="400" controls>-->
+<!--  <source src="{% static 'suggestions/video1.mp4' %}" id="content_video" type="video/mp4" autoplay="true" >-->
 <!--  <source src="mov_bbb.ogg" type="video/ogg">-->
+    <video id="video_kgvid_0" controls preload="metadata" width="640" height="267" class="fitvidsignore video-js kg-
+ video-js-skin">
+ <source src="{% static 'suggestions/video1.mp4' %}" type="video/mp4" data-res="534p">
+ </video>
   Your browser does not support HTML video.
-</video>
+<div class="modal" tabindex="-1" role="dialog" id="first_modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">First Modal</h5>
+      </div>
+      <div class="modal-body">
+        <h5 class="card-title">What is the average playtime</h5>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="playtime" value="1">1
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="playtime" value="2">2
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="playtime" value="3">3
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="playtime" value="4">4
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="playtime" value="5">5
+                        </label>
+                    </div>
+        <h5 class="card-title">How difficult are your studies?</h5>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="difficult" value="1">1
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="difficult" value="2">2
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="difficult" value="3">3
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="difficult" value="4">4
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="difficult" value="5">5
+                        </label>
+                    </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" onclick="closeModal('first_modal')">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal" tabindex="-1" role="dialog" id="second_modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Second Modal</h5>
+      </div>
+      <div class="modal-body">
+        <h5 class="card-title">How clean is your school environment</h5>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="environment" value="1">1
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="environment" value="2">2
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="environment" value="3">3
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="environment" value="4">4
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="environment" value="5">5
+                        </label>
+                    </div>
+        <h5 class="card-title">Are creative and colourful materials used to teach</h5>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons" id="creative_org">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="materials" value="1">1
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="materials" value="2">2
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="materials" value="3">3
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="materials" value="4">4
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="materials" value="5">5
+                        </label>
+                    </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" onclick="closeModal('second_modal')">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal" tabindex="-1" role="dialog" id="third_modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Third Modal</h5>
+      </div>
+      <div class="modal-body">
+        <h5 class="card-title">How much do you participate in extra curricular activities</h5>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="extra_curr" value="1">1
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="extra_curr" value="2">2
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="extra_curr" value="3">3
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="extra_curr" value="4">4
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="extra_curr" value="5">5
+                        </label>
+                    </div>
+        <h5 class="card-title">How afraid are you during exam time</h5>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="fear" value="1">1
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="fear" value="2">2
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="fear" value="3">3
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="fear" value="4">4
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="fear" value="5">5
+                        </label>
+                    </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" onclick="closeModal('third_modal')">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal" tabindex="-1" role="dialog" id="fourth_modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Fourth Modal</h5>
+      </div>
+      <div class="modal-body">
+       <h5 class="card-title">Do you like going to school</h5>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="like_sch" value="1">1
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="like_sch" value="2">2
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="like_sch" value="3">3
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="like_sch" value="4">4
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="like_sch" value="5">5
+                        </label>
+                    </div>
+        <h5 class="card-title">Do you like playing with friends?</h5>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="like_friends" value="1">1
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="like_friends" value="2">2
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="like_friends" value="3">3
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="like_friends" value="4">4
+                        </label>
+                        <label class="btn btn-secondary">
+                            <input type="radio" name="like_friends" value="5">5
+                        </label>
+                    </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" onclick="closeModal('fourth_modal')">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal" tabindex="-1" role="dialog" id="fifth_modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Fifth Modal</h5>
+      </div>
+      <div class="modal-body">
+       <div class="card text-center">
+                <div class="card-body" style="padding: 0.5rem !important;">
+                    <h5 class="card-title">Any other factors, according to you which contribute to your happiness</h5>
+                </div>
+                <div style="margin-bottom:1rem;">
+                    <input id="others_val" type="text" name="others" placeholder="Enter your suggestions" class="form-control">
+                </div>
+            </div>
+            <div class="card text-center">
+                <div class="card-body" style="padding: 0.5rem !important;">
+                    <h5 class="card-title">Do you have any solution for the above mentioned problem(/s)?(Write your solution below)</h5>
+                </div>
+                <div style="margin-bottom:1rem;">
+                    <input id="soln_val" type="text" name="solution" placeholder="Enter your suggestions" class="form-control">
+                </div>
+            </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" onclick="closeModal('fifth_modal')">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script src="https://vjs.zencdn.net/7.20.2/video.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+ var pausetime = 60;
+
+var myPlayer = videojs('video_kgvid_0');
+var modals = ['first_modal','second_modal','third_modal','fourth_modal','fifth_modal'];
+i=0;
+myPlayer.on('timeupdate', function (e) {
+    if (myPlayer.currentTime() >= pausetime) {
+        pausetime = 60 + myPlayer.currentTime()
+        myPlayer.pause();
+        console.log('Paused');
+        $('#'+modals[i]).show();
+        i++;
+    }
+    else if(myPlayer.currentTime() >= 28){
+    console.log('Hello');
+    play_val=$("input[type='radio'][name='playtime']:checked").val();
+    env_val=$("input[type='radio'][name='environment']:checked").val();
+    difficult_val=$("input[type='radio'][name='difficult']:checked").val();
+    mat_val=$("input[type='radio'][name='materials']:checked").val();
+    extra_val=$("input[type='radio'][name='extra_curr']:checked").val();
+    fear_val=$("input[type='radio'][name='fear']:checked").val();
+    like_sch_val=$("input[type='radio'][name='like_sch']:checked").val();
+    like_friends_val=$("input[type='radio'][name='like_friends']:checked").val();
+    others_val=$("#others_val").val();
+    solution_val=$("#soln_val").val();
+$.ajax(
+        {
+            type:"POST",
+            url: "{% url 'savedata' %}",
+            data:{
+                    'playtime': play_val,
+                    'environment': env_val,
+                    'difficult': difficult_val,
+                    'materials': mat_val,
+                    'extra_curr': extra_val,
+                    'fear': fear_val,
+                    'like_sch': like_sch_val,
+                    'like_friends': like_friends_val,
+                    'others':others_val,
+                    'solution':solution_val,
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+            },
+            success: function( response )
+            {
+                console.log('COmp');
+            }
+         })
+
+}
+
+
+
+});
+
+
+function closeModal(id){
+$('#'+id).hide();
+myPlayer.play();
+}
+
+  </script>
+
   </body>
 </html>
