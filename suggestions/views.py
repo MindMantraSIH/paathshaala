@@ -2,6 +2,16 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 from .models import *
 
+
+def validate(value11,value12,value21,value22):
+    if value11==value12:
+        if value21==value22:
+            return(True)
+        else:
+            return(False)
+    else:
+        return(False)
+
 def savedata(request):
     print("saving")
     if request.method=="POST":
@@ -13,8 +23,10 @@ def savedata(request):
         print(levelc)
         env = request.POST.get('env')
         teachersc = request.POST.get('teachersc')
+        teachersc2 = request.POST.get('teachersc2')
         prevdisc = request.POST.get('prevdisc')
         fecilities = request.POST.get('fecilities')
+        fecilities2 = request.POST.get('fecilities2')
         timetable = request.POST.get('timetable')
         grpwork = request.POST.get('grpwork')
         mentalhlth = request.POST.get('mentalhlth')
@@ -28,9 +40,14 @@ def savedata(request):
         aresolved = request.POST.get('aresolved')
         others = request.POST.get('others')
         data = Data(school=school,student=student,levelc=levelc,env=env,teachersc=teachersc,prevdisc=prevdisc,fecilities=fecilities,timetable=timetable,grpwork=grpwork,mentalhlth=mentalhlth,sportart=sportart,solveprob=solveprob,creativecourse=creativecourse,foconindv=foconindv,mannlearn=mannlearn,courserele=courserele,issuesofconc=issuesofconc,aresolved=aresolved,others=others)
-
-        data.save()
-        print("done")
-        return redirect('home')
+        validity=validate(teachersc,teachersc2,fecilities,fecilities2)
+        if validity == True:
+            data.save()
+            print("done")
+            return redirect('home')
+        else:
+            print("not valid")
     return render(request,'sugg.html')
+
+
         
