@@ -14,6 +14,8 @@ def savedata(request):
     std = student_obj.std
     if request.method=="POST":
         print("hello")
+        if not student_obj.rewards:
+            student_obj.rewards = 0
         if 1 <= int(std) <= 4:
             school = request.user.student.school
             playtime = request.POST.get('playtime')
@@ -32,6 +34,9 @@ def savedata(request):
                 data = Data1(school=school,student=student_obj,playtime=playtime,extra_curr=extra_curr,difficult=difficult,materials=materials,fear=fear,environment=environment,like_sch=like_sch,like_friends=like_friends,others=others, solution=solution)
                 data.save()
                 print("valid")
+                
+                student_obj.rewards = 10 + int(student_obj.rewards)
+                student_obj.save()
                 return redirect('home')
         elif 5 <= int(std) <= 8:
             school = request.user.student.school
@@ -53,6 +58,8 @@ def savedata(request):
                 data = Data2(school=school,student=student_obj,levelc=levelc,extra_curr=extra_curr,course_rev=course_rev,violence=violence,teachers=teachers,environment=environment,anxiety=anxiety,grpwork=grpwork,secure=secure,socially_active=socially_active,others=others, solution=solution)
                 data.save()
                 print("valid")
+                student_obj.rewards = 10 + int(student_obj.rewards)
+                student_obj.save()
                 return redirect('home')
         else:
             school = request.user.student.school
@@ -75,6 +82,8 @@ def savedata(request):
                 data.save()
                 print("valid")
                 print("done")
+                student_obj.rewards = 10 + int(student_obj.rewards)
+                student_obj.save()
                 return redirect('home')
     
     if 1 <= int(std) <= 4:

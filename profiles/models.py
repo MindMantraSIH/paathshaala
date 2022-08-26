@@ -39,6 +39,7 @@ class Student(models.Model):
     pincode = models.CharField(max_length=10, blank=True, null=True)
     std = models.CharField(max_length=10)
     division = models.CharField(max_length=10)
+    rewards = models.CharField(max_length=10, blank=True, null=True)
 
 
     def __str__(self) -> str:
